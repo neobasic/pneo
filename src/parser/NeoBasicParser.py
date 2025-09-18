@@ -1,0 +1,6090 @@
+# Generated from NeoBasicParser.g4 by ANTLR 4.13.2
+# encoding: utf-8
+from antlr4 import *
+from io import StringIO
+import sys
+if sys.version_info[1] > 5:
+	from typing import TextIO
+else:
+	from typing.io import TextIO
+
+def serializedATN():
+    return [
+        4,1,198,561,2,0,7,0,2,1,7,1,2,2,7,2,2,3,7,3,2,4,7,4,2,5,7,5,2,6,
+        7,6,2,7,7,7,2,8,7,8,2,9,7,9,2,10,7,10,2,11,7,11,2,12,7,12,2,13,7,
+        13,2,14,7,14,2,15,7,15,2,16,7,16,2,17,7,17,2,18,7,18,2,19,7,19,2,
+        20,7,20,2,21,7,21,2,22,7,22,2,23,7,23,2,24,7,24,2,25,7,25,2,26,7,
+        26,2,27,7,27,2,28,7,28,2,29,7,29,2,30,7,30,2,31,7,31,2,32,7,32,2,
+        33,7,33,2,34,7,34,2,35,7,35,2,36,7,36,2,37,7,37,2,38,7,38,2,39,7,
+        39,2,40,7,40,2,41,7,41,2,42,7,42,2,43,7,43,2,44,7,44,2,45,7,45,2,
+        46,7,46,2,47,7,47,2,48,7,48,2,49,7,49,2,50,7,50,2,51,7,51,2,52,7,
+        52,2,53,7,53,2,54,7,54,2,55,7,55,2,56,7,56,2,57,7,57,2,58,7,58,2,
+        59,7,59,2,60,7,60,2,61,7,61,2,62,7,62,2,63,7,63,2,64,7,64,2,65,7,
+        65,2,66,7,66,2,67,7,67,2,68,7,68,2,69,7,69,2,70,7,70,2,71,7,71,2,
+        72,7,72,2,73,7,73,2,74,7,74,2,75,7,75,1,0,1,0,1,0,4,0,156,8,0,11,
+        0,12,0,157,1,1,1,1,1,2,1,2,1,2,3,2,165,8,2,1,3,5,3,168,8,3,10,3,
+        12,3,171,9,3,1,3,1,3,1,4,1,4,1,5,1,5,1,5,1,6,1,6,1,6,3,6,183,8,6,
+        1,7,1,7,3,7,187,8,7,1,7,1,7,1,7,1,8,1,8,1,8,4,8,195,8,8,11,8,12,
+        8,196,1,9,1,9,1,9,1,9,1,10,5,10,204,8,10,10,10,12,10,207,9,10,1,
+        10,1,10,1,11,1,11,1,12,1,12,1,12,1,13,1,13,1,13,3,13,219,8,13,1,
+        14,1,14,3,14,223,8,14,1,14,1,14,1,14,3,14,228,8,14,1,15,1,15,1,15,
+        4,15,233,8,15,11,15,12,15,234,1,16,1,16,1,16,1,16,1,17,5,17,242,
+        8,17,10,17,12,17,245,9,17,1,17,1,17,1,18,1,18,1,19,1,19,1,19,1,20,
+        1,20,1,20,3,20,257,8,20,1,21,1,21,3,21,261,8,21,1,21,1,21,1,21,3,
+        21,266,8,21,1,22,1,22,1,22,4,22,271,8,22,11,22,12,22,272,1,23,1,
+        23,1,23,1,23,1,24,1,24,1,24,1,24,1,24,1,24,3,24,285,8,24,1,25,1,
+        25,3,25,289,8,25,1,26,1,26,1,27,1,27,1,28,1,28,1,29,1,29,1,30,1,
+        30,1,31,1,31,1,32,1,32,1,33,1,33,1,34,1,34,1,35,1,35,1,36,1,36,1,
+        37,1,37,1,38,1,38,1,39,1,39,1,40,1,40,1,41,1,41,1,42,1,42,1,42,1,
+        42,1,42,1,42,1,42,1,42,1,42,1,42,1,42,1,42,1,42,1,42,3,42,337,8,
+        42,1,43,1,43,1,44,1,44,1,45,1,45,1,46,1,46,1,47,1,47,1,47,3,47,350,
+        8,47,1,48,1,48,1,49,1,49,1,50,1,50,1,51,1,51,1,52,1,52,1,52,5,52,
+        363,8,52,10,52,12,52,366,9,52,1,53,1,53,1,53,5,53,371,8,53,10,53,
+        12,53,374,9,53,1,54,1,54,1,54,5,54,379,8,54,10,54,12,54,382,9,54,
+        1,55,1,55,1,55,5,55,387,8,55,10,55,12,55,390,9,55,1,56,1,56,1,57,
+        1,57,1,58,1,58,3,58,398,8,58,1,59,1,59,1,60,1,60,1,60,1,60,1,60,
+        1,60,1,60,1,60,1,60,1,60,1,60,3,60,413,8,60,1,61,1,61,1,62,1,62,
+        1,63,1,63,3,63,421,8,63,1,64,1,64,1,65,1,65,1,65,3,65,428,8,65,1,
+        66,1,66,1,67,1,67,1,68,1,68,1,69,1,69,1,69,5,69,439,8,69,10,69,12,
+        69,442,9,69,1,70,1,70,1,70,5,70,447,8,70,10,70,12,70,450,9,70,1,
+        71,1,71,1,71,1,71,1,71,1,71,1,71,1,71,1,71,3,71,461,8,71,1,71,1,
+        71,1,71,1,71,1,71,1,71,1,71,1,71,1,71,1,71,1,71,1,71,1,71,5,71,476,
+        8,71,10,71,12,71,479,9,71,1,72,1,72,1,72,3,72,484,8,72,1,73,1,73,
+        1,73,1,73,1,74,1,74,1,74,3,74,493,8,74,1,74,1,74,1,74,1,74,1,74,
+        1,74,1,74,1,74,1,74,1,74,1,74,1,74,1,74,1,74,1,74,1,74,1,74,1,74,
+        1,74,1,74,1,74,1,74,1,74,1,74,1,74,1,74,1,74,1,74,1,74,1,74,1,74,
+        1,74,1,74,1,74,1,74,1,74,1,74,1,74,1,74,1,74,1,74,1,74,1,74,1,74,
+        1,74,1,74,1,74,1,74,1,74,1,74,1,74,1,74,1,74,1,74,1,74,3,74,550,
+        8,74,5,74,552,8,74,10,74,12,74,555,9,74,1,75,1,75,1,75,1,75,1,75,
+        0,2,142,148,76,0,2,4,6,8,10,12,14,16,18,20,22,24,26,28,30,32,34,
+        36,38,40,42,44,46,48,50,52,54,56,58,60,62,64,66,68,70,72,74,76,78,
+        80,82,84,86,88,90,92,94,96,98,100,102,104,106,108,110,112,114,116,
+        118,120,122,124,126,128,130,132,134,136,138,140,142,144,146,148,
+        150,0,26,1,0,145,146,1,0,145,147,2,0,32,33,47,51,2,0,27,27,52,52,
+        2,0,28,28,54,54,2,0,31,31,53,53,1,0,149,150,1,0,49,50,2,0,22,25,
+        55,60,1,0,32,33,2,0,40,41,62,62,2,0,21,21,61,61,1,0,65,66,2,0,7,
+        8,67,72,2,0,157,157,160,160,2,0,159,159,162,162,2,0,158,158,161,
+        161,3,0,13,14,42,43,73,73,2,0,31,31,74,76,2,0,31,31,77,77,2,0,78,
+        82,84,99,1,0,188,189,1,0,163,168,1,0,169,175,1,0,176,181,1,0,182,
+        187,565,0,155,1,0,0,0,2,159,1,0,0,0,4,164,1,0,0,0,6,169,1,0,0,0,
+        8,174,1,0,0,0,10,176,1,0,0,0,12,182,1,0,0,0,14,184,1,0,0,0,16,191,
+        1,0,0,0,18,198,1,0,0,0,20,205,1,0,0,0,22,210,1,0,0,0,24,212,1,0,
+        0,0,26,218,1,0,0,0,28,220,1,0,0,0,30,229,1,0,0,0,32,236,1,0,0,0,
+        34,243,1,0,0,0,36,248,1,0,0,0,38,250,1,0,0,0,40,256,1,0,0,0,42,258,
+        1,0,0,0,44,267,1,0,0,0,46,274,1,0,0,0,48,284,1,0,0,0,50,288,1,0,
+        0,0,52,290,1,0,0,0,54,292,1,0,0,0,56,294,1,0,0,0,58,296,1,0,0,0,
+        60,298,1,0,0,0,62,300,1,0,0,0,64,302,1,0,0,0,66,304,1,0,0,0,68,306,
+        1,0,0,0,70,308,1,0,0,0,72,310,1,0,0,0,74,312,1,0,0,0,76,314,1,0,
+        0,0,78,316,1,0,0,0,80,318,1,0,0,0,82,320,1,0,0,0,84,336,1,0,0,0,
+        86,338,1,0,0,0,88,340,1,0,0,0,90,342,1,0,0,0,92,344,1,0,0,0,94,349,
+        1,0,0,0,96,351,1,0,0,0,98,353,1,0,0,0,100,355,1,0,0,0,102,357,1,
+        0,0,0,104,359,1,0,0,0,106,367,1,0,0,0,108,375,1,0,0,0,110,383,1,
+        0,0,0,112,391,1,0,0,0,114,393,1,0,0,0,116,397,1,0,0,0,118,399,1,
+        0,0,0,120,412,1,0,0,0,122,414,1,0,0,0,124,416,1,0,0,0,126,420,1,
+        0,0,0,128,422,1,0,0,0,130,427,1,0,0,0,132,429,1,0,0,0,134,431,1,
+        0,0,0,136,433,1,0,0,0,138,435,1,0,0,0,140,443,1,0,0,0,142,460,1,
+        0,0,0,144,483,1,0,0,0,146,485,1,0,0,0,148,492,1,0,0,0,150,556,1,
+        0,0,0,152,153,3,2,1,0,153,154,5,139,0,0,154,156,1,0,0,0,155,152,
+        1,0,0,0,156,157,1,0,0,0,157,155,1,0,0,0,157,158,1,0,0,0,158,1,1,
+        0,0,0,159,160,3,4,2,0,160,3,1,0,0,0,161,165,3,6,3,0,162,165,3,20,
+        10,0,163,165,3,34,17,0,164,161,1,0,0,0,164,162,1,0,0,0,164,163,1,
+        0,0,0,165,5,1,0,0,0,166,168,3,8,4,0,167,166,1,0,0,0,168,171,1,0,
+        0,0,169,167,1,0,0,0,169,170,1,0,0,0,170,172,1,0,0,0,171,169,1,0,
+        0,0,172,173,3,10,5,0,173,7,1,0,0,0,174,175,7,0,0,0,175,9,1,0,0,0,
+        176,177,5,142,0,0,177,178,3,12,6,0,178,11,1,0,0,0,179,183,3,14,7,
+        0,180,183,3,16,8,0,181,183,3,18,9,0,182,179,1,0,0,0,182,180,1,0,
+        0,0,182,181,1,0,0,0,183,13,1,0,0,0,184,186,3,102,51,0,185,187,3,
+        122,61,0,186,185,1,0,0,0,186,187,1,0,0,0,187,188,1,0,0,0,188,189,
+        3,96,48,0,189,190,3,148,74,0,190,15,1,0,0,0,191,194,3,14,7,0,192,
+        193,5,10,0,0,193,195,3,14,7,0,194,192,1,0,0,0,195,196,1,0,0,0,196,
+        194,1,0,0,0,196,197,1,0,0,0,197,17,1,0,0,0,198,199,3,108,54,0,199,
+        200,3,98,49,0,200,201,3,138,69,0,201,19,1,0,0,0,202,204,3,22,11,
+        0,203,202,1,0,0,0,204,207,1,0,0,0,205,203,1,0,0,0,205,206,1,0,0,
+        0,206,208,1,0,0,0,207,205,1,0,0,0,208,209,3,24,12,0,209,21,1,0,0,
+        0,210,211,7,1,0,0,211,23,1,0,0,0,212,213,5,143,0,0,213,214,3,40,
+        20,0,214,25,1,0,0,0,215,219,3,28,14,0,216,219,3,30,15,0,217,219,
+        3,32,16,0,218,215,1,0,0,0,218,216,1,0,0,0,218,217,1,0,0,0,219,27,
+        1,0,0,0,220,222,3,102,51,0,221,223,3,122,61,0,222,221,1,0,0,0,222,
+        223,1,0,0,0,223,227,1,0,0,0,224,225,3,96,48,0,225,226,3,148,74,0,
+        226,228,1,0,0,0,227,224,1,0,0,0,227,228,1,0,0,0,228,29,1,0,0,0,229,
+        232,3,28,14,0,230,231,5,10,0,0,231,233,3,28,14,0,232,230,1,0,0,0,
+        233,234,1,0,0,0,234,232,1,0,0,0,234,235,1,0,0,0,235,31,1,0,0,0,236,
+        237,3,108,54,0,237,238,3,98,49,0,238,239,3,138,69,0,239,33,1,0,0,
+        0,240,242,3,36,18,0,241,240,1,0,0,0,242,245,1,0,0,0,243,241,1,0,
+        0,0,243,244,1,0,0,0,244,246,1,0,0,0,245,243,1,0,0,0,246,247,3,38,
+        19,0,247,35,1,0,0,0,248,249,7,1,0,0,249,37,1,0,0,0,250,251,5,144,
+        0,0,251,252,3,40,20,0,252,39,1,0,0,0,253,257,3,42,21,0,254,257,3,
+        44,22,0,255,257,3,46,23,0,256,253,1,0,0,0,256,254,1,0,0,0,256,255,
+        1,0,0,0,257,41,1,0,0,0,258,260,3,102,51,0,259,261,3,122,61,0,260,
+        259,1,0,0,0,260,261,1,0,0,0,261,265,1,0,0,0,262,263,3,96,48,0,263,
+        264,3,148,74,0,264,266,1,0,0,0,265,262,1,0,0,0,265,266,1,0,0,0,266,
+        43,1,0,0,0,267,270,3,42,21,0,268,269,5,10,0,0,269,271,3,42,21,0,
+        270,268,1,0,0,0,271,272,1,0,0,0,272,270,1,0,0,0,272,273,1,0,0,0,
+        273,45,1,0,0,0,274,275,3,108,54,0,275,276,3,98,49,0,276,277,3,138,
+        69,0,277,47,1,0,0,0,278,285,3,52,26,0,279,285,3,54,27,0,280,285,
+        3,56,28,0,281,285,3,58,29,0,282,285,3,60,30,0,283,285,3,64,32,0,
+        284,278,1,0,0,0,284,279,1,0,0,0,284,280,1,0,0,0,284,281,1,0,0,0,
+        284,282,1,0,0,0,284,283,1,0,0,0,285,49,1,0,0,0,286,289,3,60,30,0,
+        287,289,3,62,31,0,288,286,1,0,0,0,288,287,1,0,0,0,289,51,1,0,0,0,
+        290,291,7,2,0,0,291,53,1,0,0,0,292,293,7,3,0,0,293,55,1,0,0,0,294,
+        295,5,156,0,0,295,57,1,0,0,0,296,297,5,34,0,0,297,59,1,0,0,0,298,
+        299,7,4,0,0,299,61,1,0,0,0,300,301,7,5,0,0,301,63,1,0,0,0,302,303,
+        7,6,0,0,303,65,1,0,0,0,304,305,7,7,0,0,305,67,1,0,0,0,306,307,7,
+        8,0,0,307,69,1,0,0,0,308,309,7,9,0,0,309,71,1,0,0,0,310,311,7,10,
+        0,0,311,73,1,0,0,0,312,313,7,11,0,0,313,75,1,0,0,0,314,315,5,28,
+        0,0,315,77,1,0,0,0,316,317,5,29,0,0,317,79,1,0,0,0,318,319,7,12,
+        0,0,319,81,1,0,0,0,320,321,7,13,0,0,321,83,1,0,0,0,322,337,5,152,
+        0,0,323,324,5,152,0,0,324,337,5,156,0,0,325,337,5,153,0,0,326,327,
+        5,156,0,0,327,337,5,153,0,0,328,337,5,154,0,0,329,330,5,156,0,0,
+        330,337,5,154,0,0,331,337,5,155,0,0,332,333,5,156,0,0,333,337,5,
+        155,0,0,334,337,5,63,0,0,335,337,5,64,0,0,336,322,1,0,0,0,336,323,
+        1,0,0,0,336,325,1,0,0,0,336,326,1,0,0,0,336,328,1,0,0,0,336,329,
+        1,0,0,0,336,331,1,0,0,0,336,332,1,0,0,0,336,334,1,0,0,0,336,335,
+        1,0,0,0,337,85,1,0,0,0,338,339,7,14,0,0,339,87,1,0,0,0,340,341,7,
+        15,0,0,341,89,1,0,0,0,342,343,7,16,0,0,343,91,1,0,0,0,344,345,7,
+        17,0,0,345,93,1,0,0,0,346,350,3,96,48,0,347,350,3,98,49,0,348,350,
+        3,100,50,0,349,346,1,0,0,0,349,347,1,0,0,0,349,348,1,0,0,0,350,95,
+        1,0,0,0,351,352,7,18,0,0,352,97,1,0,0,0,353,354,7,19,0,0,354,99,
+        1,0,0,0,355,356,7,20,0,0,356,101,1,0,0,0,357,358,5,138,0,0,358,103,
+        1,0,0,0,359,364,5,138,0,0,360,361,5,9,0,0,361,363,5,138,0,0,362,
+        360,1,0,0,0,363,366,1,0,0,0,364,362,1,0,0,0,364,365,1,0,0,0,365,
+        105,1,0,0,0,366,364,1,0,0,0,367,372,5,138,0,0,368,369,5,10,0,0,369,
+        371,5,138,0,0,370,368,1,0,0,0,371,374,1,0,0,0,372,370,1,0,0,0,372,
+        373,1,0,0,0,373,107,1,0,0,0,374,372,1,0,0,0,375,380,3,102,51,0,376,
+        377,5,10,0,0,377,379,3,102,51,0,378,376,1,0,0,0,379,382,1,0,0,0,
+        380,378,1,0,0,0,380,381,1,0,0,0,381,109,1,0,0,0,382,380,1,0,0,0,
+        383,388,3,104,52,0,384,385,5,10,0,0,385,387,3,104,52,0,386,384,1,
+        0,0,0,387,390,1,0,0,0,388,386,1,0,0,0,388,389,1,0,0,0,389,111,1,
+        0,0,0,390,388,1,0,0,0,391,392,5,148,0,0,392,113,1,0,0,0,393,394,
+        3,116,58,0,394,115,1,0,0,0,395,398,3,118,59,0,396,398,3,120,60,0,
+        397,395,1,0,0,0,397,396,1,0,0,0,398,117,1,0,0,0,399,400,7,21,0,0,
+        400,119,1,0,0,0,401,413,5,130,0,0,402,413,5,131,0,0,403,413,5,125,
+        0,0,404,405,5,190,0,0,405,413,3,148,74,0,406,413,5,191,0,0,407,413,
+        5,192,0,0,408,413,5,193,0,0,409,413,5,194,0,0,410,413,5,195,0,0,
+        411,413,5,196,0,0,412,401,1,0,0,0,412,402,1,0,0,0,412,403,1,0,0,
+        0,412,404,1,0,0,0,412,406,1,0,0,0,412,407,1,0,0,0,412,408,1,0,0,
+        0,412,409,1,0,0,0,412,410,1,0,0,0,412,411,1,0,0,0,413,121,1,0,0,
+        0,414,415,3,124,62,0,415,123,1,0,0,0,416,417,3,126,63,0,417,125,
+        1,0,0,0,418,421,3,128,64,0,419,421,3,130,65,0,420,418,1,0,0,0,420,
+        419,1,0,0,0,421,127,1,0,0,0,422,423,7,22,0,0,423,129,1,0,0,0,424,
+        428,3,132,66,0,425,428,3,134,67,0,426,428,3,136,68,0,427,424,1,0,
+        0,0,427,425,1,0,0,0,427,426,1,0,0,0,428,131,1,0,0,0,429,430,7,23,
+        0,0,430,133,1,0,0,0,431,432,7,24,0,0,432,135,1,0,0,0,433,434,7,25,
+        0,0,434,137,1,0,0,0,435,440,3,148,74,0,436,437,5,10,0,0,437,439,
+        3,148,74,0,438,436,1,0,0,0,439,442,1,0,0,0,440,438,1,0,0,0,440,441,
+        1,0,0,0,441,139,1,0,0,0,442,440,1,0,0,0,443,448,3,142,71,0,444,445,
+        5,10,0,0,445,447,3,142,71,0,446,444,1,0,0,0,447,450,1,0,0,0,448,
+        446,1,0,0,0,448,449,1,0,0,0,449,141,1,0,0,0,450,448,1,0,0,0,451,
+        452,6,71,-1,0,452,461,3,144,72,0,453,461,3,146,73,0,454,455,3,48,
+        24,0,455,456,3,142,71,2,456,461,1,0,0,0,457,458,3,104,52,0,458,459,
+        3,148,74,0,459,461,1,0,0,0,460,451,1,0,0,0,460,453,1,0,0,0,460,454,
+        1,0,0,0,460,457,1,0,0,0,461,477,1,0,0,0,462,463,10,6,0,0,463,464,
+        5,9,0,0,464,476,3,142,71,7,465,466,10,4,0,0,466,467,5,11,0,0,467,
+        476,3,142,71,5,468,469,10,5,0,0,469,470,5,1,0,0,470,471,3,138,69,
+        0,471,472,5,2,0,0,472,476,1,0,0,0,473,474,10,3,0,0,474,476,3,50,
+        25,0,475,462,1,0,0,0,475,465,1,0,0,0,475,468,1,0,0,0,475,473,1,0,
+        0,0,476,479,1,0,0,0,477,475,1,0,0,0,477,478,1,0,0,0,478,143,1,0,
+        0,0,479,477,1,0,0,0,480,484,3,114,57,0,481,484,3,112,56,0,482,484,
+        3,104,52,0,483,480,1,0,0,0,483,481,1,0,0,0,483,482,1,0,0,0,484,145,
+        1,0,0,0,485,486,5,1,0,0,486,487,3,148,74,0,487,488,5,2,0,0,488,147,
+        1,0,0,0,489,490,6,74,-1,0,490,493,3,142,71,0,491,493,3,150,75,0,
+        492,489,1,0,0,0,492,491,1,0,0,0,493,553,1,0,0,0,494,495,10,15,0,
+        0,495,496,3,66,33,0,496,497,3,148,74,16,497,552,1,0,0,0,498,499,
+        10,14,0,0,499,500,3,68,34,0,500,501,3,148,74,15,501,552,1,0,0,0,
+        502,503,10,13,0,0,503,504,3,70,35,0,504,505,3,148,74,14,505,552,
+        1,0,0,0,506,507,10,12,0,0,507,508,3,72,36,0,508,509,3,148,74,13,
+        509,552,1,0,0,0,510,511,10,11,0,0,511,512,3,74,37,0,512,513,3,148,
+        74,12,513,552,1,0,0,0,514,515,10,10,0,0,515,516,3,76,38,0,516,517,
+        3,148,74,11,517,552,1,0,0,0,518,519,10,9,0,0,519,520,3,78,39,0,520,
+        521,3,148,74,10,521,552,1,0,0,0,522,523,10,8,0,0,523,524,3,80,40,
+        0,524,525,3,148,74,9,525,552,1,0,0,0,526,527,10,7,0,0,527,528,3,
+        82,41,0,528,529,3,148,74,8,529,552,1,0,0,0,530,531,10,6,0,0,531,
+        532,3,84,42,0,532,533,3,148,74,7,533,552,1,0,0,0,534,535,10,5,0,
+        0,535,536,3,86,43,0,536,537,3,148,74,6,537,552,1,0,0,0,538,539,10,
+        4,0,0,539,540,3,88,44,0,540,541,3,148,74,5,541,552,1,0,0,0,542,543,
+        10,3,0,0,543,544,3,90,45,0,544,545,3,148,74,4,545,552,1,0,0,0,546,
+        547,10,2,0,0,547,549,3,92,46,0,548,550,3,148,74,0,549,548,1,0,0,
+        0,549,550,1,0,0,0,550,552,1,0,0,0,551,494,1,0,0,0,551,498,1,0,0,
+        0,551,502,1,0,0,0,551,506,1,0,0,0,551,510,1,0,0,0,551,514,1,0,0,
+        0,551,518,1,0,0,0,551,522,1,0,0,0,551,526,1,0,0,0,551,530,1,0,0,
+        0,551,534,1,0,0,0,551,538,1,0,0,0,551,542,1,0,0,0,551,546,1,0,0,
+        0,552,555,1,0,0,0,553,551,1,0,0,0,553,554,1,0,0,0,554,149,1,0,0,
+        0,555,553,1,0,0,0,556,557,3,142,71,0,557,558,3,94,47,0,558,559,3,
+        148,74,0,559,151,1,0,0,0,38,157,164,169,182,186,196,205,218,222,
+        227,234,243,256,260,265,272,284,288,336,349,364,372,380,388,397,
+        412,420,427,440,448,460,475,477,483,492,549,551,553
+    ]
+
+class NeoBasicParser ( Parser ):
+
+    grammarFileName = "NeoBasicParser.g4"
+
+    atn = ATNDeserializer().deserialize(serializedATN())
+
+    decisionsToDFA = [ DFA(ds, i) for i, ds in enumerate(atn.decisionToState) ]
+
+    sharedContextCache = PredictionContextCache()
+
+    literalNames = [ "<INVALID>", "'('", "')'", "'['", "']'", "'{'", "'}'", 
+                     "'<'", "'>'", "'.'", "','", "';'", "':'", "'!'", "'?'", 
+                     "'''", "'\"'", "'`'", "'@'", "'#'", "'$'", "'&'", "'*'", 
+                     "'/'", "'\\u00F7'", "'%'", "'\\'", "'~'", "'^'", "'|'", 
+                     "'_'", "'='", "'+'", "'-'", "'...'", "'(\\'", "'[['", 
+                     "']]'", "'{{'", "'}}'", "'<<'", "'>>'", "'!!'", "'??'", 
+                     "'::'", "';;'", "'~='", "'++'", "'--'", "'**'", "'*/'", 
+                     "'*!'", "'~~'", "'==='", "'^^'", "'%%'", "'%/'", "'%*'", 
+                     "'%+'", "'%-'", "'%^'", "'&~'", "'>>>'", "'?%'", "'!%'", 
+                     "'?:'", "'<=>'", "'=='", "'!='", "'~=='", "'~!='", 
+                     "'<='", "'>='", "'!?'", "'<-'", "'<<-'", "'<|'", "':='", 
+                     "'+='", "'-='", "'*='", "'/='", "'\\u00F7='", "'%%='", 
+                     "'%='", "'**='", "'*/='", "'%/='", "'%*='", "'%+='", 
+                     "'%-='", "'%^\\u207C'", "'&='", "'|='", "'^='", "'&^='", 
+                     "'<<='", "'>>='", "'>>>='", "'??='", "'&&='", "'||='", 
+                     "'..'", "'>..'", "'..<'", "'>..<'", "<INVALID>", "<INVALID>", 
+                     "<INVALID>", "'<>'", "'->'", "':-'", "'=>'", "'=>>'", 
+                     "'|>'", "'&&'", "'?&'", "'!&'", "'||'", "'&>'", "'&>>'", 
+                     "'&1>'", "'&1>>'", "'&2>'", "'&2>>'", "<INVALID>", 
+                     "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>", 
+                     "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>", 
+                     "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>", 
+                     "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>", 
+                     "'const'", "'val'", "'var'", "'comptime'", "'inline'", 
+                     "'static'", "'iota'", "'typeof'", "'sizeof'", "'instanceof'", 
+                     "'is'", "'in'", "'between'", "'like'", "'not'", "'and'", 
+                     "'or'", "'xor'", "'nand'", "'nor'", "'nxor'", "'bool8'", 
+                     "'bool16'", "'bool32'", "'bool64'", "'bool128'", "'bool'", 
+                     "'nat8'", "'nat16'", "'nat32'", "'nat64'", "'nat128'", 
+                     "'byte'", "'nat'", "'int8'", "'int16'", "'int32'", 
+                     "'int64'", "'int128'", "'int'", "'real8'", "'real16'", 
+                     "'real32'", "'real64'", "'real128'", "'real'", "'True'", 
+                     "'False'", "'Nonzero'", "'Zero'", "'MinValue'", "'MaxValue'", 
+                     "'NaN'", "'PositiveInfinity'", "'NegativeInfinity'", 
+                     "'scan'", "'echo'" ]
+
+    symbolicNames = [ "<INVALID>", "LEFT_PARENTHESIS", "RIGHT_PARENTHESIS", 
+                      "LEFT_BRACKET", "RIGHT_BRACKET", "LEFT_CURLY", "RIGHT_CURLY", 
+                      "LEFT_ANGLE", "RIGHT_ANGLE", "DOT", "COMMA", "SEMICOLON", 
+                      "COLON", "EXCLAMATION", "QUESTION", "APOSTROPHE", 
+                      "QUOTE", "BACKTICK", "AT", "HASH", "DOLLAR", "AMPERSAND", 
+                      "ASTERISK", "SLASH", "DIVISION", "PERCENT", "BACKSLASH", 
+                      "TILDE", "CARET", "PIPE", "UNDERSCORE", "EQUAL", "PLUS", 
+                      "MINUS", "ELLIPSIS", "LAMBDA", "DOUBLE_LEFT_BRACKET", 
+                      "DOUBLE_RIGHT_BRACKET", "DOUBLE_LEFT_CURLY", "DOUBLE_RIGHT_CURLY", 
+                      "DOUBLE_LEFT_ANGLE", "DOUBLE_RIGHT_ANGLE", "DOUBLE_EXCLAMATION", 
+                      "DOUBLE_QUESTION", "DOUBLE_COLON", "DOUBLE_SEMICOLON", 
+                      "SPECIAL_ASSIGNMENT", "INCREMENT", "DECREMENT", "SQUARE_POWER", 
+                      "SQUARE_ROOT", "FACTORIAL", "BIT_NEGATION", "DEEP_CLONING", 
+                      "SORTING", "QUOTIENT", "PERCENTAGE_RATE", "PERCENTAGE_AMOUNT", 
+                      "PERCENTAGE_INCREASE", "PERCENTAGE_DECREASE", "PERCENTAGE_VARIATION", 
+                      "BIT_CLEAR", "UNSIGNED_RIGHT_SHIFT", "DIVISIBLE_BY", 
+                      "NOT_DIVISIBLE_BY", "ELVIS_TEST", "THREE_WAY_TEST", 
+                      "STRICT_EQUALITY", "STRICT_INEQUALITY", "LOOSE_EQUALITY", 
+                      "LOOSE_INEQUALITY", "LESS_OR_EQUALS", "GREATER_OR_EQUALS", 
+                      "ERROR_PROPAGATION_NONE_COALESCING", "POP_ONE_ASSIGNMENT", 
+                      "PULL_ALL_ASSIGNMENT", "PIPE_ASSIGNMENT", "DESTRUCTURING_ASSIGNMENT", 
+                      "ADDITION_ASSIGNMENT", "SUBTRACTION_ASSIGNMENT", "MULTIPLICATION_ASSIGNMENT", 
+                      "REAL_DIVISION_ASSIGNMENT", "INTEGER_DIVISION_ASSIGNMENT", 
+                      "QUOTIENT_ASSIGNMENT", "MODULO_ASSIGNMENT", "NTH_POWER_ASSIGNMENT", 
+                      "NTH_ROOT_ASSIGNMENT", "PERCENTAGE_RATE_ASSIGNMENT", 
+                      "PERCENTAGE_AMOUNT_ASSIGNMENT", "PERCENTAGE_INCREASE_ASSIGNMENT", 
+                      "PERCENTAGE_DECREASE_ASSIGNMENT", "PERCENTAGE_VARIATION_ASSIGNMENT", 
+                      "BIT_AND_ASSIGNMENT", "BIT_OR_ASSIGNMENT", "BIT_XOR_ASSIGNMENT", 
+                      "BIT_CLEAR_ASSIGNMENT", "LEFT_SHIFT_ASSIGNMENT", "SIGNED_RIGHT_SHIFT_ASSIGNMENT", 
+                      "UNSIGNED_RIGHT_SHIFT_ASSIGNMENT", "NONE_COALESCING_ASSIGNMENT", 
+                      "SHELL_PID_ASSIGNMENT", "SHELL_BKG_PID_ASSIGNMENT", 
+                      "INTERVAL_INCLUSIVE", "INTERVAL_LEFT_EXCLUSIVE", "INTERVAL_RIGHT_EXCLUSIVE", 
+                      "INTERVAL_EXCLUSIVE", "INTERVAL", "INTERVAL_LEFT", 
+                      "INTERVAL_RIGHT", "MIXIN", "EXTENDS", "NECK_RULE", 
+                      "MAPPING_ARROW", "MONAD_BIND", "PIPELINE", "COMMAND_SEQUENCE", 
+                      "COMMAND_SEQUENCE_OKAY", "COMMAND_SEQUENCE_FAIL", 
+                      "COMMAND_BACKGROUND", "OUTPUT_REDIRECTION", "APPEND_OUTPUT_REDIRECTION", 
+                      "STDOUT_REDIRECTION", "APPEND_STDOUT_REDIRECTION", 
+                      "STDERR_REDIRECTION", "APPEND_STDERR_REDIRECTION", 
+                      "REAL_LIT", "DEC_REAL", "HEX_REAL", "DEC_DECIMAL", 
+                      "HEX_DECIMAL", "NATURAL_LIT", "INTEGER_LIT", "INTEGER_NUMBER", 
+                      "DEC_VALUE", "HEX_VALUE", "OCT_VALUE", "BIN_VALUE", 
+                      "ROM_VALUE", "IDENTIFIER", "EOS", "EOL", "WSP", "CONST", 
+                      "VAL", "VAR", "COMPTIME", "INLINE", "STATIC", "IOTA", 
+                      "TYPEOF", "SIZEOF", "INSTANCEOF", "IS", "IN", "BETWEEN", 
+                      "LIKE", "NOT", "AND", "OR", "XOR", "NAND", "NOR", 
+                      "NXOR", "BOOL8", "BOOL16", "BOOL32", "BOOL64", "BOOL128", 
+                      "BOOL", "NAT8", "NAT16", "NAT32", "NAT64", "NAT128", 
+                      "BYTE", "NAT", "INT8", "INT16", "INT32", "INT64", 
+                      "INT128", "INT", "REAL8", "REAL16", "REAL32", "REAL64", 
+                      "REAL128", "REAL", "TRUE", "FALSE", "NONZERO", "ZERO", 
+                      "MINVALUE", "MAXVALUE", "NAN", "POSITIVEINFINITY", 
+                      "NEGATIVEINFINITY", "SCAN", "ECHO" ]
+
+    RULE_neoProgram = 0
+    RULE_instructionSentence = 1
+    RULE_declaration = 2
+    RULE_constSentence = 3
+    RULE_constSpecifier = 4
+    RULE_constClause = 5
+    RULE_constDeclare = 6
+    RULE_constDeclareSingle = 7
+    RULE_constDeclareMultiple = 8
+    RULE_constDeclareParallel = 9
+    RULE_valSentence = 10
+    RULE_valSpecifier = 11
+    RULE_valClause = 12
+    RULE_valDeclare = 13
+    RULE_valDeclareSingle = 14
+    RULE_valDeclareMultiple = 15
+    RULE_valDeclareParallel = 16
+    RULE_varSentence = 17
+    RULE_varSpecifier = 18
+    RULE_varClause = 19
+    RULE_varDeclare = 20
+    RULE_varDeclareSingle = 21
+    RULE_varDeclareMultiple = 22
+    RULE_varDeclareParallel = 23
+    RULE_prefixUnaryOperator = 24
+    RULE_posfixUnaryOperator = 25
+    RULE_unaryArithmeticOperator = 26
+    RULE_unaryBitwiseOperator = 27
+    RULE_unaryLogicalOperator = 28
+    RULE_unarySpreadOperator = 29
+    RULE_unarySortOperator = 30
+    RULE_unaryCloneOperator = 31
+    RULE_unaryMetaOperator = 32
+    RULE_binaryExponentialOperator = 33
+    RULE_binaryMultiplicativeOperator = 34
+    RULE_binaryAdditiveOperator = 35
+    RULE_bitShiftOperator = 36
+    RULE_bitConjunctionOperator = 37
+    RULE_bitExclusiveDisjunctionOperator = 38
+    RULE_bitDisjunctionOperator = 39
+    RULE_binaryComparisonOperator = 40
+    RULE_binaryRelationalOperator = 41
+    RULE_binaryConditionalOperator = 42
+    RULE_binaryConjunctionOperator = 43
+    RULE_binaryExclusiveDisjunctionOperator = 44
+    RULE_binaryDisjunctionOperator = 45
+    RULE_binaryCoalescingOperator = 46
+    RULE_assignmentOperator = 47
+    RULE_singleAssignmentOperator = 48
+    RULE_multipleAssignmentOperator = 49
+    RULE_compoundAssignmentOperator = 50
+    RULE_symbolIdentifier = 51
+    RULE_qualifiedIdentifier = 52
+    RULE_identifiers = 53
+    RULE_symbolIdentifiers = 54
+    RULE_qualifiedIdentifiers = 55
+    RULE_predeclaredValue = 56
+    RULE_literal = 57
+    RULE_escalarLiteral = 58
+    RULE_booleanLiteral = 59
+    RULE_numericLiteral = 60
+    RULE_type = 61
+    RULE_nativeType = 62
+    RULE_escalarType = 63
+    RULE_booleanType = 64
+    RULE_numericType = 65
+    RULE_numericNatural = 66
+    RULE_numericInteger = 67
+    RULE_numericReal = 68
+    RULE_expressions = 69
+    RULE_primaryExpressions = 70
+    RULE_primaryExpression = 71
+    RULE_operand = 72
+    RULE_parenthesizedExpression = 73
+    RULE_expression = 74
+    RULE_assignmentExpression = 75
+
+    ruleNames =  [ "neoProgram", "instructionSentence", "declaration", "constSentence", 
+                   "constSpecifier", "constClause", "constDeclare", "constDeclareSingle", 
+                   "constDeclareMultiple", "constDeclareParallel", "valSentence", 
+                   "valSpecifier", "valClause", "valDeclare", "valDeclareSingle", 
+                   "valDeclareMultiple", "valDeclareParallel", "varSentence", 
+                   "varSpecifier", "varClause", "varDeclare", "varDeclareSingle", 
+                   "varDeclareMultiple", "varDeclareParallel", "prefixUnaryOperator", 
+                   "posfixUnaryOperator", "unaryArithmeticOperator", "unaryBitwiseOperator", 
+                   "unaryLogicalOperator", "unarySpreadOperator", "unarySortOperator", 
+                   "unaryCloneOperator", "unaryMetaOperator", "binaryExponentialOperator", 
+                   "binaryMultiplicativeOperator", "binaryAdditiveOperator", 
+                   "bitShiftOperator", "bitConjunctionOperator", "bitExclusiveDisjunctionOperator", 
+                   "bitDisjunctionOperator", "binaryComparisonOperator", 
+                   "binaryRelationalOperator", "binaryConditionalOperator", 
+                   "binaryConjunctionOperator", "binaryExclusiveDisjunctionOperator", 
+                   "binaryDisjunctionOperator", "binaryCoalescingOperator", 
+                   "assignmentOperator", "singleAssignmentOperator", "multipleAssignmentOperator", 
+                   "compoundAssignmentOperator", "symbolIdentifier", "qualifiedIdentifier", 
+                   "identifiers", "symbolIdentifiers", "qualifiedIdentifiers", 
+                   "predeclaredValue", "literal", "escalarLiteral", "booleanLiteral", 
+                   "numericLiteral", "type", "nativeType", "escalarType", 
+                   "booleanType", "numericType", "numericNatural", "numericInteger", 
+                   "numericReal", "expressions", "primaryExpressions", "primaryExpression", 
+                   "operand", "parenthesizedExpression", "expression", "assignmentExpression" ]
+
+    EOF = Token.EOF
+    LEFT_PARENTHESIS=1
+    RIGHT_PARENTHESIS=2
+    LEFT_BRACKET=3
+    RIGHT_BRACKET=4
+    LEFT_CURLY=5
+    RIGHT_CURLY=6
+    LEFT_ANGLE=7
+    RIGHT_ANGLE=8
+    DOT=9
+    COMMA=10
+    SEMICOLON=11
+    COLON=12
+    EXCLAMATION=13
+    QUESTION=14
+    APOSTROPHE=15
+    QUOTE=16
+    BACKTICK=17
+    AT=18
+    HASH=19
+    DOLLAR=20
+    AMPERSAND=21
+    ASTERISK=22
+    SLASH=23
+    DIVISION=24
+    PERCENT=25
+    BACKSLASH=26
+    TILDE=27
+    CARET=28
+    PIPE=29
+    UNDERSCORE=30
+    EQUAL=31
+    PLUS=32
+    MINUS=33
+    ELLIPSIS=34
+    LAMBDA=35
+    DOUBLE_LEFT_BRACKET=36
+    DOUBLE_RIGHT_BRACKET=37
+    DOUBLE_LEFT_CURLY=38
+    DOUBLE_RIGHT_CURLY=39
+    DOUBLE_LEFT_ANGLE=40
+    DOUBLE_RIGHT_ANGLE=41
+    DOUBLE_EXCLAMATION=42
+    DOUBLE_QUESTION=43
+    DOUBLE_COLON=44
+    DOUBLE_SEMICOLON=45
+    SPECIAL_ASSIGNMENT=46
+    INCREMENT=47
+    DECREMENT=48
+    SQUARE_POWER=49
+    SQUARE_ROOT=50
+    FACTORIAL=51
+    BIT_NEGATION=52
+    DEEP_CLONING=53
+    SORTING=54
+    QUOTIENT=55
+    PERCENTAGE_RATE=56
+    PERCENTAGE_AMOUNT=57
+    PERCENTAGE_INCREASE=58
+    PERCENTAGE_DECREASE=59
+    PERCENTAGE_VARIATION=60
+    BIT_CLEAR=61
+    UNSIGNED_RIGHT_SHIFT=62
+    DIVISIBLE_BY=63
+    NOT_DIVISIBLE_BY=64
+    ELVIS_TEST=65
+    THREE_WAY_TEST=66
+    STRICT_EQUALITY=67
+    STRICT_INEQUALITY=68
+    LOOSE_EQUALITY=69
+    LOOSE_INEQUALITY=70
+    LESS_OR_EQUALS=71
+    GREATER_OR_EQUALS=72
+    ERROR_PROPAGATION_NONE_COALESCING=73
+    POP_ONE_ASSIGNMENT=74
+    PULL_ALL_ASSIGNMENT=75
+    PIPE_ASSIGNMENT=76
+    DESTRUCTURING_ASSIGNMENT=77
+    ADDITION_ASSIGNMENT=78
+    SUBTRACTION_ASSIGNMENT=79
+    MULTIPLICATION_ASSIGNMENT=80
+    REAL_DIVISION_ASSIGNMENT=81
+    INTEGER_DIVISION_ASSIGNMENT=82
+    QUOTIENT_ASSIGNMENT=83
+    MODULO_ASSIGNMENT=84
+    NTH_POWER_ASSIGNMENT=85
+    NTH_ROOT_ASSIGNMENT=86
+    PERCENTAGE_RATE_ASSIGNMENT=87
+    PERCENTAGE_AMOUNT_ASSIGNMENT=88
+    PERCENTAGE_INCREASE_ASSIGNMENT=89
+    PERCENTAGE_DECREASE_ASSIGNMENT=90
+    PERCENTAGE_VARIATION_ASSIGNMENT=91
+    BIT_AND_ASSIGNMENT=92
+    BIT_OR_ASSIGNMENT=93
+    BIT_XOR_ASSIGNMENT=94
+    BIT_CLEAR_ASSIGNMENT=95
+    LEFT_SHIFT_ASSIGNMENT=96
+    SIGNED_RIGHT_SHIFT_ASSIGNMENT=97
+    UNSIGNED_RIGHT_SHIFT_ASSIGNMENT=98
+    NONE_COALESCING_ASSIGNMENT=99
+    SHELL_PID_ASSIGNMENT=100
+    SHELL_BKG_PID_ASSIGNMENT=101
+    INTERVAL_INCLUSIVE=102
+    INTERVAL_LEFT_EXCLUSIVE=103
+    INTERVAL_RIGHT_EXCLUSIVE=104
+    INTERVAL_EXCLUSIVE=105
+    INTERVAL=106
+    INTERVAL_LEFT=107
+    INTERVAL_RIGHT=108
+    MIXIN=109
+    EXTENDS=110
+    NECK_RULE=111
+    MAPPING_ARROW=112
+    MONAD_BIND=113
+    PIPELINE=114
+    COMMAND_SEQUENCE=115
+    COMMAND_SEQUENCE_OKAY=116
+    COMMAND_SEQUENCE_FAIL=117
+    COMMAND_BACKGROUND=118
+    OUTPUT_REDIRECTION=119
+    APPEND_OUTPUT_REDIRECTION=120
+    STDOUT_REDIRECTION=121
+    APPEND_STDOUT_REDIRECTION=122
+    STDERR_REDIRECTION=123
+    APPEND_STDERR_REDIRECTION=124
+    REAL_LIT=125
+    DEC_REAL=126
+    HEX_REAL=127
+    DEC_DECIMAL=128
+    HEX_DECIMAL=129
+    NATURAL_LIT=130
+    INTEGER_LIT=131
+    INTEGER_NUMBER=132
+    DEC_VALUE=133
+    HEX_VALUE=134
+    OCT_VALUE=135
+    BIN_VALUE=136
+    ROM_VALUE=137
+    IDENTIFIER=138
+    EOS=139
+    EOL=140
+    WSP=141
+    CONST=142
+    VAL=143
+    VAR=144
+    COMPTIME=145
+    INLINE=146
+    STATIC=147
+    IOTA=148
+    TYPEOF=149
+    SIZEOF=150
+    INSTANCEOF=151
+    IS=152
+    IN=153
+    BETWEEN=154
+    LIKE=155
+    NOT=156
+    AND=157
+    OR=158
+    XOR=159
+    NAND=160
+    NOR=161
+    NXOR=162
+    BOOL8=163
+    BOOL16=164
+    BOOL32=165
+    BOOL64=166
+    BOOL128=167
+    BOOL=168
+    NAT8=169
+    NAT16=170
+    NAT32=171
+    NAT64=172
+    NAT128=173
+    BYTE=174
+    NAT=175
+    INT8=176
+    INT16=177
+    INT32=178
+    INT64=179
+    INT128=180
+    INT=181
+    REAL8=182
+    REAL16=183
+    REAL32=184
+    REAL64=185
+    REAL128=186
+    REAL=187
+    TRUE=188
+    FALSE=189
+    NONZERO=190
+    ZERO=191
+    MINVALUE=192
+    MAXVALUE=193
+    NAN=194
+    POSITIVEINFINITY=195
+    NEGATIVEINFINITY=196
+    SCAN=197
+    ECHO=198
+
+    def __init__(self, input:TokenStream, output:TextIO = sys.stdout):
+        super().__init__(input, output)
+        self.checkVersion("4.13.2")
+        self._interp = ParserATNSimulator(self, self.atn, self.decisionsToDFA, self.sharedContextCache)
+        self._predicates = None
+
+
+
+
+    class NeoProgramContext(ParserRuleContext):
+        __slots__ = 'parser'
+
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+            super().__init__(parent, invokingState)
+            self.parser = parser
+
+        def instructionSentence(self, i:int=None):
+            if i is None:
+                return self.getTypedRuleContexts(NeoBasicParser.InstructionSentenceContext)
+            else:
+                return self.getTypedRuleContext(NeoBasicParser.InstructionSentenceContext,i)
+
+
+        def EOS(self, i:int=None):
+            if i is None:
+                return self.getTokens(NeoBasicParser.EOS)
+            else:
+                return self.getToken(NeoBasicParser.EOS, i)
+
+        def getRuleIndex(self):
+            return NeoBasicParser.RULE_neoProgram
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterNeoProgram" ):
+                listener.enterNeoProgram(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitNeoProgram" ):
+                listener.exitNeoProgram(self)
+
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitNeoProgram" ):
+                return visitor.visitNeoProgram(self)
+            else:
+                return visitor.visitChildren(self)
+
+
+
+
+    def neoProgram(self):
+
+        localctx = NeoBasicParser.NeoProgramContext(self, self._ctx, self.state)
+        self.enterRule(localctx, 0, self.RULE_neoProgram)
+        self._la = 0 # Token type
+        try:
+            self.enterOuterAlt(localctx, 1)
+            self.state = 155 
+            self._errHandler.sync(self)
+            _la = self._input.LA(1)
+            while True:
+                self.state = 152
+                self.instructionSentence()
+                self.state = 153
+                self.match(NeoBasicParser.EOS)
+                self.state = 157 
+                self._errHandler.sync(self)
+                _la = self._input.LA(1)
+                if not (((((_la - 142)) & ~0x3f) == 0 and ((1 << (_la - 142)) & 63) != 0)):
+                    break
+
+        except RecognitionException as re:
+            localctx.exception = re
+            self._errHandler.reportError(self, re)
+            self._errHandler.recover(self, re)
+        finally:
+            self.exitRule()
+        return localctx
+
+
+    class InstructionSentenceContext(ParserRuleContext):
+        __slots__ = 'parser'
+
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+            super().__init__(parent, invokingState)
+            self.parser = parser
+
+        def declaration(self):
+            return self.getTypedRuleContext(NeoBasicParser.DeclarationContext,0)
+
+
+        def getRuleIndex(self):
+            return NeoBasicParser.RULE_instructionSentence
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterInstructionSentence" ):
+                listener.enterInstructionSentence(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitInstructionSentence" ):
+                listener.exitInstructionSentence(self)
+
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitInstructionSentence" ):
+                return visitor.visitInstructionSentence(self)
+            else:
+                return visitor.visitChildren(self)
+
+
+
+
+    def instructionSentence(self):
+
+        localctx = NeoBasicParser.InstructionSentenceContext(self, self._ctx, self.state)
+        self.enterRule(localctx, 2, self.RULE_instructionSentence)
+        try:
+            self.enterOuterAlt(localctx, 1)
+            self.state = 159
+            self.declaration()
+        except RecognitionException as re:
+            localctx.exception = re
+            self._errHandler.reportError(self, re)
+            self._errHandler.recover(self, re)
+        finally:
+            self.exitRule()
+        return localctx
+
+
+    class DeclarationContext(ParserRuleContext):
+        __slots__ = 'parser'
+
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+            super().__init__(parent, invokingState)
+            self.parser = parser
+
+        def constSentence(self):
+            return self.getTypedRuleContext(NeoBasicParser.ConstSentenceContext,0)
+
+
+        def valSentence(self):
+            return self.getTypedRuleContext(NeoBasicParser.ValSentenceContext,0)
+
+
+        def varSentence(self):
+            return self.getTypedRuleContext(NeoBasicParser.VarSentenceContext,0)
+
+
+        def getRuleIndex(self):
+            return NeoBasicParser.RULE_declaration
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterDeclaration" ):
+                listener.enterDeclaration(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitDeclaration" ):
+                listener.exitDeclaration(self)
+
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitDeclaration" ):
+                return visitor.visitDeclaration(self)
+            else:
+                return visitor.visitChildren(self)
+
+
+
+
+    def declaration(self):
+
+        localctx = NeoBasicParser.DeclarationContext(self, self._ctx, self.state)
+        self.enterRule(localctx, 4, self.RULE_declaration)
+        try:
+            self.state = 164
+            self._errHandler.sync(self)
+            la_ = self._interp.adaptivePredict(self._input,1,self._ctx)
+            if la_ == 1:
+                self.enterOuterAlt(localctx, 1)
+                self.state = 161
+                self.constSentence()
+                pass
+
+            elif la_ == 2:
+                self.enterOuterAlt(localctx, 2)
+                self.state = 162
+                self.valSentence()
+                pass
+
+            elif la_ == 3:
+                self.enterOuterAlt(localctx, 3)
+                self.state = 163
+                self.varSentence()
+                pass
+
+
+        except RecognitionException as re:
+            localctx.exception = re
+            self._errHandler.reportError(self, re)
+            self._errHandler.recover(self, re)
+        finally:
+            self.exitRule()
+        return localctx
+
+
+    class ConstSentenceContext(ParserRuleContext):
+        __slots__ = 'parser'
+
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+            super().__init__(parent, invokingState)
+            self.parser = parser
+
+        def constClause(self):
+            return self.getTypedRuleContext(NeoBasicParser.ConstClauseContext,0)
+
+
+        def constSpecifier(self, i:int=None):
+            if i is None:
+                return self.getTypedRuleContexts(NeoBasicParser.ConstSpecifierContext)
+            else:
+                return self.getTypedRuleContext(NeoBasicParser.ConstSpecifierContext,i)
+
+
+        def getRuleIndex(self):
+            return NeoBasicParser.RULE_constSentence
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterConstSentence" ):
+                listener.enterConstSentence(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitConstSentence" ):
+                listener.exitConstSentence(self)
+
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitConstSentence" ):
+                return visitor.visitConstSentence(self)
+            else:
+                return visitor.visitChildren(self)
+
+
+
+
+    def constSentence(self):
+
+        localctx = NeoBasicParser.ConstSentenceContext(self, self._ctx, self.state)
+        self.enterRule(localctx, 6, self.RULE_constSentence)
+        self._la = 0 # Token type
+        try:
+            self.enterOuterAlt(localctx, 1)
+            self.state = 169
+            self._errHandler.sync(self)
+            _la = self._input.LA(1)
+            while _la==145 or _la==146:
+                self.state = 166
+                self.constSpecifier()
+                self.state = 171
+                self._errHandler.sync(self)
+                _la = self._input.LA(1)
+
+            self.state = 172
+            self.constClause()
+        except RecognitionException as re:
+            localctx.exception = re
+            self._errHandler.reportError(self, re)
+            self._errHandler.recover(self, re)
+        finally:
+            self.exitRule()
+        return localctx
+
+
+    class ConstSpecifierContext(ParserRuleContext):
+        __slots__ = 'parser'
+
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+            super().__init__(parent, invokingState)
+            self.parser = parser
+
+        def COMPTIME(self):
+            return self.getToken(NeoBasicParser.COMPTIME, 0)
+
+        def INLINE(self):
+            return self.getToken(NeoBasicParser.INLINE, 0)
+
+        def getRuleIndex(self):
+            return NeoBasicParser.RULE_constSpecifier
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterConstSpecifier" ):
+                listener.enterConstSpecifier(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitConstSpecifier" ):
+                listener.exitConstSpecifier(self)
+
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitConstSpecifier" ):
+                return visitor.visitConstSpecifier(self)
+            else:
+                return visitor.visitChildren(self)
+
+
+
+
+    def constSpecifier(self):
+
+        localctx = NeoBasicParser.ConstSpecifierContext(self, self._ctx, self.state)
+        self.enterRule(localctx, 8, self.RULE_constSpecifier)
+        self._la = 0 # Token type
+        try:
+            self.enterOuterAlt(localctx, 1)
+            self.state = 174
+            _la = self._input.LA(1)
+            if not(_la==145 or _la==146):
+                self._errHandler.recoverInline(self)
+            else:
+                self._errHandler.reportMatch(self)
+                self.consume()
+        except RecognitionException as re:
+            localctx.exception = re
+            self._errHandler.reportError(self, re)
+            self._errHandler.recover(self, re)
+        finally:
+            self.exitRule()
+        return localctx
+
+
+    class ConstClauseContext(ParserRuleContext):
+        __slots__ = 'parser'
+
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+            super().__init__(parent, invokingState)
+            self.parser = parser
+
+        def CONST(self):
+            return self.getToken(NeoBasicParser.CONST, 0)
+
+        def constDeclare(self):
+            return self.getTypedRuleContext(NeoBasicParser.ConstDeclareContext,0)
+
+
+        def getRuleIndex(self):
+            return NeoBasicParser.RULE_constClause
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterConstClause" ):
+                listener.enterConstClause(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitConstClause" ):
+                listener.exitConstClause(self)
+
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitConstClause" ):
+                return visitor.visitConstClause(self)
+            else:
+                return visitor.visitChildren(self)
+
+
+
+
+    def constClause(self):
+
+        localctx = NeoBasicParser.ConstClauseContext(self, self._ctx, self.state)
+        self.enterRule(localctx, 10, self.RULE_constClause)
+        try:
+            self.enterOuterAlt(localctx, 1)
+            self.state = 176
+            self.match(NeoBasicParser.CONST)
+            self.state = 177
+            self.constDeclare()
+        except RecognitionException as re:
+            localctx.exception = re
+            self._errHandler.reportError(self, re)
+            self._errHandler.recover(self, re)
+        finally:
+            self.exitRule()
+        return localctx
+
+
+    class ConstDeclareContext(ParserRuleContext):
+        __slots__ = 'parser'
+
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+            super().__init__(parent, invokingState)
+            self.parser = parser
+
+        def constDeclareSingle(self):
+            return self.getTypedRuleContext(NeoBasicParser.ConstDeclareSingleContext,0)
+
+
+        def constDeclareMultiple(self):
+            return self.getTypedRuleContext(NeoBasicParser.ConstDeclareMultipleContext,0)
+
+
+        def constDeclareParallel(self):
+            return self.getTypedRuleContext(NeoBasicParser.ConstDeclareParallelContext,0)
+
+
+        def getRuleIndex(self):
+            return NeoBasicParser.RULE_constDeclare
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterConstDeclare" ):
+                listener.enterConstDeclare(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitConstDeclare" ):
+                listener.exitConstDeclare(self)
+
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitConstDeclare" ):
+                return visitor.visitConstDeclare(self)
+            else:
+                return visitor.visitChildren(self)
+
+
+
+
+    def constDeclare(self):
+
+        localctx = NeoBasicParser.ConstDeclareContext(self, self._ctx, self.state)
+        self.enterRule(localctx, 12, self.RULE_constDeclare)
+        try:
+            self.state = 182
+            self._errHandler.sync(self)
+            la_ = self._interp.adaptivePredict(self._input,3,self._ctx)
+            if la_ == 1:
+                self.enterOuterAlt(localctx, 1)
+                self.state = 179
+                self.constDeclareSingle()
+                pass
+
+            elif la_ == 2:
+                self.enterOuterAlt(localctx, 2)
+                self.state = 180
+                self.constDeclareMultiple()
+                pass
+
+            elif la_ == 3:
+                self.enterOuterAlt(localctx, 3)
+                self.state = 181
+                self.constDeclareParallel()
+                pass
+
+
+        except RecognitionException as re:
+            localctx.exception = re
+            self._errHandler.reportError(self, re)
+            self._errHandler.recover(self, re)
+        finally:
+            self.exitRule()
+        return localctx
+
+
+    class ConstDeclareSingleContext(ParserRuleContext):
+        __slots__ = 'parser'
+
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+            super().__init__(parent, invokingState)
+            self.parser = parser
+
+        def symbolIdentifier(self):
+            return self.getTypedRuleContext(NeoBasicParser.SymbolIdentifierContext,0)
+
+
+        def singleAssignmentOperator(self):
+            return self.getTypedRuleContext(NeoBasicParser.SingleAssignmentOperatorContext,0)
+
+
+        def expression(self):
+            return self.getTypedRuleContext(NeoBasicParser.ExpressionContext,0)
+
+
+        def type_(self):
+            return self.getTypedRuleContext(NeoBasicParser.TypeContext,0)
+
+
+        def getRuleIndex(self):
+            return NeoBasicParser.RULE_constDeclareSingle
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterConstDeclareSingle" ):
+                listener.enterConstDeclareSingle(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitConstDeclareSingle" ):
+                listener.exitConstDeclareSingle(self)
+
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitConstDeclareSingle" ):
+                return visitor.visitConstDeclareSingle(self)
+            else:
+                return visitor.visitChildren(self)
+
+
+
+
+    def constDeclareSingle(self):
+
+        localctx = NeoBasicParser.ConstDeclareSingleContext(self, self._ctx, self.state)
+        self.enterRule(localctx, 14, self.RULE_constDeclareSingle)
+        self._la = 0 # Token type
+        try:
+            self.enterOuterAlt(localctx, 1)
+            self.state = 184
+            self.symbolIdentifier()
+            self.state = 186
+            self._errHandler.sync(self)
+            _la = self._input.LA(1)
+            if ((((_la - 163)) & ~0x3f) == 0 and ((1 << (_la - 163)) & 33554431) != 0):
+                self.state = 185
+                self.type_()
+
+
+            self.state = 188
+            self.singleAssignmentOperator()
+            self.state = 189
+            self.expression(0)
+        except RecognitionException as re:
+            localctx.exception = re
+            self._errHandler.reportError(self, re)
+            self._errHandler.recover(self, re)
+        finally:
+            self.exitRule()
+        return localctx
+
+
+    class ConstDeclareMultipleContext(ParserRuleContext):
+        __slots__ = 'parser'
+
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+            super().__init__(parent, invokingState)
+            self.parser = parser
+
+        def constDeclareSingle(self, i:int=None):
+            if i is None:
+                return self.getTypedRuleContexts(NeoBasicParser.ConstDeclareSingleContext)
+            else:
+                return self.getTypedRuleContext(NeoBasicParser.ConstDeclareSingleContext,i)
+
+
+        def COMMA(self, i:int=None):
+            if i is None:
+                return self.getTokens(NeoBasicParser.COMMA)
+            else:
+                return self.getToken(NeoBasicParser.COMMA, i)
+
+        def getRuleIndex(self):
+            return NeoBasicParser.RULE_constDeclareMultiple
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterConstDeclareMultiple" ):
+                listener.enterConstDeclareMultiple(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitConstDeclareMultiple" ):
+                listener.exitConstDeclareMultiple(self)
+
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitConstDeclareMultiple" ):
+                return visitor.visitConstDeclareMultiple(self)
+            else:
+                return visitor.visitChildren(self)
+
+
+
+
+    def constDeclareMultiple(self):
+
+        localctx = NeoBasicParser.ConstDeclareMultipleContext(self, self._ctx, self.state)
+        self.enterRule(localctx, 16, self.RULE_constDeclareMultiple)
+        self._la = 0 # Token type
+        try:
+            self.enterOuterAlt(localctx, 1)
+            self.state = 191
+            self.constDeclareSingle()
+            self.state = 194 
+            self._errHandler.sync(self)
+            _la = self._input.LA(1)
+            while True:
+                self.state = 192
+                self.match(NeoBasicParser.COMMA)
+                self.state = 193
+                self.constDeclareSingle()
+                self.state = 196 
+                self._errHandler.sync(self)
+                _la = self._input.LA(1)
+                if not (_la==10):
+                    break
+
+        except RecognitionException as re:
+            localctx.exception = re
+            self._errHandler.reportError(self, re)
+            self._errHandler.recover(self, re)
+        finally:
+            self.exitRule()
+        return localctx
+
+
+    class ConstDeclareParallelContext(ParserRuleContext):
+        __slots__ = 'parser'
+
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+            super().__init__(parent, invokingState)
+            self.parser = parser
+
+        def symbolIdentifiers(self):
+            return self.getTypedRuleContext(NeoBasicParser.SymbolIdentifiersContext,0)
+
+
+        def multipleAssignmentOperator(self):
+            return self.getTypedRuleContext(NeoBasicParser.MultipleAssignmentOperatorContext,0)
+
+
+        def expressions(self):
+            return self.getTypedRuleContext(NeoBasicParser.ExpressionsContext,0)
+
+
+        def getRuleIndex(self):
+            return NeoBasicParser.RULE_constDeclareParallel
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterConstDeclareParallel" ):
+                listener.enterConstDeclareParallel(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitConstDeclareParallel" ):
+                listener.exitConstDeclareParallel(self)
+
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitConstDeclareParallel" ):
+                return visitor.visitConstDeclareParallel(self)
+            else:
+                return visitor.visitChildren(self)
+
+
+
+
+    def constDeclareParallel(self):
+
+        localctx = NeoBasicParser.ConstDeclareParallelContext(self, self._ctx, self.state)
+        self.enterRule(localctx, 18, self.RULE_constDeclareParallel)
+        try:
+            self.enterOuterAlt(localctx, 1)
+            self.state = 198
+            self.symbolIdentifiers()
+            self.state = 199
+            self.multipleAssignmentOperator()
+            self.state = 200
+            self.expressions()
+        except RecognitionException as re:
+            localctx.exception = re
+            self._errHandler.reportError(self, re)
+            self._errHandler.recover(self, re)
+        finally:
+            self.exitRule()
+        return localctx
+
+
+    class ValSentenceContext(ParserRuleContext):
+        __slots__ = 'parser'
+
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+            super().__init__(parent, invokingState)
+            self.parser = parser
+
+        def valClause(self):
+            return self.getTypedRuleContext(NeoBasicParser.ValClauseContext,0)
+
+
+        def valSpecifier(self, i:int=None):
+            if i is None:
+                return self.getTypedRuleContexts(NeoBasicParser.ValSpecifierContext)
+            else:
+                return self.getTypedRuleContext(NeoBasicParser.ValSpecifierContext,i)
+
+
+        def getRuleIndex(self):
+            return NeoBasicParser.RULE_valSentence
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterValSentence" ):
+                listener.enterValSentence(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitValSentence" ):
+                listener.exitValSentence(self)
+
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitValSentence" ):
+                return visitor.visitValSentence(self)
+            else:
+                return visitor.visitChildren(self)
+
+
+
+
+    def valSentence(self):
+
+        localctx = NeoBasicParser.ValSentenceContext(self, self._ctx, self.state)
+        self.enterRule(localctx, 20, self.RULE_valSentence)
+        self._la = 0 # Token type
+        try:
+            self.enterOuterAlt(localctx, 1)
+            self.state = 205
+            self._errHandler.sync(self)
+            _la = self._input.LA(1)
+            while ((((_la - 145)) & ~0x3f) == 0 and ((1 << (_la - 145)) & 7) != 0):
+                self.state = 202
+                self.valSpecifier()
+                self.state = 207
+                self._errHandler.sync(self)
+                _la = self._input.LA(1)
+
+            self.state = 208
+            self.valClause()
+        except RecognitionException as re:
+            localctx.exception = re
+            self._errHandler.reportError(self, re)
+            self._errHandler.recover(self, re)
+        finally:
+            self.exitRule()
+        return localctx
+
+
+    class ValSpecifierContext(ParserRuleContext):
+        __slots__ = 'parser'
+
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+            super().__init__(parent, invokingState)
+            self.parser = parser
+
+        def COMPTIME(self):
+            return self.getToken(NeoBasicParser.COMPTIME, 0)
+
+        def STATIC(self):
+            return self.getToken(NeoBasicParser.STATIC, 0)
+
+        def INLINE(self):
+            return self.getToken(NeoBasicParser.INLINE, 0)
+
+        def getRuleIndex(self):
+            return NeoBasicParser.RULE_valSpecifier
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterValSpecifier" ):
+                listener.enterValSpecifier(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitValSpecifier" ):
+                listener.exitValSpecifier(self)
+
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitValSpecifier" ):
+                return visitor.visitValSpecifier(self)
+            else:
+                return visitor.visitChildren(self)
+
+
+
+
+    def valSpecifier(self):
+
+        localctx = NeoBasicParser.ValSpecifierContext(self, self._ctx, self.state)
+        self.enterRule(localctx, 22, self.RULE_valSpecifier)
+        self._la = 0 # Token type
+        try:
+            self.enterOuterAlt(localctx, 1)
+            self.state = 210
+            _la = self._input.LA(1)
+            if not(((((_la - 145)) & ~0x3f) == 0 and ((1 << (_la - 145)) & 7) != 0)):
+                self._errHandler.recoverInline(self)
+            else:
+                self._errHandler.reportMatch(self)
+                self.consume()
+        except RecognitionException as re:
+            localctx.exception = re
+            self._errHandler.reportError(self, re)
+            self._errHandler.recover(self, re)
+        finally:
+            self.exitRule()
+        return localctx
+
+
+    class ValClauseContext(ParserRuleContext):
+        __slots__ = 'parser'
+
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+            super().__init__(parent, invokingState)
+            self.parser = parser
+
+        def VAL(self):
+            return self.getToken(NeoBasicParser.VAL, 0)
+
+        def varDeclare(self):
+            return self.getTypedRuleContext(NeoBasicParser.VarDeclareContext,0)
+
+
+        def getRuleIndex(self):
+            return NeoBasicParser.RULE_valClause
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterValClause" ):
+                listener.enterValClause(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitValClause" ):
+                listener.exitValClause(self)
+
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitValClause" ):
+                return visitor.visitValClause(self)
+            else:
+                return visitor.visitChildren(self)
+
+
+
+
+    def valClause(self):
+
+        localctx = NeoBasicParser.ValClauseContext(self, self._ctx, self.state)
+        self.enterRule(localctx, 24, self.RULE_valClause)
+        try:
+            self.enterOuterAlt(localctx, 1)
+            self.state = 212
+            self.match(NeoBasicParser.VAL)
+            self.state = 213
+            self.varDeclare()
+        except RecognitionException as re:
+            localctx.exception = re
+            self._errHandler.reportError(self, re)
+            self._errHandler.recover(self, re)
+        finally:
+            self.exitRule()
+        return localctx
+
+
+    class ValDeclareContext(ParserRuleContext):
+        __slots__ = 'parser'
+
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+            super().__init__(parent, invokingState)
+            self.parser = parser
+
+        def valDeclareSingle(self):
+            return self.getTypedRuleContext(NeoBasicParser.ValDeclareSingleContext,0)
+
+
+        def valDeclareMultiple(self):
+            return self.getTypedRuleContext(NeoBasicParser.ValDeclareMultipleContext,0)
+
+
+        def valDeclareParallel(self):
+            return self.getTypedRuleContext(NeoBasicParser.ValDeclareParallelContext,0)
+
+
+        def getRuleIndex(self):
+            return NeoBasicParser.RULE_valDeclare
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterValDeclare" ):
+                listener.enterValDeclare(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitValDeclare" ):
+                listener.exitValDeclare(self)
+
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitValDeclare" ):
+                return visitor.visitValDeclare(self)
+            else:
+                return visitor.visitChildren(self)
+
+
+
+
+    def valDeclare(self):
+
+        localctx = NeoBasicParser.ValDeclareContext(self, self._ctx, self.state)
+        self.enterRule(localctx, 26, self.RULE_valDeclare)
+        try:
+            self.state = 218
+            self._errHandler.sync(self)
+            la_ = self._interp.adaptivePredict(self._input,7,self._ctx)
+            if la_ == 1:
+                self.enterOuterAlt(localctx, 1)
+                self.state = 215
+                self.valDeclareSingle()
+                pass
+
+            elif la_ == 2:
+                self.enterOuterAlt(localctx, 2)
+                self.state = 216
+                self.valDeclareMultiple()
+                pass
+
+            elif la_ == 3:
+                self.enterOuterAlt(localctx, 3)
+                self.state = 217
+                self.valDeclareParallel()
+                pass
+
+
+        except RecognitionException as re:
+            localctx.exception = re
+            self._errHandler.reportError(self, re)
+            self._errHandler.recover(self, re)
+        finally:
+            self.exitRule()
+        return localctx
+
+
+    class ValDeclareSingleContext(ParserRuleContext):
+        __slots__ = 'parser'
+
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+            super().__init__(parent, invokingState)
+            self.parser = parser
+
+        def symbolIdentifier(self):
+            return self.getTypedRuleContext(NeoBasicParser.SymbolIdentifierContext,0)
+
+
+        def type_(self):
+            return self.getTypedRuleContext(NeoBasicParser.TypeContext,0)
+
+
+        def singleAssignmentOperator(self):
+            return self.getTypedRuleContext(NeoBasicParser.SingleAssignmentOperatorContext,0)
+
+
+        def expression(self):
+            return self.getTypedRuleContext(NeoBasicParser.ExpressionContext,0)
+
+
+        def getRuleIndex(self):
+            return NeoBasicParser.RULE_valDeclareSingle
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterValDeclareSingle" ):
+                listener.enterValDeclareSingle(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitValDeclareSingle" ):
+                listener.exitValDeclareSingle(self)
+
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitValDeclareSingle" ):
+                return visitor.visitValDeclareSingle(self)
+            else:
+                return visitor.visitChildren(self)
+
+
+
+
+    def valDeclareSingle(self):
+
+        localctx = NeoBasicParser.ValDeclareSingleContext(self, self._ctx, self.state)
+        self.enterRule(localctx, 28, self.RULE_valDeclareSingle)
+        self._la = 0 # Token type
+        try:
+            self.enterOuterAlt(localctx, 1)
+            self.state = 220
+            self.symbolIdentifier()
+            self.state = 222
+            self._errHandler.sync(self)
+            _la = self._input.LA(1)
+            if ((((_la - 163)) & ~0x3f) == 0 and ((1 << (_la - 163)) & 33554431) != 0):
+                self.state = 221
+                self.type_()
+
+
+            self.state = 227
+            self._errHandler.sync(self)
+            _la = self._input.LA(1)
+            if ((((_la - 31)) & ~0x3f) == 0 and ((1 << (_la - 31)) & 61572651155457) != 0):
+                self.state = 224
+                self.singleAssignmentOperator()
+                self.state = 225
+                self.expression(0)
+
+
+        except RecognitionException as re:
+            localctx.exception = re
+            self._errHandler.reportError(self, re)
+            self._errHandler.recover(self, re)
+        finally:
+            self.exitRule()
+        return localctx
+
+
+    class ValDeclareMultipleContext(ParserRuleContext):
+        __slots__ = 'parser'
+
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+            super().__init__(parent, invokingState)
+            self.parser = parser
+
+        def valDeclareSingle(self, i:int=None):
+            if i is None:
+                return self.getTypedRuleContexts(NeoBasicParser.ValDeclareSingleContext)
+            else:
+                return self.getTypedRuleContext(NeoBasicParser.ValDeclareSingleContext,i)
+
+
+        def COMMA(self, i:int=None):
+            if i is None:
+                return self.getTokens(NeoBasicParser.COMMA)
+            else:
+                return self.getToken(NeoBasicParser.COMMA, i)
+
+        def getRuleIndex(self):
+            return NeoBasicParser.RULE_valDeclareMultiple
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterValDeclareMultiple" ):
+                listener.enterValDeclareMultiple(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitValDeclareMultiple" ):
+                listener.exitValDeclareMultiple(self)
+
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitValDeclareMultiple" ):
+                return visitor.visitValDeclareMultiple(self)
+            else:
+                return visitor.visitChildren(self)
+
+
+
+
+    def valDeclareMultiple(self):
+
+        localctx = NeoBasicParser.ValDeclareMultipleContext(self, self._ctx, self.state)
+        self.enterRule(localctx, 30, self.RULE_valDeclareMultiple)
+        self._la = 0 # Token type
+        try:
+            self.enterOuterAlt(localctx, 1)
+            self.state = 229
+            self.valDeclareSingle()
+            self.state = 232 
+            self._errHandler.sync(self)
+            _la = self._input.LA(1)
+            while True:
+                self.state = 230
+                self.match(NeoBasicParser.COMMA)
+                self.state = 231
+                self.valDeclareSingle()
+                self.state = 234 
+                self._errHandler.sync(self)
+                _la = self._input.LA(1)
+                if not (_la==10):
+                    break
+
+        except RecognitionException as re:
+            localctx.exception = re
+            self._errHandler.reportError(self, re)
+            self._errHandler.recover(self, re)
+        finally:
+            self.exitRule()
+        return localctx
+
+
+    class ValDeclareParallelContext(ParserRuleContext):
+        __slots__ = 'parser'
+
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+            super().__init__(parent, invokingState)
+            self.parser = parser
+
+        def symbolIdentifiers(self):
+            return self.getTypedRuleContext(NeoBasicParser.SymbolIdentifiersContext,0)
+
+
+        def multipleAssignmentOperator(self):
+            return self.getTypedRuleContext(NeoBasicParser.MultipleAssignmentOperatorContext,0)
+
+
+        def expressions(self):
+            return self.getTypedRuleContext(NeoBasicParser.ExpressionsContext,0)
+
+
+        def getRuleIndex(self):
+            return NeoBasicParser.RULE_valDeclareParallel
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterValDeclareParallel" ):
+                listener.enterValDeclareParallel(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitValDeclareParallel" ):
+                listener.exitValDeclareParallel(self)
+
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitValDeclareParallel" ):
+                return visitor.visitValDeclareParallel(self)
+            else:
+                return visitor.visitChildren(self)
+
+
+
+
+    def valDeclareParallel(self):
+
+        localctx = NeoBasicParser.ValDeclareParallelContext(self, self._ctx, self.state)
+        self.enterRule(localctx, 32, self.RULE_valDeclareParallel)
+        try:
+            self.enterOuterAlt(localctx, 1)
+            self.state = 236
+            self.symbolIdentifiers()
+            self.state = 237
+            self.multipleAssignmentOperator()
+            self.state = 238
+            self.expressions()
+        except RecognitionException as re:
+            localctx.exception = re
+            self._errHandler.reportError(self, re)
+            self._errHandler.recover(self, re)
+        finally:
+            self.exitRule()
+        return localctx
+
+
+    class VarSentenceContext(ParserRuleContext):
+        __slots__ = 'parser'
+
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+            super().__init__(parent, invokingState)
+            self.parser = parser
+
+        def varClause(self):
+            return self.getTypedRuleContext(NeoBasicParser.VarClauseContext,0)
+
+
+        def varSpecifier(self, i:int=None):
+            if i is None:
+                return self.getTypedRuleContexts(NeoBasicParser.VarSpecifierContext)
+            else:
+                return self.getTypedRuleContext(NeoBasicParser.VarSpecifierContext,i)
+
+
+        def getRuleIndex(self):
+            return NeoBasicParser.RULE_varSentence
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterVarSentence" ):
+                listener.enterVarSentence(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitVarSentence" ):
+                listener.exitVarSentence(self)
+
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitVarSentence" ):
+                return visitor.visitVarSentence(self)
+            else:
+                return visitor.visitChildren(self)
+
+
+
+
+    def varSentence(self):
+
+        localctx = NeoBasicParser.VarSentenceContext(self, self._ctx, self.state)
+        self.enterRule(localctx, 34, self.RULE_varSentence)
+        self._la = 0 # Token type
+        try:
+            self.enterOuterAlt(localctx, 1)
+            self.state = 243
+            self._errHandler.sync(self)
+            _la = self._input.LA(1)
+            while ((((_la - 145)) & ~0x3f) == 0 and ((1 << (_la - 145)) & 7) != 0):
+                self.state = 240
+                self.varSpecifier()
+                self.state = 245
+                self._errHandler.sync(self)
+                _la = self._input.LA(1)
+
+            self.state = 246
+            self.varClause()
+        except RecognitionException as re:
+            localctx.exception = re
+            self._errHandler.reportError(self, re)
+            self._errHandler.recover(self, re)
+        finally:
+            self.exitRule()
+        return localctx
+
+
+    class VarSpecifierContext(ParserRuleContext):
+        __slots__ = 'parser'
+
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+            super().__init__(parent, invokingState)
+            self.parser = parser
+
+        def COMPTIME(self):
+            return self.getToken(NeoBasicParser.COMPTIME, 0)
+
+        def STATIC(self):
+            return self.getToken(NeoBasicParser.STATIC, 0)
+
+        def INLINE(self):
+            return self.getToken(NeoBasicParser.INLINE, 0)
+
+        def getRuleIndex(self):
+            return NeoBasicParser.RULE_varSpecifier
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterVarSpecifier" ):
+                listener.enterVarSpecifier(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitVarSpecifier" ):
+                listener.exitVarSpecifier(self)
+
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitVarSpecifier" ):
+                return visitor.visitVarSpecifier(self)
+            else:
+                return visitor.visitChildren(self)
+
+
+
+
+    def varSpecifier(self):
+
+        localctx = NeoBasicParser.VarSpecifierContext(self, self._ctx, self.state)
+        self.enterRule(localctx, 36, self.RULE_varSpecifier)
+        self._la = 0 # Token type
+        try:
+            self.enterOuterAlt(localctx, 1)
+            self.state = 248
+            _la = self._input.LA(1)
+            if not(((((_la - 145)) & ~0x3f) == 0 and ((1 << (_la - 145)) & 7) != 0)):
+                self._errHandler.recoverInline(self)
+            else:
+                self._errHandler.reportMatch(self)
+                self.consume()
+        except RecognitionException as re:
+            localctx.exception = re
+            self._errHandler.reportError(self, re)
+            self._errHandler.recover(self, re)
+        finally:
+            self.exitRule()
+        return localctx
+
+
+    class VarClauseContext(ParserRuleContext):
+        __slots__ = 'parser'
+
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+            super().__init__(parent, invokingState)
+            self.parser = parser
+
+        def VAR(self):
+            return self.getToken(NeoBasicParser.VAR, 0)
+
+        def varDeclare(self):
+            return self.getTypedRuleContext(NeoBasicParser.VarDeclareContext,0)
+
+
+        def getRuleIndex(self):
+            return NeoBasicParser.RULE_varClause
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterVarClause" ):
+                listener.enterVarClause(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitVarClause" ):
+                listener.exitVarClause(self)
+
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitVarClause" ):
+                return visitor.visitVarClause(self)
+            else:
+                return visitor.visitChildren(self)
+
+
+
+
+    def varClause(self):
+
+        localctx = NeoBasicParser.VarClauseContext(self, self._ctx, self.state)
+        self.enterRule(localctx, 38, self.RULE_varClause)
+        try:
+            self.enterOuterAlt(localctx, 1)
+            self.state = 250
+            self.match(NeoBasicParser.VAR)
+            self.state = 251
+            self.varDeclare()
+        except RecognitionException as re:
+            localctx.exception = re
+            self._errHandler.reportError(self, re)
+            self._errHandler.recover(self, re)
+        finally:
+            self.exitRule()
+        return localctx
+
+
+    class VarDeclareContext(ParserRuleContext):
+        __slots__ = 'parser'
+
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+            super().__init__(parent, invokingState)
+            self.parser = parser
+
+        def varDeclareSingle(self):
+            return self.getTypedRuleContext(NeoBasicParser.VarDeclareSingleContext,0)
+
+
+        def varDeclareMultiple(self):
+            return self.getTypedRuleContext(NeoBasicParser.VarDeclareMultipleContext,0)
+
+
+        def varDeclareParallel(self):
+            return self.getTypedRuleContext(NeoBasicParser.VarDeclareParallelContext,0)
+
+
+        def getRuleIndex(self):
+            return NeoBasicParser.RULE_varDeclare
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterVarDeclare" ):
+                listener.enterVarDeclare(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitVarDeclare" ):
+                listener.exitVarDeclare(self)
+
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitVarDeclare" ):
+                return visitor.visitVarDeclare(self)
+            else:
+                return visitor.visitChildren(self)
+
+
+
+
+    def varDeclare(self):
+
+        localctx = NeoBasicParser.VarDeclareContext(self, self._ctx, self.state)
+        self.enterRule(localctx, 40, self.RULE_varDeclare)
+        try:
+            self.state = 256
+            self._errHandler.sync(self)
+            la_ = self._interp.adaptivePredict(self._input,12,self._ctx)
+            if la_ == 1:
+                self.enterOuterAlt(localctx, 1)
+                self.state = 253
+                self.varDeclareSingle()
+                pass
+
+            elif la_ == 2:
+                self.enterOuterAlt(localctx, 2)
+                self.state = 254
+                self.varDeclareMultiple()
+                pass
+
+            elif la_ == 3:
+                self.enterOuterAlt(localctx, 3)
+                self.state = 255
+                self.varDeclareParallel()
+                pass
+
+
+        except RecognitionException as re:
+            localctx.exception = re
+            self._errHandler.reportError(self, re)
+            self._errHandler.recover(self, re)
+        finally:
+            self.exitRule()
+        return localctx
+
+
+    class VarDeclareSingleContext(ParserRuleContext):
+        __slots__ = 'parser'
+
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+            super().__init__(parent, invokingState)
+            self.parser = parser
+
+        def symbolIdentifier(self):
+            return self.getTypedRuleContext(NeoBasicParser.SymbolIdentifierContext,0)
+
+
+        def type_(self):
+            return self.getTypedRuleContext(NeoBasicParser.TypeContext,0)
+
+
+        def singleAssignmentOperator(self):
+            return self.getTypedRuleContext(NeoBasicParser.SingleAssignmentOperatorContext,0)
+
+
+        def expression(self):
+            return self.getTypedRuleContext(NeoBasicParser.ExpressionContext,0)
+
+
+        def getRuleIndex(self):
+            return NeoBasicParser.RULE_varDeclareSingle
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterVarDeclareSingle" ):
+                listener.enterVarDeclareSingle(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitVarDeclareSingle" ):
+                listener.exitVarDeclareSingle(self)
+
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitVarDeclareSingle" ):
+                return visitor.visitVarDeclareSingle(self)
+            else:
+                return visitor.visitChildren(self)
+
+
+
+
+    def varDeclareSingle(self):
+
+        localctx = NeoBasicParser.VarDeclareSingleContext(self, self._ctx, self.state)
+        self.enterRule(localctx, 42, self.RULE_varDeclareSingle)
+        self._la = 0 # Token type
+        try:
+            self.enterOuterAlt(localctx, 1)
+            self.state = 258
+            self.symbolIdentifier()
+            self.state = 260
+            self._errHandler.sync(self)
+            _la = self._input.LA(1)
+            if ((((_la - 163)) & ~0x3f) == 0 and ((1 << (_la - 163)) & 33554431) != 0):
+                self.state = 259
+                self.type_()
+
+
+            self.state = 265
+            self._errHandler.sync(self)
+            _la = self._input.LA(1)
+            if ((((_la - 31)) & ~0x3f) == 0 and ((1 << (_la - 31)) & 61572651155457) != 0):
+                self.state = 262
+                self.singleAssignmentOperator()
+                self.state = 263
+                self.expression(0)
+
+
+        except RecognitionException as re:
+            localctx.exception = re
+            self._errHandler.reportError(self, re)
+            self._errHandler.recover(self, re)
+        finally:
+            self.exitRule()
+        return localctx
+
+
+    class VarDeclareMultipleContext(ParserRuleContext):
+        __slots__ = 'parser'
+
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+            super().__init__(parent, invokingState)
+            self.parser = parser
+
+        def varDeclareSingle(self, i:int=None):
+            if i is None:
+                return self.getTypedRuleContexts(NeoBasicParser.VarDeclareSingleContext)
+            else:
+                return self.getTypedRuleContext(NeoBasicParser.VarDeclareSingleContext,i)
+
+
+        def COMMA(self, i:int=None):
+            if i is None:
+                return self.getTokens(NeoBasicParser.COMMA)
+            else:
+                return self.getToken(NeoBasicParser.COMMA, i)
+
+        def getRuleIndex(self):
+            return NeoBasicParser.RULE_varDeclareMultiple
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterVarDeclareMultiple" ):
+                listener.enterVarDeclareMultiple(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitVarDeclareMultiple" ):
+                listener.exitVarDeclareMultiple(self)
+
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitVarDeclareMultiple" ):
+                return visitor.visitVarDeclareMultiple(self)
+            else:
+                return visitor.visitChildren(self)
+
+
+
+
+    def varDeclareMultiple(self):
+
+        localctx = NeoBasicParser.VarDeclareMultipleContext(self, self._ctx, self.state)
+        self.enterRule(localctx, 44, self.RULE_varDeclareMultiple)
+        self._la = 0 # Token type
+        try:
+            self.enterOuterAlt(localctx, 1)
+            self.state = 267
+            self.varDeclareSingle()
+            self.state = 270 
+            self._errHandler.sync(self)
+            _la = self._input.LA(1)
+            while True:
+                self.state = 268
+                self.match(NeoBasicParser.COMMA)
+                self.state = 269
+                self.varDeclareSingle()
+                self.state = 272 
+                self._errHandler.sync(self)
+                _la = self._input.LA(1)
+                if not (_la==10):
+                    break
+
+        except RecognitionException as re:
+            localctx.exception = re
+            self._errHandler.reportError(self, re)
+            self._errHandler.recover(self, re)
+        finally:
+            self.exitRule()
+        return localctx
+
+
+    class VarDeclareParallelContext(ParserRuleContext):
+        __slots__ = 'parser'
+
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+            super().__init__(parent, invokingState)
+            self.parser = parser
+
+        def symbolIdentifiers(self):
+            return self.getTypedRuleContext(NeoBasicParser.SymbolIdentifiersContext,0)
+
+
+        def multipleAssignmentOperator(self):
+            return self.getTypedRuleContext(NeoBasicParser.MultipleAssignmentOperatorContext,0)
+
+
+        def expressions(self):
+            return self.getTypedRuleContext(NeoBasicParser.ExpressionsContext,0)
+
+
+        def getRuleIndex(self):
+            return NeoBasicParser.RULE_varDeclareParallel
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterVarDeclareParallel" ):
+                listener.enterVarDeclareParallel(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitVarDeclareParallel" ):
+                listener.exitVarDeclareParallel(self)
+
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitVarDeclareParallel" ):
+                return visitor.visitVarDeclareParallel(self)
+            else:
+                return visitor.visitChildren(self)
+
+
+
+
+    def varDeclareParallel(self):
+
+        localctx = NeoBasicParser.VarDeclareParallelContext(self, self._ctx, self.state)
+        self.enterRule(localctx, 46, self.RULE_varDeclareParallel)
+        try:
+            self.enterOuterAlt(localctx, 1)
+            self.state = 274
+            self.symbolIdentifiers()
+            self.state = 275
+            self.multipleAssignmentOperator()
+            self.state = 276
+            self.expressions()
+        except RecognitionException as re:
+            localctx.exception = re
+            self._errHandler.reportError(self, re)
+            self._errHandler.recover(self, re)
+        finally:
+            self.exitRule()
+        return localctx
+
+
+    class PrefixUnaryOperatorContext(ParserRuleContext):
+        __slots__ = 'parser'
+
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+            super().__init__(parent, invokingState)
+            self.parser = parser
+
+        def unaryArithmeticOperator(self):
+            return self.getTypedRuleContext(NeoBasicParser.UnaryArithmeticOperatorContext,0)
+
+
+        def unaryBitwiseOperator(self):
+            return self.getTypedRuleContext(NeoBasicParser.UnaryBitwiseOperatorContext,0)
+
+
+        def unaryLogicalOperator(self):
+            return self.getTypedRuleContext(NeoBasicParser.UnaryLogicalOperatorContext,0)
+
+
+        def unarySpreadOperator(self):
+            return self.getTypedRuleContext(NeoBasicParser.UnarySpreadOperatorContext,0)
+
+
+        def unarySortOperator(self):
+            return self.getTypedRuleContext(NeoBasicParser.UnarySortOperatorContext,0)
+
+
+        def unaryMetaOperator(self):
+            return self.getTypedRuleContext(NeoBasicParser.UnaryMetaOperatorContext,0)
+
+
+        def getRuleIndex(self):
+            return NeoBasicParser.RULE_prefixUnaryOperator
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterPrefixUnaryOperator" ):
+                listener.enterPrefixUnaryOperator(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitPrefixUnaryOperator" ):
+                listener.exitPrefixUnaryOperator(self)
+
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitPrefixUnaryOperator" ):
+                return visitor.visitPrefixUnaryOperator(self)
+            else:
+                return visitor.visitChildren(self)
+
+
+
+
+    def prefixUnaryOperator(self):
+
+        localctx = NeoBasicParser.PrefixUnaryOperatorContext(self, self._ctx, self.state)
+        self.enterRule(localctx, 48, self.RULE_prefixUnaryOperator)
+        try:
+            self.state = 284
+            self._errHandler.sync(self)
+            token = self._input.LA(1)
+            if token in [32, 33, 47, 48, 49, 50, 51]:
+                self.enterOuterAlt(localctx, 1)
+                self.state = 278
+                self.unaryArithmeticOperator()
+                pass
+            elif token in [27, 52]:
+                self.enterOuterAlt(localctx, 2)
+                self.state = 279
+                self.unaryBitwiseOperator()
+                pass
+            elif token in [156]:
+                self.enterOuterAlt(localctx, 3)
+                self.state = 280
+                self.unaryLogicalOperator()
+                pass
+            elif token in [34]:
+                self.enterOuterAlt(localctx, 4)
+                self.state = 281
+                self.unarySpreadOperator()
+                pass
+            elif token in [28, 54]:
+                self.enterOuterAlt(localctx, 5)
+                self.state = 282
+                self.unarySortOperator()
+                pass
+            elif token in [149, 150]:
+                self.enterOuterAlt(localctx, 6)
+                self.state = 283
+                self.unaryMetaOperator()
+                pass
+            else:
+                raise NoViableAltException(self)
+
+        except RecognitionException as re:
+            localctx.exception = re
+            self._errHandler.reportError(self, re)
+            self._errHandler.recover(self, re)
+        finally:
+            self.exitRule()
+        return localctx
+
+
+    class PosfixUnaryOperatorContext(ParserRuleContext):
+        __slots__ = 'parser'
+
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+            super().__init__(parent, invokingState)
+            self.parser = parser
+
+        def unarySortOperator(self):
+            return self.getTypedRuleContext(NeoBasicParser.UnarySortOperatorContext,0)
+
+
+        def unaryCloneOperator(self):
+            return self.getTypedRuleContext(NeoBasicParser.UnaryCloneOperatorContext,0)
+
+
+        def getRuleIndex(self):
+            return NeoBasicParser.RULE_posfixUnaryOperator
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterPosfixUnaryOperator" ):
+                listener.enterPosfixUnaryOperator(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitPosfixUnaryOperator" ):
+                listener.exitPosfixUnaryOperator(self)
+
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitPosfixUnaryOperator" ):
+                return visitor.visitPosfixUnaryOperator(self)
+            else:
+                return visitor.visitChildren(self)
+
+
+
+
+    def posfixUnaryOperator(self):
+
+        localctx = NeoBasicParser.PosfixUnaryOperatorContext(self, self._ctx, self.state)
+        self.enterRule(localctx, 50, self.RULE_posfixUnaryOperator)
+        try:
+            self.state = 288
+            self._errHandler.sync(self)
+            token = self._input.LA(1)
+            if token in [28, 54]:
+                self.enterOuterAlt(localctx, 1)
+                self.state = 286
+                self.unarySortOperator()
+                pass
+            elif token in [31, 53]:
+                self.enterOuterAlt(localctx, 2)
+                self.state = 287
+                self.unaryCloneOperator()
+                pass
+            else:
+                raise NoViableAltException(self)
+
+        except RecognitionException as re:
+            localctx.exception = re
+            self._errHandler.reportError(self, re)
+            self._errHandler.recover(self, re)
+        finally:
+            self.exitRule()
+        return localctx
+
+
+    class UnaryArithmeticOperatorContext(ParserRuleContext):
+        __slots__ = 'parser'
+
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+            super().__init__(parent, invokingState)
+            self.parser = parser
+
+        def PLUS(self):
+            return self.getToken(NeoBasicParser.PLUS, 0)
+
+        def MINUS(self):
+            return self.getToken(NeoBasicParser.MINUS, 0)
+
+        def INCREMENT(self):
+            return self.getToken(NeoBasicParser.INCREMENT, 0)
+
+        def DECREMENT(self):
+            return self.getToken(NeoBasicParser.DECREMENT, 0)
+
+        def SQUARE_POWER(self):
+            return self.getToken(NeoBasicParser.SQUARE_POWER, 0)
+
+        def SQUARE_ROOT(self):
+            return self.getToken(NeoBasicParser.SQUARE_ROOT, 0)
+
+        def FACTORIAL(self):
+            return self.getToken(NeoBasicParser.FACTORIAL, 0)
+
+        def getRuleIndex(self):
+            return NeoBasicParser.RULE_unaryArithmeticOperator
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterUnaryArithmeticOperator" ):
+                listener.enterUnaryArithmeticOperator(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitUnaryArithmeticOperator" ):
+                listener.exitUnaryArithmeticOperator(self)
+
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitUnaryArithmeticOperator" ):
+                return visitor.visitUnaryArithmeticOperator(self)
+            else:
+                return visitor.visitChildren(self)
+
+
+
+
+    def unaryArithmeticOperator(self):
+
+        localctx = NeoBasicParser.UnaryArithmeticOperatorContext(self, self._ctx, self.state)
+        self.enterRule(localctx, 52, self.RULE_unaryArithmeticOperator)
+        self._la = 0 # Token type
+        try:
+            self.enterOuterAlt(localctx, 1)
+            self.state = 290
+            _la = self._input.LA(1)
+            if not((((_la) & ~0x3f) == 0 and ((1 << _la) & 4362875023917056) != 0)):
+                self._errHandler.recoverInline(self)
+            else:
+                self._errHandler.reportMatch(self)
+                self.consume()
+        except RecognitionException as re:
+            localctx.exception = re
+            self._errHandler.reportError(self, re)
+            self._errHandler.recover(self, re)
+        finally:
+            self.exitRule()
+        return localctx
+
+
+    class UnaryBitwiseOperatorContext(ParserRuleContext):
+        __slots__ = 'parser'
+
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+            super().__init__(parent, invokingState)
+            self.parser = parser
+
+        def TILDE(self):
+            return self.getToken(NeoBasicParser.TILDE, 0)
+
+        def BIT_NEGATION(self):
+            return self.getToken(NeoBasicParser.BIT_NEGATION, 0)
+
+        def getRuleIndex(self):
+            return NeoBasicParser.RULE_unaryBitwiseOperator
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterUnaryBitwiseOperator" ):
+                listener.enterUnaryBitwiseOperator(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitUnaryBitwiseOperator" ):
+                listener.exitUnaryBitwiseOperator(self)
+
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitUnaryBitwiseOperator" ):
+                return visitor.visitUnaryBitwiseOperator(self)
+            else:
+                return visitor.visitChildren(self)
+
+
+
+
+    def unaryBitwiseOperator(self):
+
+        localctx = NeoBasicParser.UnaryBitwiseOperatorContext(self, self._ctx, self.state)
+        self.enterRule(localctx, 54, self.RULE_unaryBitwiseOperator)
+        self._la = 0 # Token type
+        try:
+            self.enterOuterAlt(localctx, 1)
+            self.state = 292
+            _la = self._input.LA(1)
+            if not(_la==27 or _la==52):
+                self._errHandler.recoverInline(self)
+            else:
+                self._errHandler.reportMatch(self)
+                self.consume()
+        except RecognitionException as re:
+            localctx.exception = re
+            self._errHandler.reportError(self, re)
+            self._errHandler.recover(self, re)
+        finally:
+            self.exitRule()
+        return localctx
+
+
+    class UnaryLogicalOperatorContext(ParserRuleContext):
+        __slots__ = 'parser'
+
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+            super().__init__(parent, invokingState)
+            self.parser = parser
+
+        def NOT(self):
+            return self.getToken(NeoBasicParser.NOT, 0)
+
+        def getRuleIndex(self):
+            return NeoBasicParser.RULE_unaryLogicalOperator
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterUnaryLogicalOperator" ):
+                listener.enterUnaryLogicalOperator(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitUnaryLogicalOperator" ):
+                listener.exitUnaryLogicalOperator(self)
+
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitUnaryLogicalOperator" ):
+                return visitor.visitUnaryLogicalOperator(self)
+            else:
+                return visitor.visitChildren(self)
+
+
+
+
+    def unaryLogicalOperator(self):
+
+        localctx = NeoBasicParser.UnaryLogicalOperatorContext(self, self._ctx, self.state)
+        self.enterRule(localctx, 56, self.RULE_unaryLogicalOperator)
+        try:
+            self.enterOuterAlt(localctx, 1)
+            self.state = 294
+            self.match(NeoBasicParser.NOT)
+        except RecognitionException as re:
+            localctx.exception = re
+            self._errHandler.reportError(self, re)
+            self._errHandler.recover(self, re)
+        finally:
+            self.exitRule()
+        return localctx
+
+
+    class UnarySpreadOperatorContext(ParserRuleContext):
+        __slots__ = 'parser'
+
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+            super().__init__(parent, invokingState)
+            self.parser = parser
+
+        def ELLIPSIS(self):
+            return self.getToken(NeoBasicParser.ELLIPSIS, 0)
+
+        def getRuleIndex(self):
+            return NeoBasicParser.RULE_unarySpreadOperator
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterUnarySpreadOperator" ):
+                listener.enterUnarySpreadOperator(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitUnarySpreadOperator" ):
+                listener.exitUnarySpreadOperator(self)
+
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitUnarySpreadOperator" ):
+                return visitor.visitUnarySpreadOperator(self)
+            else:
+                return visitor.visitChildren(self)
+
+
+
+
+    def unarySpreadOperator(self):
+
+        localctx = NeoBasicParser.UnarySpreadOperatorContext(self, self._ctx, self.state)
+        self.enterRule(localctx, 58, self.RULE_unarySpreadOperator)
+        try:
+            self.enterOuterAlt(localctx, 1)
+            self.state = 296
+            self.match(NeoBasicParser.ELLIPSIS)
+        except RecognitionException as re:
+            localctx.exception = re
+            self._errHandler.reportError(self, re)
+            self._errHandler.recover(self, re)
+        finally:
+            self.exitRule()
+        return localctx
+
+
+    class UnarySortOperatorContext(ParserRuleContext):
+        __slots__ = 'parser'
+
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+            super().__init__(parent, invokingState)
+            self.parser = parser
+
+        def CARET(self):
+            return self.getToken(NeoBasicParser.CARET, 0)
+
+        def SORTING(self):
+            return self.getToken(NeoBasicParser.SORTING, 0)
+
+        def getRuleIndex(self):
+            return NeoBasicParser.RULE_unarySortOperator
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterUnarySortOperator" ):
+                listener.enterUnarySortOperator(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitUnarySortOperator" ):
+                listener.exitUnarySortOperator(self)
+
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitUnarySortOperator" ):
+                return visitor.visitUnarySortOperator(self)
+            else:
+                return visitor.visitChildren(self)
+
+
+
+
+    def unarySortOperator(self):
+
+        localctx = NeoBasicParser.UnarySortOperatorContext(self, self._ctx, self.state)
+        self.enterRule(localctx, 60, self.RULE_unarySortOperator)
+        self._la = 0 # Token type
+        try:
+            self.enterOuterAlt(localctx, 1)
+            self.state = 298
+            _la = self._input.LA(1)
+            if not(_la==28 or _la==54):
+                self._errHandler.recoverInline(self)
+            else:
+                self._errHandler.reportMatch(self)
+                self.consume()
+        except RecognitionException as re:
+            localctx.exception = re
+            self._errHandler.reportError(self, re)
+            self._errHandler.recover(self, re)
+        finally:
+            self.exitRule()
+        return localctx
+
+
+    class UnaryCloneOperatorContext(ParserRuleContext):
+        __slots__ = 'parser'
+
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+            super().__init__(parent, invokingState)
+            self.parser = parser
+
+        def EQUAL(self):
+            return self.getToken(NeoBasicParser.EQUAL, 0)
+
+        def DEEP_CLONING(self):
+            return self.getToken(NeoBasicParser.DEEP_CLONING, 0)
+
+        def getRuleIndex(self):
+            return NeoBasicParser.RULE_unaryCloneOperator
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterUnaryCloneOperator" ):
+                listener.enterUnaryCloneOperator(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitUnaryCloneOperator" ):
+                listener.exitUnaryCloneOperator(self)
+
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitUnaryCloneOperator" ):
+                return visitor.visitUnaryCloneOperator(self)
+            else:
+                return visitor.visitChildren(self)
+
+
+
+
+    def unaryCloneOperator(self):
+
+        localctx = NeoBasicParser.UnaryCloneOperatorContext(self, self._ctx, self.state)
+        self.enterRule(localctx, 62, self.RULE_unaryCloneOperator)
+        self._la = 0 # Token type
+        try:
+            self.enterOuterAlt(localctx, 1)
+            self.state = 300
+            _la = self._input.LA(1)
+            if not(_la==31 or _la==53):
+                self._errHandler.recoverInline(self)
+            else:
+                self._errHandler.reportMatch(self)
+                self.consume()
+        except RecognitionException as re:
+            localctx.exception = re
+            self._errHandler.reportError(self, re)
+            self._errHandler.recover(self, re)
+        finally:
+            self.exitRule()
+        return localctx
+
+
+    class UnaryMetaOperatorContext(ParserRuleContext):
+        __slots__ = 'parser'
+
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+            super().__init__(parent, invokingState)
+            self.parser = parser
+
+        def TYPEOF(self):
+            return self.getToken(NeoBasicParser.TYPEOF, 0)
+
+        def SIZEOF(self):
+            return self.getToken(NeoBasicParser.SIZEOF, 0)
+
+        def getRuleIndex(self):
+            return NeoBasicParser.RULE_unaryMetaOperator
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterUnaryMetaOperator" ):
+                listener.enterUnaryMetaOperator(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitUnaryMetaOperator" ):
+                listener.exitUnaryMetaOperator(self)
+
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitUnaryMetaOperator" ):
+                return visitor.visitUnaryMetaOperator(self)
+            else:
+                return visitor.visitChildren(self)
+
+
+
+
+    def unaryMetaOperator(self):
+
+        localctx = NeoBasicParser.UnaryMetaOperatorContext(self, self._ctx, self.state)
+        self.enterRule(localctx, 64, self.RULE_unaryMetaOperator)
+        self._la = 0 # Token type
+        try:
+            self.enterOuterAlt(localctx, 1)
+            self.state = 302
+            _la = self._input.LA(1)
+            if not(_la==149 or _la==150):
+                self._errHandler.recoverInline(self)
+            else:
+                self._errHandler.reportMatch(self)
+                self.consume()
+        except RecognitionException as re:
+            localctx.exception = re
+            self._errHandler.reportError(self, re)
+            self._errHandler.recover(self, re)
+        finally:
+            self.exitRule()
+        return localctx
+
+
+    class BinaryExponentialOperatorContext(ParserRuleContext):
+        __slots__ = 'parser'
+
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+            super().__init__(parent, invokingState)
+            self.parser = parser
+
+        def SQUARE_POWER(self):
+            return self.getToken(NeoBasicParser.SQUARE_POWER, 0)
+
+        def SQUARE_ROOT(self):
+            return self.getToken(NeoBasicParser.SQUARE_ROOT, 0)
+
+        def getRuleIndex(self):
+            return NeoBasicParser.RULE_binaryExponentialOperator
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterBinaryExponentialOperator" ):
+                listener.enterBinaryExponentialOperator(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitBinaryExponentialOperator" ):
+                listener.exitBinaryExponentialOperator(self)
+
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitBinaryExponentialOperator" ):
+                return visitor.visitBinaryExponentialOperator(self)
+            else:
+                return visitor.visitChildren(self)
+
+
+
+
+    def binaryExponentialOperator(self):
+
+        localctx = NeoBasicParser.BinaryExponentialOperatorContext(self, self._ctx, self.state)
+        self.enterRule(localctx, 66, self.RULE_binaryExponentialOperator)
+        self._la = 0 # Token type
+        try:
+            self.enterOuterAlt(localctx, 1)
+            self.state = 304
+            _la = self._input.LA(1)
+            if not(_la==49 or _la==50):
+                self._errHandler.recoverInline(self)
+            else:
+                self._errHandler.reportMatch(self)
+                self.consume()
+        except RecognitionException as re:
+            localctx.exception = re
+            self._errHandler.reportError(self, re)
+            self._errHandler.recover(self, re)
+        finally:
+            self.exitRule()
+        return localctx
+
+
+    class BinaryMultiplicativeOperatorContext(ParserRuleContext):
+        __slots__ = 'parser'
+
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+            super().__init__(parent, invokingState)
+            self.parser = parser
+
+        def ASTERISK(self):
+            return self.getToken(NeoBasicParser.ASTERISK, 0)
+
+        def SLASH(self):
+            return self.getToken(NeoBasicParser.SLASH, 0)
+
+        def DIVISION(self):
+            return self.getToken(NeoBasicParser.DIVISION, 0)
+
+        def QUOTIENT(self):
+            return self.getToken(NeoBasicParser.QUOTIENT, 0)
+
+        def PERCENT(self):
+            return self.getToken(NeoBasicParser.PERCENT, 0)
+
+        def PERCENTAGE_RATE(self):
+            return self.getToken(NeoBasicParser.PERCENTAGE_RATE, 0)
+
+        def PERCENTAGE_AMOUNT(self):
+            return self.getToken(NeoBasicParser.PERCENTAGE_AMOUNT, 0)
+
+        def PERCENTAGE_INCREASE(self):
+            return self.getToken(NeoBasicParser.PERCENTAGE_INCREASE, 0)
+
+        def PERCENTAGE_DECREASE(self):
+            return self.getToken(NeoBasicParser.PERCENTAGE_DECREASE, 0)
+
+        def PERCENTAGE_VARIATION(self):
+            return self.getToken(NeoBasicParser.PERCENTAGE_VARIATION, 0)
+
+        def getRuleIndex(self):
+            return NeoBasicParser.RULE_binaryMultiplicativeOperator
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterBinaryMultiplicativeOperator" ):
+                listener.enterBinaryMultiplicativeOperator(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitBinaryMultiplicativeOperator" ):
+                listener.exitBinaryMultiplicativeOperator(self)
+
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitBinaryMultiplicativeOperator" ):
+                return visitor.visitBinaryMultiplicativeOperator(self)
+            else:
+                return visitor.visitChildren(self)
+
+
+
+
+    def binaryMultiplicativeOperator(self):
+
+        localctx = NeoBasicParser.BinaryMultiplicativeOperatorContext(self, self._ctx, self.state)
+        self.enterRule(localctx, 68, self.RULE_binaryMultiplicativeOperator)
+        self._la = 0 # Token type
+        try:
+            self.enterOuterAlt(localctx, 1)
+            self.state = 306
+            _la = self._input.LA(1)
+            if not((((_la) & ~0x3f) == 0 and ((1 << _la) & 2269814212257644544) != 0)):
+                self._errHandler.recoverInline(self)
+            else:
+                self._errHandler.reportMatch(self)
+                self.consume()
+        except RecognitionException as re:
+            localctx.exception = re
+            self._errHandler.reportError(self, re)
+            self._errHandler.recover(self, re)
+        finally:
+            self.exitRule()
+        return localctx
+
+
+    class BinaryAdditiveOperatorContext(ParserRuleContext):
+        __slots__ = 'parser'
+
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+            super().__init__(parent, invokingState)
+            self.parser = parser
+
+        def PLUS(self):
+            return self.getToken(NeoBasicParser.PLUS, 0)
+
+        def MINUS(self):
+            return self.getToken(NeoBasicParser.MINUS, 0)
+
+        def getRuleIndex(self):
+            return NeoBasicParser.RULE_binaryAdditiveOperator
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterBinaryAdditiveOperator" ):
+                listener.enterBinaryAdditiveOperator(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitBinaryAdditiveOperator" ):
+                listener.exitBinaryAdditiveOperator(self)
+
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitBinaryAdditiveOperator" ):
+                return visitor.visitBinaryAdditiveOperator(self)
+            else:
+                return visitor.visitChildren(self)
+
+
+
+
+    def binaryAdditiveOperator(self):
+
+        localctx = NeoBasicParser.BinaryAdditiveOperatorContext(self, self._ctx, self.state)
+        self.enterRule(localctx, 70, self.RULE_binaryAdditiveOperator)
+        self._la = 0 # Token type
+        try:
+            self.enterOuterAlt(localctx, 1)
+            self.state = 308
+            _la = self._input.LA(1)
+            if not(_la==32 or _la==33):
+                self._errHandler.recoverInline(self)
+            else:
+                self._errHandler.reportMatch(self)
+                self.consume()
+        except RecognitionException as re:
+            localctx.exception = re
+            self._errHandler.reportError(self, re)
+            self._errHandler.recover(self, re)
+        finally:
+            self.exitRule()
+        return localctx
+
+
+    class BitShiftOperatorContext(ParserRuleContext):
+        __slots__ = 'parser'
+
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+            super().__init__(parent, invokingState)
+            self.parser = parser
+
+        def DOUBLE_LEFT_ANGLE(self):
+            return self.getToken(NeoBasicParser.DOUBLE_LEFT_ANGLE, 0)
+
+        def DOUBLE_RIGHT_ANGLE(self):
+            return self.getToken(NeoBasicParser.DOUBLE_RIGHT_ANGLE, 0)
+
+        def UNSIGNED_RIGHT_SHIFT(self):
+            return self.getToken(NeoBasicParser.UNSIGNED_RIGHT_SHIFT, 0)
+
+        def getRuleIndex(self):
+            return NeoBasicParser.RULE_bitShiftOperator
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterBitShiftOperator" ):
+                listener.enterBitShiftOperator(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitBitShiftOperator" ):
+                listener.exitBitShiftOperator(self)
+
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitBitShiftOperator" ):
+                return visitor.visitBitShiftOperator(self)
+            else:
+                return visitor.visitChildren(self)
+
+
+
+
+    def bitShiftOperator(self):
+
+        localctx = NeoBasicParser.BitShiftOperatorContext(self, self._ctx, self.state)
+        self.enterRule(localctx, 72, self.RULE_bitShiftOperator)
+        self._la = 0 # Token type
+        try:
+            self.enterOuterAlt(localctx, 1)
+            self.state = 310
+            _la = self._input.LA(1)
+            if not((((_la) & ~0x3f) == 0 and ((1 << _la) & 4611689316962271232) != 0)):
+                self._errHandler.recoverInline(self)
+            else:
+                self._errHandler.reportMatch(self)
+                self.consume()
+        except RecognitionException as re:
+            localctx.exception = re
+            self._errHandler.reportError(self, re)
+            self._errHandler.recover(self, re)
+        finally:
+            self.exitRule()
+        return localctx
+
+
+    class BitConjunctionOperatorContext(ParserRuleContext):
+        __slots__ = 'parser'
+
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+            super().__init__(parent, invokingState)
+            self.parser = parser
+
+        def AMPERSAND(self):
+            return self.getToken(NeoBasicParser.AMPERSAND, 0)
+
+        def BIT_CLEAR(self):
+            return self.getToken(NeoBasicParser.BIT_CLEAR, 0)
+
+        def getRuleIndex(self):
+            return NeoBasicParser.RULE_bitConjunctionOperator
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterBitConjunctionOperator" ):
+                listener.enterBitConjunctionOperator(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitBitConjunctionOperator" ):
+                listener.exitBitConjunctionOperator(self)
+
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitBitConjunctionOperator" ):
+                return visitor.visitBitConjunctionOperator(self)
+            else:
+                return visitor.visitChildren(self)
+
+
+
+
+    def bitConjunctionOperator(self):
+
+        localctx = NeoBasicParser.BitConjunctionOperatorContext(self, self._ctx, self.state)
+        self.enterRule(localctx, 74, self.RULE_bitConjunctionOperator)
+        self._la = 0 # Token type
+        try:
+            self.enterOuterAlt(localctx, 1)
+            self.state = 312
+            _la = self._input.LA(1)
+            if not(_la==21 or _la==61):
+                self._errHandler.recoverInline(self)
+            else:
+                self._errHandler.reportMatch(self)
+                self.consume()
+        except RecognitionException as re:
+            localctx.exception = re
+            self._errHandler.reportError(self, re)
+            self._errHandler.recover(self, re)
+        finally:
+            self.exitRule()
+        return localctx
+
+
+    class BitExclusiveDisjunctionOperatorContext(ParserRuleContext):
+        __slots__ = 'parser'
+
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+            super().__init__(parent, invokingState)
+            self.parser = parser
+
+        def CARET(self):
+            return self.getToken(NeoBasicParser.CARET, 0)
+
+        def getRuleIndex(self):
+            return NeoBasicParser.RULE_bitExclusiveDisjunctionOperator
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterBitExclusiveDisjunctionOperator" ):
+                listener.enterBitExclusiveDisjunctionOperator(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitBitExclusiveDisjunctionOperator" ):
+                listener.exitBitExclusiveDisjunctionOperator(self)
+
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitBitExclusiveDisjunctionOperator" ):
+                return visitor.visitBitExclusiveDisjunctionOperator(self)
+            else:
+                return visitor.visitChildren(self)
+
+
+
+
+    def bitExclusiveDisjunctionOperator(self):
+
+        localctx = NeoBasicParser.BitExclusiveDisjunctionOperatorContext(self, self._ctx, self.state)
+        self.enterRule(localctx, 76, self.RULE_bitExclusiveDisjunctionOperator)
+        try:
+            self.enterOuterAlt(localctx, 1)
+            self.state = 314
+            self.match(NeoBasicParser.CARET)
+        except RecognitionException as re:
+            localctx.exception = re
+            self._errHandler.reportError(self, re)
+            self._errHandler.recover(self, re)
+        finally:
+            self.exitRule()
+        return localctx
+
+
+    class BitDisjunctionOperatorContext(ParserRuleContext):
+        __slots__ = 'parser'
+
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+            super().__init__(parent, invokingState)
+            self.parser = parser
+
+        def PIPE(self):
+            return self.getToken(NeoBasicParser.PIPE, 0)
+
+        def getRuleIndex(self):
+            return NeoBasicParser.RULE_bitDisjunctionOperator
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterBitDisjunctionOperator" ):
+                listener.enterBitDisjunctionOperator(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitBitDisjunctionOperator" ):
+                listener.exitBitDisjunctionOperator(self)
+
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitBitDisjunctionOperator" ):
+                return visitor.visitBitDisjunctionOperator(self)
+            else:
+                return visitor.visitChildren(self)
+
+
+
+
+    def bitDisjunctionOperator(self):
+
+        localctx = NeoBasicParser.BitDisjunctionOperatorContext(self, self._ctx, self.state)
+        self.enterRule(localctx, 78, self.RULE_bitDisjunctionOperator)
+        try:
+            self.enterOuterAlt(localctx, 1)
+            self.state = 316
+            self.match(NeoBasicParser.PIPE)
+        except RecognitionException as re:
+            localctx.exception = re
+            self._errHandler.reportError(self, re)
+            self._errHandler.recover(self, re)
+        finally:
+            self.exitRule()
+        return localctx
+
+
+    class BinaryComparisonOperatorContext(ParserRuleContext):
+        __slots__ = 'parser'
+
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+            super().__init__(parent, invokingState)
+            self.parser = parser
+
+        def ELVIS_TEST(self):
+            return self.getToken(NeoBasicParser.ELVIS_TEST, 0)
+
+        def THREE_WAY_TEST(self):
+            return self.getToken(NeoBasicParser.THREE_WAY_TEST, 0)
+
+        def getRuleIndex(self):
+            return NeoBasicParser.RULE_binaryComparisonOperator
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterBinaryComparisonOperator" ):
+                listener.enterBinaryComparisonOperator(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitBinaryComparisonOperator" ):
+                listener.exitBinaryComparisonOperator(self)
+
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitBinaryComparisonOperator" ):
+                return visitor.visitBinaryComparisonOperator(self)
+            else:
+                return visitor.visitChildren(self)
+
+
+
+
+    def binaryComparisonOperator(self):
+
+        localctx = NeoBasicParser.BinaryComparisonOperatorContext(self, self._ctx, self.state)
+        self.enterRule(localctx, 80, self.RULE_binaryComparisonOperator)
+        self._la = 0 # Token type
+        try:
+            self.enterOuterAlt(localctx, 1)
+            self.state = 318
+            _la = self._input.LA(1)
+            if not(_la==65 or _la==66):
+                self._errHandler.recoverInline(self)
+            else:
+                self._errHandler.reportMatch(self)
+                self.consume()
+        except RecognitionException as re:
+            localctx.exception = re
+            self._errHandler.reportError(self, re)
+            self._errHandler.recover(self, re)
+        finally:
+            self.exitRule()
+        return localctx
+
+
+    class BinaryRelationalOperatorContext(ParserRuleContext):
+        __slots__ = 'parser'
+
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+            super().__init__(parent, invokingState)
+            self.parser = parser
+
+        def STRICT_EQUALITY(self):
+            return self.getToken(NeoBasicParser.STRICT_EQUALITY, 0)
+
+        def STRICT_INEQUALITY(self):
+            return self.getToken(NeoBasicParser.STRICT_INEQUALITY, 0)
+
+        def LOOSE_EQUALITY(self):
+            return self.getToken(NeoBasicParser.LOOSE_EQUALITY, 0)
+
+        def LOOSE_INEQUALITY(self):
+            return self.getToken(NeoBasicParser.LOOSE_INEQUALITY, 0)
+
+        def LEFT_ANGLE(self):
+            return self.getToken(NeoBasicParser.LEFT_ANGLE, 0)
+
+        def LESS_OR_EQUALS(self):
+            return self.getToken(NeoBasicParser.LESS_OR_EQUALS, 0)
+
+        def RIGHT_ANGLE(self):
+            return self.getToken(NeoBasicParser.RIGHT_ANGLE, 0)
+
+        def GREATER_OR_EQUALS(self):
+            return self.getToken(NeoBasicParser.GREATER_OR_EQUALS, 0)
+
+        def getRuleIndex(self):
+            return NeoBasicParser.RULE_binaryRelationalOperator
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterBinaryRelationalOperator" ):
+                listener.enterBinaryRelationalOperator(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitBinaryRelationalOperator" ):
+                listener.exitBinaryRelationalOperator(self)
+
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitBinaryRelationalOperator" ):
+                return visitor.visitBinaryRelationalOperator(self)
+            else:
+                return visitor.visitChildren(self)
+
+
+
+
+    def binaryRelationalOperator(self):
+
+        localctx = NeoBasicParser.BinaryRelationalOperatorContext(self, self._ctx, self.state)
+        self.enterRule(localctx, 82, self.RULE_binaryRelationalOperator)
+        self._la = 0 # Token type
+        try:
+            self.enterOuterAlt(localctx, 1)
+            self.state = 320
+            _la = self._input.LA(1)
+            if not(_la==7 or _la==8 or ((((_la - 67)) & ~0x3f) == 0 and ((1 << (_la - 67)) & 63) != 0)):
+                self._errHandler.recoverInline(self)
+            else:
+                self._errHandler.reportMatch(self)
+                self.consume()
+        except RecognitionException as re:
+            localctx.exception = re
+            self._errHandler.reportError(self, re)
+            self._errHandler.recover(self, re)
+        finally:
+            self.exitRule()
+        return localctx
+
+
+    class BinaryConditionalOperatorContext(ParserRuleContext):
+        __slots__ = 'parser'
+
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+            super().__init__(parent, invokingState)
+            self.parser = parser
+
+        def IS(self):
+            return self.getToken(NeoBasicParser.IS, 0)
+
+        def NOT(self):
+            return self.getToken(NeoBasicParser.NOT, 0)
+
+        def IN(self):
+            return self.getToken(NeoBasicParser.IN, 0)
+
+        def BETWEEN(self):
+            return self.getToken(NeoBasicParser.BETWEEN, 0)
+
+        def LIKE(self):
+            return self.getToken(NeoBasicParser.LIKE, 0)
+
+        def DIVISIBLE_BY(self):
+            return self.getToken(NeoBasicParser.DIVISIBLE_BY, 0)
+
+        def NOT_DIVISIBLE_BY(self):
+            return self.getToken(NeoBasicParser.NOT_DIVISIBLE_BY, 0)
+
+        def getRuleIndex(self):
+            return NeoBasicParser.RULE_binaryConditionalOperator
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterBinaryConditionalOperator" ):
+                listener.enterBinaryConditionalOperator(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitBinaryConditionalOperator" ):
+                listener.exitBinaryConditionalOperator(self)
+
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitBinaryConditionalOperator" ):
+                return visitor.visitBinaryConditionalOperator(self)
+            else:
+                return visitor.visitChildren(self)
+
+
+
+
+    def binaryConditionalOperator(self):
+
+        localctx = NeoBasicParser.BinaryConditionalOperatorContext(self, self._ctx, self.state)
+        self.enterRule(localctx, 84, self.RULE_binaryConditionalOperator)
+        try:
+            self.state = 336
+            self._errHandler.sync(self)
+            la_ = self._interp.adaptivePredict(self._input,18,self._ctx)
+            if la_ == 1:
+                self.enterOuterAlt(localctx, 1)
+                self.state = 322
+                self.match(NeoBasicParser.IS)
+                pass
+
+            elif la_ == 2:
+                self.enterOuterAlt(localctx, 2)
+                self.state = 323
+                self.match(NeoBasicParser.IS)
+                self.state = 324
+                self.match(NeoBasicParser.NOT)
+                pass
+
+            elif la_ == 3:
+                self.enterOuterAlt(localctx, 3)
+                self.state = 325
+                self.match(NeoBasicParser.IN)
+                pass
+
+            elif la_ == 4:
+                self.enterOuterAlt(localctx, 4)
+                self.state = 326
+                self.match(NeoBasicParser.NOT)
+                self.state = 327
+                self.match(NeoBasicParser.IN)
+                pass
+
+            elif la_ == 5:
+                self.enterOuterAlt(localctx, 5)
+                self.state = 328
+                self.match(NeoBasicParser.BETWEEN)
+                pass
+
+            elif la_ == 6:
+                self.enterOuterAlt(localctx, 6)
+                self.state = 329
+                self.match(NeoBasicParser.NOT)
+                self.state = 330
+                self.match(NeoBasicParser.BETWEEN)
+                pass
+
+            elif la_ == 7:
+                self.enterOuterAlt(localctx, 7)
+                self.state = 331
+                self.match(NeoBasicParser.LIKE)
+                pass
+
+            elif la_ == 8:
+                self.enterOuterAlt(localctx, 8)
+                self.state = 332
+                self.match(NeoBasicParser.NOT)
+                self.state = 333
+                self.match(NeoBasicParser.LIKE)
+                pass
+
+            elif la_ == 9:
+                self.enterOuterAlt(localctx, 9)
+                self.state = 334
+                self.match(NeoBasicParser.DIVISIBLE_BY)
+                pass
+
+            elif la_ == 10:
+                self.enterOuterAlt(localctx, 10)
+                self.state = 335
+                self.match(NeoBasicParser.NOT_DIVISIBLE_BY)
+                pass
+
+
+        except RecognitionException as re:
+            localctx.exception = re
+            self._errHandler.reportError(self, re)
+            self._errHandler.recover(self, re)
+        finally:
+            self.exitRule()
+        return localctx
+
+
+    class BinaryConjunctionOperatorContext(ParserRuleContext):
+        __slots__ = 'parser'
+
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+            super().__init__(parent, invokingState)
+            self.parser = parser
+
+        def AND(self):
+            return self.getToken(NeoBasicParser.AND, 0)
+
+        def NAND(self):
+            return self.getToken(NeoBasicParser.NAND, 0)
+
+        def getRuleIndex(self):
+            return NeoBasicParser.RULE_binaryConjunctionOperator
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterBinaryConjunctionOperator" ):
+                listener.enterBinaryConjunctionOperator(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitBinaryConjunctionOperator" ):
+                listener.exitBinaryConjunctionOperator(self)
+
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitBinaryConjunctionOperator" ):
+                return visitor.visitBinaryConjunctionOperator(self)
+            else:
+                return visitor.visitChildren(self)
+
+
+
+
+    def binaryConjunctionOperator(self):
+
+        localctx = NeoBasicParser.BinaryConjunctionOperatorContext(self, self._ctx, self.state)
+        self.enterRule(localctx, 86, self.RULE_binaryConjunctionOperator)
+        self._la = 0 # Token type
+        try:
+            self.enterOuterAlt(localctx, 1)
+            self.state = 338
+            _la = self._input.LA(1)
+            if not(_la==157 or _la==160):
+                self._errHandler.recoverInline(self)
+            else:
+                self._errHandler.reportMatch(self)
+                self.consume()
+        except RecognitionException as re:
+            localctx.exception = re
+            self._errHandler.reportError(self, re)
+            self._errHandler.recover(self, re)
+        finally:
+            self.exitRule()
+        return localctx
+
+
+    class BinaryExclusiveDisjunctionOperatorContext(ParserRuleContext):
+        __slots__ = 'parser'
+
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+            super().__init__(parent, invokingState)
+            self.parser = parser
+
+        def XOR(self):
+            return self.getToken(NeoBasicParser.XOR, 0)
+
+        def NXOR(self):
+            return self.getToken(NeoBasicParser.NXOR, 0)
+
+        def getRuleIndex(self):
+            return NeoBasicParser.RULE_binaryExclusiveDisjunctionOperator
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterBinaryExclusiveDisjunctionOperator" ):
+                listener.enterBinaryExclusiveDisjunctionOperator(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitBinaryExclusiveDisjunctionOperator" ):
+                listener.exitBinaryExclusiveDisjunctionOperator(self)
+
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitBinaryExclusiveDisjunctionOperator" ):
+                return visitor.visitBinaryExclusiveDisjunctionOperator(self)
+            else:
+                return visitor.visitChildren(self)
+
+
+
+
+    def binaryExclusiveDisjunctionOperator(self):
+
+        localctx = NeoBasicParser.BinaryExclusiveDisjunctionOperatorContext(self, self._ctx, self.state)
+        self.enterRule(localctx, 88, self.RULE_binaryExclusiveDisjunctionOperator)
+        self._la = 0 # Token type
+        try:
+            self.enterOuterAlt(localctx, 1)
+            self.state = 340
+            _la = self._input.LA(1)
+            if not(_la==159 or _la==162):
+                self._errHandler.recoverInline(self)
+            else:
+                self._errHandler.reportMatch(self)
+                self.consume()
+        except RecognitionException as re:
+            localctx.exception = re
+            self._errHandler.reportError(self, re)
+            self._errHandler.recover(self, re)
+        finally:
+            self.exitRule()
+        return localctx
+
+
+    class BinaryDisjunctionOperatorContext(ParserRuleContext):
+        __slots__ = 'parser'
+
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+            super().__init__(parent, invokingState)
+            self.parser = parser
+
+        def OR(self):
+            return self.getToken(NeoBasicParser.OR, 0)
+
+        def NOR(self):
+            return self.getToken(NeoBasicParser.NOR, 0)
+
+        def getRuleIndex(self):
+            return NeoBasicParser.RULE_binaryDisjunctionOperator
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterBinaryDisjunctionOperator" ):
+                listener.enterBinaryDisjunctionOperator(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitBinaryDisjunctionOperator" ):
+                listener.exitBinaryDisjunctionOperator(self)
+
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitBinaryDisjunctionOperator" ):
+                return visitor.visitBinaryDisjunctionOperator(self)
+            else:
+                return visitor.visitChildren(self)
+
+
+
+
+    def binaryDisjunctionOperator(self):
+
+        localctx = NeoBasicParser.BinaryDisjunctionOperatorContext(self, self._ctx, self.state)
+        self.enterRule(localctx, 90, self.RULE_binaryDisjunctionOperator)
+        self._la = 0 # Token type
+        try:
+            self.enterOuterAlt(localctx, 1)
+            self.state = 342
+            _la = self._input.LA(1)
+            if not(_la==158 or _la==161):
+                self._errHandler.recoverInline(self)
+            else:
+                self._errHandler.reportMatch(self)
+                self.consume()
+        except RecognitionException as re:
+            localctx.exception = re
+            self._errHandler.reportError(self, re)
+            self._errHandler.recover(self, re)
+        finally:
+            self.exitRule()
+        return localctx
+
+
+    class BinaryCoalescingOperatorContext(ParserRuleContext):
+        __slots__ = 'parser'
+
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+            super().__init__(parent, invokingState)
+            self.parser = parser
+
+        def EXCLAMATION(self):
+            return self.getToken(NeoBasicParser.EXCLAMATION, 0)
+
+        def DOUBLE_EXCLAMATION(self):
+            return self.getToken(NeoBasicParser.DOUBLE_EXCLAMATION, 0)
+
+        def ERROR_PROPAGATION_NONE_COALESCING(self):
+            return self.getToken(NeoBasicParser.ERROR_PROPAGATION_NONE_COALESCING, 0)
+
+        def QUESTION(self):
+            return self.getToken(NeoBasicParser.QUESTION, 0)
+
+        def DOUBLE_QUESTION(self):
+            return self.getToken(NeoBasicParser.DOUBLE_QUESTION, 0)
+
+        def getRuleIndex(self):
+            return NeoBasicParser.RULE_binaryCoalescingOperator
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterBinaryCoalescingOperator" ):
+                listener.enterBinaryCoalescingOperator(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitBinaryCoalescingOperator" ):
+                listener.exitBinaryCoalescingOperator(self)
+
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitBinaryCoalescingOperator" ):
+                return visitor.visitBinaryCoalescingOperator(self)
+            else:
+                return visitor.visitChildren(self)
+
+
+
+
+    def binaryCoalescingOperator(self):
+
+        localctx = NeoBasicParser.BinaryCoalescingOperatorContext(self, self._ctx, self.state)
+        self.enterRule(localctx, 92, self.RULE_binaryCoalescingOperator)
+        self._la = 0 # Token type
+        try:
+            self.enterOuterAlt(localctx, 1)
+            self.state = 344
+            _la = self._input.LA(1)
+            if not(((((_la - 13)) & ~0x3f) == 0 and ((1 << (_la - 13)) & 1152921506217459715) != 0)):
+                self._errHandler.recoverInline(self)
+            else:
+                self._errHandler.reportMatch(self)
+                self.consume()
+        except RecognitionException as re:
+            localctx.exception = re
+            self._errHandler.reportError(self, re)
+            self._errHandler.recover(self, re)
+        finally:
+            self.exitRule()
+        return localctx
+
+
+    class AssignmentOperatorContext(ParserRuleContext):
+        __slots__ = 'parser'
+
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+            super().__init__(parent, invokingState)
+            self.parser = parser
+
+        def singleAssignmentOperator(self):
+            return self.getTypedRuleContext(NeoBasicParser.SingleAssignmentOperatorContext,0)
+
+
+        def multipleAssignmentOperator(self):
+            return self.getTypedRuleContext(NeoBasicParser.MultipleAssignmentOperatorContext,0)
+
+
+        def compoundAssignmentOperator(self):
+            return self.getTypedRuleContext(NeoBasicParser.CompoundAssignmentOperatorContext,0)
+
+
+        def getRuleIndex(self):
+            return NeoBasicParser.RULE_assignmentOperator
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterAssignmentOperator" ):
+                listener.enterAssignmentOperator(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitAssignmentOperator" ):
+                listener.exitAssignmentOperator(self)
+
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitAssignmentOperator" ):
+                return visitor.visitAssignmentOperator(self)
+            else:
+                return visitor.visitChildren(self)
+
+
+
+
+    def assignmentOperator(self):
+
+        localctx = NeoBasicParser.AssignmentOperatorContext(self, self._ctx, self.state)
+        self.enterRule(localctx, 94, self.RULE_assignmentOperator)
+        try:
+            self.state = 349
+            self._errHandler.sync(self)
+            la_ = self._interp.adaptivePredict(self._input,19,self._ctx)
+            if la_ == 1:
+                self.enterOuterAlt(localctx, 1)
+                self.state = 346
+                self.singleAssignmentOperator()
+                pass
+
+            elif la_ == 2:
+                self.enterOuterAlt(localctx, 2)
+                self.state = 347
+                self.multipleAssignmentOperator()
+                pass
+
+            elif la_ == 3:
+                self.enterOuterAlt(localctx, 3)
+                self.state = 348
+                self.compoundAssignmentOperator()
+                pass
+
+
+        except RecognitionException as re:
+            localctx.exception = re
+            self._errHandler.reportError(self, re)
+            self._errHandler.recover(self, re)
+        finally:
+            self.exitRule()
+        return localctx
+
+
+    class SingleAssignmentOperatorContext(ParserRuleContext):
+        __slots__ = 'parser'
+
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+            super().__init__(parent, invokingState)
+            self.parser = parser
+
+        def EQUAL(self):
+            return self.getToken(NeoBasicParser.EQUAL, 0)
+
+        def POP_ONE_ASSIGNMENT(self):
+            return self.getToken(NeoBasicParser.POP_ONE_ASSIGNMENT, 0)
+
+        def PULL_ALL_ASSIGNMENT(self):
+            return self.getToken(NeoBasicParser.PULL_ALL_ASSIGNMENT, 0)
+
+        def PIPE_ASSIGNMENT(self):
+            return self.getToken(NeoBasicParser.PIPE_ASSIGNMENT, 0)
+
+        def getRuleIndex(self):
+            return NeoBasicParser.RULE_singleAssignmentOperator
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterSingleAssignmentOperator" ):
+                listener.enterSingleAssignmentOperator(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitSingleAssignmentOperator" ):
+                listener.exitSingleAssignmentOperator(self)
+
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitSingleAssignmentOperator" ):
+                return visitor.visitSingleAssignmentOperator(self)
+            else:
+                return visitor.visitChildren(self)
+
+
+
+
+    def singleAssignmentOperator(self):
+
+        localctx = NeoBasicParser.SingleAssignmentOperatorContext(self, self._ctx, self.state)
+        self.enterRule(localctx, 96, self.RULE_singleAssignmentOperator)
+        self._la = 0 # Token type
+        try:
+            self.enterOuterAlt(localctx, 1)
+            self.state = 351
+            _la = self._input.LA(1)
+            if not(((((_la - 31)) & ~0x3f) == 0 and ((1 << (_la - 31)) & 61572651155457) != 0)):
+                self._errHandler.recoverInline(self)
+            else:
+                self._errHandler.reportMatch(self)
+                self.consume()
+        except RecognitionException as re:
+            localctx.exception = re
+            self._errHandler.reportError(self, re)
+            self._errHandler.recover(self, re)
+        finally:
+            self.exitRule()
+        return localctx
+
+
+    class MultipleAssignmentOperatorContext(ParserRuleContext):
+        __slots__ = 'parser'
+
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+            super().__init__(parent, invokingState)
+            self.parser = parser
+
+        def EQUAL(self):
+            return self.getToken(NeoBasicParser.EQUAL, 0)
+
+        def DESTRUCTURING_ASSIGNMENT(self):
+            return self.getToken(NeoBasicParser.DESTRUCTURING_ASSIGNMENT, 0)
+
+        def getRuleIndex(self):
+            return NeoBasicParser.RULE_multipleAssignmentOperator
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterMultipleAssignmentOperator" ):
+                listener.enterMultipleAssignmentOperator(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitMultipleAssignmentOperator" ):
+                listener.exitMultipleAssignmentOperator(self)
+
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitMultipleAssignmentOperator" ):
+                return visitor.visitMultipleAssignmentOperator(self)
+            else:
+                return visitor.visitChildren(self)
+
+
+
+
+    def multipleAssignmentOperator(self):
+
+        localctx = NeoBasicParser.MultipleAssignmentOperatorContext(self, self._ctx, self.state)
+        self.enterRule(localctx, 98, self.RULE_multipleAssignmentOperator)
+        self._la = 0 # Token type
+        try:
+            self.enterOuterAlt(localctx, 1)
+            self.state = 353
+            _la = self._input.LA(1)
+            if not(_la==31 or _la==77):
+                self._errHandler.recoverInline(self)
+            else:
+                self._errHandler.reportMatch(self)
+                self.consume()
+        except RecognitionException as re:
+            localctx.exception = re
+            self._errHandler.reportError(self, re)
+            self._errHandler.recover(self, re)
+        finally:
+            self.exitRule()
+        return localctx
+
+
+    class CompoundAssignmentOperatorContext(ParserRuleContext):
+        __slots__ = 'parser'
+
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+            super().__init__(parent, invokingState)
+            self.parser = parser
+
+        def ADDITION_ASSIGNMENT(self):
+            return self.getToken(NeoBasicParser.ADDITION_ASSIGNMENT, 0)
+
+        def SUBTRACTION_ASSIGNMENT(self):
+            return self.getToken(NeoBasicParser.SUBTRACTION_ASSIGNMENT, 0)
+
+        def MULTIPLICATION_ASSIGNMENT(self):
+            return self.getToken(NeoBasicParser.MULTIPLICATION_ASSIGNMENT, 0)
+
+        def REAL_DIVISION_ASSIGNMENT(self):
+            return self.getToken(NeoBasicParser.REAL_DIVISION_ASSIGNMENT, 0)
+
+        def INTEGER_DIVISION_ASSIGNMENT(self):
+            return self.getToken(NeoBasicParser.INTEGER_DIVISION_ASSIGNMENT, 0)
+
+        def MODULO_ASSIGNMENT(self):
+            return self.getToken(NeoBasicParser.MODULO_ASSIGNMENT, 0)
+
+        def NTH_POWER_ASSIGNMENT(self):
+            return self.getToken(NeoBasicParser.NTH_POWER_ASSIGNMENT, 0)
+
+        def NTH_ROOT_ASSIGNMENT(self):
+            return self.getToken(NeoBasicParser.NTH_ROOT_ASSIGNMENT, 0)
+
+        def PERCENTAGE_RATE_ASSIGNMENT(self):
+            return self.getToken(NeoBasicParser.PERCENTAGE_RATE_ASSIGNMENT, 0)
+
+        def PERCENTAGE_AMOUNT_ASSIGNMENT(self):
+            return self.getToken(NeoBasicParser.PERCENTAGE_AMOUNT_ASSIGNMENT, 0)
+
+        def PERCENTAGE_INCREASE_ASSIGNMENT(self):
+            return self.getToken(NeoBasicParser.PERCENTAGE_INCREASE_ASSIGNMENT, 0)
+
+        def PERCENTAGE_DECREASE_ASSIGNMENT(self):
+            return self.getToken(NeoBasicParser.PERCENTAGE_DECREASE_ASSIGNMENT, 0)
+
+        def PERCENTAGE_VARIATION_ASSIGNMENT(self):
+            return self.getToken(NeoBasicParser.PERCENTAGE_VARIATION_ASSIGNMENT, 0)
+
+        def BIT_AND_ASSIGNMENT(self):
+            return self.getToken(NeoBasicParser.BIT_AND_ASSIGNMENT, 0)
+
+        def BIT_CLEAR_ASSIGNMENT(self):
+            return self.getToken(NeoBasicParser.BIT_CLEAR_ASSIGNMENT, 0)
+
+        def BIT_XOR_ASSIGNMENT(self):
+            return self.getToken(NeoBasicParser.BIT_XOR_ASSIGNMENT, 0)
+
+        def BIT_OR_ASSIGNMENT(self):
+            return self.getToken(NeoBasicParser.BIT_OR_ASSIGNMENT, 0)
+
+        def LEFT_SHIFT_ASSIGNMENT(self):
+            return self.getToken(NeoBasicParser.LEFT_SHIFT_ASSIGNMENT, 0)
+
+        def SIGNED_RIGHT_SHIFT_ASSIGNMENT(self):
+            return self.getToken(NeoBasicParser.SIGNED_RIGHT_SHIFT_ASSIGNMENT, 0)
+
+        def UNSIGNED_RIGHT_SHIFT_ASSIGNMENT(self):
+            return self.getToken(NeoBasicParser.UNSIGNED_RIGHT_SHIFT_ASSIGNMENT, 0)
+
+        def NONE_COALESCING_ASSIGNMENT(self):
+            return self.getToken(NeoBasicParser.NONE_COALESCING_ASSIGNMENT, 0)
+
+        def getRuleIndex(self):
+            return NeoBasicParser.RULE_compoundAssignmentOperator
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterCompoundAssignmentOperator" ):
+                listener.enterCompoundAssignmentOperator(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitCompoundAssignmentOperator" ):
+                listener.exitCompoundAssignmentOperator(self)
+
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitCompoundAssignmentOperator" ):
+                return visitor.visitCompoundAssignmentOperator(self)
+            else:
+                return visitor.visitChildren(self)
+
+
+
+
+    def compoundAssignmentOperator(self):
+
+        localctx = NeoBasicParser.CompoundAssignmentOperatorContext(self, self._ctx, self.state)
+        self.enterRule(localctx, 100, self.RULE_compoundAssignmentOperator)
+        self._la = 0 # Token type
+        try:
+            self.enterOuterAlt(localctx, 1)
+            self.state = 355
+            _la = self._input.LA(1)
+            if not(((((_la - 78)) & ~0x3f) == 0 and ((1 << (_la - 78)) & 4194271) != 0)):
+                self._errHandler.recoverInline(self)
+            else:
+                self._errHandler.reportMatch(self)
+                self.consume()
+        except RecognitionException as re:
+            localctx.exception = re
+            self._errHandler.reportError(self, re)
+            self._errHandler.recover(self, re)
+        finally:
+            self.exitRule()
+        return localctx
+
+
+    class SymbolIdentifierContext(ParserRuleContext):
+        __slots__ = 'parser'
+
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+            super().__init__(parent, invokingState)
+            self.parser = parser
+
+        def IDENTIFIER(self):
+            return self.getToken(NeoBasicParser.IDENTIFIER, 0)
+
+        def getRuleIndex(self):
+            return NeoBasicParser.RULE_symbolIdentifier
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterSymbolIdentifier" ):
+                listener.enterSymbolIdentifier(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitSymbolIdentifier" ):
+                listener.exitSymbolIdentifier(self)
+
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitSymbolIdentifier" ):
+                return visitor.visitSymbolIdentifier(self)
+            else:
+                return visitor.visitChildren(self)
+
+
+
+
+    def symbolIdentifier(self):
+
+        localctx = NeoBasicParser.SymbolIdentifierContext(self, self._ctx, self.state)
+        self.enterRule(localctx, 102, self.RULE_symbolIdentifier)
+        try:
+            self.enterOuterAlt(localctx, 1)
+            self.state = 357
+            self.match(NeoBasicParser.IDENTIFIER)
+        except RecognitionException as re:
+            localctx.exception = re
+            self._errHandler.reportError(self, re)
+            self._errHandler.recover(self, re)
+        finally:
+            self.exitRule()
+        return localctx
+
+
+    class QualifiedIdentifierContext(ParserRuleContext):
+        __slots__ = 'parser'
+
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+            super().__init__(parent, invokingState)
+            self.parser = parser
+
+        def IDENTIFIER(self, i:int=None):
+            if i is None:
+                return self.getTokens(NeoBasicParser.IDENTIFIER)
+            else:
+                return self.getToken(NeoBasicParser.IDENTIFIER, i)
+
+        def DOT(self, i:int=None):
+            if i is None:
+                return self.getTokens(NeoBasicParser.DOT)
+            else:
+                return self.getToken(NeoBasicParser.DOT, i)
+
+        def getRuleIndex(self):
+            return NeoBasicParser.RULE_qualifiedIdentifier
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterQualifiedIdentifier" ):
+                listener.enterQualifiedIdentifier(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitQualifiedIdentifier" ):
+                listener.exitQualifiedIdentifier(self)
+
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitQualifiedIdentifier" ):
+                return visitor.visitQualifiedIdentifier(self)
+            else:
+                return visitor.visitChildren(self)
+
+
+
+
+    def qualifiedIdentifier(self):
+
+        localctx = NeoBasicParser.QualifiedIdentifierContext(self, self._ctx, self.state)
+        self.enterRule(localctx, 104, self.RULE_qualifiedIdentifier)
+        try:
+            self.enterOuterAlt(localctx, 1)
+            self.state = 359
+            self.match(NeoBasicParser.IDENTIFIER)
+            self.state = 364
+            self._errHandler.sync(self)
+            _alt = self._interp.adaptivePredict(self._input,20,self._ctx)
+            while _alt!=2 and _alt!=ATN.INVALID_ALT_NUMBER:
+                if _alt==1:
+                    self.state = 360
+                    self.match(NeoBasicParser.DOT)
+                    self.state = 361
+                    self.match(NeoBasicParser.IDENTIFIER) 
+                self.state = 366
+                self._errHandler.sync(self)
+                _alt = self._interp.adaptivePredict(self._input,20,self._ctx)
+
+        except RecognitionException as re:
+            localctx.exception = re
+            self._errHandler.reportError(self, re)
+            self._errHandler.recover(self, re)
+        finally:
+            self.exitRule()
+        return localctx
+
+
+    class IdentifiersContext(ParserRuleContext):
+        __slots__ = 'parser'
+
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+            super().__init__(parent, invokingState)
+            self.parser = parser
+
+        def IDENTIFIER(self, i:int=None):
+            if i is None:
+                return self.getTokens(NeoBasicParser.IDENTIFIER)
+            else:
+                return self.getToken(NeoBasicParser.IDENTIFIER, i)
+
+        def COMMA(self, i:int=None):
+            if i is None:
+                return self.getTokens(NeoBasicParser.COMMA)
+            else:
+                return self.getToken(NeoBasicParser.COMMA, i)
+
+        def getRuleIndex(self):
+            return NeoBasicParser.RULE_identifiers
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterIdentifiers" ):
+                listener.enterIdentifiers(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitIdentifiers" ):
+                listener.exitIdentifiers(self)
+
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitIdentifiers" ):
+                return visitor.visitIdentifiers(self)
+            else:
+                return visitor.visitChildren(self)
+
+
+
+
+    def identifiers(self):
+
+        localctx = NeoBasicParser.IdentifiersContext(self, self._ctx, self.state)
+        self.enterRule(localctx, 106, self.RULE_identifiers)
+        self._la = 0 # Token type
+        try:
+            self.enterOuterAlt(localctx, 1)
+            self.state = 367
+            self.match(NeoBasicParser.IDENTIFIER)
+            self.state = 372
+            self._errHandler.sync(self)
+            _la = self._input.LA(1)
+            while _la==10:
+                self.state = 368
+                self.match(NeoBasicParser.COMMA)
+                self.state = 369
+                self.match(NeoBasicParser.IDENTIFIER)
+                self.state = 374
+                self._errHandler.sync(self)
+                _la = self._input.LA(1)
+
+        except RecognitionException as re:
+            localctx.exception = re
+            self._errHandler.reportError(self, re)
+            self._errHandler.recover(self, re)
+        finally:
+            self.exitRule()
+        return localctx
+
+
+    class SymbolIdentifiersContext(ParserRuleContext):
+        __slots__ = 'parser'
+
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+            super().__init__(parent, invokingState)
+            self.parser = parser
+
+        def symbolIdentifier(self, i:int=None):
+            if i is None:
+                return self.getTypedRuleContexts(NeoBasicParser.SymbolIdentifierContext)
+            else:
+                return self.getTypedRuleContext(NeoBasicParser.SymbolIdentifierContext,i)
+
+
+        def COMMA(self, i:int=None):
+            if i is None:
+                return self.getTokens(NeoBasicParser.COMMA)
+            else:
+                return self.getToken(NeoBasicParser.COMMA, i)
+
+        def getRuleIndex(self):
+            return NeoBasicParser.RULE_symbolIdentifiers
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterSymbolIdentifiers" ):
+                listener.enterSymbolIdentifiers(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitSymbolIdentifiers" ):
+                listener.exitSymbolIdentifiers(self)
+
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitSymbolIdentifiers" ):
+                return visitor.visitSymbolIdentifiers(self)
+            else:
+                return visitor.visitChildren(self)
+
+
+
+
+    def symbolIdentifiers(self):
+
+        localctx = NeoBasicParser.SymbolIdentifiersContext(self, self._ctx, self.state)
+        self.enterRule(localctx, 108, self.RULE_symbolIdentifiers)
+        self._la = 0 # Token type
+        try:
+            self.enterOuterAlt(localctx, 1)
+            self.state = 375
+            self.symbolIdentifier()
+            self.state = 380
+            self._errHandler.sync(self)
+            _la = self._input.LA(1)
+            while _la==10:
+                self.state = 376
+                self.match(NeoBasicParser.COMMA)
+                self.state = 377
+                self.symbolIdentifier()
+                self.state = 382
+                self._errHandler.sync(self)
+                _la = self._input.LA(1)
+
+        except RecognitionException as re:
+            localctx.exception = re
+            self._errHandler.reportError(self, re)
+            self._errHandler.recover(self, re)
+        finally:
+            self.exitRule()
+        return localctx
+
+
+    class QualifiedIdentifiersContext(ParserRuleContext):
+        __slots__ = 'parser'
+
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+            super().__init__(parent, invokingState)
+            self.parser = parser
+
+        def qualifiedIdentifier(self, i:int=None):
+            if i is None:
+                return self.getTypedRuleContexts(NeoBasicParser.QualifiedIdentifierContext)
+            else:
+                return self.getTypedRuleContext(NeoBasicParser.QualifiedIdentifierContext,i)
+
+
+        def COMMA(self, i:int=None):
+            if i is None:
+                return self.getTokens(NeoBasicParser.COMMA)
+            else:
+                return self.getToken(NeoBasicParser.COMMA, i)
+
+        def getRuleIndex(self):
+            return NeoBasicParser.RULE_qualifiedIdentifiers
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterQualifiedIdentifiers" ):
+                listener.enterQualifiedIdentifiers(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitQualifiedIdentifiers" ):
+                listener.exitQualifiedIdentifiers(self)
+
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitQualifiedIdentifiers" ):
+                return visitor.visitQualifiedIdentifiers(self)
+            else:
+                return visitor.visitChildren(self)
+
+
+
+
+    def qualifiedIdentifiers(self):
+
+        localctx = NeoBasicParser.QualifiedIdentifiersContext(self, self._ctx, self.state)
+        self.enterRule(localctx, 110, self.RULE_qualifiedIdentifiers)
+        self._la = 0 # Token type
+        try:
+            self.enterOuterAlt(localctx, 1)
+            self.state = 383
+            self.qualifiedIdentifier()
+            self.state = 388
+            self._errHandler.sync(self)
+            _la = self._input.LA(1)
+            while _la==10:
+                self.state = 384
+                self.match(NeoBasicParser.COMMA)
+                self.state = 385
+                self.qualifiedIdentifier()
+                self.state = 390
+                self._errHandler.sync(self)
+                _la = self._input.LA(1)
+
+        except RecognitionException as re:
+            localctx.exception = re
+            self._errHandler.reportError(self, re)
+            self._errHandler.recover(self, re)
+        finally:
+            self.exitRule()
+        return localctx
+
+
+    class PredeclaredValueContext(ParserRuleContext):
+        __slots__ = 'parser'
+
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+            super().__init__(parent, invokingState)
+            self.parser = parser
+
+        def IOTA(self):
+            return self.getToken(NeoBasicParser.IOTA, 0)
+
+        def getRuleIndex(self):
+            return NeoBasicParser.RULE_predeclaredValue
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterPredeclaredValue" ):
+                listener.enterPredeclaredValue(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitPredeclaredValue" ):
+                listener.exitPredeclaredValue(self)
+
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitPredeclaredValue" ):
+                return visitor.visitPredeclaredValue(self)
+            else:
+                return visitor.visitChildren(self)
+
+
+
+
+    def predeclaredValue(self):
+
+        localctx = NeoBasicParser.PredeclaredValueContext(self, self._ctx, self.state)
+        self.enterRule(localctx, 112, self.RULE_predeclaredValue)
+        try:
+            self.enterOuterAlt(localctx, 1)
+            self.state = 391
+            self.match(NeoBasicParser.IOTA)
+        except RecognitionException as re:
+            localctx.exception = re
+            self._errHandler.reportError(self, re)
+            self._errHandler.recover(self, re)
+        finally:
+            self.exitRule()
+        return localctx
+
+
+    class LiteralContext(ParserRuleContext):
+        __slots__ = 'parser'
+
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+            super().__init__(parent, invokingState)
+            self.parser = parser
+
+        def escalarLiteral(self):
+            return self.getTypedRuleContext(NeoBasicParser.EscalarLiteralContext,0)
+
+
+        def getRuleIndex(self):
+            return NeoBasicParser.RULE_literal
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterLiteral" ):
+                listener.enterLiteral(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitLiteral" ):
+                listener.exitLiteral(self)
+
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitLiteral" ):
+                return visitor.visitLiteral(self)
+            else:
+                return visitor.visitChildren(self)
+
+
+
+
+    def literal(self):
+
+        localctx = NeoBasicParser.LiteralContext(self, self._ctx, self.state)
+        self.enterRule(localctx, 114, self.RULE_literal)
+        try:
+            self.enterOuterAlt(localctx, 1)
+            self.state = 393
+            self.escalarLiteral()
+        except RecognitionException as re:
+            localctx.exception = re
+            self._errHandler.reportError(self, re)
+            self._errHandler.recover(self, re)
+        finally:
+            self.exitRule()
+        return localctx
+
+
+    class EscalarLiteralContext(ParserRuleContext):
+        __slots__ = 'parser'
+
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+            super().__init__(parent, invokingState)
+            self.parser = parser
+
+        def booleanLiteral(self):
+            return self.getTypedRuleContext(NeoBasicParser.BooleanLiteralContext,0)
+
+
+        def numericLiteral(self):
+            return self.getTypedRuleContext(NeoBasicParser.NumericLiteralContext,0)
+
+
+        def getRuleIndex(self):
+            return NeoBasicParser.RULE_escalarLiteral
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterEscalarLiteral" ):
+                listener.enterEscalarLiteral(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitEscalarLiteral" ):
+                listener.exitEscalarLiteral(self)
+
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitEscalarLiteral" ):
+                return visitor.visitEscalarLiteral(self)
+            else:
+                return visitor.visitChildren(self)
+
+
+
+
+    def escalarLiteral(self):
+
+        localctx = NeoBasicParser.EscalarLiteralContext(self, self._ctx, self.state)
+        self.enterRule(localctx, 116, self.RULE_escalarLiteral)
+        try:
+            self.state = 397
+            self._errHandler.sync(self)
+            token = self._input.LA(1)
+            if token in [188, 189]:
+                self.enterOuterAlt(localctx, 1)
+                self.state = 395
+                self.booleanLiteral()
+                pass
+            elif token in [125, 130, 131, 190, 191, 192, 193, 194, 195, 196]:
+                self.enterOuterAlt(localctx, 2)
+                self.state = 396
+                self.numericLiteral()
+                pass
+            else:
+                raise NoViableAltException(self)
+
+        except RecognitionException as re:
+            localctx.exception = re
+            self._errHandler.reportError(self, re)
+            self._errHandler.recover(self, re)
+        finally:
+            self.exitRule()
+        return localctx
+
+
+    class BooleanLiteralContext(ParserRuleContext):
+        __slots__ = 'parser'
+
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+            super().__init__(parent, invokingState)
+            self.parser = parser
+
+        def TRUE(self):
+            return self.getToken(NeoBasicParser.TRUE, 0)
+
+        def FALSE(self):
+            return self.getToken(NeoBasicParser.FALSE, 0)
+
+        def getRuleIndex(self):
+            return NeoBasicParser.RULE_booleanLiteral
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterBooleanLiteral" ):
+                listener.enterBooleanLiteral(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitBooleanLiteral" ):
+                listener.exitBooleanLiteral(self)
+
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitBooleanLiteral" ):
+                return visitor.visitBooleanLiteral(self)
+            else:
+                return visitor.visitChildren(self)
+
+
+
+
+    def booleanLiteral(self):
+
+        localctx = NeoBasicParser.BooleanLiteralContext(self, self._ctx, self.state)
+        self.enterRule(localctx, 118, self.RULE_booleanLiteral)
+        self._la = 0 # Token type
+        try:
+            self.enterOuterAlt(localctx, 1)
+            self.state = 399
+            _la = self._input.LA(1)
+            if not(_la==188 or _la==189):
+                self._errHandler.recoverInline(self)
+            else:
+                self._errHandler.reportMatch(self)
+                self.consume()
+        except RecognitionException as re:
+            localctx.exception = re
+            self._errHandler.reportError(self, re)
+            self._errHandler.recover(self, re)
+        finally:
+            self.exitRule()
+        return localctx
+
+
+    class NumericLiteralContext(ParserRuleContext):
+        __slots__ = 'parser'
+
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+            super().__init__(parent, invokingState)
+            self.parser = parser
+
+        def NATURAL_LIT(self):
+            return self.getToken(NeoBasicParser.NATURAL_LIT, 0)
+
+        def INTEGER_LIT(self):
+            return self.getToken(NeoBasicParser.INTEGER_LIT, 0)
+
+        def REAL_LIT(self):
+            return self.getToken(NeoBasicParser.REAL_LIT, 0)
+
+        def NONZERO(self):
+            return self.getToken(NeoBasicParser.NONZERO, 0)
+
+        def expression(self):
+            return self.getTypedRuleContext(NeoBasicParser.ExpressionContext,0)
+
+
+        def ZERO(self):
+            return self.getToken(NeoBasicParser.ZERO, 0)
+
+        def MINVALUE(self):
+            return self.getToken(NeoBasicParser.MINVALUE, 0)
+
+        def MAXVALUE(self):
+            return self.getToken(NeoBasicParser.MAXVALUE, 0)
+
+        def NAN(self):
+            return self.getToken(NeoBasicParser.NAN, 0)
+
+        def POSITIVEINFINITY(self):
+            return self.getToken(NeoBasicParser.POSITIVEINFINITY, 0)
+
+        def NEGATIVEINFINITY(self):
+            return self.getToken(NeoBasicParser.NEGATIVEINFINITY, 0)
+
+        def getRuleIndex(self):
+            return NeoBasicParser.RULE_numericLiteral
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterNumericLiteral" ):
+                listener.enterNumericLiteral(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitNumericLiteral" ):
+                listener.exitNumericLiteral(self)
+
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitNumericLiteral" ):
+                return visitor.visitNumericLiteral(self)
+            else:
+                return visitor.visitChildren(self)
+
+
+
+
+    def numericLiteral(self):
+
+        localctx = NeoBasicParser.NumericLiteralContext(self, self._ctx, self.state)
+        self.enterRule(localctx, 120, self.RULE_numericLiteral)
+        try:
+            self.state = 412
+            self._errHandler.sync(self)
+            token = self._input.LA(1)
+            if token in [130]:
+                self.enterOuterAlt(localctx, 1)
+                self.state = 401
+                self.match(NeoBasicParser.NATURAL_LIT)
+                pass
+            elif token in [131]:
+                self.enterOuterAlt(localctx, 2)
+                self.state = 402
+                self.match(NeoBasicParser.INTEGER_LIT)
+                pass
+            elif token in [125]:
+                self.enterOuterAlt(localctx, 3)
+                self.state = 403
+                self.match(NeoBasicParser.REAL_LIT)
+                pass
+            elif token in [190]:
+                self.enterOuterAlt(localctx, 4)
+                self.state = 404
+                self.match(NeoBasicParser.NONZERO)
+                self.state = 405
+                self.expression(0)
+                pass
+            elif token in [191]:
+                self.enterOuterAlt(localctx, 5)
+                self.state = 406
+                self.match(NeoBasicParser.ZERO)
+                pass
+            elif token in [192]:
+                self.enterOuterAlt(localctx, 6)
+                self.state = 407
+                self.match(NeoBasicParser.MINVALUE)
+                pass
+            elif token in [193]:
+                self.enterOuterAlt(localctx, 7)
+                self.state = 408
+                self.match(NeoBasicParser.MAXVALUE)
+                pass
+            elif token in [194]:
+                self.enterOuterAlt(localctx, 8)
+                self.state = 409
+                self.match(NeoBasicParser.NAN)
+                pass
+            elif token in [195]:
+                self.enterOuterAlt(localctx, 9)
+                self.state = 410
+                self.match(NeoBasicParser.POSITIVEINFINITY)
+                pass
+            elif token in [196]:
+                self.enterOuterAlt(localctx, 10)
+                self.state = 411
+                self.match(NeoBasicParser.NEGATIVEINFINITY)
+                pass
+            else:
+                raise NoViableAltException(self)
+
+        except RecognitionException as re:
+            localctx.exception = re
+            self._errHandler.reportError(self, re)
+            self._errHandler.recover(self, re)
+        finally:
+            self.exitRule()
+        return localctx
+
+
+    class TypeContext(ParserRuleContext):
+        __slots__ = 'parser'
+
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+            super().__init__(parent, invokingState)
+            self.parser = parser
+
+        def nativeType(self):
+            return self.getTypedRuleContext(NeoBasicParser.NativeTypeContext,0)
+
+
+        def getRuleIndex(self):
+            return NeoBasicParser.RULE_type
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterType" ):
+                listener.enterType(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitType" ):
+                listener.exitType(self)
+
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitType" ):
+                return visitor.visitType(self)
+            else:
+                return visitor.visitChildren(self)
+
+
+
+
+    def type_(self):
+
+        localctx = NeoBasicParser.TypeContext(self, self._ctx, self.state)
+        self.enterRule(localctx, 122, self.RULE_type)
+        try:
+            self.enterOuterAlt(localctx, 1)
+            self.state = 414
+            self.nativeType()
+        except RecognitionException as re:
+            localctx.exception = re
+            self._errHandler.reportError(self, re)
+            self._errHandler.recover(self, re)
+        finally:
+            self.exitRule()
+        return localctx
+
+
+    class NativeTypeContext(ParserRuleContext):
+        __slots__ = 'parser'
+
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+            super().__init__(parent, invokingState)
+            self.parser = parser
+
+        def escalarType(self):
+            return self.getTypedRuleContext(NeoBasicParser.EscalarTypeContext,0)
+
+
+        def getRuleIndex(self):
+            return NeoBasicParser.RULE_nativeType
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterNativeType" ):
+                listener.enterNativeType(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitNativeType" ):
+                listener.exitNativeType(self)
+
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitNativeType" ):
+                return visitor.visitNativeType(self)
+            else:
+                return visitor.visitChildren(self)
+
+
+
+
+    def nativeType(self):
+
+        localctx = NeoBasicParser.NativeTypeContext(self, self._ctx, self.state)
+        self.enterRule(localctx, 124, self.RULE_nativeType)
+        try:
+            self.enterOuterAlt(localctx, 1)
+            self.state = 416
+            self.escalarType()
+        except RecognitionException as re:
+            localctx.exception = re
+            self._errHandler.reportError(self, re)
+            self._errHandler.recover(self, re)
+        finally:
+            self.exitRule()
+        return localctx
+
+
+    class EscalarTypeContext(ParserRuleContext):
+        __slots__ = 'parser'
+
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+            super().__init__(parent, invokingState)
+            self.parser = parser
+
+        def booleanType(self):
+            return self.getTypedRuleContext(NeoBasicParser.BooleanTypeContext,0)
+
+
+        def numericType(self):
+            return self.getTypedRuleContext(NeoBasicParser.NumericTypeContext,0)
+
+
+        def getRuleIndex(self):
+            return NeoBasicParser.RULE_escalarType
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterEscalarType" ):
+                listener.enterEscalarType(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitEscalarType" ):
+                listener.exitEscalarType(self)
+
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitEscalarType" ):
+                return visitor.visitEscalarType(self)
+            else:
+                return visitor.visitChildren(self)
+
+
+
+
+    def escalarType(self):
+
+        localctx = NeoBasicParser.EscalarTypeContext(self, self._ctx, self.state)
+        self.enterRule(localctx, 126, self.RULE_escalarType)
+        try:
+            self.state = 420
+            self._errHandler.sync(self)
+            token = self._input.LA(1)
+            if token in [163, 164, 165, 166, 167, 168]:
+                self.enterOuterAlt(localctx, 1)
+                self.state = 418
+                self.booleanType()
+                pass
+            elif token in [169, 170, 171, 172, 173, 174, 175, 176, 177, 178, 179, 180, 181, 182, 183, 184, 185, 186, 187]:
+                self.enterOuterAlt(localctx, 2)
+                self.state = 419
+                self.numericType()
+                pass
+            else:
+                raise NoViableAltException(self)
+
+        except RecognitionException as re:
+            localctx.exception = re
+            self._errHandler.reportError(self, re)
+            self._errHandler.recover(self, re)
+        finally:
+            self.exitRule()
+        return localctx
+
+
+    class BooleanTypeContext(ParserRuleContext):
+        __slots__ = 'parser'
+
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+            super().__init__(parent, invokingState)
+            self.parser = parser
+
+        def BOOL8(self):
+            return self.getToken(NeoBasicParser.BOOL8, 0)
+
+        def BOOL16(self):
+            return self.getToken(NeoBasicParser.BOOL16, 0)
+
+        def BOOL32(self):
+            return self.getToken(NeoBasicParser.BOOL32, 0)
+
+        def BOOL64(self):
+            return self.getToken(NeoBasicParser.BOOL64, 0)
+
+        def BOOL128(self):
+            return self.getToken(NeoBasicParser.BOOL128, 0)
+
+        def BOOL(self):
+            return self.getToken(NeoBasicParser.BOOL, 0)
+
+        def getRuleIndex(self):
+            return NeoBasicParser.RULE_booleanType
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterBooleanType" ):
+                listener.enterBooleanType(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitBooleanType" ):
+                listener.exitBooleanType(self)
+
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitBooleanType" ):
+                return visitor.visitBooleanType(self)
+            else:
+                return visitor.visitChildren(self)
+
+
+
+
+    def booleanType(self):
+
+        localctx = NeoBasicParser.BooleanTypeContext(self, self._ctx, self.state)
+        self.enterRule(localctx, 128, self.RULE_booleanType)
+        self._la = 0 # Token type
+        try:
+            self.enterOuterAlt(localctx, 1)
+            self.state = 422
+            _la = self._input.LA(1)
+            if not(((((_la - 163)) & ~0x3f) == 0 and ((1 << (_la - 163)) & 63) != 0)):
+                self._errHandler.recoverInline(self)
+            else:
+                self._errHandler.reportMatch(self)
+                self.consume()
+        except RecognitionException as re:
+            localctx.exception = re
+            self._errHandler.reportError(self, re)
+            self._errHandler.recover(self, re)
+        finally:
+            self.exitRule()
+        return localctx
+
+
+    class NumericTypeContext(ParserRuleContext):
+        __slots__ = 'parser'
+
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+            super().__init__(parent, invokingState)
+            self.parser = parser
+
+        def numericNatural(self):
+            return self.getTypedRuleContext(NeoBasicParser.NumericNaturalContext,0)
+
+
+        def numericInteger(self):
+            return self.getTypedRuleContext(NeoBasicParser.NumericIntegerContext,0)
+
+
+        def numericReal(self):
+            return self.getTypedRuleContext(NeoBasicParser.NumericRealContext,0)
+
+
+        def getRuleIndex(self):
+            return NeoBasicParser.RULE_numericType
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterNumericType" ):
+                listener.enterNumericType(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitNumericType" ):
+                listener.exitNumericType(self)
+
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitNumericType" ):
+                return visitor.visitNumericType(self)
+            else:
+                return visitor.visitChildren(self)
+
+
+
+
+    def numericType(self):
+
+        localctx = NeoBasicParser.NumericTypeContext(self, self._ctx, self.state)
+        self.enterRule(localctx, 130, self.RULE_numericType)
+        try:
+            self.state = 427
+            self._errHandler.sync(self)
+            token = self._input.LA(1)
+            if token in [169, 170, 171, 172, 173, 174, 175]:
+                self.enterOuterAlt(localctx, 1)
+                self.state = 424
+                self.numericNatural()
+                pass
+            elif token in [176, 177, 178, 179, 180, 181]:
+                self.enterOuterAlt(localctx, 2)
+                self.state = 425
+                self.numericInteger()
+                pass
+            elif token in [182, 183, 184, 185, 186, 187]:
+                self.enterOuterAlt(localctx, 3)
+                self.state = 426
+                self.numericReal()
+                pass
+            else:
+                raise NoViableAltException(self)
+
+        except RecognitionException as re:
+            localctx.exception = re
+            self._errHandler.reportError(self, re)
+            self._errHandler.recover(self, re)
+        finally:
+            self.exitRule()
+        return localctx
+
+
+    class NumericNaturalContext(ParserRuleContext):
+        __slots__ = 'parser'
+
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+            super().__init__(parent, invokingState)
+            self.parser = parser
+
+        def NAT8(self):
+            return self.getToken(NeoBasicParser.NAT8, 0)
+
+        def NAT16(self):
+            return self.getToken(NeoBasicParser.NAT16, 0)
+
+        def NAT32(self):
+            return self.getToken(NeoBasicParser.NAT32, 0)
+
+        def NAT64(self):
+            return self.getToken(NeoBasicParser.NAT64, 0)
+
+        def NAT128(self):
+            return self.getToken(NeoBasicParser.NAT128, 0)
+
+        def BYTE(self):
+            return self.getToken(NeoBasicParser.BYTE, 0)
+
+        def NAT(self):
+            return self.getToken(NeoBasicParser.NAT, 0)
+
+        def getRuleIndex(self):
+            return NeoBasicParser.RULE_numericNatural
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterNumericNatural" ):
+                listener.enterNumericNatural(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitNumericNatural" ):
+                listener.exitNumericNatural(self)
+
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitNumericNatural" ):
+                return visitor.visitNumericNatural(self)
+            else:
+                return visitor.visitChildren(self)
+
+
+
+
+    def numericNatural(self):
+
+        localctx = NeoBasicParser.NumericNaturalContext(self, self._ctx, self.state)
+        self.enterRule(localctx, 132, self.RULE_numericNatural)
+        self._la = 0 # Token type
+        try:
+            self.enterOuterAlt(localctx, 1)
+            self.state = 429
+            _la = self._input.LA(1)
+            if not(((((_la - 169)) & ~0x3f) == 0 and ((1 << (_la - 169)) & 127) != 0)):
+                self._errHandler.recoverInline(self)
+            else:
+                self._errHandler.reportMatch(self)
+                self.consume()
+        except RecognitionException as re:
+            localctx.exception = re
+            self._errHandler.reportError(self, re)
+            self._errHandler.recover(self, re)
+        finally:
+            self.exitRule()
+        return localctx
+
+
+    class NumericIntegerContext(ParserRuleContext):
+        __slots__ = 'parser'
+
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+            super().__init__(parent, invokingState)
+            self.parser = parser
+
+        def INT8(self):
+            return self.getToken(NeoBasicParser.INT8, 0)
+
+        def INT16(self):
+            return self.getToken(NeoBasicParser.INT16, 0)
+
+        def INT32(self):
+            return self.getToken(NeoBasicParser.INT32, 0)
+
+        def INT64(self):
+            return self.getToken(NeoBasicParser.INT64, 0)
+
+        def INT128(self):
+            return self.getToken(NeoBasicParser.INT128, 0)
+
+        def INT(self):
+            return self.getToken(NeoBasicParser.INT, 0)
+
+        def getRuleIndex(self):
+            return NeoBasicParser.RULE_numericInteger
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterNumericInteger" ):
+                listener.enterNumericInteger(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitNumericInteger" ):
+                listener.exitNumericInteger(self)
+
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitNumericInteger" ):
+                return visitor.visitNumericInteger(self)
+            else:
+                return visitor.visitChildren(self)
+
+
+
+
+    def numericInteger(self):
+
+        localctx = NeoBasicParser.NumericIntegerContext(self, self._ctx, self.state)
+        self.enterRule(localctx, 134, self.RULE_numericInteger)
+        self._la = 0 # Token type
+        try:
+            self.enterOuterAlt(localctx, 1)
+            self.state = 431
+            _la = self._input.LA(1)
+            if not(((((_la - 176)) & ~0x3f) == 0 and ((1 << (_la - 176)) & 63) != 0)):
+                self._errHandler.recoverInline(self)
+            else:
+                self._errHandler.reportMatch(self)
+                self.consume()
+        except RecognitionException as re:
+            localctx.exception = re
+            self._errHandler.reportError(self, re)
+            self._errHandler.recover(self, re)
+        finally:
+            self.exitRule()
+        return localctx
+
+
+    class NumericRealContext(ParserRuleContext):
+        __slots__ = 'parser'
+
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+            super().__init__(parent, invokingState)
+            self.parser = parser
+
+        def REAL8(self):
+            return self.getToken(NeoBasicParser.REAL8, 0)
+
+        def REAL16(self):
+            return self.getToken(NeoBasicParser.REAL16, 0)
+
+        def REAL32(self):
+            return self.getToken(NeoBasicParser.REAL32, 0)
+
+        def REAL64(self):
+            return self.getToken(NeoBasicParser.REAL64, 0)
+
+        def REAL128(self):
+            return self.getToken(NeoBasicParser.REAL128, 0)
+
+        def REAL(self):
+            return self.getToken(NeoBasicParser.REAL, 0)
+
+        def getRuleIndex(self):
+            return NeoBasicParser.RULE_numericReal
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterNumericReal" ):
+                listener.enterNumericReal(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitNumericReal" ):
+                listener.exitNumericReal(self)
+
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitNumericReal" ):
+                return visitor.visitNumericReal(self)
+            else:
+                return visitor.visitChildren(self)
+
+
+
+
+    def numericReal(self):
+
+        localctx = NeoBasicParser.NumericRealContext(self, self._ctx, self.state)
+        self.enterRule(localctx, 136, self.RULE_numericReal)
+        self._la = 0 # Token type
+        try:
+            self.enterOuterAlt(localctx, 1)
+            self.state = 433
+            _la = self._input.LA(1)
+            if not(((((_la - 182)) & ~0x3f) == 0 and ((1 << (_la - 182)) & 63) != 0)):
+                self._errHandler.recoverInline(self)
+            else:
+                self._errHandler.reportMatch(self)
+                self.consume()
+        except RecognitionException as re:
+            localctx.exception = re
+            self._errHandler.reportError(self, re)
+            self._errHandler.recover(self, re)
+        finally:
+            self.exitRule()
+        return localctx
+
+
+    class ExpressionsContext(ParserRuleContext):
+        __slots__ = 'parser'
+
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+            super().__init__(parent, invokingState)
+            self.parser = parser
+
+        def expression(self, i:int=None):
+            if i is None:
+                return self.getTypedRuleContexts(NeoBasicParser.ExpressionContext)
+            else:
+                return self.getTypedRuleContext(NeoBasicParser.ExpressionContext,i)
+
+
+        def COMMA(self, i:int=None):
+            if i is None:
+                return self.getTokens(NeoBasicParser.COMMA)
+            else:
+                return self.getToken(NeoBasicParser.COMMA, i)
+
+        def getRuleIndex(self):
+            return NeoBasicParser.RULE_expressions
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterExpressions" ):
+                listener.enterExpressions(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitExpressions" ):
+                listener.exitExpressions(self)
+
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitExpressions" ):
+                return visitor.visitExpressions(self)
+            else:
+                return visitor.visitChildren(self)
+
+
+
+
+    def expressions(self):
+
+        localctx = NeoBasicParser.ExpressionsContext(self, self._ctx, self.state)
+        self.enterRule(localctx, 138, self.RULE_expressions)
+        self._la = 0 # Token type
+        try:
+            self.enterOuterAlt(localctx, 1)
+            self.state = 435
+            self.expression(0)
+            self.state = 440
+            self._errHandler.sync(self)
+            _la = self._input.LA(1)
+            while _la==10:
+                self.state = 436
+                self.match(NeoBasicParser.COMMA)
+                self.state = 437
+                self.expression(0)
+                self.state = 442
+                self._errHandler.sync(self)
+                _la = self._input.LA(1)
+
+        except RecognitionException as re:
+            localctx.exception = re
+            self._errHandler.reportError(self, re)
+            self._errHandler.recover(self, re)
+        finally:
+            self.exitRule()
+        return localctx
+
+
+    class PrimaryExpressionsContext(ParserRuleContext):
+        __slots__ = 'parser'
+
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+            super().__init__(parent, invokingState)
+            self.parser = parser
+
+        def primaryExpression(self, i:int=None):
+            if i is None:
+                return self.getTypedRuleContexts(NeoBasicParser.PrimaryExpressionContext)
+            else:
+                return self.getTypedRuleContext(NeoBasicParser.PrimaryExpressionContext,i)
+
+
+        def COMMA(self, i:int=None):
+            if i is None:
+                return self.getTokens(NeoBasicParser.COMMA)
+            else:
+                return self.getToken(NeoBasicParser.COMMA, i)
+
+        def getRuleIndex(self):
+            return NeoBasicParser.RULE_primaryExpressions
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterPrimaryExpressions" ):
+                listener.enterPrimaryExpressions(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitPrimaryExpressions" ):
+                listener.exitPrimaryExpressions(self)
+
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitPrimaryExpressions" ):
+                return visitor.visitPrimaryExpressions(self)
+            else:
+                return visitor.visitChildren(self)
+
+
+
+
+    def primaryExpressions(self):
+
+        localctx = NeoBasicParser.PrimaryExpressionsContext(self, self._ctx, self.state)
+        self.enterRule(localctx, 140, self.RULE_primaryExpressions)
+        self._la = 0 # Token type
+        try:
+            self.enterOuterAlt(localctx, 1)
+            self.state = 443
+            self.primaryExpression(0)
+            self.state = 448
+            self._errHandler.sync(self)
+            _la = self._input.LA(1)
+            while _la==10:
+                self.state = 444
+                self.match(NeoBasicParser.COMMA)
+                self.state = 445
+                self.primaryExpression(0)
+                self.state = 450
+                self._errHandler.sync(self)
+                _la = self._input.LA(1)
+
+        except RecognitionException as re:
+            localctx.exception = re
+            self._errHandler.reportError(self, re)
+            self._errHandler.recover(self, re)
+        finally:
+            self.exitRule()
+        return localctx
+
+
+    class PrimaryExpressionContext(ParserRuleContext):
+        __slots__ = 'parser'
+
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+            super().__init__(parent, invokingState)
+            self.parser = parser
+
+        def operand(self):
+            return self.getTypedRuleContext(NeoBasicParser.OperandContext,0)
+
+
+        def parenthesizedExpression(self):
+            return self.getTypedRuleContext(NeoBasicParser.ParenthesizedExpressionContext,0)
+
+
+        def prefixUnaryOperator(self):
+            return self.getTypedRuleContext(NeoBasicParser.PrefixUnaryOperatorContext,0)
+
+
+        def primaryExpression(self, i:int=None):
+            if i is None:
+                return self.getTypedRuleContexts(NeoBasicParser.PrimaryExpressionContext)
+            else:
+                return self.getTypedRuleContext(NeoBasicParser.PrimaryExpressionContext,i)
+
+
+        def qualifiedIdentifier(self):
+            return self.getTypedRuleContext(NeoBasicParser.QualifiedIdentifierContext,0)
+
+
+        def expression(self):
+            return self.getTypedRuleContext(NeoBasicParser.ExpressionContext,0)
+
+
+        def DOT(self):
+            return self.getToken(NeoBasicParser.DOT, 0)
+
+        def SEMICOLON(self):
+            return self.getToken(NeoBasicParser.SEMICOLON, 0)
+
+        def LEFT_PARENTHESIS(self):
+            return self.getToken(NeoBasicParser.LEFT_PARENTHESIS, 0)
+
+        def expressions(self):
+            return self.getTypedRuleContext(NeoBasicParser.ExpressionsContext,0)
+
+
+        def RIGHT_PARENTHESIS(self):
+            return self.getToken(NeoBasicParser.RIGHT_PARENTHESIS, 0)
+
+        def posfixUnaryOperator(self):
+            return self.getTypedRuleContext(NeoBasicParser.PosfixUnaryOperatorContext,0)
+
+
+        def getRuleIndex(self):
+            return NeoBasicParser.RULE_primaryExpression
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterPrimaryExpression" ):
+                listener.enterPrimaryExpression(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitPrimaryExpression" ):
+                listener.exitPrimaryExpression(self)
+
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitPrimaryExpression" ):
+                return visitor.visitPrimaryExpression(self)
+            else:
+                return visitor.visitChildren(self)
+
+
+
+    def primaryExpression(self, _p:int=0):
+        _parentctx = self._ctx
+        _parentState = self.state
+        localctx = NeoBasicParser.PrimaryExpressionContext(self, self._ctx, _parentState)
+        _prevctx = localctx
+        _startState = 142
+        self.enterRecursionRule(localctx, 142, self.RULE_primaryExpression, _p)
+        try:
+            self.enterOuterAlt(localctx, 1)
+            self.state = 460
+            self._errHandler.sync(self)
+            la_ = self._interp.adaptivePredict(self._input,30,self._ctx)
+            if la_ == 1:
+                self.state = 452
+                self.operand()
+                pass
+
+            elif la_ == 2:
+                self.state = 453
+                self.parenthesizedExpression()
+                pass
+
+            elif la_ == 3:
+                self.state = 454
+                self.prefixUnaryOperator()
+                self.state = 455
+                self.primaryExpression(2)
+                pass
+
+            elif la_ == 4:
+                self.state = 457
+                self.qualifiedIdentifier()
+                self.state = 458
+                self.expression(0)
+                pass
+
+
+            self._ctx.stop = self._input.LT(-1)
+            self.state = 477
+            self._errHandler.sync(self)
+            _alt = self._interp.adaptivePredict(self._input,32,self._ctx)
+            while _alt!=2 and _alt!=ATN.INVALID_ALT_NUMBER:
+                if _alt==1:
+                    if self._parseListeners is not None:
+                        self.triggerExitRuleEvent()
+                    _prevctx = localctx
+                    self.state = 475
+                    self._errHandler.sync(self)
+                    la_ = self._interp.adaptivePredict(self._input,31,self._ctx)
+                    if la_ == 1:
+                        localctx = NeoBasicParser.PrimaryExpressionContext(self, _parentctx, _parentState)
+                        self.pushNewRecursionContext(localctx, _startState, self.RULE_primaryExpression)
+                        self.state = 462
+                        if not self.precpred(self._ctx, 6):
+                            from antlr4.error.Errors import FailedPredicateException
+                            raise FailedPredicateException(self, "self.precpred(self._ctx, 6)")
+                        self.state = 463
+                        self.match(NeoBasicParser.DOT)
+                        self.state = 464
+                        self.primaryExpression(7)
+                        pass
+
+                    elif la_ == 2:
+                        localctx = NeoBasicParser.PrimaryExpressionContext(self, _parentctx, _parentState)
+                        self.pushNewRecursionContext(localctx, _startState, self.RULE_primaryExpression)
+                        self.state = 465
+                        if not self.precpred(self._ctx, 4):
+                            from antlr4.error.Errors import FailedPredicateException
+                            raise FailedPredicateException(self, "self.precpred(self._ctx, 4)")
+                        self.state = 466
+                        self.match(NeoBasicParser.SEMICOLON)
+                        self.state = 467
+                        self.primaryExpression(5)
+                        pass
+
+                    elif la_ == 3:
+                        localctx = NeoBasicParser.PrimaryExpressionContext(self, _parentctx, _parentState)
+                        self.pushNewRecursionContext(localctx, _startState, self.RULE_primaryExpression)
+                        self.state = 468
+                        if not self.precpred(self._ctx, 5):
+                            from antlr4.error.Errors import FailedPredicateException
+                            raise FailedPredicateException(self, "self.precpred(self._ctx, 5)")
+                        self.state = 469
+                        self.match(NeoBasicParser.LEFT_PARENTHESIS)
+                        self.state = 470
+                        self.expressions()
+                        self.state = 471
+                        self.match(NeoBasicParser.RIGHT_PARENTHESIS)
+                        pass
+
+                    elif la_ == 4:
+                        localctx = NeoBasicParser.PrimaryExpressionContext(self, _parentctx, _parentState)
+                        self.pushNewRecursionContext(localctx, _startState, self.RULE_primaryExpression)
+                        self.state = 473
+                        if not self.precpred(self._ctx, 3):
+                            from antlr4.error.Errors import FailedPredicateException
+                            raise FailedPredicateException(self, "self.precpred(self._ctx, 3)")
+                        self.state = 474
+                        self.posfixUnaryOperator()
+                        pass
+
+             
+                self.state = 479
+                self._errHandler.sync(self)
+                _alt = self._interp.adaptivePredict(self._input,32,self._ctx)
+
+        except RecognitionException as re:
+            localctx.exception = re
+            self._errHandler.reportError(self, re)
+            self._errHandler.recover(self, re)
+        finally:
+            self.unrollRecursionContexts(_parentctx)
+        return localctx
+
+
+    class OperandContext(ParserRuleContext):
+        __slots__ = 'parser'
+
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+            super().__init__(parent, invokingState)
+            self.parser = parser
+
+        def literal(self):
+            return self.getTypedRuleContext(NeoBasicParser.LiteralContext,0)
+
+
+        def predeclaredValue(self):
+            return self.getTypedRuleContext(NeoBasicParser.PredeclaredValueContext,0)
+
+
+        def qualifiedIdentifier(self):
+            return self.getTypedRuleContext(NeoBasicParser.QualifiedIdentifierContext,0)
+
+
+        def getRuleIndex(self):
+            return NeoBasicParser.RULE_operand
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterOperand" ):
+                listener.enterOperand(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitOperand" ):
+                listener.exitOperand(self)
+
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitOperand" ):
+                return visitor.visitOperand(self)
+            else:
+                return visitor.visitChildren(self)
+
+
+
+
+    def operand(self):
+
+        localctx = NeoBasicParser.OperandContext(self, self._ctx, self.state)
+        self.enterRule(localctx, 144, self.RULE_operand)
+        try:
+            self.state = 483
+            self._errHandler.sync(self)
+            token = self._input.LA(1)
+            if token in [125, 130, 131, 188, 189, 190, 191, 192, 193, 194, 195, 196]:
+                self.enterOuterAlt(localctx, 1)
+                self.state = 480
+                self.literal()
+                pass
+            elif token in [148]:
+                self.enterOuterAlt(localctx, 2)
+                self.state = 481
+                self.predeclaredValue()
+                pass
+            elif token in [138]:
+                self.enterOuterAlt(localctx, 3)
+                self.state = 482
+                self.qualifiedIdentifier()
+                pass
+            else:
+                raise NoViableAltException(self)
+
+        except RecognitionException as re:
+            localctx.exception = re
+            self._errHandler.reportError(self, re)
+            self._errHandler.recover(self, re)
+        finally:
+            self.exitRule()
+        return localctx
+
+
+    class ParenthesizedExpressionContext(ParserRuleContext):
+        __slots__ = 'parser'
+
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+            super().__init__(parent, invokingState)
+            self.parser = parser
+
+        def LEFT_PARENTHESIS(self):
+            return self.getToken(NeoBasicParser.LEFT_PARENTHESIS, 0)
+
+        def expression(self):
+            return self.getTypedRuleContext(NeoBasicParser.ExpressionContext,0)
+
+
+        def RIGHT_PARENTHESIS(self):
+            return self.getToken(NeoBasicParser.RIGHT_PARENTHESIS, 0)
+
+        def getRuleIndex(self):
+            return NeoBasicParser.RULE_parenthesizedExpression
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterParenthesizedExpression" ):
+                listener.enterParenthesizedExpression(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitParenthesizedExpression" ):
+                listener.exitParenthesizedExpression(self)
+
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitParenthesizedExpression" ):
+                return visitor.visitParenthesizedExpression(self)
+            else:
+                return visitor.visitChildren(self)
+
+
+
+
+    def parenthesizedExpression(self):
+
+        localctx = NeoBasicParser.ParenthesizedExpressionContext(self, self._ctx, self.state)
+        self.enterRule(localctx, 146, self.RULE_parenthesizedExpression)
+        try:
+            self.enterOuterAlt(localctx, 1)
+            self.state = 485
+            self.match(NeoBasicParser.LEFT_PARENTHESIS)
+            self.state = 486
+            self.expression(0)
+            self.state = 487
+            self.match(NeoBasicParser.RIGHT_PARENTHESIS)
+        except RecognitionException as re:
+            localctx.exception = re
+            self._errHandler.reportError(self, re)
+            self._errHandler.recover(self, re)
+        finally:
+            self.exitRule()
+        return localctx
+
+
+    class ExpressionContext(ParserRuleContext):
+        __slots__ = 'parser'
+
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+            super().__init__(parent, invokingState)
+            self.parser = parser
+
+        def primaryExpression(self):
+            return self.getTypedRuleContext(NeoBasicParser.PrimaryExpressionContext,0)
+
+
+        def assignmentExpression(self):
+            return self.getTypedRuleContext(NeoBasicParser.AssignmentExpressionContext,0)
+
+
+        def expression(self, i:int=None):
+            if i is None:
+                return self.getTypedRuleContexts(NeoBasicParser.ExpressionContext)
+            else:
+                return self.getTypedRuleContext(NeoBasicParser.ExpressionContext,i)
+
+
+        def binaryExponentialOperator(self):
+            return self.getTypedRuleContext(NeoBasicParser.BinaryExponentialOperatorContext,0)
+
+
+        def binaryMultiplicativeOperator(self):
+            return self.getTypedRuleContext(NeoBasicParser.BinaryMultiplicativeOperatorContext,0)
+
+
+        def binaryAdditiveOperator(self):
+            return self.getTypedRuleContext(NeoBasicParser.BinaryAdditiveOperatorContext,0)
+
+
+        def bitShiftOperator(self):
+            return self.getTypedRuleContext(NeoBasicParser.BitShiftOperatorContext,0)
+
+
+        def bitConjunctionOperator(self):
+            return self.getTypedRuleContext(NeoBasicParser.BitConjunctionOperatorContext,0)
+
+
+        def bitExclusiveDisjunctionOperator(self):
+            return self.getTypedRuleContext(NeoBasicParser.BitExclusiveDisjunctionOperatorContext,0)
+
+
+        def bitDisjunctionOperator(self):
+            return self.getTypedRuleContext(NeoBasicParser.BitDisjunctionOperatorContext,0)
+
+
+        def binaryComparisonOperator(self):
+            return self.getTypedRuleContext(NeoBasicParser.BinaryComparisonOperatorContext,0)
+
+
+        def binaryRelationalOperator(self):
+            return self.getTypedRuleContext(NeoBasicParser.BinaryRelationalOperatorContext,0)
+
+
+        def binaryConditionalOperator(self):
+            return self.getTypedRuleContext(NeoBasicParser.BinaryConditionalOperatorContext,0)
+
+
+        def binaryConjunctionOperator(self):
+            return self.getTypedRuleContext(NeoBasicParser.BinaryConjunctionOperatorContext,0)
+
+
+        def binaryExclusiveDisjunctionOperator(self):
+            return self.getTypedRuleContext(NeoBasicParser.BinaryExclusiveDisjunctionOperatorContext,0)
+
+
+        def binaryDisjunctionOperator(self):
+            return self.getTypedRuleContext(NeoBasicParser.BinaryDisjunctionOperatorContext,0)
+
+
+        def binaryCoalescingOperator(self):
+            return self.getTypedRuleContext(NeoBasicParser.BinaryCoalescingOperatorContext,0)
+
+
+        def getRuleIndex(self):
+            return NeoBasicParser.RULE_expression
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterExpression" ):
+                listener.enterExpression(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitExpression" ):
+                listener.exitExpression(self)
+
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitExpression" ):
+                return visitor.visitExpression(self)
+            else:
+                return visitor.visitChildren(self)
+
+
+
+    def expression(self, _p:int=0):
+        _parentctx = self._ctx
+        _parentState = self.state
+        localctx = NeoBasicParser.ExpressionContext(self, self._ctx, _parentState)
+        _prevctx = localctx
+        _startState = 148
+        self.enterRecursionRule(localctx, 148, self.RULE_expression, _p)
+        try:
+            self.enterOuterAlt(localctx, 1)
+            self.state = 492
+            self._errHandler.sync(self)
+            la_ = self._interp.adaptivePredict(self._input,34,self._ctx)
+            if la_ == 1:
+                self.state = 490
+                self.primaryExpression(0)
+                pass
+
+            elif la_ == 2:
+                self.state = 491
+                self.assignmentExpression()
+                pass
+
+
+            self._ctx.stop = self._input.LT(-1)
+            self.state = 553
+            self._errHandler.sync(self)
+            _alt = self._interp.adaptivePredict(self._input,37,self._ctx)
+            while _alt!=2 and _alt!=ATN.INVALID_ALT_NUMBER:
+                if _alt==1:
+                    if self._parseListeners is not None:
+                        self.triggerExitRuleEvent()
+                    _prevctx = localctx
+                    self.state = 551
+                    self._errHandler.sync(self)
+                    la_ = self._interp.adaptivePredict(self._input,36,self._ctx)
+                    if la_ == 1:
+                        localctx = NeoBasicParser.ExpressionContext(self, _parentctx, _parentState)
+                        self.pushNewRecursionContext(localctx, _startState, self.RULE_expression)
+                        self.state = 494
+                        if not self.precpred(self._ctx, 15):
+                            from antlr4.error.Errors import FailedPredicateException
+                            raise FailedPredicateException(self, "self.precpred(self._ctx, 15)")
+                        self.state = 495
+                        self.binaryExponentialOperator()
+                        self.state = 496
+                        self.expression(16)
+                        pass
+
+                    elif la_ == 2:
+                        localctx = NeoBasicParser.ExpressionContext(self, _parentctx, _parentState)
+                        self.pushNewRecursionContext(localctx, _startState, self.RULE_expression)
+                        self.state = 498
+                        if not self.precpred(self._ctx, 14):
+                            from antlr4.error.Errors import FailedPredicateException
+                            raise FailedPredicateException(self, "self.precpred(self._ctx, 14)")
+                        self.state = 499
+                        self.binaryMultiplicativeOperator()
+                        self.state = 500
+                        self.expression(15)
+                        pass
+
+                    elif la_ == 3:
+                        localctx = NeoBasicParser.ExpressionContext(self, _parentctx, _parentState)
+                        self.pushNewRecursionContext(localctx, _startState, self.RULE_expression)
+                        self.state = 502
+                        if not self.precpred(self._ctx, 13):
+                            from antlr4.error.Errors import FailedPredicateException
+                            raise FailedPredicateException(self, "self.precpred(self._ctx, 13)")
+                        self.state = 503
+                        self.binaryAdditiveOperator()
+                        self.state = 504
+                        self.expression(14)
+                        pass
+
+                    elif la_ == 4:
+                        localctx = NeoBasicParser.ExpressionContext(self, _parentctx, _parentState)
+                        self.pushNewRecursionContext(localctx, _startState, self.RULE_expression)
+                        self.state = 506
+                        if not self.precpred(self._ctx, 12):
+                            from antlr4.error.Errors import FailedPredicateException
+                            raise FailedPredicateException(self, "self.precpred(self._ctx, 12)")
+                        self.state = 507
+                        self.bitShiftOperator()
+                        self.state = 508
+                        self.expression(13)
+                        pass
+
+                    elif la_ == 5:
+                        localctx = NeoBasicParser.ExpressionContext(self, _parentctx, _parentState)
+                        self.pushNewRecursionContext(localctx, _startState, self.RULE_expression)
+                        self.state = 510
+                        if not self.precpred(self._ctx, 11):
+                            from antlr4.error.Errors import FailedPredicateException
+                            raise FailedPredicateException(self, "self.precpred(self._ctx, 11)")
+                        self.state = 511
+                        self.bitConjunctionOperator()
+                        self.state = 512
+                        self.expression(12)
+                        pass
+
+                    elif la_ == 6:
+                        localctx = NeoBasicParser.ExpressionContext(self, _parentctx, _parentState)
+                        self.pushNewRecursionContext(localctx, _startState, self.RULE_expression)
+                        self.state = 514
+                        if not self.precpred(self._ctx, 10):
+                            from antlr4.error.Errors import FailedPredicateException
+                            raise FailedPredicateException(self, "self.precpred(self._ctx, 10)")
+                        self.state = 515
+                        self.bitExclusiveDisjunctionOperator()
+                        self.state = 516
+                        self.expression(11)
+                        pass
+
+                    elif la_ == 7:
+                        localctx = NeoBasicParser.ExpressionContext(self, _parentctx, _parentState)
+                        self.pushNewRecursionContext(localctx, _startState, self.RULE_expression)
+                        self.state = 518
+                        if not self.precpred(self._ctx, 9):
+                            from antlr4.error.Errors import FailedPredicateException
+                            raise FailedPredicateException(self, "self.precpred(self._ctx, 9)")
+                        self.state = 519
+                        self.bitDisjunctionOperator()
+                        self.state = 520
+                        self.expression(10)
+                        pass
+
+                    elif la_ == 8:
+                        localctx = NeoBasicParser.ExpressionContext(self, _parentctx, _parentState)
+                        self.pushNewRecursionContext(localctx, _startState, self.RULE_expression)
+                        self.state = 522
+                        if not self.precpred(self._ctx, 8):
+                            from antlr4.error.Errors import FailedPredicateException
+                            raise FailedPredicateException(self, "self.precpred(self._ctx, 8)")
+                        self.state = 523
+                        self.binaryComparisonOperator()
+                        self.state = 524
+                        self.expression(9)
+                        pass
+
+                    elif la_ == 9:
+                        localctx = NeoBasicParser.ExpressionContext(self, _parentctx, _parentState)
+                        self.pushNewRecursionContext(localctx, _startState, self.RULE_expression)
+                        self.state = 526
+                        if not self.precpred(self._ctx, 7):
+                            from antlr4.error.Errors import FailedPredicateException
+                            raise FailedPredicateException(self, "self.precpred(self._ctx, 7)")
+                        self.state = 527
+                        self.binaryRelationalOperator()
+                        self.state = 528
+                        self.expression(8)
+                        pass
+
+                    elif la_ == 10:
+                        localctx = NeoBasicParser.ExpressionContext(self, _parentctx, _parentState)
+                        self.pushNewRecursionContext(localctx, _startState, self.RULE_expression)
+                        self.state = 530
+                        if not self.precpred(self._ctx, 6):
+                            from antlr4.error.Errors import FailedPredicateException
+                            raise FailedPredicateException(self, "self.precpred(self._ctx, 6)")
+                        self.state = 531
+                        self.binaryConditionalOperator()
+                        self.state = 532
+                        self.expression(7)
+                        pass
+
+                    elif la_ == 11:
+                        localctx = NeoBasicParser.ExpressionContext(self, _parentctx, _parentState)
+                        self.pushNewRecursionContext(localctx, _startState, self.RULE_expression)
+                        self.state = 534
+                        if not self.precpred(self._ctx, 5):
+                            from antlr4.error.Errors import FailedPredicateException
+                            raise FailedPredicateException(self, "self.precpred(self._ctx, 5)")
+                        self.state = 535
+                        self.binaryConjunctionOperator()
+                        self.state = 536
+                        self.expression(6)
+                        pass
+
+                    elif la_ == 12:
+                        localctx = NeoBasicParser.ExpressionContext(self, _parentctx, _parentState)
+                        self.pushNewRecursionContext(localctx, _startState, self.RULE_expression)
+                        self.state = 538
+                        if not self.precpred(self._ctx, 4):
+                            from antlr4.error.Errors import FailedPredicateException
+                            raise FailedPredicateException(self, "self.precpred(self._ctx, 4)")
+                        self.state = 539
+                        self.binaryExclusiveDisjunctionOperator()
+                        self.state = 540
+                        self.expression(5)
+                        pass
+
+                    elif la_ == 13:
+                        localctx = NeoBasicParser.ExpressionContext(self, _parentctx, _parentState)
+                        self.pushNewRecursionContext(localctx, _startState, self.RULE_expression)
+                        self.state = 542
+                        if not self.precpred(self._ctx, 3):
+                            from antlr4.error.Errors import FailedPredicateException
+                            raise FailedPredicateException(self, "self.precpred(self._ctx, 3)")
+                        self.state = 543
+                        self.binaryDisjunctionOperator()
+                        self.state = 544
+                        self.expression(4)
+                        pass
+
+                    elif la_ == 14:
+                        localctx = NeoBasicParser.ExpressionContext(self, _parentctx, _parentState)
+                        self.pushNewRecursionContext(localctx, _startState, self.RULE_expression)
+                        self.state = 546
+                        if not self.precpred(self._ctx, 2):
+                            from antlr4.error.Errors import FailedPredicateException
+                            raise FailedPredicateException(self, "self.precpred(self._ctx, 2)")
+                        self.state = 547
+                        self.binaryCoalescingOperator()
+                        self.state = 549
+                        self._errHandler.sync(self)
+                        la_ = self._interp.adaptivePredict(self._input,35,self._ctx)
+                        if la_ == 1:
+                            self.state = 548
+                            self.expression(0)
+
+
+                        pass
+
+             
+                self.state = 555
+                self._errHandler.sync(self)
+                _alt = self._interp.adaptivePredict(self._input,37,self._ctx)
+
+        except RecognitionException as re:
+            localctx.exception = re
+            self._errHandler.reportError(self, re)
+            self._errHandler.recover(self, re)
+        finally:
+            self.unrollRecursionContexts(_parentctx)
+        return localctx
+
+
+    class AssignmentExpressionContext(ParserRuleContext):
+        __slots__ = 'parser'
+
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+            super().__init__(parent, invokingState)
+            self.parser = parser
+
+        def primaryExpression(self):
+            return self.getTypedRuleContext(NeoBasicParser.PrimaryExpressionContext,0)
+
+
+        def assignmentOperator(self):
+            return self.getTypedRuleContext(NeoBasicParser.AssignmentOperatorContext,0)
+
+
+        def expression(self):
+            return self.getTypedRuleContext(NeoBasicParser.ExpressionContext,0)
+
+
+        def getRuleIndex(self):
+            return NeoBasicParser.RULE_assignmentExpression
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterAssignmentExpression" ):
+                listener.enterAssignmentExpression(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitAssignmentExpression" ):
+                listener.exitAssignmentExpression(self)
+
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitAssignmentExpression" ):
+                return visitor.visitAssignmentExpression(self)
+            else:
+                return visitor.visitChildren(self)
+
+
+
+
+    def assignmentExpression(self):
+
+        localctx = NeoBasicParser.AssignmentExpressionContext(self, self._ctx, self.state)
+        self.enterRule(localctx, 150, self.RULE_assignmentExpression)
+        try:
+            self.enterOuterAlt(localctx, 1)
+            self.state = 556
+            self.primaryExpression(0)
+            self.state = 557
+            self.assignmentOperator()
+            self.state = 558
+            self.expression(0)
+        except RecognitionException as re:
+            localctx.exception = re
+            self._errHandler.reportError(self, re)
+            self._errHandler.recover(self, re)
+        finally:
+            self.exitRule()
+        return localctx
+
+
+
+    def sempred(self, localctx:RuleContext, ruleIndex:int, predIndex:int):
+        if self._predicates == None:
+            self._predicates = dict()
+        self._predicates[71] = self.primaryExpression_sempred
+        self._predicates[74] = self.expression_sempred
+        pred = self._predicates.get(ruleIndex, None)
+        if pred is None:
+            raise Exception("No predicate with index:" + str(ruleIndex))
+        else:
+            return pred(localctx, predIndex)
+
+    def primaryExpression_sempred(self, localctx:PrimaryExpressionContext, predIndex:int):
+            if predIndex == 0:
+                return self.precpred(self._ctx, 6)
+         
+
+            if predIndex == 1:
+                return self.precpred(self._ctx, 4)
+         
+
+            if predIndex == 2:
+                return self.precpred(self._ctx, 5)
+         
+
+            if predIndex == 3:
+                return self.precpred(self._ctx, 3)
+         
+
+    def expression_sempred(self, localctx:ExpressionContext, predIndex:int):
+            if predIndex == 4:
+                return self.precpred(self._ctx, 15)
+         
+
+            if predIndex == 5:
+                return self.precpred(self._ctx, 14)
+         
+
+            if predIndex == 6:
+                return self.precpred(self._ctx, 13)
+         
+
+            if predIndex == 7:
+                return self.precpred(self._ctx, 12)
+         
+
+            if predIndex == 8:
+                return self.precpred(self._ctx, 11)
+         
+
+            if predIndex == 9:
+                return self.precpred(self._ctx, 10)
+         
+
+            if predIndex == 10:
+                return self.precpred(self._ctx, 9)
+         
+
+            if predIndex == 11:
+                return self.precpred(self._ctx, 8)
+         
+
+            if predIndex == 12:
+                return self.precpred(self._ctx, 7)
+         
+
+            if predIndex == 13:
+                return self.precpred(self._ctx, 6)
+         
+
+            if predIndex == 14:
+                return self.precpred(self._ctx, 5)
+         
+
+            if predIndex == 15:
+                return self.precpred(self._ctx, 4)
+         
+
+            if predIndex == 16:
+                return self.precpred(self._ctx, 3)
+         
+
+            if predIndex == 17:
+                return self.precpred(self._ctx, 2)
+         
+
+
+
+
