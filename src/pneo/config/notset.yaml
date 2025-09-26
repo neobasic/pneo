@@ -1,0 +1,46 @@
+---
+version: 1
+disable_existing_loggers: False
+
+# Define format of output logs (named 'simple').
+formatters:
+  simple:
+    format: "%(message)s"
+
+handlers:
+  console:
+    level: INFO
+    class: logging.StreamHandler
+    formatter: simple
+    stream: ext://sys.stdout
+
+loggers:
+  yaml:
+    level: ERROR
+    handlers: [console]
+    propagate: yes
+
+  babel:
+    level: ERROR
+    handlers: [console]
+    propagate: yes
+
+  click:
+    level: ERROR
+    handlers: [console]
+    propagate: yes
+
+  jinja2:
+    level: ERROR
+    handlers: [console]
+    propagate: yes
+
+  pneo:
+    level: INFO
+    handlers: [console]
+    propagate: no
+
+root:
+  level: INFO
+  handlers: [console]
+  propagate: no

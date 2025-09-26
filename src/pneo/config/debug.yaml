@@ -1,0 +1,58 @@
+---
+version: 1
+disable_existing_loggers: False
+
+# Define format of output logs (named 'simple').
+formatters:
+  simple:
+    format: "%(levelname)s: %(message)s"
+
+  verbose:
+    format: "\r %(asctime)s %(levelname)-5s [%(threadName)s] %(name)s->%(funcName)s<%(lineno)d>  %(message)s"
+
+handlers:
+  console:
+    level: INFO
+    class: logging.StreamHandler
+    formatter: simple
+    stream: ext://sys.stdout
+
+  # Create rotating file handler using 'simple' format.
+  logfile:
+      level: DEBUG
+      class: logging.FileHandler
+      formatter: verbose
+      mode: w
+      encoding: utf8
+  #    filename: None
+
+loggers:
+  yaml:
+    level: ERROR
+    handlers: [console, logfile]
+    propagate: yes
+
+  babel:
+    level: ERROR
+    handlers: [console, logfile]
+    propagate: yes
+
+  click:
+    level: ERROR
+    handlers: [console, logfile]
+    propagate: yes
+
+  jinja2:
+    level: ERROR
+    handlers: [console, logfile]
+    propagate: yes
+
+  pneo:
+    level: DEBUG
+    handlers: [console, logfile]
+    propagate: no
+
+root:
+  level: DEBUG
+  handlers: [console, logfile]
+  propagate: no

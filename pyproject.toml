@@ -2,29 +2,28 @@
 name = "pneo"
 version = "0.0.1"
 authors = [{ name="Raul Bras", email="@teknolista" }]
-description = "Recursive-descent parser and evaluation prototype engine for the NeoBASIC language, made with the ANTLR tool and written in Python."
+description = "Prototype implementation of a project and package manager for the NeoBASIC programming language, written in Python."
 readme = "README.md"
 license = "MIT"
 license-files = ["LICEN[CS]E*"]
 requires-python = ">=3.13"
 dependencies = [
     "ruff>=0.7.3",
-    "pydantic>=2.11.9",
+    "pyyaml>=6.0.2",
     "babel>=2.17.0",
     "click>=8.1.7",
-    "antlr4-python3-runtime>=4.13.2",
     "jinja2>=3.1.6",
 ]
-keywords = ["pneo", "neobasic", "language", "parser", "compiler", "transpiler", "cpp"]
+keywords = ["pneo", "neobasic", "programming", "language", "package", "project", "manager", "bundler"]
 classifiers = [
     "Programming Language :: Python :: 3",
     "Operating System :: OS Independent",
-    "Topic :: Software Development :: Code Generators",
+    "Topic :: Software Development :: Build Tools",
     "Intended Audience :: Developers",
 ]
 
 [project.scripts]
-pneo = "pneo.__main__:main"
+pneo = "pneo.__main__:cli"
 
 [project.urls]
 Homepage = "https://neobasic.org"
@@ -39,7 +38,8 @@ build-backend = "uv_build"
 
 [tool.hatch.build]
 include = [
-    "pneo/logging_configs/*.json",    # Include JSON files in the 'data' folder
+    "pneo/config/*.yaml",             # Include YAML files in the 'config' folder
+    "pneo/config/*.conf",             # Include INI files in the 'config' folder
     "*.py",                           # Include all Python files
     "py.typed",                       # Include the 'py.typed' file
     "README.md",                      # Include the README file
