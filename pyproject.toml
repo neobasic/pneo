@@ -1,7 +1,9 @@
 [project]
 name = "pneo"
 version = "0.0.1"
-authors = [{ name="Raul Bras", email="@teknolista" }]
+authors = [
+    {name = "Raul Bras"},
+]
 description = "Prototype implementation of a project and package manager for the NeoBASIC programming language, written in Python."
 readme = "README.md"
 license = "MIT"
@@ -16,14 +18,21 @@ dependencies = [
 ]
 keywords = ["pneo", "neobasic", "programming", "language", "package", "project", "manager", "bundler"]
 classifiers = [
-    "Programming Language :: Python :: 3",
-    "Operating System :: OS Independent",
-    "Topic :: Software Development :: Build Tools",
-    "Intended Audience :: Developers",
-]
+    "Development Status :: 2 - Pre-Alpha",
+    "License :: OSI Approved :: MIT License",
 
-[project.scripts]
-pneo = "pneo.__main__:cli"
+    "Intended Audience :: Developers",
+    "Topic :: Software Development :: Build Tools",
+
+    "Operating System :: OS Independent",
+    "Environment :: Console",
+
+    "Programming Language :: Python :: 3",
+    "Typing :: Typed",
+
+    "Natural Language :: English",
+    "Natural Language :: Portuguese (Brazilian)",
+]
 
 [project.urls]
 Homepage = "https://neobasic.org"
@@ -32,17 +41,33 @@ Repository = "https://github.com/neobasic/pneo.git"
 Issues = "https://github.com/neobasic/pneo/issues"
 Changelog = "https://github.com/neobasic/pneo/blob/main/CHANGELOG.md"
 
+[project.scripts]
+pneo = "pneo.__main__:cli"
+
 [build-system]
 requires = ["uv_build>=0.8.17,<0.9.0"]
 build-backend = "uv_build"
 
-[tool.hatch.build]
-include = [
-    "pneo/config/*.yaml",             # Include YAML files in the 'config' folder
-    "pneo/config/*.conf",             # Include INI files in the 'config' folder
-    "*.py",                           # Include all Python files
-    "py.typed",                       # Include the 'py.typed' file
-    "README.md",                      # Include the README file
-    "LICENSE",                        # Include the LICENSE file
-    "pyproject.toml",                 # Include the pyproject.toml file
+# Include non-Python files like .mo/.conf in the wheel
+[tool.uv.build-backend]
+# Specify the root of your Python module
+module-root = "src"
+module-name = "pneo"
+# Include specific source files and configuration files
+source-include = [
+    "src/pneo/**/*.py",
+    "src/pneo/**/*.mo",
+    "src/pneo/**/*.conf",
+    "src/pneo/**/*.yaml",
+    "src/pneo/**/*.typed",
+    "CHANGELOG.md",
+    "uv.lock",
+]
+# Exclude cache directories and temporary files
+source-exclude = [
+    "src/**/__pycache__",
+    "src/**/*.pyc",
+    "src/**/*.pyo",
+    "src/**/*.pot",
+    "src/**/*.po",
 ]

@@ -1,5 +1,6 @@
 import logging
 from pathlib import Path
+from builtins import _, fdocstr
 
 import click
 
@@ -18,43 +19,47 @@ app_config: pneo.AppConfig = pneo.getAppConfig()
 
 
 # ----------------------------------------------------------------------------
-# CLICK: COMMAND INIT
+# CLICK: COMMAND COMPILE
 # ----------------------------------------------------------------------------
 
-@click.command(options_metavar="<OPTIONS>")
-@click.option(
-    "--name",
-    required=False,
-    type=click.STRING,
-    help="The name of the project",
+compile_short_help: str = _("Parse and transpile one or more NeoBASIC program files.")
+
+@click.command(
+    options_metavar=_("<OPTIONS>"),
+    short_help=compile_short_help
 )
 @click.option(
-    "--app",
+    "--target", "-t",
+    required=False,
+    type=click.Path(exists=False, dir_okay=True),
+    default=Path('.'),
+    help=_("Specify where to place generated transpiled files."),
+)
+@click.option(
+    "--nowarn", "-n",
     required=False,
     is_flag=True,
     default=False,
     type=click.BOOL,
-    help="Create a project for an application",
+    help=_("Generate no warnings about the code, only errors."),
 )
 @click.option(
-    "--lib",
+    "--verbose", "-v",
     required=False,
     is_flag=True,
-    default=False,
     type=click.BOOL,
-    help="Create a project for a library",
+    default=False,
+    help=_("Output messages about what the compiler is doing."),
 )
 @click.argument(
-    "path",
+    "files",
     required=True,
-    default=Path("."),
-    metavar="<PATH>",
-    type=click.Path(exists=False, dir_okay=True, writable=True),
+    nargs=-1,
+    type=click.STRING,
+    metavar=_("<FILES>"),
 )
 @click.pass_context
-def init(context: click.Context, name: str, app: bool, lib: bool, path: Path) -> None:
-    """
-    Create a new NeoBASIC project in an existing <PATH> directory [default: .]
-    """
-    # print(f"name: {name}, app: {app}, lib: {lib}, path: {path}")
+@fdocstr(compile_short_help)
+def compile(context: click.Context, target: Path, nowarn: bool, verbose: bool, files: tuple) -> None:
+    # print(f"target: {target}, nowarn: {nowarn}, verbose: {verbose}, files: {files}")
     pass

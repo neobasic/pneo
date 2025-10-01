@@ -1,14 +1,30 @@
 import sys
 import logging
+from importlib.metadata import version
+from builtins import _, fdocstr
 
 import click
 
 import pneo
-from pneo.command import (
-    command_config,
-    command_init,
-    command_clean,
-    command_add,
+from pneo.command.invoker import (
+    invoker_config,
+    invoker_init,
+    invoker_clean,
+    invoker_add,
+    invoker_remove,
+    invoker_self,
+    invoker_check,
+    invoker_build,
+    invoker_make,
+    invoker_run,
+    invoker_compile,
+    invoker_package,
+    invoker_backup,
+    invoker_version,
+    invoker_lock,
+    invoker_tree,
+    invoker_list,
+    invoker_format,
 )
 
 
@@ -32,8 +48,7 @@ EXIT_ERROR_CONFIG_LOG = -1
 EXIT_ERROR_CONFIG_APP = -2
 EXIT_ERROR_INVALID_ARGS = -3
 EXIT_ERROR_NO_ARGS = -4
-EXIT_ERROR_MAIN = "Module '__main__.py' cannot be loaded by another module!"
-# EXIT_ERROR_MAIN = "O modulo '__main__.py' nao pode ser carregado por outro modulo!"
+EXIT_ERROR_MAIN = _("Module '__main__.py' cannot be loaded by another module.")
 
 EXIT_SUCCESS = 0  # informs that in fact no error occurred, it was executed successfully.
 
@@ -52,38 +67,21 @@ if __name__ not in ["__main__", "pneo.__main__"]:
 # MAIN ENTRY-POINT
 # ----------------------------------------------------------------------------
 
-# Adds the option '-h' for help.
+# Adds the options '-h' for help and '-V' for version.
 CONTEXT_SETTINGS: dict = dict(help_option_names=["-h", "--help"])
 
 @click.group(context_settings=CONTEXT_SETTINGS)
 @click.pass_context
-@click.version_option()
+@click.version_option(
+    version('pneo'), 
+    "--version", "-V",
+    message=_("%(prog)s, version %(version)s"),
+    help=_("Show the pneo version and exit.")
+)
+@fdocstr(_("Pneo is an all-in-one utility for working with NeoBASIC projects. It provides source code management, a compiler, a package manager, and a bundler — streamlining the entire development workflow into a single tool."))
 def cli(context: click.Context) -> None:
-    """
-    Pneo is a tool ...
-
-    In order to use Pneo, ... as an option. Or alternativly,
-    as an enviroment variable in the current session.
-    """
-
-    # setting = get_config()
-    # # setup_logging(DevLoggerStrategy(), setting["logging"]["filename"])
-
-    # if setting is None and context.invoked_subcommand == "setting":
-    #     logger.info("Config file not found")
-    #     create_config_file()
-    #     exit(0)
-
-    # if setting is None:
-    #     logger.error("Config file not found")
-    #     logger.info("Run the following command to create a new setting file: `pneo setting create`")
-    #     exit(1)
-
     context.ensure_object(dict)
-    if not context.invoked_subcommand == "setting":
-        context.obj["parser"] = None
-
-    context.obj["setting"] = app_config
+    context.obj["settings"] = app_config
 
 
 # ----------------------------------------------------------------------------
@@ -91,8 +89,22 @@ def cli(context: click.Context) -> None:
 # ----------------------------------------------------------------------------
 
 # 
-cli.add_command(command_config.config)
-cli.add_command(command_init.init)
-cli.add_command(command_clean.clean)
-cli.add_command(command_add.add)
+cli.add_command(invoker_config.config)
+cli.add_command(invoker_self.self)
+cli.add_command(invoker_init.init)
+cli.add_command(invoker_lock.lock)
+cli.add_command(invoker_tree.tree)
+cli.add_command(invoker_list.list)
+cli.add_command(invoker_version.version)
+cli.add_command(invoker_add.add)
+cli.add_command(invoker_remove.remove)
+cli.add_command(invoker_check.check)
+cli.add_command(invoker_build.build)
+cli.add_command(invoker_make.make)
+cli.add_command(invoker_run.run)
+cli.add_command(invoker_package.package)
+cli.add_command(invoker_backup.backup)
+cli.add_command(invoker_clean.clean)
+cli.add_command(invoker_format.format)
+cli.add_command(invoker_compile.compile)
 cli()

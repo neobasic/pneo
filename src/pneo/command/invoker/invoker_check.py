@@ -1,5 +1,6 @@
 import logging
 from pathlib import Path
+from builtins import _, fdocstr
 
 import click
 
@@ -18,43 +19,33 @@ app_config: pneo.AppConfig = pneo.getAppConfig()
 
 
 # ----------------------------------------------------------------------------
-# CLICK: COMMAND INIT
+# CLICK: COMMAND CHECK
 # ----------------------------------------------------------------------------
 
-@click.command(options_metavar="<OPTIONS>")
-@click.option(
-    "--name",
-    required=False,
-    type=click.STRING,
-    help="The name of the project",
+check_short_help: str = _("Analyze the current project and report errors, but don't build target files.")
+
+@click.command(
+    options_metavar=_("<OPTIONS>"), 
+    short_help=check_short_help
 )
 @click.option(
-    "--app",
-    required=False,
-    is_flag=True,
-    default=False,
-    type=click.BOOL,
-    help="Create a project for an application",
-)
-@click.option(
-    "--lib",
+    "--keep-going", "-k",
     required=False,
     is_flag=True,
-    default=False,
     type=click.BOOL,
-    help="Create a project for a library",
-)
-@click.argument(
-    "path",
-    required=True,
-    default=Path("."),
-    metavar="<PATH>",
-    type=click.Path(exists=False, dir_okay=True, writable=True),
+    default=False,
+    help=_("Do not abort the check as soon as there is an error."),
+)              
+@click.option(
+    "--verbose", "-v",
+    required=False,
+    is_flag=True,
+    type=click.BOOL,
+    default=False,
+    help=_("Use verbose output on console."),
 )
 @click.pass_context
-def add(context: click.Context, name: str, app: bool, lib: bool, path: Path) -> None:
-    """
-    Create a new NeoBASIC project in an existing <PATH> directory [default: .]
-    """
-    # print(f"name: {name}, app: {app}, lib: {lib}, path: {path}")
+@fdocstr(check_short_help)
+def check(context: click.Context, keep_going: bool, verbose: bool) -> None:
+    # print(f"keep_going: {keep_going}, verbose: {verbose}")
     pass

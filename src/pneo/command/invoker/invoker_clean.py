@@ -1,5 +1,6 @@
 import logging
 from pathlib import Path
+from builtins import _, fdocstr
 
 import click
 
@@ -21,34 +22,37 @@ app_config: pneo.AppConfig = pneo.getAppConfig()
 # CLICK: COMMAND CLEAN
 # ----------------------------------------------------------------------------
 
-@click.command(options_metavar="<OPTIONS>")
-@click.option(
-    "--keep",
-    required=False,
-    is_flag=True,
-    default=False,
-    type=click.BOOL,
-    help="Display what would be deleted without deleting anything",
+clean_short_help: str = _("Remove artifacts of project that pneo has generated in the past, in an existing <PATH> directory. [default: .]")
+
+@click.command(
+    options_metavar=_("<OPTIONS>"),
+    short_help=clean_short_help
 )
 @click.option(
-    "--quiet",
+    "--keep", "-k",
     required=False,
     is_flag=True,
     default=False,
     type=click.BOOL,
-    help="Specifies quiet mode, not prompting for delete confirmation",
+    help=_("Display what would be deleted without deleting anything."),
+)
+@click.option(
+    "--quiet", "-q",
+    required=False,
+    is_flag=True,
+    default=False,
+    type=click.BOOL,
+    help=_("Specifies quiet mode, not prompting for delete confirmation."),
 )
 @click.argument(
     "path",
     required=True,
     default=Path("."),
-    metavar="<PATH>",
+    metavar=_("<PATH>"),
     type=click.Path(exists=True, dir_okay=True, writable=True),
 )
 @click.pass_context
+@fdocstr(clean_short_help)
 def clean(context: click.Context, keep: bool, quiet: bool, path: Path) -> None:
-    """
-    Remove artifacts of project that pneo has generated in the past, in an existing <PATH> directory [default: .]
-    """
     # print(f"keep: {keep}, quiet: {quiet}, path: {path}")
     pass

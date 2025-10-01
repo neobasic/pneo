@@ -1,11 +1,15 @@
-import logging.config
-import yaml
 import os
-from enum import StrEnum, auto
+import yaml
+import logging.config
+import gettext
+import locale
+import builtins
+from typing import Sequence, Optional, Dict, List, AnyStr
 from pathlib import Path
+from importlib import resources
+from enum import StrEnum, auto
 from dataclasses import dataclass
 from configparser import ConfigParser
-from importlib import resources
 
 
 __all__ = [
@@ -23,6 +27,14 @@ LOG_FILE = "pneo.log"
 USER_HOME_PATH = Path.home()
 NEOBASIC_HOME_PATH = USER_HOME_PATH / ".neobasic"
 
+# check if user declared a environment variable NEOBASIC_HOME.
+envar_neobasic_home = os.getenv("NEOBASIC_HOME")
+if envar_neobasic_home is not None:
+    envar_path = Path(envar_neobasic_home)
+    if envar_path.exists():
+        NEOBASIC_HOME_PATH = envar_path
+
+# whenever possible, uses envar NEOBASIC_HOME first.
 CONFIG_FILE_PATH = NEOBASIC_HOME_PATH / CONFIG_FILE
 LOG_FILE_PATH = NEOBASIC_HOME_PATH / "logs" / LOG_FILE
 
@@ -41,26 +53,26 @@ class LoggingLevel(StrEnum):
 
 @dataclass
 class I18nConfig:
-    locale: str
-    timezone: str
-    date_format: str
-    time_format: str
-    decimal_separator: str
-    thousands_separator: str
-    direction: str
+    locale: AnyStr
+    timezone: AnyStr
+    date_format: AnyStr
+    time_format: AnyStr
+    decimal_separator: AnyStr
+    thousands_separator: AnyStr
+    direction: AnyStr
 
 @dataclass
 class ThemeConfig:
-    title_color: str
-    section_color: str
-    key_color: str
-    value_color: str
-    debug_color: str
-    info_color: str
-    warning_color: str
-    error_color: str
-    critical_color: str
-    success_color: str
+    title_color: AnyStr
+    section_color: AnyStr
+    key_color: AnyStr
+    value_color: AnyStr
+    debug_color: AnyStr
+    info_color: AnyStr
+    warning_color: AnyStr
+    error_color: AnyStr
+    critical_color: AnyStr
+    success_color: AnyStr
 
 @dataclass
 class LoggingConfig:
@@ -73,7 +85,7 @@ class AppConfig:
     themeConfig: ThemeConfig
     logConfig: LoggingConfig
 
-    def asDict(self) -> dict:
+    def asDict(self) -> Dict:
         dict_config = {
             "i18n": {
                 "locale": self.i18nConfig.locale,
@@ -108,9 +120,9 @@ class AppConfig:
 # SETTINGS HELPERS
 # ----------------------------------------------------------------------------
 
-# Read the content of a configuration file inside de project, from a module.
-def read_config_resource(filename: str = CONFIG_FILE) -> str:
-    content: str = None
+# Read the content of a configuration file inside the project, from a module.
+def read_config_resource(filename: AnyStr = CONFIG_FILE) -> AnyStr:
+    content: AnyStr = None
     with resources.open_text("pneo.config", filename) as f:
         content = f.read()
 
@@ -130,15 +142,26 @@ def read_config_file(file_path: Path | None) -> ConfigParser:
         if os.fspath(file_path) in read_files:
             # The file was successfully read.
             # You can now work with the config object.
-            # print(f"Successfully read the file '{file_path}'.")
             return config_parser
 
     # no config file means, load default config.
-    default_settings: str = getDefaultConfig()
+    default_settings: AnyStr = getDefaultConfig()
     # Read the settings inside the project (default configuration).
     config_parser.read_string(default_settings)
 
     return config_parser
+
+
+# decorator to patch the docstring of a function, to enable
+# the use of gettext '_' in a docstring before the click library.
+def fdocstr(docstr: AnyStr):
+    def wrapper(func):
+        func.__doc__ = docstr
+        return func
+    return wrapper
+
+# put the decorator in the global scope for all modules.
+builtins.__dict__['fdocstr'] = fdocstr
 
 
 # ----------------------------------------------------------------------------
@@ -146,11 +169,11 @@ def read_config_file(file_path: Path | None) -> ConfigParser:
 # ----------------------------------------------------------------------------
 
 # first, just declare singleton instances for application settings.
-default_config: str = None
+default_config: AnyStr = None
 app_config: AppConfig = None
 
 
-def getDefaultConfig() -> str:
+def getDefaultConfig() -> AnyStr:
     global default_config
     
     # check like it is a singleton
@@ -178,18 +201,19 @@ def getAppConfig() -> AppConfig:
     return app_config
 
 
+# then, initialize the singleton instances.
+default_config = getDefaultConfig()
+app_config = getAppConfig()
+
+
 # ----------------------------------------------------------------------------
 # GLOBAL LOGGING
 # ----------------------------------------------------------------------------
 
-# initialize the singleton instances.
-default_config = getDefaultConfig()
-app_config = getAppConfig()
-
-log_level: str = app_config.logConfig.level
+log_level: AnyStr = app_config.logConfig.level
 log_level = log_level.casefold() if log_level is not None else "notset"
 
-log_config_file: str = None
+log_config_file: AnyStr = None
 match log_level:
     case "info" | "warning" | "error" | "critical":
         # this logging configuration has file:
@@ -204,10 +228,10 @@ match log_level:
         log_config_file = "notset.yaml"
 
 # load the logging configuration from inside pneo package (resource).
-log_config_dict: dict = yaml.safe_load(read_config_resource(log_config_file))
+log_config_dict: Dict = yaml.safe_load(read_config_resource(log_config_file))
 
 if log_config_file != "notset.yaml":
-    log_filename: str = app_config.logConfig.filename
+    log_filename: AnyStr = app_config.logConfig.filename
     # Ensure log path directory exists in current OS.
     log_filename = os.path.expanduser(log_filename)
     os.makedirs(os.path.dirname(log_filename), exist_ok=True)
@@ -217,3 +241,43 @@ if log_config_file != "notset.yaml":
 
 # as soon as the app is loaded, set the logging configuration:
 logging.config.dictConfig(config=log_config_dict)
+
+
+# ----------------------------------------------------------------------------
+# GLOBAL INTERNATIONALIZATION (I18N) & LOCALIZATION (L10N)  
+# ----------------------------------------------------------------------------
+
+VALID_LOCALES: List = ['en_US', 'pt_BR']
+DEFAULT_LOCALE: AnyStr = 'en_US'  # fallback language.
+
+# check the configured locale language:
+lang: AnyStr = app_config.i18nConfig.locale
+if lang not in VALID_LOCALES:
+    # get the default locale already configured of OS.
+    locale.setlocale(locale.LC_ALL, '')
+    lang, _ = locale.getlocale()
+    if lang not in VALID_LOCALES:
+        lang = DEFAULT_LOCALE
+
+# configure the choosen locale as global locale:
+value_locale: AnyStr = lang + ".UTF-8"
+locale.setlocale(locale.LC_ALL, value_locale)
+
+# include the default-locale at the end, as a fallback.
+languages: List = [lang]
+if DEFAULT_LOCALE not in languages:
+    languages.append(DEFAULT_LOCALE)
+
+# path to the locale folder (defaults to src/pneo/locale, or relative to this file)
+heredir = os.path.abspath(os.path.dirname(__file__))
+localedir = os.path.normpath(os.path.join(heredir, "locale"))
+
+# fallback=True avoids exceptions if any file .mo is missing.
+messages_translations = gettext.translation("messages", localedir=localedir, languages=languages, fallback=True)
+click_translations = gettext.translation("click", localedir=localedir, languages=languages, fallback=True)
+
+# If a string isn’t found in 'messages', gettext looks in the fallback ('click').
+messages_translations.add_fallback(click_translations)
+
+# Install gettext('_') into builtins for the chosen domain and localedir.
+messages_translations.install()   # registers builtin _() and ngettext() globally.

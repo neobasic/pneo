@@ -1,8 +1,9 @@
 import os
+import logging
 from configparser import ConfigParser
 from pathlib import Path
 from typing import Any
-import logging
+from builtins import _
 
 import click
 
@@ -21,12 +22,12 @@ app_config: pneo.AppConfig = pneo.getAppConfig()
 
 
 # ----------------------------------------------------------------------------
-# APPLICATION SETTINGS API
+# API: COMMAND CONFIG
 # ----------------------------------------------------------------------------
 
 # create a new configuration file with default settings.
 def create_config_file(file_path: Path, default_ok: bool = False):
-    logger.debug(f"Creating config file at: {file_path}")
+    logger.debug(_("Creating config file at: %(file_path)s"), {"file_path": file_path})
 
     # Ensure config path directory exists.
     os.makedirs(os.path.dirname(file_path), exist_ok=True)
@@ -50,7 +51,7 @@ def create_config_file(file_path: Path, default_ok: bool = False):
 
 # Resets a config file to default configuration.
 def reset_config_file(file_path: Path, default_ok: bool = False):
-    logger.debug(f"Resetting config file at: {file_path}")
+    logger.debug(_("Resetting config file at: %(file_path)s"), {"file_path": file_path})
 
     if default_ok:
         # Read the settings inside the project (default configuration).
@@ -71,22 +72,22 @@ def reset_config_file(file_path: Path, default_ok: bool = False):
 
 # Show the content of a config file, or the current settings.
 def show_config_file(file_path: Path | None, default_ok: bool = False):
-    logger.debug(f"Showing config file at: {file_path}")
+    logger.debug(_("Showing config file at: %(file_path)s"), {"file_path": file_path})
 
     title: str = None
     config_parser: ConfigParser = ConfigParser()
 
     if default_ok:
-        title = "\nPNEO Default Configuration:"
+        title = _("\nPNEO Default Configuration:")
         # Read the settings inside the project (default configuration).
         content_str: str = pneo.read_config_resource()
         config_parser.read_string(content_str)
     elif file_path is None:
-        title = "\nPNEO Current Configuration:"
+        title = _("\nPNEO Current Configuration:")
         # Use the current settings (from config file).
         config_parser.read_dict(app_config.asDict())
     else:
-        title = "\nPNEO File Configuration:"
+        title = _("\nPNEO File Configuration:")
         # Read the settings inside the file.
         config_parser.read(file_path)
 
@@ -101,7 +102,7 @@ def show_config_file(file_path: Path | None, default_ok: bool = False):
 
 # Update the settings of a config file, or the current config file.
 def update_config_file(file_path: Path, updates: dict[str, Any]):
-    logger.debug(f"Updating config file at: {file_path}")
+    logger.debug(_("Updating config file at: %(file_path)s"), {"file_path": file_path})
 
     config_parser: ConfigParser = ConfigParser()
     if file_path is None:
@@ -180,5 +181,5 @@ def update_config_file(file_path: Path, updates: dict[str, Any]):
 
 
 # ----------------------------------------------------------------------------
-# SETTINGS HELPERS
+# HELPERS
 # ----------------------------------------------------------------------------
