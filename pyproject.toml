@@ -60,8 +60,11 @@ source-include = [
     "src/pneo/**/*.conf",
     "src/pneo/**/*.yaml",
     "src/pneo/**/*.typed",
-    "CHANGELOG.md",
+    "scripts/**",
+    "doc/**",
+    "LICENSES/**",
     "uv.lock",
+    "CHANGELOG.md",
 ]
 # Exclude cache directories and temporary files
 source-exclude = [
