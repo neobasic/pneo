@@ -4,34 +4,48 @@ import os
 import subprocess
 import sys
 from typing import List
+from pathlib import Path
 
+
+# ----------------------------------------------------------------------------
+# GLOBAL SETTINGS
+# ----------------------------------------------------------------------------
+
+APP_MODULE: str = "pneo"
+APP_DOMAIN: str = APP_MODULE
+
+# full relative paths to the locale files.
+LOCALE_DIR: Path = os.path.join('src', APP_MODULE, 'locale')
+LOCALE_POT: Path = os.path.join(LOCALE_DIR, APP_DOMAIN + '.pot')
+
+MESSAGES_PATH: Path = os.path.join('src', APP_MODULE, 'locale', 'en_US', 'LC_MESSAGES')
+MESSAGES_FILE: str = os.path.join(MESSAGES_PATH, APP_DOMAIN + '.po')
 
 # ----------------------------------------------------------------------
 # OS PROCESS HELPERS
 # ----------------------------------------------------------------------
 
-def run_command(args: str, silent: bool = False) -> bool:
+def run_command(command_args: List[str], silent: bool = False) -> bool:
     """
     Runs any shell command using the subprocess module, ensuring cross-platform compatibility.
 
     Args:
-        args (str): A string representing the shell command and its arguments.
+        command_args (List[str]): A list of strings representing the command and its arguments.
+
         silent (bool): If True, suppresses output unless an error occurs.
 
     Returns:
         bool: True if the command executed successfully, False otherwise.
     """
-    command: List = args.split() if args else []
-
     if not silent:
-        print(f"--- Running:  {' '.join(command)}")
+        print(f"--- Running:  {' '.join(command_args)}")
 
     try:
         # Use subprocess.run to execute the command.
         # check=True raises an exception for non-zero return codes (errors).
         # Using a list for the command ensures cross-platform compatibility.
         result = subprocess.run(
-            command,
+            command_args,
             check=True,
             capture_output=True,
             text=True
@@ -70,21 +84,22 @@ def run_command(args: str, silent: bool = False) -> bool:
         print("\n" + "="*50 + "\n")
 
 
-def run_pybabel_command(args: str, silent: bool = False) -> bool:
+def run_pybabel_command(pybabel_args: List[str], silent: bool = False) -> bool:
     """
     Runs any pybabel command using the subprocess module, ensuring cross-platform compatibility.
 
     Args:
-        args (str): A string representing the pybabel command and its arguments,
-                    e.g., "extract -o messages.pot ."
-                    **Do NOT include 'pybabel' itself.**
+        pybabel_args (List[str]): A list of strings representing the pybabel command and its arguments,
+                                    e.g., ['extract', '-o', 'messages.pot', '.'].
+                                    **Do NOT include 'pybabel' itself.**
+
         silent (bool): If True, suppresses output unless an error occurs.
 
     Returns:
         bool: True if the command executed successfully, False otherwise.
     """
     # The full command starts with the 'pybabel' executable.
-    command = 'pybabel ' + args
+    command = ['pybabel'] + pybabel_args
 
     return run_command(command, silent)
 
@@ -111,53 +126,49 @@ if current_dir_name == "scripts":
 
 
 # ----------------------------------------------------------------------
-# PNEO LOCALIZATION / I18N
+# APP LOCALIZATION / I18N
 # ----------------------------------------------------------------------
 
 result_ok: bool = False
 
-# --- Extract English strings → pneo.pot
-# Equivalent to:  pybabel extract -F babel.cfg -o src/pneo/locale/pneo.pot .
-result_ok = run_pybabel_command("extract -F babel.cfg -o src/pneo/locale/pneo.pot .")
+# --- Extract English strings → messages.pot
+# Equivalent to:  pybabel extract -F babel.cfg -o src/app/locale/messages.pot .
+result_ok = run_pybabel_command(['extract', '-F', 'babel.cfg', '-o', LOCALE_POT, '.'])
 if not result_ok:
     print("\n🚨 Please ensure **Babel** is installed in your environment (e.g., `pip install Babel`).", file=sys.stderr)
+    sys.exit(1)
 
-# full relative path to the locale files.
-LOCALE_PATH = os.path.join('src', 'pneo', 'locale', 'en_US', 'LC_MESSAGES')
-LOCALE_FILE = 'pneo.po'
-full_locale_path = os.path.join(LOCALE_PATH, LOCALE_FILE)
-
-# Check if the directory structure and the file exist
-if os.path.exists(full_locale_path) and os.path.isfile(full_locale_path):
+# Check if the directory structure and the file already exist.
+if os.path.exists(MESSAGES_FILE) and os.path.isfile(MESSAGES_FILE):
     # --- Update a .po translation file.
-    # Equivalent to:  pybabel update -D pneo -i src/pneo/locale/pneo.pot -d src/pneo/locale
-    result_ok = run_pybabel_command("update -D pneo -i src/pneo/locale/pneo.pot -d src/pneo/locale")
+    # Equivalent to:  pybabel update -D messages -i src/app/locale/messages.pot -d src/app/locale
+    result_ok = run_pybabel_command(['update', '-D', APP_DOMAIN, '-i', LOCALE_POT, '-d', LOCALE_DIR])
     if not result_ok: sys.exit(1)
 
     # --- Review, edit, and remove translations marked as fuzzy: #, fuzzy
-    # Equivalent to:  grep -n -i -H -r --include="*.po" "fuzzy" src/pneo/locale
-    run_command('grep -n -i -H -r --include="*.po" "fuzzy" src/pneo/locale')
+    # Equivalent to:  grep -n -i -H -r --include="*.po" "fuzzy" src/app/locale
+    run_command(['grep', '-n', '-i', '-H', '-r', '--include="*.po"', '"fuzzy"', LOCALE_DIR])
 
 else:
-    # --- Initialize English catalog → locale/en_US/LC_MESSAGES/pneo.po 
-    # Equivalent to:  pybabel init -D pneo -i src/pneo/locale/pneo.pot -d src/pneo/locale -l en_US
+    # --- Initialize English catalog → locale/en_US/LC_MESSAGES/messages.po 
+    # Equivalent to:  pybabel init -D messages -i src/app/locale/messages.pot -d src/app/locale -l en_US
     # NOTE: Recommended even if English is source. This allows translators 
     # to correct source English if needed.
-    result_ok = run_pybabel_command("init -D pneo -i src/pneo/locale/pneo.pot -d src/pneo/locale -l en_US")
+    result_ok = run_pybabel_command(['init', '-D', APP_DOMAIN, '-i', LOCALE_POT, '-d', LOCALE_DIR, '-l', 'en_US'])
     if not result_ok: sys.exit(1)
 
-    # --- Initialize Portuguese catalog → locale/pt_BR/LC_MESSAGES/pneo.po
-    # Equivalent to:  pybabel init -D pneo -i src/pneo/locale/pneo.pot -d src/pneo/locale -l pt_BR
-    # NOTE: This will fail if 'pneo.pot' from the previous command doesn't exist.
+    # --- Initialize Portuguese catalog → locale/pt_BR/LC_MESSAGES/messages.po
+    # Equivalent to:  pybabel init -D messages -i src/app/locale/messages.pot -d src/app/locale -l pt_BR
+    # NOTE: This will fail if 'messages.pot' from the previous command doesn't exist.
     # or if the 'po' directory doesn't exist.
-    result_ok = run_pybabel_command("init -D pneo -i src/pneo/locale/pneo.pot -d src/pneo/locale -l pt_BR")
+    result_ok = run_pybabel_command(['init', '-D', APP_DOMAIN, '-i', LOCALE_POT, '-d', LOCALE_DIR, '-l', 'pt_BR'])
     if not result_ok: sys.exit(1)
 
 # --- Compile .po → .mo
 # The gettext runtime system uses binary .mo files, so you must compile the .po files.
-# NOTE: This will fail if 'po/es/LC_MESSAGES/pneo.po' from the previous command doesn't exist.
-# Equivalent to:  pybabel compile -D pneo -d src/pneo/locale
-result_ok = run_pybabel_command("compile -D pneo -d src/pneo/locale")
+# Equivalent to:  pybabel compile -D messages -d src/app/locale
+# NOTE: This will fail if 'messages.po' from the previous command doesn't exist.
+result_ok = run_pybabel_command(['compile', '-D', APP_DOMAIN, '-d', LOCALE_DIR])
 if not result_ok: sys.exit(1)
 
 # everything ok!
