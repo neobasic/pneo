@@ -21,8 +21,11 @@ __all__ = [
 # APPLICATION CONFIGURATION PATHS
 # ----------------------------------------------------------------------------
 
-CONFIG_FILE = "pneo.conf"
-LOG_FILE = "pneo.log"
+APP_MODULE: str = "pneo"
+APP_DOMAIN: str = APP_MODULE
+
+CONFIG_FILE = APP_DOMAIN + ".conf"
+LOG_FILE = APP_DOMAIN + ".log"
 
 USER_HOME_PATH = Path.home()
 NEOBASIC_HOME_PATH = USER_HOME_PATH / ".neobasic"
@@ -123,7 +126,7 @@ class AppConfig:
 # Read the content of a configuration file inside the project, from a module.
 def read_config_resource(filename: AnyStr = CONFIG_FILE) -> AnyStr:
     content: AnyStr = None
-    with resources.open_text("pneo.config", filename) as f:
+    with resources.open_text(CONFIG_FILE, filename) as f:
         content = f.read()
 
     return content
@@ -196,6 +199,8 @@ def getAppConfig() -> AppConfig:
         i18n_config = I18nConfig(**config_parser["i18n"])
         theme_config = ThemeConfig(**config_parser["theme"])
         log_config = LoggingConfig(**config_parser["logging"])
+        if log_config.filename == "None":  # Just to be sure it did not set None as string.
+            log_config.filename = None
         app_config = AppConfig(i18nConfig = i18n_config, themeConfig = theme_config, logConfig = log_config)
 
     return app_config
@@ -227,11 +232,13 @@ match log_level:
         # this logging configuration uses console, does not have file:
         log_config_file = "notset.yaml"
 
-# load the logging configuration from inside pneo package (resource).
+# load the logging configuration from inside the app packages (resource).
 log_config_dict: Dict = yaml.safe_load(read_config_resource(log_config_file))
 
 if log_config_file != "notset.yaml":
-    log_filename: AnyStr = app_config.logConfig.filename
+    log_filename: str = LOG_FILE_PATH
+    if app_config.logConfig.filename is not None:
+        log_filename = app_config.logConfig.filename
     # Ensure log path directory exists in current OS.
     log_filename = os.path.expanduser(log_filename)
     os.makedirs(os.path.dirname(log_filename), exist_ok=True)
@@ -268,16 +275,16 @@ languages: List = [lang]
 if DEFAULT_LOCALE not in languages:
     languages.append(DEFAULT_LOCALE)
 
-# path to the locale folder (defaults to src/pneo/locale, or relative to this file)
+# path to the locale folder (defaults to src/app/locale, or relative to this file)
 heredir = os.path.abspath(os.path.dirname(__file__))
 localedir = os.path.normpath(os.path.join(heredir, "locale"))
 
 # fallback=True avoids exceptions if any file .mo is missing.
-pneo_translations = gettext.translation("pneo", localedir=localedir, languages=languages, fallback=True)
+domain_translations = gettext.translation(APP_DOMAIN, localedir=localedir, languages=languages, fallback=True)
 click_translations = gettext.translation("click", localedir=localedir, languages=languages, fallback=True)
 
-# If a string isn’t found in 'pneo' messages, gettext looks in the fallback ('click').
-pneo_translations.add_fallback(click_translations)
+# If a string isn’t found in 'messages.po', gettext looks in the fallback ('click').
+domain_translations.add_fallback(click_translations)
 
 # Install gettext('_') into builtins for the chosen domain and localedir.
-pneo_translations.install()   # registers builtin _() and ngettext() globally.
+domain_translations.install()   # registers builtin _() and ngettext() globally.
