@@ -1,0 +1,164 @@
+#!/usr/bin/env python3
+
+import os
+import subprocess
+import sys
+from typing import List
+
+
+# ----------------------------------------------------------------------
+# OS PROCESS HELPERS
+# ----------------------------------------------------------------------
+
+def run_command(args: str, silent: bool = False) -> bool:
+    """
+    Runs any shell command using the subprocess module, ensuring cross-platform compatibility.
+
+    Args:
+        args (str): A string representing the shell command and its arguments.
+        silent (bool): If True, suppresses output unless an error occurs.
+
+    Returns:
+        bool: True if the command executed successfully, False otherwise.
+    """
+    command: List = args.split() if args else []
+
+    if not silent:
+        print(f"--- Running:  {' '.join(command)}")
+
+    try:
+        # Use subprocess.run to execute the command.
+        # check=True raises an exception for non-zero return codes (errors).
+        # Using a list for the command ensures cross-platform compatibility.
+        result = subprocess.run(
+            command,
+            check=True,
+            capture_output=True,
+            text=True
+        )
+
+        if not silent:
+            # Print the standard output and error output from the command
+            if result.stdout:
+                print(result.stdout.strip())
+            if result.stderr:
+                print(result.stderr.strip(), file=sys.stderr)
+
+        print("\n✅ Command executed successfully.")
+        return True
+
+    except subprocess.CalledProcessError as e:
+        print(f"\n❌ Error running shell command (Exit Code {e.returncode}):", file=sys.stderr)
+        if e.stdout:
+            print("--- STDOUT (Context) ---", file=sys.stderr)
+            print(e.stdout.strip(), file=sys.stderr)
+        if e.stderr:
+            print("--- STDERR (Details) ---", file=sys.stderr)
+            print(e.stderr.strip(), file=sys.stderr)
+        return False
+
+    except FileNotFoundError:
+        # This occurs if command executable is not found in the system's PATH
+        print("\n❌ Error: The command executable was not found.", file=sys.stderr)
+        return False
+
+    except Exception as e:
+        print(f"\n❌ An unexpected error occurred: {e}", file=sys.stderr)
+        return False
+
+    finally:
+        print("\n" + "="*50 + "\n")
+
+
+def run_pybabel_command(args: str, silent: bool = False) -> bool:
+    """
+    Runs any pybabel command using the subprocess module, ensuring cross-platform compatibility.
+
+    Args:
+        args (str): A string representing the pybabel command and its arguments,
+                    e.g., "extract -o messages.pot ."
+                    **Do NOT include 'pybabel' itself.**
+        silent (bool): If True, suppresses output unless an error occurs.
+
+    Returns:
+        bool: True if the command executed successfully, False otherwise.
+    """
+    # The full command starts with the 'pybabel' executable.
+    command = 'pybabel ' + args
+
+    return run_command(command, silent)
+
+
+# ----------------------------------------------------------------------------
+# ENTRY-POINT CHECK
+# ----------------------------------------------------------------------------
+
+# This module cannot be loaded by another module.
+if __name__ != "__main__":
+    sys.exit("This module 'pylocale' cannot be loaded by another module.")
+# proceeds only if this program was executed as entry-point...
+
+#  Get the current working directory and extract the last part of the path.
+current_dir = os.getcwd()
+current_dir_name = os.path.basename(current_dir)
+
+# Check if the current directory is not root of project.
+if current_dir_name == "scripts":
+    # Change the current working directory to the parent directory.
+    parent_dir = os.path.join(current_dir, '..')
+    os.chdir(parent_dir)
+    print(f"✅ Detected running from **/scripts. Changed directory to: {os.getcwd()}\n")
+
+
+# ----------------------------------------------------------------------
+# PNEO LOCALIZATION / I18N
+# ----------------------------------------------------------------------
+
+result_ok: bool = False
+
+# --- Extract English strings → pneo.pot
+# Equivalent to:  pybabel extract -F babel.cfg -o src/pneo/locale/pneo.pot .
+result_ok = run_pybabel_command("extract -F babel.cfg -o src/pneo/locale/pneo.pot .")
+if not result_ok:
+    print("\n🚨 Please ensure **Babel** is installed in your environment (e.g., `pip install Babel`).", file=sys.stderr)
+
+# full relative path to the locale files.
+LOCALE_PATH = os.path.join('src', 'pneo', 'locale', 'en_US', 'LC_MESSAGES')
+LOCALE_FILE = 'pneo.po'
+full_locale_path = os.path.join(LOCALE_PATH, LOCALE_FILE)
+
+# Check if the directory structure and the file exist
+if os.path.exists(full_locale_path) and os.path.isfile(full_locale_path):
+    # --- Update a .po translation file.
+    # Equivalent to:  pybabel update -D pneo -i src/pneo/locale/pneo.pot -d src/pneo/locale
+    result_ok = run_pybabel_command("update -D pneo -i src/pneo/locale/pneo.pot -d src/pneo/locale")
+    if not result_ok: sys.exit(1)
+
+    # --- Review, edit, and remove translations marked as fuzzy: #, fuzzy
+    # Equivalent to:  grep -n -i -H -r --include="*.po" "fuzzy" src/pneo/locale
+    run_command('grep -n -i -H -r --include="*.po" "fuzzy" src/pneo/locale')
+
+else:
+    # --- Initialize English catalog → locale/en_US/LC_MESSAGES/pneo.po 
+    # Equivalent to:  pybabel init -D pneo -i src/pneo/locale/pneo.pot -d src/pneo/locale -l en_US
+    # NOTE: Recommended even if English is source. This allows translators 
+    # to correct source English if needed.
+    result_ok = run_pybabel_command("init -D pneo -i src/pneo/locale/pneo.pot -d src/pneo/locale -l en_US")
+    if not result_ok: sys.exit(1)
+
+    # --- Initialize Portuguese catalog → locale/pt_BR/LC_MESSAGES/pneo.po
+    # Equivalent to:  pybabel init -D pneo -i src/pneo/locale/pneo.pot -d src/pneo/locale -l pt_BR
+    # NOTE: This will fail if 'pneo.pot' from the previous command doesn't exist.
+    # or if the 'po' directory doesn't exist.
+    result_ok = run_pybabel_command("init -D pneo -i src/pneo/locale/pneo.pot -d src/pneo/locale -l pt_BR")
+    if not result_ok: sys.exit(1)
+
+# --- Compile .po → .mo
+# The gettext runtime system uses binary .mo files, so you must compile the .po files.
+# NOTE: This will fail if 'po/es/LC_MESSAGES/pneo.po' from the previous command doesn't exist.
+# Equivalent to:  pybabel compile -D pneo -d src/pneo/locale
+result_ok = run_pybabel_command("compile -D pneo -d src/pneo/locale")
+if not result_ok: sys.exit(1)
+
+# everything ok!
+sys.exit(0)

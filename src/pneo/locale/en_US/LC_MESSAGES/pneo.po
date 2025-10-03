@@ -1,4 +1,4 @@
-# Portuguese (Brazil) translations for PROJECT.
+# English (United States) translations for PROJECT.
 # Copyright (C) 2025 ORGANIZATION
 # This file is distributed under the same license as the PROJECT project.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
@@ -7,12 +7,12 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2025-10-01 12:43-0300\n"
-"PO-Revision-Date: 2025-09-30 10:19-0300\n"
+"POT-Creation-Date: 2025-10-03 12:46-0300\n"
+"PO-Revision-Date: 2025-10-03 12:07-0300\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language: pt_BR\n"
-"Language-Team: pt_BR <LL@li.org>\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Language: en_US\n"
+"Language-Team: en_US <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -20,7 +20,7 @@ msgstr ""
 
 #: src/pneo/__main__.py:51
 msgid "Module '__main__.py' cannot be loaded by another module."
-msgstr "O módulo '__main__.py' não pode ser carregado por outro módulo."
+msgstr ""
 
 #: src/pneo/__main__.py:78
 #, python-format
@@ -38,14 +38,10 @@ msgid ""
 "bundler — streamlining the entire development workflow into a single "
 "tool."
 msgstr ""
-"Pneo é um utilitário completo para trabalhar com projetos NeoBASIC. "
-"Ele oferece gerenciamento de código-fonte, um compilador, um gerenciador de "
-"pacotes e um empacotador - simplificando todo o fluxo de trabalho de "
-"desenvolvimento em uma única ferramenta."
 
 #: src/pneo/command/invoker/invoker_add.py:25
 msgid "Add one or more dependencies to the current project manifest file."
-msgstr "Adiciona uma ou mais dependências ao arquivo manifest do projeto corrente."
+msgstr ""
 
 #: src/pneo/command/invoker/invoker_add.py:28
 #: src/pneo/command/invoker/invoker_backup.py:28
@@ -64,7 +60,7 @@ msgstr "Adiciona uma ou mais dependências ao arquivo manifest do projeto corren
 #: src/pneo/command/invoker/invoker_tree.py:28
 #: src/pneo/command/invoker/invoker_version.py:28
 msgid "<OPTIONS>"
-msgstr "<OPÇÕES>"
+msgstr ""
 
 #: src/pneo/command/invoker/invoker_add.py:35
 msgid "Filesystem path to local dependency to add."
@@ -482,36 +478,4 @@ msgstr ""
 #, python-format
 msgid "Updating config file at: %(file_path)s"
 msgstr ""
-
-#~ msgid ""
-#~ "\n"
-#~ "    Pneo is a tool ...\n"
-#~ "\n"
-#~ "    In order to use Pneo, ... as an option. Or alternativly,\n"
-#~ "    as an enviroment variable in the current session.\n"
-#~ "    "
-#~ msgstr ""
-
-#~ msgid "Read or update the current project's version."
-#~ msgstr ""
-
-#~ msgid ""
-#~ "Pneo is a tool ...\n"
-#~ "\n"
-#~ "    In order to use Pneo, ... as an option. Or alternativly,\n"
-#~ "    as an enviroment variable in the current session."
-#~ msgstr ""
-
-#~ msgid ""
-#~ "\n"
-#~ "    Pneo is a tool ...\n"
-#~ "\n"
-#~ "    In order to use Pneo, ... as an option. Or alternativly,\n"
-#~ "    as an enviroment variable in the current session.\n"
-#~ msgstr ""
-#~ "\n"
-#~ "    Pneo é uma ferramenta ...\n"
-#~ "\n"
-#~ "    Para usar pneo, ... as an option. Or alternativly,\n"
-#~ "    as an enviroment variable in the current session.\n"
 

@@ -273,11 +273,11 @@ heredir = os.path.abspath(os.path.dirname(__file__))
 localedir = os.path.normpath(os.path.join(heredir, "locale"))
 
 # fallback=True avoids exceptions if any file .mo is missing.
-messages_translations = gettext.translation("messages", localedir=localedir, languages=languages, fallback=True)
+pneo_translations = gettext.translation("pneo", localedir=localedir, languages=languages, fallback=True)
 click_translations = gettext.translation("click", localedir=localedir, languages=languages, fallback=True)
 
-# If a string isn’t found in 'messages', gettext looks in the fallback ('click').
-messages_translations.add_fallback(click_translations)
+# If a string isn’t found in 'pneo' messages, gettext looks in the fallback ('click').
+pneo_translations.add_fallback(click_translations)
 
 # Install gettext('_') into builtins for the chosen domain and localedir.
-messages_translations.install()   # registers builtin _() and ngettext() globally.
+pneo_translations.install()   # registers builtin _() and ngettext() globally.
