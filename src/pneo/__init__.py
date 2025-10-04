@@ -4,42 +4,48 @@ import logging.config
 import gettext
 import locale
 import builtins
-from typing import Sequence, Optional, Dict, List, AnyStr
+from typing import Sequence, Optional, Dict, List
 from pathlib import Path
 from importlib import resources
 from enum import StrEnum, auto
 from dataclasses import dataclass
 from configparser import ConfigParser
+from platformdirs import user_config_path, user_log_path
 
 
 __all__ = [
-    'NEOBASIC_HOME_PATH', 'CONFIG_FILE_PATH', 'AppConfig', 'getDefaultConfig', 'getAppConfig'
+    'USER_HOME_PATH', 'NEOBASIC_HOME_PATH', 'CONFIG_FILE_PATH', 'AppConfig', 'getAppConfig'
 ]
 
 
 # ----------------------------------------------------------------------------
-# APPLICATION CONFIGURATION PATHS
+# APPLICATION SETTINGS AND CONFIGURATION PATHS
 # ----------------------------------------------------------------------------
 
-APP_MODULE: str = "pneo"
-APP_DOMAIN: str = APP_MODULE
+APP_DOMAIN: str = "pneo"
+APP_MAIN_MODULE: str = APP_DOMAIN
+APP_ANCHOR_CONFIG: str = APP_MAIN_MODULE + ".config"
 
-CONFIG_FILE = APP_DOMAIN + ".conf"
-LOG_FILE = APP_DOMAIN + ".log"
+CONFIG_FILE: str = APP_DOMAIN + ".conf"
+CONFIG_FILE_PATH: Path = user_config_path(appname=APP_DOMAIN) / CONFIG_FILE
 
-USER_HOME_PATH = Path.home()
-NEOBASIC_HOME_PATH = USER_HOME_PATH / ".neobasic"
+LOG_FILE: str = APP_DOMAIN + ".log"
+LOG_FILE_PATH: Path = user_log_path(appname=APP_DOMAIN) / LOG_FILE
+
+# just convention, where it should be.
+USER_HOME_PATH: Path = Path.home()
+NEOBASIC_HOME_PATH: Path = USER_HOME_PATH / ".neobasic"
 
 # check if user declared a environment variable NEOBASIC_HOME.
 envar_neobasic_home = os.getenv("NEOBASIC_HOME")
 if envar_neobasic_home is not None:
-    envar_path = Path(envar_neobasic_home)
-    if envar_path.exists():
-        NEOBASIC_HOME_PATH = envar_path
+    NEOBASIC_HOME_PATH = Path(envar_neobasic_home)
+    if not NEOBASIC_HOME_PATH.exists():
+        os.makedirs(NEOBASIC_HOME_PATH, exist_ok=True)
 
-# whenever possible, uses envar NEOBASIC_HOME first.
-CONFIG_FILE_PATH = NEOBASIC_HOME_PATH / CONFIG_FILE
-LOG_FILE_PATH = NEOBASIC_HOME_PATH / "logs" / LOG_FILE
+    # whenever possible, uses envar NEOBASIC_HOME for all tools.
+    CONFIG_FILE_PATH = NEOBASIC_HOME_PATH / CONFIG_FILE
+    LOG_FILE_PATH = NEOBASIC_HOME_PATH / "logs" / LOG_FILE
 
 
 # ----------------------------------------------------------------------------
@@ -56,26 +62,26 @@ class LoggingLevel(StrEnum):
 
 @dataclass
 class I18nConfig:
-    locale: AnyStr
-    timezone: AnyStr
-    date_format: AnyStr
-    time_format: AnyStr
-    decimal_separator: AnyStr
-    thousands_separator: AnyStr
-    direction: AnyStr
+    locale: str
+    timezone: str
+    date_format: str
+    time_format: str
+    decimal_separator: str
+    thousands_separator: str
+    direction: str
 
 @dataclass
 class ThemeConfig:
-    title_color: AnyStr
-    section_color: AnyStr
-    key_color: AnyStr
-    value_color: AnyStr
-    debug_color: AnyStr
-    info_color: AnyStr
-    warning_color: AnyStr
-    error_color: AnyStr
-    critical_color: AnyStr
-    success_color: AnyStr
+    title_color: str
+    section_color: str
+    key_color: str
+    value_color: str
+    debug_color: str
+    info_color: str
+    warning_color: str
+    error_color: str
+    critical_color: str
+    success_color: str
 
 @dataclass
 class LoggingConfig:
@@ -124,9 +130,9 @@ class AppConfig:
 # ----------------------------------------------------------------------------
 
 # Read the content of a configuration file inside the project, from a module.
-def read_config_resource(filename: AnyStr = CONFIG_FILE) -> AnyStr:
-    content: AnyStr = None
-    with resources.open_text(CONFIG_FILE, filename) as f:
+def read_config_resource(filename: str) -> str:
+    content: str = None
+    with resources.open_text(APP_ANCHOR_CONFIG, filename) as f:
         content = f.read()
 
     return content
@@ -148,7 +154,7 @@ def read_config_file(file_path: Path | None) -> ConfigParser:
             return config_parser
 
     # no config file means, load default config.
-    default_settings: AnyStr = getDefaultConfig()
+    default_settings: str = getDefaultConfig()
     # Read the settings inside the project (default configuration).
     config_parser.read_string(default_settings)
 
@@ -157,7 +163,7 @@ def read_config_file(file_path: Path | None) -> ConfigParser:
 
 # decorator to patch the docstring of a function, to enable
 # the use of gettext '_' in a docstring before the click library.
-def fdocstr(docstr: AnyStr):
+def fdocstr(docstr: str):
     def wrapper(func):
         func.__doc__ = docstr
         return func
@@ -172,11 +178,11 @@ builtins.__dict__['fdocstr'] = fdocstr
 # ----------------------------------------------------------------------------
 
 # first, just declare singleton instances for application settings.
-default_config: AnyStr = None
+default_config: str = None
 app_config: AppConfig = None
 
 
-def getDefaultConfig() -> AnyStr:
+def getDefaultConfig() -> str:
     global default_config
     
     # check like it is a singleton
@@ -215,10 +221,10 @@ app_config = getAppConfig()
 # GLOBAL LOGGING
 # ----------------------------------------------------------------------------
 
-log_level: AnyStr = app_config.logConfig.level
+log_level: str = app_config.logConfig.level
 log_level = log_level.casefold() if log_level is not None else "notset"
 
-log_config_file: AnyStr = None
+log_config_file: str = None
 match log_level:
     case "info" | "warning" | "error" | "critical":
         # this logging configuration has file:
@@ -236,11 +242,11 @@ match log_level:
 log_config_dict: Dict = yaml.safe_load(read_config_resource(log_config_file))
 
 if log_config_file != "notset.yaml":
-    log_filename: str = LOG_FILE_PATH
+    log_filename: str = LOG_FILE_PATH  # default value
     if app_config.logConfig.filename is not None:
-        log_filename = app_config.logConfig.filename
+        # just in case there is '~' in file path.
+        log_filename = os.path.expanduser(app_config.logConfig.filename)
     # Ensure log path directory exists in current OS.
-    log_filename = os.path.expanduser(log_filename)
     os.makedirs(os.path.dirname(log_filename), exist_ok=True)
 
     log_config_dict["handlers"]["logfile"]["level"] = log_level.upper()
@@ -255,10 +261,10 @@ logging.config.dictConfig(config=log_config_dict)
 # ----------------------------------------------------------------------------
 
 VALID_LOCALES: List = ['en_US', 'pt_BR']
-DEFAULT_LOCALE: AnyStr = 'en_US'  # fallback language.
+DEFAULT_LOCALE: str = 'en_US'  # fallback language.
 
 # check the configured locale language:
-lang: AnyStr = app_config.i18nConfig.locale
+lang: str = app_config.i18nConfig.locale
 if lang not in VALID_LOCALES:
     # get the default locale already configured of OS.
     locale.setlocale(locale.LC_ALL, '')
@@ -267,7 +273,7 @@ if lang not in VALID_LOCALES:
         lang = DEFAULT_LOCALE
 
 # configure the choosen locale as global locale:
-value_locale: AnyStr = lang + ".UTF-8"
+value_locale: str = lang + ".UTF-8"
 locale.setlocale(locale.LC_ALL, value_locale)
 
 # include the default-locale at the end, as a fallback.
@@ -281,9 +287,11 @@ localedir = os.path.normpath(os.path.join(heredir, "locale"))
 
 # fallback=True avoids exceptions if any file .mo is missing.
 domain_translations = gettext.translation(APP_DOMAIN, localedir=localedir, languages=languages, fallback=True)
+ngne_translations = gettext.translation("ngne", localedir=localedir, languages=languages, fallback=True)
 click_translations = gettext.translation("click", localedir=localedir, languages=languages, fallback=True)
 
-# If a string isn’t found in 'messages.po', gettext looks in the fallback ('click').
+# If a string isn’t found in 'messages.po', gettext looks in the fallbacks ('ngne', 'click').
+domain_translations.add_fallback(ngne_translations)
 domain_translations.add_fallback(click_translations)
 
 # Install gettext('_') into builtins for the chosen domain and localedir.
