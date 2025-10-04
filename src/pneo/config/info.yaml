@@ -48,6 +48,36 @@ loggers:
     handlers: [logfile]
     propagate: no
 
+  antlr4:
+    level: ERROR
+    handlers: [logfile]
+    propagate: no
+
+  colorama:
+    level: ERROR
+    handlers: [logfile]
+    propagate: no
+
+  rich:
+    level: ERROR
+    handlers: [logfile]
+    propagate: no
+
+  tomli:
+    level: ERROR
+    handlers: [logfile]
+    propagate: no
+
+  platformdirs:
+    level: ERROR
+    handlers: [logfile]
+    propagate: no
+
+  watchdog:
+    level: ERROR
+    handlers: [logfile]
+    propagate: no
+
   jinja2:
     level: ERROR
     handlers: [logfile]

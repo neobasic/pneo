@@ -34,6 +34,36 @@ loggers:
     handlers: []
     propagate: yes
 
+  antlr4:
+    level: ERROR
+    handlers: []
+    propagate: yes
+
+  colorama:
+    level: ERROR
+    handlers: []
+    propagate: yes
+
+  rich:
+    level: ERROR
+    handlers: []
+    propagate: yes
+
+  tomli:
+    level: ERROR
+    handlers: []
+    propagate: yes
+
+  platformdirs:
+    level: ERROR
+    handlers: []
+    propagate: yes
+
+  watchdog:
+    level: ERROR
+    handlers: []
+    propagate: yes
+
   jinja2:
     level: ERROR
     handlers: []
