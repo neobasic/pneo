@@ -88,7 +88,7 @@ def cli(context: click.Context) -> None:
 # CLICK: COMMAND LINE ARGUMENTS
 # ----------------------------------------------------------------------------
 
-# 
+# Register all commands for click library, more to come...
 cli.add_command(invoker_config.config)
 cli.add_command(invoker_self.self)
 cli.add_command(invoker_init.init)
@@ -107,4 +107,6 @@ cli.add_command(invoker_backup.backup)
 cli.add_command(invoker_clean.clean)
 cli.add_command(invoker_format.format)
 cli.add_command(invoker_compile.compile)
+
+# just in case it is not executing with `uv run`.
 cli()
