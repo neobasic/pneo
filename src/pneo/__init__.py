@@ -53,6 +53,7 @@ if envar_neobasic_home is not None:
 # ----------------------------------------------------------------------------
 
 class LoggingLevel(StrEnum):
+    NOTSET = auto()
     DEBUG = auto()
     INFO = auto()
     WARNING = auto()
@@ -86,7 +87,7 @@ class ThemeConfig:
 @dataclass
 class LoggingConfig:
     level: LoggingLevel
-    filename: Path
+    filename: str
 
 @dataclass
 class AppConfig:
@@ -95,6 +96,7 @@ class AppConfig:
     logConfig: LoggingConfig
 
     def asDict(self) -> Dict:
+        print("logConfig.filename = ", self.logConfig.filename)
         dict_config = {
             "i18n": {
                 "locale": self.i18nConfig.locale,
@@ -205,8 +207,6 @@ def getAppConfig() -> AppConfig:
         i18n_config = I18nConfig(**config_parser["i18n"])
         theme_config = ThemeConfig(**config_parser["theme"])
         log_config = LoggingConfig(**config_parser["logging"])
-        if log_config.filename == "None":  # Just to be sure it did not set None as string.
-            log_config.filename = None
         app_config = AppConfig(i18nConfig = i18n_config, themeConfig = theme_config, logConfig = log_config)
 
     return app_config
@@ -243,7 +243,7 @@ log_config_dict: Dict = yaml.safe_load(read_config_resource(log_config_file))
 
 if log_config_file != "notset.yaml":
     log_filename: str = LOG_FILE_PATH  # default value
-    if app_config.logConfig.filename is not None:
+    if app_config.logConfig.filename and app_config.logConfig.filename != "None":
         # just in case there is '~' in file path.
         log_filename = os.path.expanduser(app_config.logConfig.filename)
     # Ensure log path directory exists in current OS.
