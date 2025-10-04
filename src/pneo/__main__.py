@@ -78,7 +78,13 @@ CONTEXT_SETTINGS: dict = dict(help_option_names=["-h", "--help"])
     message=_("%(prog)s, version %(version)s"),
     help=_("Show the pneo version and exit.")
 )
-@fdocstr(_("Pneo is an all-in-one utility for working with NeoBASIC projects. It provides source code management, a compiler, a package manager, and a bundler — streamlining the entire development workflow into a single tool."))
+@fdocstr(_("""
+Pneo is an all-in-one utility for working with NeoBASIC projects.
+
+It provides source code management, a compiler, a package manager,
+and a bundler — streamlining the entire development workflow into
+a single tool.
+"""))
 def cli(context: click.Context) -> None:
     context.ensure_object(dict)
     context.obj["settings"] = app_config
