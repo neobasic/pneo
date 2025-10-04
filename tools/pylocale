@@ -11,14 +11,14 @@ from pathlib import Path
 # GLOBAL SETTINGS
 # ----------------------------------------------------------------------------
 
-APP_MODULE: str = "pneo"
-APP_DOMAIN: str = APP_MODULE
+APP_DOMAIN: str = "pneo"
+APP_MAIN_MODULE: str = APP_DOMAIN
 
 # full relative paths to the locale files.
-LOCALE_DIR: Path = os.path.join('src', APP_MODULE, 'locale')
+LOCALE_DIR: Path = os.path.join('src', APP_MAIN_MODULE, 'locale')
 LOCALE_POT: Path = os.path.join(LOCALE_DIR, APP_DOMAIN + '.pot')
 
-MESSAGES_PATH: Path = os.path.join('src', APP_MODULE, 'locale', 'en_US', 'LC_MESSAGES')
+MESSAGES_PATH: Path = os.path.join('src', APP_MAIN_MODULE, 'locale', 'en_US', 'LC_MESSAGES')
 MESSAGES_FILE: str = os.path.join(MESSAGES_PATH, APP_DOMAIN + '.po')
 
 # ----------------------------------------------------------------------
