@@ -14,7 +14,7 @@ from platformdirs import user_config_path, user_log_path
 
 
 __all__ = [
-    'USER_HOME_PATH', 'NEOBASIC_HOME_PATH', 'CONFIG_FILE_PATH', 'AppConfig', 'getAppConfig'
+    'USER_HOME_PATH', 'NEOBASIC_HOME_PATH', 'CONFIG_FILE_PATH', 'CONFIG_FILE', 'AppConfig', 'getAppConfig'
 ]
 
 
