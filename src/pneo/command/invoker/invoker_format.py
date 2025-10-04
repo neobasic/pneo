@@ -40,8 +40,8 @@ format_short_help: str = _("Format one or more NeoBASIC program files, or the so
     "--diff", "-d",
     required=False,
     is_flag=True,
-    default=False,
     type=click.BOOL,
+    default=False,
     help=_("Show a diff of formatting changes without applying them."),
 )
 @click.argument(

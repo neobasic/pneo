@@ -32,24 +32,24 @@ clean_short_help: str = _("Remove artifacts of project that pneo has generated i
     "--keep", "-k",
     required=False,
     is_flag=True,
-    default=False,
     type=click.BOOL,
+    default=False,
     help=_("Display what would be deleted without deleting anything."),
 )
 @click.option(
     "--quiet", "-q",
     required=False,
     is_flag=True,
-    default=False,
     type=click.BOOL,
+    default=False,
     help=_("Specifies quiet mode, not prompting for delete confirmation."),
 )
 @click.argument(
     "path",
     required=True,
+    type=click.Path(exists=True, dir_okay=True, writable=True),
     default=Path("."),
     metavar=_("<PATH>"),
-    type=click.Path(exists=True, dir_okay=True, writable=True),
 )
 @click.pass_context
 @fdocstr(clean_short_help)

@@ -39,8 +39,8 @@ compile_short_help: str = _("Parse and transpile one or more NeoBASIC program fi
     "--nowarn", "-n",
     required=False,
     is_flag=True,
-    default=False,
     type=click.BOOL,
+    default=False,
     help=_("Generate no warnings about the code, only errors."),
 )
 @click.option(

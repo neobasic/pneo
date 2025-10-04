@@ -38,16 +38,16 @@ add_short_help: str = _("Add one or more dependencies to the current project man
     "--static", "-s",
     required=False,
     is_flag=True,
-    default=False,
     type=click.BOOL,
+    default=False,
     help=_("Library is copied directly into the final executable."),
 )
 @click.option(
     "--dynamic", "-d",
     required=False,
     is_flag=True,
-    default=False,
     type=click.BOOL,
+    default=False,
     help=_("Library is separated from final executable and loaded at runtime."),
 )
 @click.argument(

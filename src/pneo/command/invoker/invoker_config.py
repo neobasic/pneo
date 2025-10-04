@@ -52,16 +52,16 @@ def config(context: click.Context) -> None:
     required=False,
     is_flag=True,
     type=click.BOOL,
-    help=_("Ignore if config file already exists."),
     default=False,
+    help=_("Ignore if config file already exists."),
 )
 @click.option(
     "--default_config", "-d",
     required=False,
     is_flag=True,
     type=click.BOOL,
-    help=_("Use default configuration."),
     default=False,
+    help=_("Use default configuration."),
 )
 @click.pass_context
 @fdocstr(_("Creates a new configuration file."))
@@ -89,8 +89,8 @@ def create(context: click.Context, path: Path, force: bool, default_config: bool
     required=False,
     is_flag=True,
     type=click.BOOL,
-    help=_("Use default configuration."),
     default=False,
+    help=_("Use default configuration."),
 )
 @click.pass_context
 @fdocstr(_("Resets a configuration file, or the current configuration."))
@@ -118,8 +118,8 @@ def reset(context: click.Context, path: Path, default_config: bool) -> None:
     required=False,
     is_flag=True,
     type=click.BOOL,
-    help=_("Displays the default configuration."),
     default=False,
+    help=_("Displays the default configuration."),
 )
 @click.pass_context
 @fdocstr(_("Displays the content of a configuration file, or the current configuration."))

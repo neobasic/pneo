@@ -54,8 +54,8 @@ build_short_help: str = _("Compile the current project and build the target dire
 @click.argument(
     "src",
     required=False,
-    default=Path('src'),
     type=click.Path(exists=True, dir_okay=True),
+    default=Path('src'),
     metavar=_("<SRC>")
 )
 @click.pass_context

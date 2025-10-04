@@ -32,16 +32,16 @@ remove_short_help: str = _("Remove dependencies from the current project manifes
     "--locked", "-l",
     required=False,
     is_flag=True,
-    default=False,
     type=click.BOOL,
+    default=False,
     help=_("Remove dependencies without re-locking the project."),
 )
 @click.option(
     "--check", "-c",
     required=False,
     is_flag=True,
-    default=False,
     type=click.BOOL,
+    default=False,
     help=_("Check whether removing the package will cause issues in the project."),
 )
 @click.argument(

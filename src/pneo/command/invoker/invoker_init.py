@@ -38,23 +38,23 @@ init_short_help: str = _("Create a new NeoBASIC project in an existing <PATH> di
     "--app", "-a",
     required=False,
     is_flag=True,
-    default=False,
     type=click.BOOL,
+    default=False,
     help=_("Create a project for an application."),
 )
 @click.option(
     "--lib", "-l",
     required=False,
     is_flag=True,
-    default=False,
     type=click.BOOL,
+    default=False,
     help=_("Create a project for a library."),
 )
 @click.argument(
     "path",
     required=True,
-    default=Path("."),
     type=click.Path(exists=False, dir_okay=True, writable=True),
+    default=Path("."),
     metavar=_("<PATH>"),
 )
 @click.pass_context

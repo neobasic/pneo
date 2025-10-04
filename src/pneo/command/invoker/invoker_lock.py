@@ -32,16 +32,16 @@ lock_short_help: str = _("Create or update the current project's lockfile.")
     "--check", "-c",
     required=False,
     is_flag=True,
-    default=False,
     type=click.BOOL,
+    default=False,
     help=_("Check if the lockfile is up-to-date."),
 )
 @click.option(
     "--upgrade", "-u",
     required=False,
     is_flag=True,
-    default=False,
     type=click.BOOL,
+    default=False,
     help=_("Apply package upgrades, ignoring pinned versions in any existing output file."),
 )
 @click.pass_context

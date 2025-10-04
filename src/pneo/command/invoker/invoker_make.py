@@ -39,8 +39,8 @@ make_short_help: str = _("Compile the target directory and generate the binary e
     "--nowarn", "-n",
     required=False,
     is_flag=True,
-    default=False,
     type=click.BOOL,
+    default=False,
     help=_("Generate no warnings about the linking, only errors."),
 )
 @click.option(
@@ -54,8 +54,8 @@ make_short_help: str = _("Compile the target directory and generate the binary e
 @click.argument(
     "target",
     required=False,
-    default=Path('target'),
     type=click.Path(exists=True, dir_okay=True),
+    default=Path('target'),
     metavar=_("<TARGET>")
 )
 @click.pass_context

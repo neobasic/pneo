@@ -38,8 +38,8 @@ version_short_help: str = _("Read or update the current project's version, or so
     "--frozen", "-f",
     required=False,
     is_flag=True,
-    default=False,
     type=click.BOOL,
+    default=False,
     help=_("Update the version without re-locking the project."),
 )
 @click.option(

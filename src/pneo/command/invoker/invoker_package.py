@@ -39,8 +39,8 @@ package_short_help: str = _("Assemble the compiled binaries into a distributable
     "--nowarn", "-n",
     required=False,
     is_flag=True,
-    default=False,
     type=click.BOOL,
+    default=False,
     help=_("Generate no warnings about the packaging, only errors."),
 )
 @click.option(
@@ -54,8 +54,8 @@ package_short_help: str = _("Assemble the compiled binaries into a distributable
 @click.argument(
     "bin",
     required=False,
-    default=Path('bin'),
     type=click.Path(exists=True, dir_okay=True),
+    default=Path('bin'),
     metavar=_("<BIN>")
 )
 @click.pass_context

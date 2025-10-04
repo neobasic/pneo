@@ -38,24 +38,24 @@ list_short_help: str = _("List all NeoBASIC modules and translation units in cur
     "--absolute-path", "-a",
     required=False,
     is_flag=True,
-    default=False,
     type=click.BOOL,
+    default=False,
     help=_("Display source files with their absolute path."),
 )
 @click.option(
     "--only-modules", "-o",
     required=False,
     is_flag=True,
-    default=False,
     type=click.BOOL,
+    default=False,
     help=_("List only modules and submodules."),
 )
 @click.option(
     "--long-table", "-l",
     required=False,
     is_flag=True,
-    default=False,
     type=click.BOOL,
+    default=False,
     help=_("Display extended source file metadata, as a table."),
 )
 @click.pass_context

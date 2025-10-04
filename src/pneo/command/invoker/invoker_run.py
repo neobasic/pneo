@@ -44,8 +44,8 @@ run_short_help: str = _("Execute the binary executable in target directory or a 
     "--offline", "-o",
     required=False,
     is_flag=True,
-    default=False,
     type=click.BOOL,
+    default=False,
     help=_("Run without accessing the network (disable network access)."),
 )                                    
 @click.pass_context
