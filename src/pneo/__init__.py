@@ -96,7 +96,6 @@ class AppConfig:
     logConfig: LoggingConfig
 
     def asDict(self) -> Dict:
-        print("logConfig.filename = ", self.logConfig.filename)
         dict_config = {
             "i18n": {
                 "locale": self.i18nConfig.locale,
