@@ -2,12 +2,14 @@
 version: 1
 disable_existing_loggers: False
 
-# Define format of output logs (named 'simple').
 formatters:
+  # avoid filling the console with information, 
+  # only showing what is necessary.
   simple:
     format: "%(message)s"
 
 handlers:
+  # as there is no log file, it shows from INFO on the console.
   console:
     level: INFO
     class: logging.StreamHandler
@@ -15,32 +17,35 @@ handlers:
     stream: ext://sys.stdout
 
 loggers:
+  # only the errors from any of the libraries are of interest, 
+  # but lets root decide whether to show it in the console.
   yaml:
     level: ERROR
-    handlers: [console]
+    handlers: []
     propagate: yes
 
   babel:
     level: ERROR
-    handlers: [console]
+    handlers: []
     propagate: yes
 
   click:
     level: ERROR
-    handlers: [console]
+    handlers: []
     propagate: yes
 
   jinja2:
     level: ERROR
-    handlers: [console]
+    handlers: []
     propagate: yes
 
+  # lets root decide whether to show it in the console.
   pneo:
     level: INFO
-    handlers: [console]
-    propagate: no
+    handlers: []
+    propagate: yes
 
 root:
   level: INFO
   handlers: [console]
-  propagate: no
+  # propagate in root is unnecessary.

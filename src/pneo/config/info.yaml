@@ -2,58 +2,64 @@
 version: 1
 disable_existing_loggers: False
 
-# Define format of output logs (named 'simple').
 formatters:
+  # avoid filling the console with information, 
+  # only showing what is necessary.
   simple:
     format: "%(message)s"
 
+  # record more details to the log file for better debugging.
   verbose:
     format: "\r %(asctime)s %(levelname)-5s [%(threadName)s] %(name)s->%(funcName)s<%(lineno)d>  %(message)s"
 
 handlers:
+  # only shows critical errors in the console in production.
   console:
-    level: INFO
+    level: CRITICAL
     class: logging.StreamHandler
     formatter: simple
     stream: ext://sys.stdout
 
-  # Create rotating file handler using 'simple' format.
+  # no need to detail debug information to avoid very large files in production.
   logfile:
       level: INFO
       class: logging.handlers.TimedRotatingFileHandler
       formatter: verbose
+      encoding: utf8
       when: 'midnight'
       backupCount: 32
-      encoding: utf8
-  #    filename: None
+      # filename: None
 
 loggers:
-  # yaml:
-  #   level: ERROR
-  #   handlers: [console, logfile]
-  #   propagate: yes
+  # only the errors from any of the libraries are of interest, 
+  # and leave them in the file to debug later. 
+  yaml:
+    level: ERROR
+    handlers: [logfile]
+    propagate: no
 
-  # babel:
-  #   level: ERROR
-  #   handlers: [console, logfile]
-  #   propagate: yes
+  babel:
+    level: ERROR
+    handlers: [logfile]
+    propagate: no
 
-  # click:
-  #   level: ERROR
-  #   handlers: [console, logfile]
-  #   propagate: yes
+  click:
+    level: ERROR
+    handlers: [logfile]
+    propagate: no
 
-  # jinja2:
-  #   level: ERROR
-  #   handlers: [console, logfile]
-  #   propagate: yes
+  jinja2:
+    level: ERROR
+    handlers: [logfile]
+    propagate: no
 
+  # lets root decide whether to show it in the console or just in a file.
   pneo:
     level: INFO
-    handlers: [console, logfile]
-    propagate: no
+    handlers: []
+    propagate: yes
 
 root:
   level: INFO
   handlers: [console, logfile]
-  propagate: no
+  # propagate in root is unnecessary.
