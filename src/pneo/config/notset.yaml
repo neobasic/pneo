@@ -39,6 +39,11 @@ loggers:
     handlers: []
     propagate: yes
 
+  anytree:
+    level: ERROR
+    handlers: []
+    propagate: yes
+
   colorama:
     level: ERROR
     handlers: []

@@ -260,7 +260,7 @@ logging.config.dictConfig(config=log_config_dict)
 # GLOBAL INTERNATIONALIZATION (I18N) & LOCALIZATION (L10N)  
 # ----------------------------------------------------------------------------
 
-VALID_LOCALES: List = ['en_US', 'pt_BR']
+VALID_LOCALES: List = ['pt_BR', 'en_US']
 DEFAULT_LOCALE: str = 'en_US'  # fallback language.
 
 # check the configured locale language:

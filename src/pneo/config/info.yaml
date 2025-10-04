@@ -53,6 +53,11 @@ loggers:
     handlers: [logfile]
     propagate: no
 
+  anytree:
+    level: ERROR
+    handlers: [logfile]
+    propagate: no
+
   colorama:
     level: ERROR
     handlers: [logfile]

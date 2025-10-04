@@ -19,6 +19,9 @@ dependencies = [
     "tomli>=2.2.1",
     "platformdirs>=4.4.0",
     "watchdog>=6.0.0",
+    "anytree>=2.13.0",
+    "jinja2>=3.1.6",
+    "antlr4-python3-runtime>=4.13.2",
 ]
 keywords = ["pneo", "neobasic", "programming", "language", "package", "project", "manager", "bundler"]
 classifiers = [

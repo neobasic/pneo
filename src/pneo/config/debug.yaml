@@ -54,6 +54,11 @@ loggers:
     handlers: []
     propagate: yes
 
+  anytree:
+    level: WARNING
+    handlers: []
+    propagate: yes
+
   colorama:
     level: WARNING
     handlers: []
