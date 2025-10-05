@@ -177,6 +177,31 @@ wheels = [
 ]
 
 [[package]]
+name = "ngne"
+version = "0.0.1"
+source = { directory = "../ngne" }
+dependencies = [
+    { name = "antlr4-python3-runtime" },
+    { name = "anytree" },
+    { name = "babel" },
+    { name = "jinja2" },
+    { name = "platformdirs" },
+    { name = "pyyaml" },
+    { name = "ruff" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "antlr4-python3-runtime", specifier = ">=4.13.2" },
+    { name = "anytree", specifier = ">=2.13.0" },
+    { name = "babel", specifier = ">=2.17.0" },
+    { name = "jinja2", specifier = ">=3.1.6" },
+    { name = "platformdirs", specifier = ">=4.4.0" },
+    { name = "pyyaml", specifier = ">=6.0.2" },
+    { name = "ruff", specifier = ">=0.7.3" },
+]
+
+[[package]]
 name = "packaging"
 version = "25.0"
 source = { registry = "https://pypi.org/simple" }
@@ -205,6 +230,7 @@ dependencies = [
     { name = "click" },
     { name = "colorama" },
     { name = "jinja2" },
+    { name = "ngne" },
     { name = "platformdirs" },
     { name = "pywebview" },
     { name = "pyyaml" },
@@ -222,6 +248,7 @@ requires-dist = [
     { name = "click", specifier = ">=8.3.0" },
     { name = "colorama", specifier = ">=0.4.6" },
     { name = "jinja2", specifier = ">=3.1.6" },
+    { name = "ngne", directory = "../ngne" },
     { name = "platformdirs", specifier = ">=4.4.0" },
     { name = "pywebview", specifier = ">=6.0" },
     { name = "pyyaml", specifier = ">=6.0.2" },
