@@ -86,7 +86,7 @@ view_short_help: str = _("Open a window (using native webview) to manage the pro
 )
 @click.argument(
     "command",
-    required=True,
+    required=False,
     type=click.STRING,
     metavar=_("<COMMAND>")
 )

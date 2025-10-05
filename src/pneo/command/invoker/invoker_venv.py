@@ -54,7 +54,7 @@ venv_short_help: str = _("Create a virtual environment named <PATH> in the worki
 )
 @click.argument(
     "path",
-    required=True,
+    required=False,
     type=click.Path(exists=False, dir_okay=True),
     metavar=_("<PATH>")
 )
