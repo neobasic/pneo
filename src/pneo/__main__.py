@@ -7,24 +7,26 @@ import click
 
 import pneo
 from pneo.command.invoker import (
-    invoker_config,
-    invoker_init,
-    invoker_clean,
     invoker_add,
-    invoker_remove,
-    invoker_self,
-    invoker_check,
-    invoker_build,
-    invoker_make,
-    invoker_run,
-    invoker_compile,
-    invoker_package,
     invoker_backup,
-    invoker_version,
-    invoker_lock,
-    invoker_tree,
-    invoker_list,
+    invoker_build,
+    invoker_check,
+    invoker_clean,
+    invoker_compile,
+    invoker_config,
     invoker_format,
+    invoker_init,
+    invoker_list,
+    invoker_lock,
+    invoker_make,
+    invoker_package,
+    invoker_remove,
+    invoker_run,
+    invoker_self,
+    invoker_tree,
+    invoker_venv,
+    invoker_version,
+    invoker_view,
 )
 
 
@@ -95,24 +97,26 @@ def cli(context: click.Context) -> None:
 # ----------------------------------------------------------------------------
 
 # Register all commands for click library, more to come...
-cli.add_command(invoker_config.config)
-cli.add_command(invoker_self.self)
-cli.add_command(invoker_init.init)
-cli.add_command(invoker_lock.lock)
-cli.add_command(invoker_tree.tree)
-cli.add_command(invoker_list.list)
-cli.add_command(invoker_version.version)
 cli.add_command(invoker_add.add)
-cli.add_command(invoker_remove.remove)
-cli.add_command(invoker_check.check)
-cli.add_command(invoker_build.build)
-cli.add_command(invoker_make.make)
-cli.add_command(invoker_run.run)
-cli.add_command(invoker_package.package)
 cli.add_command(invoker_backup.backup)
+cli.add_command(invoker_build.build)
+cli.add_command(invoker_check.check)
 cli.add_command(invoker_clean.clean)
-cli.add_command(invoker_format.format)
 cli.add_command(invoker_compile.compile)
+cli.add_command(invoker_config.config)
+cli.add_command(invoker_format.format)
+cli.add_command(invoker_init.init)
+cli.add_command(invoker_list.list)
+cli.add_command(invoker_lock.lock)
+cli.add_command(invoker_make.make)
+cli.add_command(invoker_package.package)
+cli.add_command(invoker_remove.remove)
+cli.add_command(invoker_run.run)
+cli.add_command(invoker_self.self)
+cli.add_command(invoker_tree.tree)
+cli.add_command(invoker_venv.venv)
+cli.add_command(invoker_version.version)
+cli.add_command(invoker_view.view)
 
 # just in case it is not executing with `uv run`.
 cli()

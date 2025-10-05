@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2025-10-04 15:06-0300\n"
+"POT-Creation-Date: 2025-10-05 12:37-0300\n"
 "PO-Revision-Date: 2025-10-03 12:07-0300\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en_US\n"
@@ -18,20 +18,20 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.17.0\n"
 
-#: src/pneo/__main__.py:51
+#: src/pneo/__main__.py:53
 msgid "Module '__main__.py' cannot be loaded by another module."
 msgstr ""
 
-#: src/pneo/__main__.py:78
+#: src/pneo/__main__.py:80
 #, python-format
 msgid "%(prog)s, version %(version)s"
 msgstr ""
 
-#: src/pneo/__main__.py:79
+#: src/pneo/__main__.py:81
 msgid "Show the pneo version and exit."
 msgstr ""
 
-#: src/pneo/__main__.py:81
+#: src/pneo/__main__.py:83
 msgid ""
 "\n"
 "Pneo is an all-in-one utility for working with NeoBASIC projects.\n"
@@ -60,7 +60,9 @@ msgstr ""
 #: src/pneo/command/invoker/invoker_remove.py:28
 #: src/pneo/command/invoker/invoker_run.py:28
 #: src/pneo/command/invoker/invoker_tree.py:28
+#: src/pneo/command/invoker/invoker_venv.py:28
 #: src/pneo/command/invoker/invoker_version.py:28
+#: src/pneo/command/invoker/invoker_view.py:28
 msgid "<OPTIONS>"
 msgstr ""
 
@@ -147,8 +149,9 @@ msgstr ""
 msgid "Specifies quiet mode, not prompting for delete confirmation."
 msgstr ""
 
-#: src/pneo/command/invoker/invoker_clean.py:51
+#: src/pneo/command/invoker/invoker_clean.py:52
 #: src/pneo/command/invoker/invoker_init.py:58
+#: src/pneo/command/invoker/invoker_venv.py:59
 msgid "<PATH>"
 msgstr ""
 
@@ -185,12 +188,12 @@ msgstr ""
 msgid "Path to the config file."
 msgstr ""
 
-#: src/pneo/command/invoker/invoker_config.py:55
+#: src/pneo/command/invoker/invoker_config.py:56
 msgid "Ignore if config file already exists."
 msgstr ""
 
-#: src/pneo/command/invoker/invoker_config.py:63
-#: src/pneo/command/invoker/invoker_config.py:92
+#: src/pneo/command/invoker/invoker_config.py:64
+#: src/pneo/command/invoker/invoker_config.py:93
 msgid "Use default configuration."
 msgstr ""
 
@@ -214,7 +217,7 @@ msgstr ""
 msgid "Config file does not exist at %(target_path)s."
 msgstr ""
 
-#: src/pneo/command/invoker/invoker_config.py:121
+#: src/pneo/command/invoker/invoker_config.py:122
 msgid "Displays the default configuration."
 msgstr ""
 
@@ -425,6 +428,26 @@ msgstr ""
 msgid "Show sizes of all packages in the tree."
 msgstr ""
 
+#: src/pneo/command/invoker/invoker_venv.py:25
+msgid ""
+"Create a virtual environment named <PATH> in the working directory; "
+"defaults to `.venv` if not provided."
+msgstr ""
+
+#: src/pneo/command/invoker/invoker_venv.py:37
+msgid ""
+"Just check if all dependencies are installed and up-to-date, don't do "
+"anything."
+msgstr ""
+
+#: src/pneo/command/invoker/invoker_venv.py:45
+msgid "Ensures all dependencies are installed and up-to-date with the lockfile."
+msgstr ""
+
+#: src/pneo/command/invoker/invoker_venv.py:53
+msgid "Assert that the lockfile will remain unchanged."
+msgstr ""
+
 #: src/pneo/command/invoker/invoker_version.py:25
 msgid ""
 "Read or update the current project's version, or some other project "
@@ -441,6 +464,44 @@ msgstr ""
 
 #: src/pneo/command/invoker/invoker_version.py:55
 msgid "<VERSION>"
+msgstr ""
+
+#: src/pneo/command/invoker/invoker_view.py:25
+msgid ""
+"Open a window (using native webview) to manage the project, and select "
+"the <COMMAND> tab; defaults to `home` if not provided."
+msgstr ""
+
+#: src/pneo/command/invoker/invoker_view.py:37
+msgid "Use minimum allowed window size."
+msgstr ""
+
+#: src/pneo/command/invoker/invoker_view.py:45
+msgid "Whether the window can be resized by the user."
+msgstr ""
+
+#: src/pneo/command/invoker/invoker_view.py:53
+msgid "Show window initially maximized."
+msgstr ""
+
+#: src/pneo/command/invoker/invoker_view.py:61
+msgid "Start the window in fullscreen mode."
+msgstr ""
+
+#: src/pneo/command/invoker/invoker_view.py:69
+msgid "Keeps window always on top."
+msgstr ""
+
+#: src/pneo/command/invoker/invoker_view.py:77
+msgid "Whether you can drag the window by clicking anywhere."
+msgstr ""
+
+#: src/pneo/command/invoker/invoker_view.py:85
+msgid "Whether to ask confirmation before closing."
+msgstr ""
+
+#: src/pneo/command/invoker/invoker_view.py:91
+msgid "<COMMAND>"
 msgstr ""
 
 #: src/pneo/command/receiver/receiver_config.py:30
