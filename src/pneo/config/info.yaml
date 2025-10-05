@@ -33,7 +33,12 @@ handlers:
 loggers:
   # only the errors from any of the libraries are of interest, 
   # and leave them in the file to debug later. 
-  yaml:
+  antlr4:
+    level: ERROR
+    handlers: [logfile]
+    propagate: no
+
+  anytree:
     level: ERROR
     handlers: [logfile]
     propagate: no
@@ -48,17 +53,17 @@ loggers:
     handlers: [logfile]
     propagate: no
 
-  antlr4:
-    level: ERROR
-    handlers: [logfile]
-    propagate: no
-
-  anytree:
-    level: ERROR
-    handlers: [logfile]
-    propagate: no
-
   colorama:
+    level: ERROR
+    handlers: [logfile]
+    propagate: no
+
+  jinja2:
+    level: ERROR
+    handlers: [logfile]
+    propagate: no
+
+  platformdirs:
     level: ERROR
     handlers: [logfile]
     propagate: no
@@ -73,17 +78,17 @@ loggers:
     handlers: [logfile]
     propagate: no
 
-  platformdirs:
-    level: ERROR
-    handlers: [logfile]
-    propagate: no
-
   watchdog:
     level: ERROR
     handlers: [logfile]
     propagate: no
 
-  jinja2:
+  webview:
+    level: ERROR
+    handlers: [logfile]
+    propagate: no
+
+  yaml:
     level: ERROR
     handlers: [logfile]
     propagate: no

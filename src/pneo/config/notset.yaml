@@ -19,7 +19,12 @@ handlers:
 loggers:
   # only the errors from any of the libraries are of interest, 
   # but lets root decide whether to show it in the console.
-  yaml:
+  antlr4:
+    level: ERROR
+    handlers: []
+    propagate: yes
+
+  anytree:
     level: ERROR
     handlers: []
     propagate: yes
@@ -34,17 +39,17 @@ loggers:
     handlers: []
     propagate: yes
 
-  antlr4:
-    level: ERROR
-    handlers: []
-    propagate: yes
-
-  anytree:
-    level: ERROR
-    handlers: []
-    propagate: yes
-
   colorama:
+    level: ERROR
+    handlers: []
+    propagate: yes
+
+  jinja2:
+    level: ERROR
+    handlers: []
+    propagate: yes
+
+  platformdirs:
     level: ERROR
     handlers: []
     propagate: yes
@@ -59,17 +64,17 @@ loggers:
     handlers: []
     propagate: yes
 
-  platformdirs:
-    level: ERROR
-    handlers: []
-    propagate: yes
-
   watchdog:
     level: ERROR
     handlers: []
     propagate: yes
 
-  jinja2:
+  webview:
+    level: ERROR
+    handlers: []
+    propagate: yes
+
+  yaml:
     level: ERROR
     handlers: []
     propagate: yes

@@ -34,7 +34,12 @@ handlers:
 loggers:
   # shows warnings and errors from any libraries, 
   # and lets root decide whether to show it in the console or just in a file.
-  yaml:
+  antlr4:
+    level: WARNING
+    handlers: []
+    propagate: yes
+
+  anytree:
     level: WARNING
     handlers: []
     propagate: yes
@@ -49,17 +54,17 @@ loggers:
     handlers: []
     propagate: yes
 
-  antlr4:
-    level: WARNING
-    handlers: []
-    propagate: yes
-
-  anytree:
-    level: WARNING
-    handlers: []
-    propagate: yes
-
   colorama:
+    level: WARNING
+    handlers: []
+    propagate: yes
+
+  jinja2:
+    level: WARNING
+    handlers: []
+    propagate: yes
+
+  platformdirs:
     level: WARNING
     handlers: []
     propagate: yes
@@ -74,17 +79,17 @@ loggers:
     handlers: []
     propagate: yes
 
-  platformdirs:
-    level: WARNING
-    handlers: []
-    propagate: yes
-
   watchdog:
     level: WARNING
     handlers: []
     propagate: yes
 
-  jinja2:
+  webview:
+    level: WARNING
+    handlers: []
+    propagate: yes
+
+  yaml:
     level: WARNING
     handlers: []
     propagate: yes
