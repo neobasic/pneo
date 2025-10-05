@@ -155,7 +155,7 @@ def read_config_file(file_path: Path | None) -> ConfigParser:
             return config_parser
 
     # no config file means, load default config.
-    default_settings: str = getDefaultConfig()
+    default_settings: str = read_config_resource(CONFIG_FILE)
     # Read the settings inside the project (default configuration).
     config_parser.read_string(default_settings)
 
@@ -179,19 +179,7 @@ builtins.__dict__['fdocstr'] = fdocstr
 # ----------------------------------------------------------------------------
 
 # first, just declare singleton instances for application settings.
-default_config: str = None
 app_config: AppConfig = None
-
-
-def getDefaultConfig() -> str:
-    global default_config
-    
-    # check like it is a singleton
-    if default_config is None:
-        # first time: load the configuration now.
-        default_config = read_config_resource(CONFIG_FILE)
-
-    return default_config
 
 
 def getAppConfig() -> AppConfig:
@@ -212,7 +200,6 @@ def getAppConfig() -> AppConfig:
 
 
 # then, initialize the singleton instances.
-default_config = getDefaultConfig()
 app_config = getAppConfig()
 
 
