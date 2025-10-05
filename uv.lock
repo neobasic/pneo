@@ -179,7 +179,7 @@ wheels = [
 [[package]]
 name = "ngne"
 version = "0.0.1"
-source = { directory = "../ngne" }
+source = { editable = "../ngne" }
 dependencies = [
     { name = "antlr4-python3-runtime" },
     { name = "anytree" },
@@ -248,7 +248,7 @@ requires-dist = [
     { name = "click", specifier = ">=8.3.0" },
     { name = "colorama", specifier = ">=0.4.6" },
     { name = "jinja2", specifier = ">=3.1.6" },
-    { name = "ngne", directory = "../ngne" },
+    { name = "ngne", editable = "../ngne" },
     { name = "platformdirs", specifier = ">=4.4.0" },
     { name = "pywebview", specifier = ">=6.0" },
     { name = "pyyaml", specifier = ">=6.0.2" },
