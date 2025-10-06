@@ -8,6 +8,19 @@ description = "Prototype implementation of a project and package manager for the
 readme = "README.md"
 license = "MIT"
 license-files = ["LICEN[CS]E*"]
+keywords = ["pneo", "neobasic", "programming", "language", "package", "project", "manager", "bundler"]
+classifiers = [
+    "Development Status :: 2 - Pre-Alpha",
+    "License :: OSI Approved :: MIT License",
+    "Intended Audience :: Developers",
+    "Topic :: Software Development :: Build Tools",
+    "Operating System :: OS Independent",
+    "Environment :: Console",
+    "Programming Language :: Python :: 3",
+    "Typing :: Typed",
+    "Natural Language :: English",
+    "Natural Language :: Portuguese (Brazilian)",
+]
 requires-python = ">=3.13"
 dependencies = [
     "antlr4-python3-runtime>=4.13.2",
@@ -24,19 +37,6 @@ dependencies = [
     "tomli>=2.2.1",
     "watchdog>=6.0.0",
     "ngne",
-]
-keywords = ["pneo", "neobasic", "programming", "language", "package", "project", "manager", "bundler"]
-classifiers = [
-    "Development Status :: 2 - Pre-Alpha",
-    "License :: OSI Approved :: MIT License",
-    "Intended Audience :: Developers",
-    "Topic :: Software Development :: Build Tools",
-    "Operating System :: OS Independent",
-    "Environment :: Console",
-    "Programming Language :: Python :: 3",
-    "Typing :: Typed",
-    "Natural Language :: English",
-    "Natural Language :: Portuguese (Brazilian)",
 ]
 
 [project.urls]
