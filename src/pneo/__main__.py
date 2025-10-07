@@ -3,8 +3,6 @@ import logging
 from importlib.metadata import version
 from builtins import _, fdocstr
 
-import click
-
 import pneo
 from pneo.command.invoker import (
     invoker_add,
@@ -28,6 +26,8 @@ from pneo.command.invoker import (
     invoker_version,
     invoker_view,
 )
+
+import click
 
 
 # ----------------------------------------------------------------------------

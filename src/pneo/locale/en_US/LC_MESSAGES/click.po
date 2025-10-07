@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2025-09-30 10:16-0300\n"
-"PO-Revision-Date: 2025-09-30 10:16-0300\n"
+"POT-Creation-Date: 2025-10-06 17:54-0300\n"
+"PO-Revision-Date: 2025-10-06 15:55-0300\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en_US\n"
 "Language-Team: en_US <LL@li.org>\n"
@@ -26,6 +26,10 @@ msgstr ""
 #: src/click/_termui_impl.py:612
 #, python-brace-format
 msgid "{editor}: Editing failed: {e}"
+msgstr ""
+
+#: src/click/core.py:934
+msgid "[OPTIONS]"
 msgstr ""
 
 #: src/click/core.py:1104 src/click/core.py:1141
@@ -51,6 +55,14 @@ msgstr ""
 
 #: src/click/core.py:1425
 msgid "Aborted!"
+msgstr ""
+
+#: src/click/core.py:1564
+msgid "COMMAND1 [ARGS]... [COMMAND2 [ARGS]...]..."
+msgstr ""
+
+#: src/click/core.py:1566
+msgid "COMMAND [ARGS]..."
 msgstr ""
 
 #: src/click/core.py:1799
@@ -179,7 +191,7 @@ msgid "Could not open file {filename!r}: {message}"
 msgstr ""
 
 #: src/click/formatting.py:156
-msgid "Usage:"
+msgid "Usage: "
 msgstr ""
 
 #: src/click/parser.py:199
@@ -321,4 +333,7 @@ msgid "{len_type} values are required, but {len_value} was given."
 msgid_plural "{len_type} values are required, but {len_value} were given."
 msgstr[0] ""
 msgstr[1] ""
+
+#~ msgid "Usage:"
+#~ msgstr ""
 

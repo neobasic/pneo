@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2025-09-30 10:16-0300\n"
-"PO-Revision-Date: 2025-09-30 10:16-0300\n"
+"POT-Creation-Date: 2025-10-06 17:54-0300\n"
+"PO-Revision-Date: 2025-10-06 15:55-0300\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: pt_BR\n"
 "Language-Team: pt_BR <LL@li.org>\n"
@@ -27,6 +27,10 @@ msgstr ""
 #, python-brace-format
 msgid "{editor}: Editing failed: {e}"
 msgstr ""
+
+#: src/click/core.py:934
+msgid "[OPTIONS]"
+msgstr "[OPÇÕES]"
 
 #: src/click/core.py:1104 src/click/core.py:1141
 #, python-brace-format
@@ -52,6 +56,14 @@ msgstr ""
 #: src/click/core.py:1425
 msgid "Aborted!"
 msgstr ""
+
+#: src/click/core.py:1564
+msgid "COMMAND1 [ARGS]... [COMMAND2 [ARGS]...]..."
+msgstr "COMANDO1 [ARGS]... [COMANDO2 [ARGS]...]..."
+
+#: src/click/core.py:1566
+msgid "COMMAND [ARGS]..."
+msgstr "COMANDO [ARGS]..."
 
 #: src/click/core.py:1799
 msgid "Commands"
@@ -113,7 +125,7 @@ msgstr ""
 
 #: src/click/decorators.py:548
 msgid "Show this message and exit."
-msgstr "Show this message and exit."
+msgstr ""
 
 #: src/click/exceptions.py:50 src/click/exceptions.py:89
 #, python-brace-format
@@ -179,8 +191,8 @@ msgid "Could not open file {filename!r}: {message}"
 msgstr ""
 
 #: src/click/formatting.py:156
-msgid "Usage:"
-msgstr ""
+msgid "Usage: "
+msgstr "Uso: "
 
 #: src/click/parser.py:199
 #, python-brace-format

@@ -22,15 +22,15 @@ __all__ = [
 # APPLICATION SETTINGS AND CONFIGURATION PATHS
 # ----------------------------------------------------------------------------
 
-APP_DOMAIN: str = "pneo"
-APP_MAIN_MODULE: str = APP_DOMAIN
-APP_ANCHOR_CONFIG: str = APP_MAIN_MODULE + ".config"
+APP_NAME: str = "pneo"
+APP_ROOT_PACKAGE: str = APP_NAME
+APP_CONFIG_PACKAGE: str = APP_ROOT_PACKAGE + ".config"
 
-CONFIG_FILE: str = APP_DOMAIN + ".conf"
-CONFIG_FILE_PATH: Path = user_config_path(appname=APP_DOMAIN) / CONFIG_FILE
+CONFIG_FILE: str = APP_ROOT_PACKAGE + ".conf"
+CONFIG_FILE_PATH: Path = user_config_path(appname=APP_ROOT_PACKAGE) / CONFIG_FILE
 
-LOG_FILE: str = APP_DOMAIN + ".log"
-LOG_FILE_PATH: Path = user_log_path(appname=APP_DOMAIN) / LOG_FILE
+LOG_FILE: str = APP_ROOT_PACKAGE + ".log"
+LOG_FILE_PATH: Path = user_log_path(appname=APP_ROOT_PACKAGE) / LOG_FILE
 
 # just convention, where it should be.
 USER_HOME_PATH: Path = Path.home()
@@ -133,7 +133,7 @@ class AppConfig:
 # Read the content of a configuration file inside the project, from a module.
 def read_config_resource(filename: str) -> str:
     content: str = None
-    with resources.open_text(APP_ANCHOR_CONFIG, filename) as f:
+    with resources.open_text(APP_CONFIG_PACKAGE, filename) as f:
         content = f.read()
 
     return content
@@ -246,7 +246,8 @@ logging.config.dictConfig(config=log_config_dict)
 # GLOBAL INTERNATIONALIZATION (I18N) & LOCALIZATION (L10N)  
 # ----------------------------------------------------------------------------
 
-VALID_LOCALES: List = ['pt_BR', 'en_US']
+MSG_DOMAIN: str = "messages"
+VALID_LOCALES: List[str] = ['pt_BR', 'en_US']
 DEFAULT_LOCALE: str = 'en_US'  # fallback language.
 
 # check the configured locale language:
@@ -268,17 +269,18 @@ if DEFAULT_LOCALE not in languages:
     languages.append(DEFAULT_LOCALE)
 
 # path to the locale folder (defaults to src/app/locale, or relative to this file)
-heredir = os.path.abspath(os.path.dirname(__file__))
-localedir = os.path.normpath(os.path.join(heredir, "locale"))
+heredir: str = os.path.abspath(os.path.dirname(__file__))
+localedir: str = os.path.normpath(os.path.join(heredir, "locale"))
 
 # fallback=True avoids exceptions if any file .mo is missing.
-domain_translations = gettext.translation(APP_DOMAIN, localedir=localedir, languages=languages, fallback=True)
-ngne_translations = gettext.translation("ngne", localedir=localedir, languages=languages, fallback=True)
-click_translations = gettext.translation("click", localedir=localedir, languages=languages, fallback=True)
+global_translations = gettext.translation(domain=MSG_DOMAIN, localedir=localedir, languages=languages, fallback=True)
 
-# If a string isn’t found in 'messages.po', gettext looks in the fallbacks ('ngne', 'click').
-domain_translations.add_fallback(ngne_translations)
-domain_translations.add_fallback(click_translations)
+# Install gettext and ngettext into builtins for the chosen domain and localedir.
+global_translations.install({'gettext', 'ngettext'})
 
-# Install gettext('_') into builtins for the chosen domain and localedir.
-domain_translations.install()   # registers builtin _() and ngettext() globally.
+# HACKING PATCH: Because `.install()` does not update gettext and ngettext,
+# the import `from gettext import gettext as _, ngettext` does not reflect
+# the methods `gettext, ngettext` from the domain translation class.
+gettext.bindtextdomain(MSG_DOMAIN, localedir)
+# legacy implementation of gettext still check envars: LANGUAGE, LC_ALL, LC_MESSAGES, LANG
+os.environ["LANGUAGE"] = ':'.join(languages)

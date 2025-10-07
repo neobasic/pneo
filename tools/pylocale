@@ -11,15 +11,15 @@ from pathlib import Path
 # GLOBAL SETTINGS
 # ----------------------------------------------------------------------------
 
-APP_DOMAIN: str = "pneo"
-APP_MAIN_MODULE: str = APP_DOMAIN
+APP_NAME: str = "pneo"
+APP_ROOT_PACKAGE: str = APP_NAME
+LOCALE_DOMAIN: str = APP_NAME
 
 # full relative paths to the locale files.
-LOCALE_DIR: Path = os.path.join('src', APP_MAIN_MODULE, 'locale')
-LOCALE_POT: Path = os.path.join(LOCALE_DIR, APP_DOMAIN + '.pot')
+VALID_LOCALES: List[str] = ['pt_BR', 'en_US']
+LOCALE_DIR: str = os.path.join('src', APP_ROOT_PACKAGE, 'locale')
+LOCALE_POT: str = os.path.join(LOCALE_DIR, LOCALE_DOMAIN + '.pot')
 
-MESSAGES_PATH: Path = os.path.join('src', APP_MAIN_MODULE, 'locale', 'en_US', 'LC_MESSAGES')
-MESSAGES_FILE: str = os.path.join(MESSAGES_PATH, APP_DOMAIN + '.po')
 
 # ----------------------------------------------------------------------
 # OS PROCESS HELPERS
@@ -118,11 +118,11 @@ current_dir = os.getcwd()
 current_dir_name = os.path.basename(current_dir)
 
 # Check if the current directory is not root of project.
-if current_dir_name == "scripts":
-    # Change the current working directory to the parent directory.
+if current_dir_name == "tools":
+    # Change the current working directory to the parent directory (root of project).
     parent_dir = os.path.join(current_dir, '..')
     os.chdir(parent_dir)
-    print(f"✅ Detected running from **/scripts. Changed directory to: {os.getcwd()}\n")
+    print(f"✅ Detected running from **/tools. Changed directory to: {os.getcwd()}\n")
 
 
 # ----------------------------------------------------------------------
@@ -133,42 +133,56 @@ result_ok: bool = False
 
 # --- Extract English strings → messages.pot
 # Equivalent to:  pybabel extract -F babel.cfg -o src/app/locale/messages.pot .
-result_ok = run_pybabel_command(['extract', '-F', 'babel.cfg', '-o', LOCALE_POT, '.'])
+result_ok = run_pybabel_command(['extract', '-F', 'tools/babel.cfg', '-o', LOCALE_POT, '.'])
 if not result_ok:
     print("\n🚨 Please ensure **Babel** is installed in your environment (e.g., `pip install Babel`).", file=sys.stderr)
     sys.exit(1)
 
-# Check if the directory structure and the file already exist.
-if os.path.exists(MESSAGES_FILE) and os.path.isfile(MESSAGES_FILE):
-    # --- Update a .po translation file.
+# Check if the directory structure and any PO file already exist.
+en_us_messages_path: str = os.path.join('src', APP_ROOT_PACKAGE, 'locale', 'en_US', 'LC_MESSAGES', LOCALE_DOMAIN + '.po')
+if os.path.exists(en_us_messages_path) and os.path.isfile(en_us_messages_path):
+    # --- Update the .PO translation files.
     # Equivalent to:  pybabel update -D messages -i src/app/locale/messages.pot -d src/app/locale
-    result_ok = run_pybabel_command(['update', '-D', APP_DOMAIN, '-i', LOCALE_POT, '-d', LOCALE_DIR])
+    result_ok = run_pybabel_command(['update', '-D', LOCALE_DOMAIN, '-i', LOCALE_POT, '-d', LOCALE_DIR])
     if not result_ok: sys.exit(1)
 
     # --- Review, edit, and remove translations marked as fuzzy: #, fuzzy
     # Equivalent to:  grep -n -i -H -r --include="*.po" "fuzzy" src/app/locale
     run_command(['grep', '-n', '-i', '-H', '-r', '--include="*.po"', '"fuzzy"', LOCALE_DIR])
 
+    # --- # Merge all translations into unique POT and PO files, before compilation.
+    # Equivalent to:  xgettext myapp/locale/myapp.pot libA/locale/libA.pot -o merged/locale/myapp.pot
+    input1: str = os.path.join(LOCALE_DIR, LOCALE_DOMAIN + '.pot')
+    input2: str = os.path.join(LOCALE_DIR, 'ngne.pot')
+    input3: str = os.path.join(LOCALE_DIR, 'click.pot')
+    output: str = os.path.join(LOCALE_DIR, 'messages.pot')
+    run_command(['xgettext', input1, input2, input3, '-o', output])
+
+    # execute the command `msgcat` for all languages, each in its locale path.
+    for idiom in VALID_LOCALES:
+        messages_path: str = os.path.join('src', APP_ROOT_PACKAGE, 'locale', idiom, 'LC_MESSAGES')
+
+        # Equivalent to:  msgcat --use-first --sort-output myapp/locale/es/LC_MESSAGES/myapp.po libA/locale/es/LC_MESSAGES/libA.po -o merged/locale/es/LC_MESSAGES/myapp.po
+        input1: str = os.path.join(messages_path, LOCALE_DOMAIN + '.po')
+        input2: str = os.path.join(messages_path, 'ngne.po')
+        input3: str = os.path.join(messages_path, 'click.po')
+        output: str = os.path.join(messages_path, 'messages.po')
+        run_command(['msgcat', '--use-first', input1, input2, input3, '-o', output])
+
 else:
-    # --- Initialize English catalog → locale/en_US/LC_MESSAGES/messages.po 
-    # Equivalent to:  pybabel init -D messages -i src/app/locale/messages.pot -d src/app/locale -l en_US
+    # --- Initialize each language catalog → locale/idiom/LC_MESSAGES/messages.po 
+    # Equivalent to:  pybabel init -D messages -i src/app/locale/messages.pot -d src/app/locale -l language
     # NOTE: Recommended even if English is source. This allows translators 
     # to correct source English if needed.
-    result_ok = run_pybabel_command(['init', '-D', APP_DOMAIN, '-i', LOCALE_POT, '-d', LOCALE_DIR, '-l', 'en_US'])
-    if not result_ok: sys.exit(1)
-
-    # --- Initialize Portuguese catalog → locale/pt_BR/LC_MESSAGES/messages.po
-    # Equivalent to:  pybabel init -D messages -i src/app/locale/messages.pot -d src/app/locale -l pt_BR
-    # NOTE: This will fail if 'messages.pot' from the previous command doesn't exist.
-    # or if the 'po' directory doesn't exist.
-    result_ok = run_pybabel_command(['init', '-D', APP_DOMAIN, '-i', LOCALE_POT, '-d', LOCALE_DIR, '-l', 'pt_BR'])
-    if not result_ok: sys.exit(1)
+    for idiom in VALID_LOCALES:
+        result_ok = run_pybabel_command(['init', '-D', LOCALE_DOMAIN, '-i', LOCALE_POT, '-d', LOCALE_DIR, '-l', idiom])
+        if not result_ok: sys.exit(1)
 
 # --- Compile .po → .mo
 # The gettext runtime system uses binary .mo files, so you must compile the .po files.
 # Equivalent to:  pybabel compile -D messages -d src/app/locale
 # NOTE: This will fail if 'messages.po' from the previous command doesn't exist.
-result_ok = run_pybabel_command(['compile', '-D', APP_DOMAIN, '-d', LOCALE_DIR])
+result_ok = run_pybabel_command(['compile', '-D', 'messages', '-d', LOCALE_DIR])
 if not result_ok: sys.exit(1)
 
 # everything ok!
