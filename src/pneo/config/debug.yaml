@@ -69,6 +69,11 @@ loggers:
     handlers: []
     propagate: yes
 
+  pygls:
+    level: WARNING
+    handlers: []
+    propagate: yes
+
   rich:
     level: WARNING
     handlers: []
@@ -96,6 +101,16 @@ loggers:
 
   # lets root decide whether to show it in the console or just in a file.
   pneo:
+    level: DEBUG
+    handlers: []
+    propagate: yes
+
+  ngne:
+    level: DEBUG
+    handlers: []
+    propagate: yes
+
+  nasa:
     level: DEBUG
     handlers: []
     propagate: yes

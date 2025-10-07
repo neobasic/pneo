@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2025-10-06 17:53-0300\n"
+"POT-Creation-Date: 2025-10-07 12:12-0300\n"
 "PO-Revision-Date: 2025-10-03 15:17-0300\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: pt_BR\n"
@@ -18,7 +18,6 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.17.0\n"
 
-#: src/ngne/__main__.py:114
-msgid "Module '__main__.py' cannot be loaded by another module."
-msgstr ""
+#~ msgid "Module '__main__.py' cannot be loaded by another module."
+#~ msgstr ""
 

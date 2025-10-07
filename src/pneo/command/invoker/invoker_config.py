@@ -2,8 +2,6 @@ import logging
 from pathlib import Path
 from builtins import _, fdocstr
 
-import click
-
 import pneo
 from pneo.command.receiver.receiver_config import (
     create_config_file, 
@@ -11,6 +9,8 @@ from pneo.command.receiver.receiver_config import (
     reset_config_file,
     update_config_file,
 )
+
+import click
 
 
 # ----------------------------------------------------------------------------

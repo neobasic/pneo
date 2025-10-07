@@ -5,9 +5,9 @@ from pathlib import Path
 from typing import Any
 from builtins import _
 
-import click
-
 import pneo
+
+import click
 
 
 # ----------------------------------------------------------------------------

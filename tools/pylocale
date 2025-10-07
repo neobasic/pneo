@@ -1,10 +1,9 @@
 #!/usr/bin/env python3
 
 import os
-import subprocess
 import sys
+import subprocess
 from typing import List
-from pathlib import Path
 
 
 # ----------------------------------------------------------------------------
@@ -16,9 +15,13 @@ APP_ROOT_PACKAGE: str = APP_NAME
 LOCALE_DOMAIN: str = APP_NAME
 
 # full relative paths to the locale files.
-VALID_LOCALES: List[str] = ['pt_BR', 'en_US']
+VALID_LOCALES: List[str] = [ 'en_US', 'pt_BR' ]
 LOCALE_DIR: str = os.path.join('src', APP_ROOT_PACKAGE, 'locale')
 LOCALE_POT: str = os.path.join(LOCALE_DIR, LOCALE_DOMAIN + '.pot')
+
+# libraries to extract messages.
+PACK_LIBS: List[str] = [ 'ngne', 'nasa', 'click' ]
+PACK_DIR: str = 'packages'
 
 
 # ----------------------------------------------------------------------
@@ -138,45 +141,53 @@ if not result_ok:
     print("\n🚨 Please ensure **Babel** is installed in your environment (e.g., `pip install Babel`).", file=sys.stderr)
     sys.exit(1)
 
-# Check if the directory structure and any PO file already exist.
-en_us_messages_path: str = os.path.join('src', APP_ROOT_PACKAGE, 'locale', 'en_US', 'LC_MESSAGES', LOCALE_DOMAIN + '.po')
-if os.path.exists(en_us_messages_path) and os.path.isfile(en_us_messages_path):
-    # --- Update the .PO translation files.
-    # Equivalent to:  pybabel update -D messages -i src/app/locale/messages.pot -d src/app/locale
-    result_ok = run_pybabel_command(['update', '-D', LOCALE_DOMAIN, '-i', LOCALE_POT, '-d', LOCALE_DIR])
+# execute the command `pybabel extract` for all libraries, each with its messages file.
+for lib in PACK_LIBS:
+    lib_pot: str = os.path.join(LOCALE_DIR, lib + '.pot')
+    lib_src: str = os.path.join(PACK_DIR, lib)
+
+    # --- Extract from lib package
+    result_ok = run_pybabel_command(['extract', '-F', 'tools/babel.cfg', '-o', lib_pot, lib_src])
     if not result_ok: sys.exit(1)
 
-    # --- Review, edit, and remove translations marked as fuzzy: #, fuzzy
-    # Equivalent to:  grep -n -i -H -r --include="*.po" "fuzzy" src/app/locale
-    run_command(['grep', '-n', '-i', '-H', '-r', '--include="*.po"', '"fuzzy"', LOCALE_DIR])
 
-    # --- # Merge all translations into unique POT and PO files, before compilation.
-    # Equivalent to:  xgettext myapp/locale/myapp.pot libA/locale/libA.pot -o merged/locale/myapp.pot
-    input1: str = os.path.join(LOCALE_DIR, LOCALE_DOMAIN + '.pot')
-    input2: str = os.path.join(LOCALE_DIR, 'ngne.pot')
-    input3: str = os.path.join(LOCALE_DIR, 'click.pot')
-    output: str = os.path.join(LOCALE_DIR, 'messages.pot')
-    run_command(['xgettext', input1, input2, input3, '-o', output])
+# --- Update the .PO translation files.
+# Equivalent to:  pybabel update -D messages -i src/app/locale/messages.pot -d src/app/locale
+for domain in [LOCALE_DOMAIN] + PACK_LIBS:
+    domain_pot: str = os.path.join(LOCALE_DIR, domain + '.pot')
 
-    # execute the command `msgcat` for all languages, each in its locale path.
-    for idiom in VALID_LOCALES:
-        messages_path: str = os.path.join('src', APP_ROOT_PACKAGE, 'locale', idiom, 'LC_MESSAGES')
+    # --- Update from lib package
+    result_ok = run_pybabel_command(['update', '-D', domain, '-i', domain_pot, '-d', LOCALE_DIR])
+    if not result_ok: sys.exit(1)
 
-        # Equivalent to:  msgcat --use-first --sort-output myapp/locale/es/LC_MESSAGES/myapp.po libA/locale/es/LC_MESSAGES/libA.po -o merged/locale/es/LC_MESSAGES/myapp.po
-        input1: str = os.path.join(messages_path, LOCALE_DOMAIN + '.po')
-        input2: str = os.path.join(messages_path, 'ngne.po')
-        input3: str = os.path.join(messages_path, 'click.po')
-        output: str = os.path.join(messages_path, 'messages.po')
-        run_command(['msgcat', '--use-first', input1, input2, input3, '-o', output])
 
-else:
-    # --- Initialize each language catalog → locale/idiom/LC_MESSAGES/messages.po 
-    # Equivalent to:  pybabel init -D messages -i src/app/locale/messages.pot -d src/app/locale -l language
-    # NOTE: Recommended even if English is source. This allows translators 
-    # to correct source English if needed.
-    for idiom in VALID_LOCALES:
-        result_ok = run_pybabel_command(['init', '-D', LOCALE_DOMAIN, '-i', LOCALE_POT, '-d', LOCALE_DIR, '-l', idiom])
-        if not result_ok: sys.exit(1)
+# --- Review, edit, and remove translations marked as fuzzy: #, fuzzy
+# Equivalent to:  grep -n -i -H -r --include="*.po" "fuzzy" src/app/locale
+run_command(['grep', '-n', '-i', '-H', '-r', '--include="*.po"', '"fuzzy"', LOCALE_DIR])
+
+
+# --- # Merge all translations into unique POT and PO files, before compilation.
+# Equivalent to:  xgettext myapp/locale/myapp.pot libA/locale/libA.pot -o merged/locale/myapp.pot
+input1: str = os.path.join(LOCALE_DIR, LOCALE_DOMAIN + '.pot')
+input2: str = os.path.join(LOCALE_DIR, 'ngne.pot')
+input3: str = os.path.join(LOCALE_DIR, 'nasa.pot')
+input4: str = os.path.join(LOCALE_DIR, 'click.pot')
+output: str = os.path.join(LOCALE_DIR, 'messages.pot')
+run_command(['xgettext', input1, input2, input3, input4, '-o', output])
+
+
+# execute the command `msgcat` for all languages, each in its locale path.
+for idiom in VALID_LOCALES:
+    messages_path: str = os.path.join('src', APP_ROOT_PACKAGE, 'locale', idiom, 'LC_MESSAGES')
+
+    # Equivalent to:  msgcat --use-first --sort-output myapp/locale/es/LC_MESSAGES/myapp.po libA/locale/es/LC_MESSAGES/libA.po -o merged/locale/es/LC_MESSAGES/myapp.po
+    input1: str = os.path.join(messages_path, LOCALE_DOMAIN + '.po')
+    input2: str = os.path.join(messages_path, 'ngne.po')
+    input3: str = os.path.join(messages_path, 'nasa.po')
+    input4: str = os.path.join(messages_path, 'click.po')
+    output: str = os.path.join(messages_path, 'messages.po')
+    run_command(['msgcat', '--use-first', input1, input2, input3, input4, '-o', output])
+
 
 # --- Compile .po → .mo
 # The gettext runtime system uses binary .mo files, so you must compile the .po files.

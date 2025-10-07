@@ -3,9 +3,9 @@ import logging
 from pathlib import Path
 from builtins import _
 
-import click
-
 import pneo
+
+import click
 
 
 # ----------------------------------------------------------------------------

@@ -54,6 +54,11 @@ loggers:
     handlers: []
     propagate: yes
 
+  pygls:
+    level: ERROR
+    handlers: []
+    propagate: yes
+
   rich:
     level: ERROR
     handlers: []
@@ -81,6 +86,16 @@ loggers:
 
   # lets root decide whether to show it in the console.
   pneo:
+    level: INFO
+    handlers: []
+    propagate: yes
+
+  ngne:
+    level: INFO
+    handlers: []
+    propagate: yes
+
+  nasa:
     level: INFO
     handlers: []
     propagate: yes

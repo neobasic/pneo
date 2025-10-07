@@ -1,0 +1,52 @@
+[project]
+name = "ngne"
+version = "0.0.1"
+authors = [
+    {name = "Raul Bras"},
+]
+description = "Prototype implementation of a recursive-descent parser and evaluation engine for the NeoBASIC programming language, written in Python."
+readme = "README.md"
+license = "MIT"
+license-files = ["LICEN[CS]E*"]
+keywords = ["ngne", "neobasic", "programming", "language", "parser", "compiler", "transpiler"]
+classifiers = [
+    "Development Status :: 2 - Pre-Alpha",
+    "License :: OSI Approved :: MIT License",
+    "Intended Audience :: Developers",
+    "Topic :: Software Development :: Build Tools",
+    "Operating System :: OS Independent",
+    "Environment :: Console",
+    "Programming Language :: Python :: 3",
+    "Typing :: Typed",
+    "Natural Language :: English",
+    "Natural Language :: Portuguese (Brazilian)",
+]
+# vide ../pyproject.toml
+# requires-python = ">=3.13"
+dependencies = []
+
+[build-system]
+requires = ["uv_build>=0.8.17,<0.9.0"]
+build-backend = "uv_build"
+
+# Include non-Python files like .mo/.conf in the wheel
+[tool.uv.build-backend]
+# Specify the root of your Python module
+module-root = "src"
+module-name = "ngne"
+# Include specific source files and configuration files
+source-include = [
+    "src/ngne/**/*.py",
+    "src/ngne/**/*.mo",
+    "src/ngne/**/*.conf",
+    "src/ngne/**/*.yaml",
+    "src/ngne/**/*.typed",
+]
+# Exclude cache directories and temporary files
+source-exclude = [
+    "src/**/__pycache__",
+    "src/**/*.pyc",
+    "src/**/*.pyo",
+    "src/**/*.pot",
+    "src/**/*.po",
+]

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2025-10-06 17:55-0300\n"
+"POT-Creation-Date: 2025-10-07 12:12-0300\n"
 "PO-Revision-Date: 2025-10-06 15:55-0300\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: pt_BR\n"
@@ -18,20 +18,20 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.17.0\n"
 
-#: src/pneo/__main__.py:54
+#: src/pneo/__main__.py:53
 msgid "Module '__main__.py' cannot be loaded by another module."
 msgstr "O módulo '__main__.py' não pode ser carregado por outro módulo."
 
-#: src/pneo/__main__.py:81
+#: src/pneo/__main__.py:80
 #, python-format
 msgid "%(prog)s, version %(version)s"
 msgstr "%(prog)s, versão %(version)s"
 
-#: src/pneo/__main__.py:82
+#: src/pneo/__main__.py:81
 msgid "Show the pneo version and exit."
 msgstr "Mostra a versão de pneo e encerra."
 
-#: src/pneo/__main__.py:84
+#: src/pneo/__main__.py:83
 msgid ""
 "\n"
 "Pneo is an all-in-one utility for working with NeoBASIC projects.\n"
@@ -59,12 +59,15 @@ msgstr "Adiciona uma ou mais dependências ao arquivo manifest do projeto corren
 #: src/pneo/command/invoker/invoker_compile.py:28
 #: src/pneo/command/invoker/invoker_format.py:28
 #: src/pneo/command/invoker/invoker_init.py:28
+#: src/pneo/command/invoker/invoker_lint.py:28
 #: src/pneo/command/invoker/invoker_list.py:28
 #: src/pneo/command/invoker/invoker_lock.py:28
 #: src/pneo/command/invoker/invoker_make.py:28
 #: src/pneo/command/invoker/invoker_package.py:28
+#: src/pneo/command/invoker/invoker_parse.py:28
 #: src/pneo/command/invoker/invoker_remove.py:28
 #: src/pneo/command/invoker/invoker_run.py:28
+#: src/pneo/command/invoker/invoker_serve.py:28
 #: src/pneo/command/invoker/invoker_tree.py:28
 #: src/pneo/command/invoker/invoker_venv.py:28
 #: src/pneo/command/invoker/invoker_version.py:28
@@ -106,6 +109,8 @@ msgid "Includes the current time in file name."
 msgstr ""
 
 #: src/pneo/command/invoker/invoker_backup.py:59
+#: src/pneo/command/invoker/invoker_lint.py:43
+#: src/pneo/command/invoker/invoker_parse.py:58
 msgid "<FILE>"
 msgstr ""
 
@@ -287,6 +292,16 @@ msgstr ""
 msgid "Create a project for a library."
 msgstr ""
 
+#: src/pneo/command/invoker/invoker_lint.py:25
+msgid ""
+"Run full semantic analysis on a single NeoBASIC program file, primarily "
+"for testing and debugging outside of a running editor."
+msgstr ""
+
+#: src/pneo/command/invoker/invoker_lint.py:37
+msgid "Do not abort the analysis as soon as there is an error."
+msgstr ""
+
 #: src/pneo/command/invoker/invoker_list.py:25
 msgid "List all NeoBASIC modules and translation units in current project."
 msgstr ""
@@ -357,6 +372,27 @@ msgstr ""
 msgid "<BIN>"
 msgstr ""
 
+#: src/pneo/command/invoker/invoker_parse.py:25
+msgid ""
+"Parse a single NeoBASIC program file and output the abstract syntax tree "
+"(AST) or other structured data. This can be used for debugging the parser"
+" logic."
+msgstr ""
+
+#: src/pneo/command/invoker/invoker_parse.py:36
+msgid "Maximum display depth of the abstract syntax tree (AST). [default: 100]"
+msgstr ""
+
+#: src/pneo/command/invoker/invoker_parse.py:44
+msgid ""
+"Show detailed information of all symbols in the abstract syntax tree "
+"(AST)."
+msgstr ""
+
+#: src/pneo/command/invoker/invoker_parse.py:52
+msgid "Only print main symbols in the abstract syntax tree (AST)."
+msgstr ""
+
 #: src/pneo/command/invoker/invoker_remove.py:25
 msgid "Remove dependencies from the current project manifest file."
 msgstr ""
@@ -393,7 +429,7 @@ msgstr ""
 msgid "Only print the version."
 msgstr ""
 
-#: src/pneo/command/invoker/invoker_self.py:46
+#: src/pneo/command/invoker/invoker_self.py:47
 msgid "Show current version of installed pneo."
 msgstr ""
 
@@ -409,6 +445,38 @@ msgstr ""
 
 #: src/pneo/command/invoker/invoker_self.py:77
 msgid "Uninstall pneo e remove all files and settings."
+msgstr ""
+
+#: src/pneo/command/invoker/invoker_serve.py:25
+msgid ""
+"Run in language server mode, ready to handle requests from a client (the "
+"editor)."
+msgstr ""
+
+#: src/pneo/command/invoker/invoker_serve.py:37
+msgid ""
+"Instructs the server to communicate over its standard input (stdin) and "
+"standard output (stdout)."
+msgstr ""
+
+#: src/pneo/command/invoker/invoker_serve.py:43
+msgid ""
+"Instructs the server to listen on a specific TCP port for a client "
+"connection (socket). Used for remote development, servers running as "
+"persistent services, or clients that prefer TCP, often enabling multiple "
+"clients to connect to a single server instance."
+msgstr ""
+
+#: src/pneo/command/invoker/invoker_serve.py:50
+msgid "Limit completion items. [default: 10]"
+msgstr ""
+
+#: src/pneo/command/invoker/invoker_serve.py:58
+msgid "Increases the server's logging and output verbosity."
+msgstr ""
+
+#: src/pneo/command/invoker/invoker_serve.py:66
+msgid "Decreases the server's logging and output verbosity (opposite of verbose)."
 msgstr ""
 
 #: src/pneo/command/invoker/invoker_tree.py:25

@@ -2,9 +2,9 @@ import logging
 from pathlib import Path
 from builtins import _, fdocstr
 
-import click
-
 import pneo
+
+import click
 
 
 # ----------------------------------------------------------------------------
@@ -19,7 +19,7 @@ app_config: pneo.AppConfig = pneo.getAppConfig()
 
 
 # ----------------------------------------------------------------------------
-# CLICK: COMMAND LOCK
+# CLICK: COMMAND VENV
 # ----------------------------------------------------------------------------
 
 venv_short_help: str = _("Create a virtual environment named <PATH> in the working directory; defaults to `.venv` if not provided.")

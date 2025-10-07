@@ -2,9 +2,9 @@ import logging
 from pathlib import Path
 from builtins import _, fdocstr
 
-import click
-
 import pneo
+
+import click
 
 
 # ----------------------------------------------------------------------------

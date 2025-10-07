@@ -2,9 +2,9 @@ import logging
 from pathlib import Path
 from builtins import _, fdocstr
 
-import click
-
 import pneo
+
+import click
 
 
 # ----------------------------------------------------------------------------
@@ -19,7 +19,7 @@ app_config: pneo.AppConfig = pneo.getAppConfig()
 
 
 # ----------------------------------------------------------------------------
-# CLICK: COMMAND LOCK
+# CLICK: COMMAND VIEW
 # ----------------------------------------------------------------------------
 
 view_short_help: str = _("Open a window (using native webview) to manage the project, and select the <COMMAND> tab; defaults to `home` if not provided.")

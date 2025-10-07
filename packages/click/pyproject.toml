@@ -1,0 +1,44 @@
+[project]
+name = "click"
+version = "8.3.dev"
+description = "Composable command line interface toolkit"
+readme = "README.md"
+license = "BSD-3-Clause"
+license-files = ["LICENSE.txt"]
+maintainers = [{name = "Pallets", email = "contact@palletsprojects.com"}]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Developers",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python",
+    "Typing :: Typed",
+]
+# vide ../pyproject.toml
+# requires-python = ">=3.10"
+dependencies = []
+
+[build-system]
+requires = ["uv_build>=0.8.17,<0.9.0"]
+build-backend = "uv_build"
+
+# Include non-Python files like .mo/.conf in the wheel
+[tool.uv.build-backend]
+# Specify the root of your Python module
+module-root = "src"
+module-name = "click"
+# Include specific source files and configuration files
+source-include = [
+    "src/click/**/*.py",
+    "src/click/**/*.mo",
+    "src/click/**/*.conf",
+    "src/click/**/*.yaml",
+    "src/click/**/*.typed",
+]
+# Exclude cache directories and temporary files
+source-exclude = [
+    "src/**/__pycache__",
+    "src/**/*.pyc",
+    "src/**/*.pyo",
+    "src/**/*.pot",
+    "src/**/*.po",
+]

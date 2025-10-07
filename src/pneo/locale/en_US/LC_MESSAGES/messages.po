@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2025-10-06 17:55-0300\n"
+"POT-Creation-Date: 2025-10-07 12:12-0300\n"
 "PO-Revision-Date: 2025-10-06 15:55-0300\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en_US\n"
@@ -18,20 +18,20 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.17.0\n"
 
-#: src/pneo/__main__.py:54
+#: src/pneo/__main__.py:53
 msgid "Module '__main__.py' cannot be loaded by another module."
 msgstr ""
 
-#: src/pneo/__main__.py:81
+#: src/pneo/__main__.py:80
 #, python-format
 msgid "%(prog)s, version %(version)s"
 msgstr ""
 
-#: src/pneo/__main__.py:82
+#: src/pneo/__main__.py:81
 msgid "Show the pneo version and exit."
 msgstr ""
 
-#: src/pneo/__main__.py:84
+#: src/pneo/__main__.py:83
 msgid ""
 "\n"
 "Pneo is an all-in-one utility for working with NeoBASIC projects.\n"
@@ -53,12 +53,15 @@ msgstr ""
 #: src/pneo/command/invoker/invoker_compile.py:28
 #: src/pneo/command/invoker/invoker_format.py:28
 #: src/pneo/command/invoker/invoker_init.py:28
+#: src/pneo/command/invoker/invoker_lint.py:28
 #: src/pneo/command/invoker/invoker_list.py:28
 #: src/pneo/command/invoker/invoker_lock.py:28
 #: src/pneo/command/invoker/invoker_make.py:28
 #: src/pneo/command/invoker/invoker_package.py:28
+#: src/pneo/command/invoker/invoker_parse.py:28
 #: src/pneo/command/invoker/invoker_remove.py:28
 #: src/pneo/command/invoker/invoker_run.py:28
+#: src/pneo/command/invoker/invoker_serve.py:28
 #: src/pneo/command/invoker/invoker_tree.py:28
 #: src/pneo/command/invoker/invoker_venv.py:28
 #: src/pneo/command/invoker/invoker_version.py:28
@@ -100,6 +103,8 @@ msgid "Includes the current time in file name."
 msgstr ""
 
 #: src/pneo/command/invoker/invoker_backup.py:59
+#: src/pneo/command/invoker/invoker_lint.py:43
+#: src/pneo/command/invoker/invoker_parse.py:58
 msgid "<FILE>"
 msgstr ""
 
@@ -278,6 +283,16 @@ msgstr ""
 msgid "Create a project for a library."
 msgstr ""
 
+#: src/pneo/command/invoker/invoker_lint.py:25
+msgid ""
+"Run full semantic analysis on a single NeoBASIC program file, primarily for "
+"testing and debugging outside of a running editor."
+msgstr ""
+
+#: src/pneo/command/invoker/invoker_lint.py:37
+msgid "Do not abort the analysis as soon as there is an error."
+msgstr ""
+
 #: src/pneo/command/invoker/invoker_list.py:25
 msgid "List all NeoBASIC modules and translation units in current project."
 msgstr ""
@@ -347,6 +362,26 @@ msgstr ""
 msgid "<BIN>"
 msgstr ""
 
+#: src/pneo/command/invoker/invoker_parse.py:25
+msgid ""
+"Parse a single NeoBASIC program file and output the abstract syntax tree "
+"(AST) or other structured data. This can be used for debugging the parser "
+"logic."
+msgstr ""
+
+#: src/pneo/command/invoker/invoker_parse.py:36
+msgid "Maximum display depth of the abstract syntax tree (AST). [default: 100]"
+msgstr ""
+
+#: src/pneo/command/invoker/invoker_parse.py:44
+msgid ""
+"Show detailed information of all symbols in the abstract syntax tree (AST)."
+msgstr ""
+
+#: src/pneo/command/invoker/invoker_parse.py:52
+msgid "Only print main symbols in the abstract syntax tree (AST)."
+msgstr ""
+
 #: src/pneo/command/invoker/invoker_remove.py:25
 msgid "Remove dependencies from the current project manifest file."
 msgstr ""
@@ -383,7 +418,7 @@ msgstr ""
 msgid "Only print the version."
 msgstr ""
 
-#: src/pneo/command/invoker/invoker_self.py:46
+#: src/pneo/command/invoker/invoker_self.py:47
 msgid "Show current version of installed pneo."
 msgstr ""
 
@@ -399,6 +434,39 @@ msgstr ""
 
 #: src/pneo/command/invoker/invoker_self.py:77
 msgid "Uninstall pneo e remove all files and settings."
+msgstr ""
+
+#: src/pneo/command/invoker/invoker_serve.py:25
+msgid ""
+"Run in language server mode, ready to handle requests from a client (the "
+"editor)."
+msgstr ""
+
+#: src/pneo/command/invoker/invoker_serve.py:37
+msgid ""
+"Instructs the server to communicate over its standard input (stdin) and "
+"standard output (stdout)."
+msgstr ""
+
+#: src/pneo/command/invoker/invoker_serve.py:43
+msgid ""
+"Instructs the server to listen on a specific TCP port for a client "
+"connection (socket). Used for remote development, servers running as "
+"persistent services, or clients that prefer TCP, often enabling multiple "
+"clients to connect to a single server instance."
+msgstr ""
+
+#: src/pneo/command/invoker/invoker_serve.py:50
+msgid "Limit completion items. [default: 10]"
+msgstr ""
+
+#: src/pneo/command/invoker/invoker_serve.py:58
+msgid "Increases the server's logging and output verbosity."
+msgstr ""
+
+#: src/pneo/command/invoker/invoker_serve.py:66
+msgid ""
+"Decreases the server's logging and output verbosity (opposite of verbose)."
 msgstr ""
 
 #: src/pneo/command/invoker/invoker_tree.py:25
@@ -539,310 +607,327 @@ msgstr ""
 msgid "Updating config file at: %(file_path)s"
 msgstr ""
 
-#: src/click/_termui_impl.py:608
+#: packages/nasa/src/nasa/__init__.py:3
+msgid "nasa"
+msgstr ""
+
+#: packages/nasa/src/nasa/__init__.py:4
+msgid ""
+"Nasa is an implementation of the Language Server Protocol for the NeoBASIC "
+"programming language. It provides a set of core features that enhance the "
+"developer experience across editors, including code navigation, editing and "
+"refactoring tools, diagnostics and linting, and various utilities like "
+"semantic tokens for syntax highlighting, inlay hints for inline type "
+"information, folding ranges, smart selection ranges, workspace configuration "
+"handling, and execution of custom commands such as organizing imports or "
+"running tests."
+msgstr ""
+
+#: packages/click/src/click/_termui_impl.py:608
 #, python-brace-format
 msgid "{editor}: Editing failed"
 msgstr ""
 
-#: src/click/_termui_impl.py:612
+#: packages/click/src/click/_termui_impl.py:612
 #, python-brace-format
 msgid "{editor}: Editing failed: {e}"
 msgstr ""
 
-#: src/click/core.py:934
+#: packages/click/src/click/core.py:934
 msgid "[OPTIONS]"
 msgstr ""
 
-#: src/click/core.py:1104 src/click/core.py:1141
+#: packages/click/src/click/core.py:1104 packages/click/src/click/core.py:1141
 #, python-brace-format
 msgid "{text} {deprecated_message}"
 msgstr ""
 
-#: src/click/core.py:1160
+#: packages/click/src/click/core.py:1160
 msgid "Options"
 msgstr ""
 
-#: src/click/core.py:1222
+#: packages/click/src/click/core.py:1222
 #, python-brace-format
 msgid "Got unexpected extra argument ({args})"
 msgid_plural "Got unexpected extra arguments ({args})"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/click/core.py:1241
+#: packages/click/src/click/core.py:1241
 #, python-brace-format
 msgid "DeprecationWarning: The command {name!r} is deprecated.{extra_message}"
 msgstr ""
 
-#: src/click/core.py:1425
+#: packages/click/src/click/core.py:1425
 msgid "Aborted!"
 msgstr ""
 
-#: src/click/core.py:1564
+#: packages/click/src/click/core.py:1564
 msgid "COMMAND1 [ARGS]... [COMMAND2 [ARGS]...]..."
 msgstr ""
 
-#: src/click/core.py:1566
+#: packages/click/src/click/core.py:1566
 msgid "COMMAND [ARGS]..."
 msgstr ""
 
-#: src/click/core.py:1799
+#: packages/click/src/click/core.py:1799
 msgid "Commands"
 msgstr ""
 
-#: src/click/core.py:1830
+#: packages/click/src/click/core.py:1830
 msgid "Missing command."
 msgstr ""
 
-#: src/click/core.py:1908
+#: packages/click/src/click/core.py:1908
 #, python-brace-format
 msgid "No such command {name!r}."
 msgstr ""
 
-#: src/click/core.py:2332
+#: packages/click/src/click/core.py:2332
 msgid "Value must be an iterable."
 msgstr ""
 
-#: src/click/core.py:2355
+#: packages/click/src/click/core.py:2355
 #, python-brace-format
 msgid "Takes {nargs} values but 1 was given."
 msgid_plural "Takes {nargs} values but {len} were given."
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/click/core.py:2505
+#: packages/click/src/click/core.py:2505
 #, python-brace-format
 msgid ""
 "DeprecationWarning: The {param_type} {name!r} is deprecated.{extra_message}"
 msgstr ""
 
-#: src/click/core.py:2956
+#: packages/click/src/click/core.py:2956
 #, python-brace-format
 msgid "env var: {var}"
 msgstr ""
 
-#: src/click/core.py:2959
+#: packages/click/src/click/core.py:2959
 #, python-brace-format
 msgid "default: {default}"
 msgstr ""
 
-#: src/click/core.py:2963
+#: packages/click/src/click/core.py:2963
 msgid "required"
 msgstr ""
 
-#: src/click/core.py:3023
+#: packages/click/src/click/core.py:3023
 msgid "(dynamic)"
 msgstr ""
 
-#: src/click/decorators.py:522
+#: packages/click/src/click/decorators.py:522
 msgid "Show the version and exit."
 msgstr ""
 
-#: src/click/decorators.py:548
+#: packages/click/src/click/decorators.py:548
 msgid "Show this message and exit."
 msgstr ""
 
-#: src/click/exceptions.py:50 src/click/exceptions.py:89
+#: packages/click/src/click/exceptions.py:50
+#: packages/click/src/click/exceptions.py:89
 #, python-brace-format
 msgid "Error: {message}"
 msgstr ""
 
-#: src/click/exceptions.py:81
+#: packages/click/src/click/exceptions.py:81
 #, python-brace-format
 msgid "Try '{command} {option}' for help."
 msgstr ""
 
-#: src/click/exceptions.py:130
+#: packages/click/src/click/exceptions.py:130
 #, python-brace-format
 msgid "Invalid value: {message}"
 msgstr ""
 
-#: src/click/exceptions.py:132
+#: packages/click/src/click/exceptions.py:132
 #, python-brace-format
 msgid "Invalid value for {param_hint}: {message}"
 msgstr ""
 
-#: src/click/exceptions.py:190
+#: packages/click/src/click/exceptions.py:190
 msgid "Missing argument"
 msgstr ""
 
-#: src/click/exceptions.py:192
+#: packages/click/src/click/exceptions.py:192
 msgid "Missing option"
 msgstr ""
 
-#: src/click/exceptions.py:194
+#: packages/click/src/click/exceptions.py:194
 msgid "Missing parameter"
 msgstr ""
 
-#: src/click/exceptions.py:196
+#: packages/click/src/click/exceptions.py:196
 #, python-brace-format
 msgid "Missing {param_type}"
 msgstr ""
 
-#: src/click/exceptions.py:203
+#: packages/click/src/click/exceptions.py:203
 #, python-brace-format
 msgid "Missing parameter: {param_name}"
 msgstr ""
 
-#: src/click/exceptions.py:223
+#: packages/click/src/click/exceptions.py:223
 #, python-brace-format
 msgid "No such option: {name}"
 msgstr ""
 
-#: src/click/exceptions.py:235
+#: packages/click/src/click/exceptions.py:235
 #, python-brace-format
 msgid "Did you mean {possibility}?"
 msgid_plural "(Possible options: {possibilities})"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/click/exceptions.py:282
+#: packages/click/src/click/exceptions.py:282
 msgid "unknown error"
 msgstr ""
 
-#: src/click/exceptions.py:289
+#: packages/click/src/click/exceptions.py:289
 #, python-brace-format
 msgid "Could not open file {filename!r}: {message}"
 msgstr ""
 
-#: src/click/formatting.py:156
+#: packages/click/src/click/formatting.py:156
 msgid "Usage: "
 msgstr ""
 
-#: src/click/parser.py:199
+#: packages/click/src/click/parser.py:199
 #, python-brace-format
 msgid "Argument {name!r} takes {nargs} values."
 msgstr ""
 
-#: src/click/parser.py:381
+#: packages/click/src/click/parser.py:381
 #, python-brace-format
 msgid "Option {name!r} does not take a value."
 msgstr ""
 
-#: src/click/parser.py:444
+#: packages/click/src/click/parser.py:444
 #, python-brace-format
 msgid "Option {name!r} requires an argument."
 msgid_plural "Option {name!r} requires {nargs} arguments."
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/click/shell_completion.py:332
+#: packages/click/src/click/shell_completion.py:332
 msgid "Shell completion is not supported for Bash versions older than 4.4."
 msgstr ""
 
-#: src/click/shell_completion.py:339
+#: packages/click/src/click/shell_completion.py:339
 msgid "Couldn't detect Bash version, shell completion is not supported."
 msgstr ""
 
-#: src/click/termui.py:162
+#: packages/click/src/click/termui.py:162
 msgid "Repeat for confirmation"
 msgstr ""
 
-#: src/click/termui.py:178
+#: packages/click/src/click/termui.py:178
 msgid "Error: The value you entered was invalid."
 msgstr ""
 
-#: src/click/termui.py:180
+#: packages/click/src/click/termui.py:180
 #, python-brace-format
 msgid "Error: {e.message}"
 msgstr ""
 
-#: src/click/termui.py:191
+#: packages/click/src/click/termui.py:191
 msgid "Error: The two entered values do not match."
 msgstr ""
 
-#: src/click/termui.py:247
+#: packages/click/src/click/termui.py:247
 msgid "Error: invalid input"
 msgstr ""
 
-#: src/click/termui.py:866
+#: packages/click/src/click/termui.py:866
 msgid "Press any key to continue..."
 msgstr ""
 
-#: src/click/types.py:332
+#: packages/click/src/click/types.py:332
 #, python-brace-format
 msgid ""
 "Choose from:\n"
 "\t{choices}"
 msgstr ""
 
-#: src/click/types.py:369
+#: packages/click/src/click/types.py:369
 #, python-brace-format
 msgid "{value!r} is not {choice}."
 msgid_plural "{value!r} is not one of {choices}."
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/click/types.py:460
+#: packages/click/src/click/types.py:460
 #, python-brace-format
 msgid "{value!r} does not match the format {format}."
 msgid_plural "{value!r} does not match the formats {formats}."
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/click/types.py:482
+#: packages/click/src/click/types.py:482
 #, python-brace-format
 msgid "{value!r} is not a valid {number_type}."
 msgstr ""
 
-#: src/click/types.py:538
+#: packages/click/src/click/types.py:538
 #, python-brace-format
 msgid "{value} is not in the range {range}."
 msgstr ""
 
-#: src/click/types.py:719
+#: packages/click/src/click/types.py:719
 #, python-brace-format
 msgid "{value!r} is not a valid boolean. Recognized values: {states}"
 msgstr ""
 
-#: src/click/types.py:747
+#: packages/click/src/click/types.py:747
 #, python-brace-format
 msgid "{value!r} is not a valid UUID."
 msgstr ""
 
-#: src/click/types.py:937
+#: packages/click/src/click/types.py:937
 msgid "file"
 msgstr ""
 
-#: src/click/types.py:939
+#: packages/click/src/click/types.py:939
 msgid "directory"
 msgstr ""
 
-#: src/click/types.py:941
+#: packages/click/src/click/types.py:941
 msgid "path"
 msgstr ""
 
-#: src/click/types.py:988
+#: packages/click/src/click/types.py:988
 #, python-brace-format
 msgid "{name} {filename!r} does not exist."
 msgstr ""
 
-#: src/click/types.py:997
+#: packages/click/src/click/types.py:997
 #, python-brace-format
 msgid "{name} {filename!r} is a file."
 msgstr ""
 
-#: src/click/types.py:1005
+#: packages/click/src/click/types.py:1005
 #, python-brace-format
 msgid "{name} {filename!r} is a directory."
 msgstr ""
 
-#: src/click/types.py:1014
+#: packages/click/src/click/types.py:1014
 #, python-brace-format
 msgid "{name} {filename!r} is not readable."
 msgstr ""
 
-#: src/click/types.py:1023
+#: packages/click/src/click/types.py:1023
 #, python-brace-format
 msgid "{name} {filename!r} is not writable."
 msgstr ""
 
-#: src/click/types.py:1032
+#: packages/click/src/click/types.py:1032
 #, python-brace-format
 msgid "{name} {filename!r} is not executable."
 msgstr ""
 
-#: src/click/types.py:1099
+#: packages/click/src/click/types.py:1099
 #, python-brace-format
 msgid "{len_type} values are required, but {len_value} was given."
 msgid_plural "{len_type} values are required, but {len_value} were given."

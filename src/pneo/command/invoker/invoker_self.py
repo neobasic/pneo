@@ -2,9 +2,9 @@ import logging
 from pathlib import Path
 from builtins import _, fdocstr
 
-import click
-
 import pneo
+
+import click
 
 
 # ----------------------------------------------------------------------------
@@ -43,8 +43,8 @@ def self(context: click.Context) -> None:
     default=False,
     help=_("Only print the version."),
 )
-@fdocstr(_("Show current version of installed pneo."))
 @click.pass_context
+@fdocstr(_("Show current version of installed pneo."))
 def version(context: click.Context, short: bool) -> None:
     # print(f"short: {short}")
     pass
