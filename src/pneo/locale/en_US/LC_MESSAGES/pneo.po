@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2025-10-07 12:12-0300\n"
+"POT-Creation-Date: 2025-10-07 17:40-0300\n"
 "PO-Revision-Date: 2025-10-06 15:55-0300\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en_US\n"
@@ -18,20 +18,20 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.17.0\n"
 
-#: src/pneo/__main__.py:53
+#: src/pneo/__main__.py:39
 msgid "Module '__main__.py' cannot be loaded by another module."
 msgstr ""
 
-#: src/pneo/__main__.py:80
+#: src/pneo/__main__.py:67
 #, python-format
 msgid "%(prog)s, version %(version)s"
 msgstr ""
 
-#: src/pneo/__main__.py:81
+#: src/pneo/__main__.py:68
 msgid "Show the pneo version and exit."
 msgstr ""
 
-#: src/pneo/__main__.py:83
+#: src/pneo/__main__.py:70
 msgid ""
 "\n"
 "Pneo is an all-in-one utility for working with NeoBASIC projects.\n"

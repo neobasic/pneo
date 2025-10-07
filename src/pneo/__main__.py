@@ -31,38 +31,25 @@ import click
 
 
 # ----------------------------------------------------------------------------
-# GLOBAL SETTINGS
-# ----------------------------------------------------------------------------
-
-# gets a logger instance for the current module.
-logger: logging.Logger = logging.getLogger(__name__)
-
-# singleton instance with application settings.
-app_config: pneo.AppConfig = pneo.getAppConfig()
-
-
-# ----------------------------------------------------------------------------
-# ERROR CONSTANTS
-# ----------------------------------------------------------------------------
-
-# Possible errors that may occur when executing the application to return in sys.exit():
-EXIT_ERROR_CONFIG_LOG = -1
-EXIT_ERROR_CONFIG_APP = -2
-EXIT_ERROR_INVALID_ARGS = -3
-EXIT_ERROR_NO_ARGS = -4
-EXIT_ERROR_MAIN = _("Module '__main__.py' cannot be loaded by another module.")
-
-EXIT_SUCCESS = 0  # informs that in fact no error occurred, it was executed successfully.
-
-
-# ----------------------------------------------------------------------------
 # ENTRY-POINT CHECK
 # ----------------------------------------------------------------------------
 
-# This module cannot be loaded by another module
+# This module cannot be loaded by another module.
 if __name__ not in ["__main__", "pneo.__main__"]:
-    sys.exit(EXIT_ERROR_MAIN)
+    sys.exit(_("Module '__main__.py' cannot be loaded by another module."))
 # proceeds only if this program was executed as entry-point...
+
+
+# ----------------------------------------------------------------------------
+# GLOBAL SETTINGS
+# ----------------------------------------------------------------------------
+
+# Now that the app is initialized and checked, we can get the logger and config.
+# it is a logger instance for the current module.
+logger: logging.Logger = logging.getLogger(__name__)
+
+# it is a global singleton instance, with application settings.
+app_config: pneo.AppConfig = pneo.getAppConfig()
 
 
 # ----------------------------------------------------------------------------
@@ -119,4 +106,5 @@ cli.add_command(invoker_version.version)
 cli.add_command(invoker_view.view)
 
 # just in case it is not executing with `uv run`.
-cli()
+if __name__ == "__main__":
+    cli()
