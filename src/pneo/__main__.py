@@ -70,6 +70,13 @@ a single tool.
 APP_NOTICE: str = _("""
 Welcome to NeoBASIC "Developer Preview", version 0.0.1 (build Jan 01 2025 linux/amd64).
 
+NeoBASIC is a simple and statically-typed programming language. It is designed for 
+educational purposes and to be easy to implement. It is also intended to be fast, but
+not to be used in production, yet.
+
+NeoBASIC is a work in progress and may not have all the features you expect.
+For more information, visit https://www.neobasic.org/
+
 Copyright (c) 2025 🇧🇷 Tech4all Developers. All rights reserved unless otherwise stated.
 Textual and multimedia content is licensed under CC BY-SA 4.0, feel free to share them.
 

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2025-10-08 15:22-0300\n"
+"POT-Creation-Date: 2025-10-08 17:07-0300\n"
 "PO-Revision-Date: 2025-10-06 15:55-0300\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: pt_BR\n"
@@ -44,6 +44,16 @@ msgid ""
 "Welcome to NeoBASIC \"Developer Preview\", version 0.0.1 (build Jan 01 "
 "2025 linux/amd64).\n"
 "\n"
+"NeoBASIC is a simple and statically-typed programming language. It is "
+"designed for \n"
+"educational purposes and to be easy to implement. It is also intended to "
+"be fast, but\n"
+"not to be used in production, yet.\n"
+"\n"
+"NeoBASIC is a work in progress and may not have all the features you "
+"expect.\n"
+"For more information, visit https://www.neobasic.org/\n"
+"\n"
 "Copyright (c) 2025 🇧🇷 Tech4all Developers. All rights reserved unless "
 "otherwise stated.\n"
 "Textual and multimedia content is licensed under CC BY-SA 4.0, feel free "
@@ -55,16 +65,16 @@ msgid ""
 "PARTICULAR PURPOSE.\n"
 msgstr ""
 
-#: src/pneo/__main__.py:88
+#: src/pneo/__main__.py:95
 #, python-format
 msgid "%(prog)s, version %(version)s"
 msgstr "%(prog)s, versão %(version)s"
 
-#: src/pneo/__main__.py:89
+#: src/pneo/__main__.py:96
 msgid "Show the pneo version and exit."
 msgstr "Mostra a versão de pneo e encerra."
 
-#: src/pneo/__main__.py:97
+#: src/pneo/__main__.py:104
 #, fuzzy
 msgid "Show the legal notice of pneo and exit."
 msgstr "Mostra a versão de pneo e encerra."
@@ -637,4 +647,25 @@ msgstr ""
 #, python-format
 msgid "Updating config file at: %(file_path)s"
 msgstr ""
+
+#~ msgid ""
+#~ "\n"
+#~ "Welcome to NeoBASIC \"Developer Preview\", "
+#~ "version 0.0.1 (build Jan 01 2025 "
+#~ "linux/amd64).\n"
+#~ "\n"
+#~ "Copyright (c) 2025 🇧🇷 Tech4all "
+#~ "Developers. All rights reserved unless "
+#~ "otherwise stated.\n"
+#~ "Textual and multimedia content is "
+#~ "licensed under CC BY-SA 4.0, feel"
+#~ " free to share them.\n"
+#~ "\n"
+#~ "This is a Free and Open Source "
+#~ "Software Ad_hoc; see the project for "
+#~ "copying conditions.\n"
+#~ "There is NO warranty; not even for"
+#~ " MERCHANTABILITY or FITNESS FOR A "
+#~ "PARTICULAR PURPOSE.\n"
+#~ msgstr ""
 
