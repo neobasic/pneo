@@ -307,7 +307,8 @@ _setup_internationalization(app_config)
 log.debug("Internationalization configured.")
 
 # 4. Initial setup ok
-log.info("Application initialized successfully.")
+log.debug("Application initialized successfully.")
 
 # put the docstring decorator in the global scope for all modules.
 builtins.__dict__['fdocstr'] = _fdocstr
+

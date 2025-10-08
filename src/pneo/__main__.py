@@ -57,26 +57,58 @@ app_config: pneo.AppConfig = pneo.getAppConfig()
 # ----------------------------------------------------------------------------
 
 # Adds the options '-h' for help and '-V' for version.
-CONTEXT_SETTINGS: dict = dict(help_option_names=["-h", "--help"])
+CONTEXT_SETTINGS: dict = dict(help_option_names=["-H", "--help"])
 
-@click.group(context_settings=CONTEXT_SETTINGS)
-@click.pass_context
-@click.version_option(
-    version('pneo'), 
-    "--version", "-V",
-    message=_("%(prog)s, version %(version)s"),
-    help=_("Show the pneo version and exit.")
-)
-@fdocstr(_("""
+APP_ABOUT: str = _("""
 Pneo is an all-in-one utility for working with NeoBASIC projects.
 
 It provides source code management, a compiler, a package manager,
 and a bundler — streamlining the entire development workflow into
 a single tool.
-"""))
-def cli(context: click.Context) -> None:
+""")
+
+APP_NOTICE: str = _("""
+Welcome to NeoBASIC "Developer Preview", version 0.0.1 (build Jan 01 2025 linux/amd64).
+
+Copyright (c) 2025 🇧🇷 Tech4all Developers. All rights reserved unless otherwise stated.
+Textual and multimedia content is licensed under CC BY-SA 4.0, feel free to share them.
+
+This is a Free and Open Source Software Ad_hoc; see the project for copying conditions.
+There is NO warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+""")
+
+@click.group(
+    context_settings=CONTEXT_SETTINGS,
+    invoke_without_command=True,
+)
+@click.pass_context
+@click.version_option(
+    version('pneo'), 
+    "-V", "--version",
+    message=_("%(prog)s, version %(version)s"),
+    help=_("Show the pneo version and exit.")
+)
+@click.option(
+    "-N", "--notice",
+    required=False,
+    is_flag=True,
+    type=click.BOOL,
+    default=False,
+    help=_("Show the legal notice of pneo and exit."),
+)
+@fdocstr(APP_ABOUT)
+def cli(context: click.Context, notice: bool) -> None:
     context.ensure_object(dict)
     context.obj["settings"] = app_config
+
+    if context.invoked_subcommand is None:
+        # print the legal notice if required:
+        if notice:
+            print(APP_NOTICE)
+
+        else: # otherwise, requires any option or command.
+            click.echo(context.get_help())
+            context.exit()
 
 
 # ----------------------------------------------------------------------------
