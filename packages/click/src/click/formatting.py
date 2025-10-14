@@ -153,7 +153,7 @@ class HelpFormatter:
             ``"Usage: "``.
         """
         if prefix is None:
-            prefix = _('Usage: ')
+            prefix = _("Usage: ")
 
         usage_prefix = f"{prefix:>{self.current_indent}}{prog} "
         text_width = self.width - self.current_indent
@@ -174,11 +174,7 @@ class HelpFormatter:
             self.write(usage_prefix)
             self.write("\n")
             indent = " " * (max(self.current_indent, term_len(prefix)) + 4)
-            self.write(
-                wrap_text(
-                    args, text_width, initial_indent=indent, subsequent_indent=indent
-                )
-            )
+            self.write(wrap_text(args, text_width, initial_indent=indent, subsequent_indent=indent))
 
         self.write("\n")
 
