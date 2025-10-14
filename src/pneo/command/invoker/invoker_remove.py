@@ -1,10 +1,9 @@
 import logging
 from pathlib import Path
-from builtins import _, fdocstr
-
-import pneo
 
 import click
+
+from nuke import gettext as _, ngettext as _n, AppConfig, fdocstr, echo, p_trace, p_debug, p_info, p_warn, p_error, p_fatal
 
 
 # ----------------------------------------------------------------------------
@@ -15,21 +14,20 @@ import click
 logger: logging.Logger = logging.getLogger(__name__)
 
 # singleton instance with application settings.
-app_config: pneo.AppConfig = pneo.getAppConfig()
+app_config: AppConfig = AppConfig.get_instance()
 
 
 # ----------------------------------------------------------------------------
 # CLICK: COMMAND REMOVE
 # ----------------------------------------------------------------------------
 
-remove_short_help: str = _("Remove dependencies from the current project manifest file.")
+_remove_short_help: str = _("Remove dependencies from the current project manifest file.")
 
-@click.command(
-    options_metavar=_("<OPTIONS>"),
-    short_help=remove_short_help
-)
+
+@click.command(options_metavar=_("<OPTIONS>"), short_help=_remove_short_help)
 @click.option(
-    "--locked", "-l",
+    "--locked",
+    "-l",
     required=False,
     is_flag=True,
     type=click.BOOL,
@@ -37,7 +35,8 @@ remove_short_help: str = _("Remove dependencies from the current project manifes
     help=_("Remove dependencies without re-locking the project."),
 )
 @click.option(
-    "--check", "-c",
+    "--check",
+    "-c",
     required=False,
     is_flag=True,
     type=click.BOOL,
@@ -52,7 +51,8 @@ remove_short_help: str = _("Remove dependencies from the current project manifes
     metavar=_("<PACKAGES>"),
 )
 @click.pass_context
-@fdocstr(remove_short_help)
+@fdocstr(_remove_short_help)
 def remove(context: click.Context, check: bool, locked: bool, packages: tuple) -> None:
-    # print(f"check: {check}, locked: {locked}, packages: {packages}")
+    logger.debug("Entering: check=%s, locked=%s, packages=%s", check, locked, packages)
+
     pass

@@ -1,10 +1,9 @@
 import logging
 from pathlib import Path
-from builtins import _, fdocstr
-
-import pneo
 
 import click
+
+from nuke import gettext as _, ngettext as _n, AppConfig, fdocstr, echo, p_trace, p_debug, p_info, p_warn, p_error, p_fatal
 
 
 # ----------------------------------------------------------------------------
@@ -15,34 +14,37 @@ import click
 logger: logging.Logger = logging.getLogger(__name__)
 
 # singleton instance with application settings.
-app_config: pneo.AppConfig = pneo.getAppConfig()
+app_config: AppConfig = AppConfig.get_instance()
 
 
 # ----------------------------------------------------------------------------
 # CLICK: COMMAND TREE
 # ----------------------------------------------------------------------------
 
-tree_short_help: str = _("Display the dependency tree of current project, or some other project manifest file.")
-
-@click.command(
-    options_metavar=_("<OPTIONS>"),
-    short_help=tree_short_help
+_tree_short_help: str = _(
+    "Display the dependency tree of current project, or some other project manifest file."
 )
+
+
+@click.command(options_metavar=_("<OPTIONS>"), short_help=_tree_short_help)
 @click.option(
-    "--path", "-p",
+    "--path",
+    "-p",
     required=False,
     type=click.Path(exists=True, file_okay=True, dir_okay=True),
     help=_("Path to the project manifest file."),
 )
 @click.option(
-    "--depth", "-d",
+    "--depth",
+    "-d",
     required=False,
     type=click.IntRange(1, 255, clamp=True),
     default=255,
     help=_("Maximum display depth of the dependency tree. [default: 255]"),
 )
 @click.option(
-    "--outdated", "-o",
+    "--outdated",
+    "-o",
     required=False,
     is_flag=True,
     type=click.BOOL,
@@ -50,7 +52,8 @@ tree_short_help: str = _("Display the dependency tree of current project, or som
     help=_("Show the latest available version of each package in the tree."),
 )
 @click.option(
-    "--show-sizes", "-s",
+    "--show-sizes",
+    "-s",
     required=False,
     is_flag=True,
     type=click.BOOL,
@@ -58,7 +61,10 @@ tree_short_help: str = _("Display the dependency tree of current project, or som
     help=_("Show sizes of all packages in the tree."),
 )
 @click.pass_context
-@fdocstr(tree_short_help)
+@fdocstr(_tree_short_help)
 def tree(context: click.Context, path: Path, depth: int, outdated: bool, show_sizes: bool) -> None:
-    # print(f"path: {path}, depth: {depth}, outdated: {outdated}, show_sizes: {show_sizes}")
+    logger.debug(
+        "Entering: path=%s, depth=%s, outdated=%s, show_sizes=%s", path, depth, outdated, show_sizes
+    )
+
     pass

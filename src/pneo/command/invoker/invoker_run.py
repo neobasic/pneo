@@ -1,10 +1,9 @@
 import logging
 from pathlib import Path
-from builtins import _, fdocstr
-
-import pneo
 
 import click
+
+from nuke import gettext as _, ngettext as _n, AppConfig, fdocstr, echo, p_trace, p_debug, p_info, p_warn, p_error, p_fatal
 
 
 # ----------------------------------------------------------------------------
@@ -15,41 +14,43 @@ import click
 logger: logging.Logger = logging.getLogger(__name__)
 
 # singleton instance with application settings.
-app_config: pneo.AppConfig = pneo.getAppConfig()
+app_config: AppConfig = AppConfig.get_instance()
 
 
 # ----------------------------------------------------------------------------
 # CLICK: COMMAND RUN
 # ----------------------------------------------------------------------------
 
-run_short_help: str = _("Execute the binary executable in target directory or a local program.")
+_run_short_help: str = _("Execute the binary executable in target directory or a local program.")
 
-@click.command(
-    options_metavar=_("<OPTIONS>"),
-    short_help=run_short_help
-)
+
+@click.command(options_metavar=_("<OPTIONS>"), short_help=_run_short_help)
 @click.option(
-    "--target", "-t",
+    "--target",
+    "-t",
     required=False,
     type=click.Path(exists=True, file_okay=False, dir_okay=True),
     help=_("Target directory containing the binary executable."),
 )
 @click.option(
-    "--script", "-s",
+    "--script",
+    "-s",
     required=False,
     type=click.Path(exists=True, file_okay=True, dir_okay=False),
     help=_("Run the given source file as a NeoBASIC script."),
 )
 @click.option(
-    "--offline", "-o",
+    "--offline",
+    "-o",
     required=False,
     is_flag=True,
     type=click.BOOL,
     default=False,
     help=_("Run without accessing the network (disable network access)."),
-)                                    
+)
 @click.pass_context
-@fdocstr(run_short_help)
+@fdocstr(_run_short_help)
 def run(context: click.Context, target: Path, script: Path, offline: bool) -> None:
-    # print(f"target: {target}, script: {script}, offline: {offline}")
+    logger.debug("Entering: target=%s, script=%s, offline=%s", target, script, offline)
+
     pass

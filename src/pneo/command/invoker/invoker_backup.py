@@ -1,11 +1,11 @@
 import logging
 from pathlib import Path
-from builtins import _, fdocstr
-
-import pneo
 
 import click
 
+from nuke import gettext as _, ngettext as _n, AppConfig, fdocstr, echo, p_trace, p_debug, p_info, p_warn, p_error, p_fatal
+
+from pneo.command.receiver.receiver_backup import backup_source_file, backup_source
 
 # ----------------------------------------------------------------------------
 # GLOBAL SETTINGS
@@ -15,21 +15,20 @@ import click
 logger: logging.Logger = logging.getLogger(__name__)
 
 # singleton instance with application settings.
-app_config: pneo.AppConfig = pneo.getAppConfig()
+app_config: AppConfig = AppConfig.get_instance()
 
 
 # ----------------------------------------------------------------------------
 # CLICK: COMMAND BACKUP
 # ----------------------------------------------------------------------------
 
-backup_short_help: str = _("Create a zip file with only the source code of current project.")
+_backup_short_help: str = _("Create a zip file with only the source code of current project.")
 
-@click.command(
-    options_metavar=_("<OPTIONS>"),
-    short_help=backup_short_help
-)
+
+@click.command(options_metavar=_("<OPTIONS>"), short_help=_backup_short_help)
 @click.option(
-    "--all", "-a",
+    "--all",
+    "-a",
     required=False,
     is_flag=True,
     type=click.BOOL,
@@ -37,7 +36,8 @@ backup_short_help: str = _("Create a zip file with only the source code of curre
     help=_("Includes all files and folders in current project."),
 )
 @click.option(
-    "--force", "-f",
+    "--force",
+    "-f",
     required=False,
     is_flag=True,
     type=click.BOOL,
@@ -45,7 +45,8 @@ backup_short_help: str = _("Create a zip file with only the source code of curre
     help=_("Ignore if backup file already exists."),
 )
 @click.option(
-    "--time", "-t",
+    "--time",
+    "-t",
     required=False,
     is_flag=True,
     type=click.BOOL,
@@ -59,7 +60,26 @@ backup_short_help: str = _("Create a zip file with only the source code of curre
     metavar=_("<FILE>"),
 )
 @click.pass_context
-@fdocstr(backup_short_help)
+@fdocstr(_backup_short_help)
 def backup(context: click.Context, all: bool, force: bool, time: bool, file: Path) -> None:
-    # print(f"all: {all}, force: {force}, time: {time}, file: {file}")
-    pass
+    logger.debug("Entering: all=%s, force=%s, time=%s, file=%s", all, force, time, file)
+
+    # if the file exists, using time flag will generate a different name.
+    if file:
+        target_file: Path = Path(file)
+        if target_file.exists() and not force and not time:
+            logger.error(
+                "Backup file '%s' already exists, but option '--force' was not used.", file
+            )
+            p_error(
+                _(
+                    "Error: The backup file '%s' already exists. Use the --force option to override it."
+                ),
+                file,
+            )
+            exit(1)
+
+        backup_source_file(all, time, target_file)
+
+    else:
+        backup_source(all, time)

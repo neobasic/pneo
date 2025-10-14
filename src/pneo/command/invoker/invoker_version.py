@@ -1,10 +1,9 @@
 import logging
 from pathlib import Path
-from builtins import _, fdocstr
-
-import pneo
 
 import click
+
+from nuke import gettext as _, ngettext as _n, AppConfig, fdocstr, echo, p_trace, p_debug, p_info, p_warn, p_error, p_fatal
 
 
 # ----------------------------------------------------------------------------
@@ -15,27 +14,29 @@ import click
 logger: logging.Logger = logging.getLogger(__name__)
 
 # singleton instance with application settings.
-app_config: pneo.AppConfig = pneo.getAppConfig()
+app_config: AppConfig = AppConfig.get_instance()
 
 
 # ----------------------------------------------------------------------------
 # CLICK: COMMAND VERSION
 # ----------------------------------------------------------------------------
 
-version_short_help: str = _("Read or update the current project's version, or some other project manifest file.")
-
-@click.command(
-    options_metavar=_("<OPTIONS>"),
-    short_help=version_short_help
+_version_short_help: str = _(
+    "Read or update the current project's version, or some other project manifest file."
 )
+
+
+@click.command(options_metavar=_("<OPTIONS>"), short_help=_version_short_help)
 @click.option(
-    "--path", "-p",
+    "--path",
+    "-p",
     required=False,
     type=click.Path(exists=True, file_okay=True, dir_okay=True),
     help=_("Path to the project manifest file."),
 )
 @click.option(
-    "--frozen", "-f",
+    "--frozen",
+    "-f",
     required=False,
     is_flag=True,
     type=click.BOOL,
@@ -43,9 +44,13 @@ version_short_help: str = _("Read or update the current project's version, or so
     help=_("Update the version without re-locking the project."),
 )
 @click.option(
-    "--next", "-n",
+    "--next",
+    "-n",
     required=False,
-    type=click.Choice(["major", "minor", "patch", "stable", "alpha", "beta", "rc", "post", "dev"], case_sensitive=False),
+    type=click.Choice(
+        ["major", "minor", "patch", "stable", "alpha", "beta", "rc", "post", "dev"],
+        case_sensitive=False,
+    ),
     help=_("Increment the project version using the given semantics."),
 )
 @click.argument(
@@ -55,7 +60,8 @@ version_short_help: str = _("Read or update the current project's version, or so
     metavar=_("<VERSION>"),
 )
 @click.pass_context
-@fdocstr(version_short_help)
+@fdocstr(_version_short_help)
 def version(context: click.Context, path: Path, frozen: bool, next: bool, version: str) -> None:
-    # print(f"path: {path}, frozen: {frozen}, next: {next}, version: {version}")
+    logger.debug("Entering: path=%s, frozen=%s, next=%s, version=%s", path, frozen, next, version)
+
     pass

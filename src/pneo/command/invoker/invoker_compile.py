@@ -1,10 +1,9 @@
 import logging
 from pathlib import Path
-from builtins import _, fdocstr
-
-import pneo
 
 import click
+
+from nuke import gettext as _, ngettext as _n, AppConfig, fdocstr, echo, p_trace, p_debug, p_info, p_warn, p_error, p_fatal
 
 
 # ----------------------------------------------------------------------------
@@ -15,28 +14,28 @@ import click
 logger: logging.Logger = logging.getLogger(__name__)
 
 # singleton instance with application settings.
-app_config: pneo.AppConfig = pneo.getAppConfig()
+app_config: AppConfig = AppConfig.get_instance()
 
 
 # ----------------------------------------------------------------------------
 # CLICK: COMMAND COMPILE
 # ----------------------------------------------------------------------------
 
-compile_short_help: str = _("Parse and transpile one or more NeoBASIC program files.")
+_compile_short_help: str = _("Parse and transpile one or more NeoBASIC program files.")
 
-@click.command(
-    options_metavar=_("<OPTIONS>"),
-    short_help=compile_short_help
-)
+
+@click.command(options_metavar=_("<OPTIONS>"), short_help=_compile_short_help)
 @click.option(
-    "--target", "-t",
+    "--target",
+    "-t",
     required=False,
     type=click.Path(exists=False, dir_okay=True),
-    default=Path('.'),
+    default=Path("."),
     help=_("Specify where to place generated transpiled files."),
 )
 @click.option(
-    "--nowarn", "-n",
+    "--nowarn",
+    "-n",
     required=False,
     is_flag=True,
     type=click.BOOL,
@@ -44,7 +43,8 @@ compile_short_help: str = _("Parse and transpile one or more NeoBASIC program fi
     help=_("Generate no warnings about the code, only errors."),
 )
 @click.option(
-    "--verbose", "-v",
+    "--verbose",
+    "-v",
     required=False,
     is_flag=True,
     type=click.BOOL,
@@ -59,7 +59,12 @@ compile_short_help: str = _("Parse and transpile one or more NeoBASIC program fi
     metavar=_("<FILES>"),
 )
 @click.pass_context
-@fdocstr(compile_short_help)
-def compile(context: click.Context, target: Path, nowarn: bool, verbose: bool, files: tuple) -> None:
-    # print(f"target: {target}, nowarn: {nowarn}, verbose: {verbose}, files: {files}")
+@fdocstr(_compile_short_help)
+def compile(
+    context: click.Context, target: Path, nowarn: bool, verbose: bool, files: tuple
+) -> None:
+    logger.debug(
+        "Entering: target={}, nowarn={}, verbose={}, files={}", target, nowarn, verbose, files
+    )
+
     pass

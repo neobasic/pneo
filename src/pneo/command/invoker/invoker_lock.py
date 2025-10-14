@@ -1,10 +1,9 @@
 import logging
 from pathlib import Path
-from builtins import _, fdocstr
-
-import pneo
 
 import click
+
+from nuke import gettext as _, ngettext as _n, AppConfig, fdocstr, echo, p_trace, p_debug, p_info, p_warn, p_error, p_fatal
 
 
 # ----------------------------------------------------------------------------
@@ -15,21 +14,20 @@ import click
 logger: logging.Logger = logging.getLogger(__name__)
 
 # singleton instance with application settings.
-app_config: pneo.AppConfig = pneo.getAppConfig()
+app_config: AppConfig = AppConfig.get_instance()
 
 
 # ----------------------------------------------------------------------------
 # CLICK: COMMAND LOCK
 # ----------------------------------------------------------------------------
 
-lock_short_help: str = _("Create or update the current project's lockfile.")
+_lock_short_help: str = _("Create or update the current project's lockfile.")
 
-@click.command(
-    options_metavar=_("<OPTIONS>"),
-    short_help=lock_short_help
-)
+
+@click.command(options_metavar=_("<OPTIONS>"), short_help=_lock_short_help)
 @click.option(
-    "--check", "-c",
+    "--check",
+    "-c",
     required=False,
     is_flag=True,
     type=click.BOOL,
@@ -37,7 +35,8 @@ lock_short_help: str = _("Create or update the current project's lockfile.")
     help=_("Check if the lockfile is up-to-date."),
 )
 @click.option(
-    "--upgrade", "-u",
+    "--upgrade",
+    "-u",
     required=False,
     is_flag=True,
     type=click.BOOL,
@@ -45,7 +44,8 @@ lock_short_help: str = _("Create or update the current project's lockfile.")
     help=_("Apply package upgrades, ignoring pinned versions in any existing output file."),
 )
 @click.pass_context
-@fdocstr(lock_short_help)
+@fdocstr(_lock_short_help)
 def lock(context: click.Context, check: bool, upgrade: bool) -> None:
-    # print(f"check: {check}, upgrade: {upgrade}")
+    logger.debug("Entering: check=%s, upgrade=%s", check, upgrade)
+
     pass

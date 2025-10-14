@@ -1,13 +1,12 @@
 import os
 import logging
-from configparser import ConfigParser
 from pathlib import Path
-from typing import Any
-from builtins import _
-
-import pneo
+from configparser import ConfigParser
+from typing import Any, Optional
 
 import click
+
+from nuke import gettext as _, ngettext as _n, AppConfig, echo, p_trace, p_debug, p_info, p_warn, p_error, p_fatal
 
 
 # ----------------------------------------------------------------------------
@@ -18,96 +17,106 @@ import click
 logger: logging.Logger = logging.getLogger(__name__)
 
 # singleton instance with application settings.
-app_config: pneo.AppConfig = pneo.getAppConfig()
+app_config: AppConfig = AppConfig.get_instance()
 
 
 # ----------------------------------------------------------------------------
 # API: COMMAND CONFIG
 # ----------------------------------------------------------------------------
 
+
 # create a new configuration file with default settings.
 def create_config_file(file_path: Path, default_ok: bool = False):
-    logger.debug(_("Creating config file at: %(file_path)s"), {"file_path": file_path})
+    logger.debug("Entering: file_path=%s, default_ok=%s", file_path, default_ok)
 
     # Ensure config path directory exists.
     os.makedirs(os.path.dirname(file_path), exist_ok=True)
 
     if default_ok:
         # Read the settings inside the project (default configuration).
-        content_str: str = pneo.read_config_resource()
+        default_config: str = app_config.id.app_default_config
 
         # Write the settings content in config file:
         with open(file_path, "w") as f:
-            f.write(content_str)
+            f.write(default_config)
     else:
         # Use the current settings (from config file).
         config_parser: ConfigParser = ConfigParser()
-        config_parser.read_dict(app_config.asDict())
+        config_parser.read_dict(app_config.to_dict())
 
         # Write the settings content in config file:
         with open(file_path, "w") as f:
+            logger.debug("Creating config file at '%s'.", file_path)
             config_parser.write(f)
 
 
 # Resets a config file to default configuration.
 def reset_config_file(file_path: Path, default_ok: bool = False):
-    logger.debug(_("Resetting config file at: %(file_path)s"), {"file_path": file_path})
+    logger.debug("Entering: file_path=%s, default_ok=%s", file_path, default_ok)
 
     if default_ok:
         # Read the settings inside the project (default configuration).
-        content_str: str = pneo.read_config_resource()
+        default_config: str = app_config.id.app_default_config
 
         # Write the settings content in config file:
         with open(file_path, "w") as f:
-            f.write(content_str)
+            f.write(default_config)
     else:
         # Use the current settings (from config file).
         config_parser: ConfigParser = ConfigParser()
-        config_parser.read_dict(app_config.asDict())
+        config_parser.read_dict(app_config.to_dict())
 
         # Write the settings content in config file:
         with open(file_path, "w") as f:
+            logger.debug("Tracing: Resetting config file at '%s'.", file_path)
             config_parser.write(f)
 
 
 # Show the content of a config file, or the current settings.
-def show_config_file(file_path: Path | None, default_ok: bool = False):
-    logger.debug(_("Showing config file at: %(file_path)s"), {"file_path": file_path})
+def show_config_file(file_path: Optional[Path], default_ok: bool = False):
+    logger.debug("Entering: file_path=%s, default_ok=%s", file_path, default_ok)
 
-    title: str = None
+    title: str = ""
     config_parser: ConfigParser = ConfigParser()
 
     if default_ok:
         title = _("\nPNEO Default Configuration:")
         # Read the settings inside the project (default configuration).
-        content_str: str = pneo.read_config_resource()
-        config_parser.read_string(content_str)
+        default_config: str = app_config.id.app_default_config
+        config_parser.read_string(default_config)
+
     elif file_path is None:
         title = _("\nPNEO Current Configuration:")
         # Use the current settings (from config file).
-        config_parser.read_dict(app_config.asDict())
+        config_parser.read_dict(app_config.to_dict())
+
     else:
         title = _("\nPNEO File Configuration:")
         # Read the settings inside the file.
         config_parser.read(file_path)
 
     # Print the configuration
-    click.echo(click.style(title, fg=app_config.themeConfig.title_color, bold=True))
+    logger.debug("Tracing: Showing config file at '%s'.", file_path)
+    click.echo(click.style(title, fg=app_config.theme_config.title_color, bold=True))
     for section in config_parser.sections():
-        click.echo(click.style(f"\n[{section}]", fg=app_config.themeConfig.section_color, bold=True))
+        click.echo(
+            click.style(f"\n[{section}]", fg=app_config.theme_config.section_color, bold=True)
+        )
         for key, value in config_parser.items(section):
-            click.echo(f"  {click.style(key, fg=app_config.themeConfig.key_color)} = {click.style(str(value), fg=app_config.themeConfig.value_color)}")
+            click.echo(
+                f"  {click.style(key, fg=app_config.theme_config.key_color)} = {click.style(str(value), fg=app_config.theme_config.value_color)}"
+            )
     click.echo()
 
 
 # Update the settings of a config file, or the current config file.
 def update_config_file(file_path: Path, updates: dict[str, Any]):
-    logger.debug(_("Updating config file at: %(file_path)s"), {"file_path": file_path})
+    logger.debug("Entering: file_path=%s, updates=%s", file_path, updates)
 
     config_parser: ConfigParser = ConfigParser()
     if file_path is None:
         # Use the current settings (from config file).
-        config_parser.read_dict(app_config.asDict())
+        config_parser.read_dict(app_config.to_dict())
     else:
         # Read the settings inside the file.
         config_parser.read(file_path)
@@ -123,7 +132,7 @@ def update_config_file(file_path: Path, updates: dict[str, Any]):
                         config_parser.set("logging", "filename", "None")
 
                     case "debug" | "info" | "warning" | "error" | "critical":
-                        config_parser.set("logging", "filename", str(pneo.LOG_FILE_PATH))
+                        config_parser.set("logging", "filename", str(app_config.id.app_log_path))
 
             case "i18n":
                 # automatically configures all the other i18n options.
@@ -177,6 +186,7 @@ def update_config_file(file_path: Path, updates: dict[str, Any]):
 
     # Write the updated settings in config file:
     with open(file_path, "w") as f:
+        logger.debug("Tracing: Updating config file at '%s'.", file_path)
         config_parser.write(f)
 
 

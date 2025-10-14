@@ -1,10 +1,9 @@
 import logging
 from pathlib import Path
-from builtins import _, fdocstr
-
-import pneo
 
 import click
+
+from nuke import gettext as _, ngettext as _n, AppConfig, fdocstr, echo, p_trace, p_debug, p_info, p_warn, p_error, p_fatal
 
 
 # ----------------------------------------------------------------------------
@@ -15,21 +14,22 @@ import click
 logger: logging.Logger = logging.getLogger(__name__)
 
 # singleton instance with application settings.
-app_config: pneo.AppConfig = pneo.getAppConfig()
+app_config: AppConfig = AppConfig.get_instance()
 
 
 # ----------------------------------------------------------------------------
 # CLICK: COMMAND VIEW
 # ----------------------------------------------------------------------------
 
-view_short_help: str = _("Open a window (using native webview) to manage the project, and select the <COMMAND> tab; defaults to `home` if not provided.")
-
-@click.command(
-    options_metavar=_("<OPTIONS>"),
-    short_help=view_short_help
+_view_short_help: str = _(
+    "Open a window (using native webview) to manage the project, and select the <COMMAND> tab; defaults to `home` if not provided."
 )
+
+
+@click.command(options_metavar=_("<OPTIONS>"), short_help=_view_short_help)
 @click.option(
-    "--min-size", "-m",
+    "--min-size",
+    "-m",
     required=False,
     is_flag=True,
     type=click.BOOL,
@@ -37,7 +37,8 @@ view_short_help: str = _("Open a window (using native webview) to manage the pro
     help=_("Use minimum allowed window size."),
 )
 @click.option(
-    "--resizable", "-r",
+    "--resizable",
+    "-r",
     required=False,
     is_flag=True,
     type=click.BOOL,
@@ -45,7 +46,8 @@ view_short_help: str = _("Open a window (using native webview) to manage the pro
     help=_("Whether the window can be resized by the user."),
 )
 @click.option(
-    "--maximized", "-x",
+    "--maximized",
+    "-x",
     required=False,
     is_flag=True,
     type=click.BOOL,
@@ -53,7 +55,8 @@ view_short_help: str = _("Open a window (using native webview) to manage the pro
     help=_("Show window initially maximized."),
 )
 @click.option(
-    "--fullscreen", "-f",
+    "--fullscreen",
+    "-f",
     required=False,
     is_flag=True,
     type=click.BOOL,
@@ -61,7 +64,8 @@ view_short_help: str = _("Open a window (using native webview) to manage the pro
     help=_("Start the window in fullscreen mode."),
 )
 @click.option(
-    "--on-top", "-t",
+    "--on-top",
+    "-t",
     required=False,
     is_flag=True,
     type=click.BOOL,
@@ -69,7 +73,8 @@ view_short_help: str = _("Open a window (using native webview) to manage the pro
     help=_("Keeps window always on top."),
 )
 @click.option(
-    "--easy-drag", "-d",
+    "--easy-drag",
+    "-d",
     required=False,
     is_flag=True,
     type=click.BOOL,
@@ -77,21 +82,38 @@ view_short_help: str = _("Open a window (using native webview) to manage the pro
     help=_("Whether you can drag the window by clicking anywhere."),
 )
 @click.option(
-    "--confirm-close", "-c",
+    "--confirm-close",
+    "-c",
     required=False,
     is_flag=True,
     type=click.BOOL,
     default=False,
     help=_("Whether to ask confirmation before closing."),
 )
-@click.argument(
-    "command",
-    required=False,
-    type=click.STRING,
-    metavar=_("<COMMAND>")
-)
+@click.argument("command", required=False, type=click.STRING, metavar=_("<COMMAND>"))
 @click.pass_context
-@fdocstr(view_short_help)
-def view(context: click.Context, min_size: bool, resizable: bool, maximized: bool, fullscreen: bool, on_top: bool,  easy_drag: bool, confirm_close: bool, command: str) -> None:
-    # print(f"min_size: {min_size}, resizable: {resizable}, maximized: {maximized}, fullscreen: {fullscreen}, on_top: {on_top}, easy_drag: {easy_drag}, confirm_close: {confirm_close}, command: {command}")
+@fdocstr(_view_short_help)
+def view(
+    context: click.Context,
+    min_size: bool,
+    resizable: bool,
+    maximized: bool,
+    fullscreen: bool,
+    on_top: bool,
+    easy_drag: bool,
+    confirm_close: bool,
+    command: str,
+) -> None:
+    logger.debug(
+        "Entering: min_size=%s, resizable=%s, maximized=%s, fullscreen=%s, on_top=%s, easy_drag=%s, confirm_close=%s, command=%s",
+        min_size,
+        resizable,
+        maximized,
+        fullscreen,
+        on_top,
+        easy_drag,
+        confirm_close,
+        command,
+    )
+
     pass
