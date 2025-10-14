@@ -1,0 +1,13 @@
+{
+    "include": [
+        "src"
+    ],
+    "exclude": [
+        "**/__pycache__"
+    ],
+    "typeCheckingMode": "standard",
+    "reportMissingTypeStubs": true,
+    "extraPaths": [
+        "src/typings"
+    ]
+}

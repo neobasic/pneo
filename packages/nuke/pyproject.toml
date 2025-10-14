@@ -1,19 +1,19 @@
 [project]
-name = "ngne"
+name = "nuke"
 version = "0.0.1"
 authors = [
     {name = "Raul Bras"},
 ]
-description = "Prototype implementation of a recursive-descent parser and evaluation engine for the NeoBASIC programming language, written in Python."
+description = "A primordial standard library for the NeoBASIC ecosystem, containing utility functions and type declarations for all other projects."
 readme = "README.md"
 license = "MIT"
 license-files = ["LICEN[CS]E*"]
-keywords = ["ngne", "neobasic", "programming", "language", "parser", "compiler", "transpiler"]
+keywords = ["nuke", "neobasic", "programming", "language", "tools", "library", "util", "tool"]
 classifiers = [
     "Development Status :: 2 - Pre-Alpha",
     "License :: OSI Approved :: MIT License",
     "Intended Audience :: Developers",
-    "Topic :: Software Development :: Compilers",
+    "Topic :: Software Development :: Libraries",
     "Operating System :: OS Independent",
     "Environment :: Console",
     "Programming Language :: Python :: 3",
@@ -33,14 +33,14 @@ build-backend = "uv_build"
 [tool.uv.build-backend]
 # Specify the root of your Python module
 module-root = "src"
-module-name = "ngne"
+module-name = "nuke"
 # Include specific source files and configuration files
 source-include = [
-    "src/ngne/**/*.py",
-    "src/ngne/**/*.mo",
-    "src/ngne/**/*.conf",
-    "src/ngne/**/*.yaml",
-    "src/ngne/**/*.typed",
+    "src/nuke/**/*.py",
+    "src/nuke/**/*.mo",
+    "src/nuke/**/*.conf",
+    "src/nuke/**/*.yaml",
+    "src/nuke/**/*.typed",
 ]
 # Exclude cache directories and temporary files
 source-exclude = [
