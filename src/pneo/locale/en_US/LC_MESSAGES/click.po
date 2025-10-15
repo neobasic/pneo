@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2025-10-08 17:07-0300\n"
+"POT-Creation-Date: 2025-10-15 17:45-0300\n"
 "PO-Revision-Date: 2025-10-06 15:55-0300\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en_US\n"
@@ -18,99 +18,99 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.17.0\n"
 
-#: packages/click/src/click/_termui_impl.py:608
+#: packages/click/src/click/_termui_impl.py:594
 #, python-brace-format
 msgid "{editor}: Editing failed"
 msgstr ""
 
-#: packages/click/src/click/_termui_impl.py:612
+#: packages/click/src/click/_termui_impl.py:597
 #, python-brace-format
 msgid "{editor}: Editing failed: {e}"
 msgstr ""
 
-#: packages/click/src/click/core.py:934
+#: packages/click/src/click/core.py:920
 msgid "[OPTIONS]"
 msgstr ""
 
-#: packages/click/src/click/core.py:1104 packages/click/src/click/core.py:1141
+#: packages/click/src/click/core.py:1090 packages/click/src/click/core.py:1127
 #, python-brace-format
 msgid "{text} {deprecated_message}"
 msgstr ""
 
-#: packages/click/src/click/core.py:1160
+#: packages/click/src/click/core.py:1146
 msgid "Options"
 msgstr ""
 
-#: packages/click/src/click/core.py:1222
+#: packages/click/src/click/core.py:1208
 #, python-brace-format
 msgid "Got unexpected extra argument ({args})"
 msgid_plural "Got unexpected extra arguments ({args})"
 msgstr[0] ""
 msgstr[1] ""
 
-#: packages/click/src/click/core.py:1241
+#: packages/click/src/click/core.py:1225
 #, python-brace-format
 msgid "DeprecationWarning: The command {name!r} is deprecated.{extra_message}"
 msgstr ""
 
-#: packages/click/src/click/core.py:1425
+#: packages/click/src/click/core.py:1409
 msgid "Aborted!"
 msgstr ""
 
-#: packages/click/src/click/core.py:1564
+#: packages/click/src/click/core.py:1546
 msgid "COMMAND1 [ARGS]... [COMMAND2 [ARGS]...]..."
 msgstr ""
 
-#: packages/click/src/click/core.py:1566
+#: packages/click/src/click/core.py:1548
 msgid "COMMAND [ARGS]..."
 msgstr ""
 
-#: packages/click/src/click/core.py:1799
+#: packages/click/src/click/core.py:1779
 msgid "Commands"
 msgstr ""
 
-#: packages/click/src/click/core.py:1830
+#: packages/click/src/click/core.py:1810
 msgid "Missing command."
 msgstr ""
 
-#: packages/click/src/click/core.py:1908
+#: packages/click/src/click/core.py:1888
 #, python-brace-format
 msgid "No such command {name!r}."
 msgstr ""
 
-#: packages/click/src/click/core.py:2332
+#: packages/click/src/click/core.py:2302
 msgid "Value must be an iterable."
 msgstr ""
 
-#: packages/click/src/click/core.py:2355
+#: packages/click/src/click/core.py:2324
 #, python-brace-format
 msgid "Takes {nargs} values but 1 was given."
 msgid_plural "Takes {nargs} values but {len} were given."
 msgstr[0] ""
 msgstr[1] ""
 
-#: packages/click/src/click/core.py:2505
+#: packages/click/src/click/core.py:2472
 #, python-brace-format
 msgid ""
 "DeprecationWarning: The {param_type} {name!r} is "
 "deprecated.{extra_message}"
 msgstr ""
 
-#: packages/click/src/click/core.py:2956
+#: packages/click/src/click/core.py:2910
 #, python-brace-format
 msgid "env var: {var}"
 msgstr ""
 
-#: packages/click/src/click/core.py:2959
+#: packages/click/src/click/core.py:2912
 #, python-brace-format
 msgid "default: {default}"
 msgstr ""
 
-#: packages/click/src/click/core.py:2963
+#: packages/click/src/click/core.py:2916
 msgid "required"
 msgstr ""
 
-#: packages/click/src/click/core.py:3023
+#: packages/click/src/click/core.py:2974
 msgid "(dynamic)"
 msgstr ""
 
@@ -119,74 +119,74 @@ msgstr ""
 msgid "%(prog)s, version %(version)s"
 msgstr ""
 
-#: packages/click/src/click/decorators.py:522
+#: packages/click/src/click/decorators.py:521
 msgid "Show the version and exit."
 msgstr ""
 
-#: packages/click/src/click/decorators.py:548
+#: packages/click/src/click/decorators.py:547
 msgid "Show this message and exit."
 msgstr ""
 
 #: packages/click/src/click/exceptions.py:50
-#: packages/click/src/click/exceptions.py:89
+#: packages/click/src/click/exceptions.py:86
 #, python-brace-format
 msgid "Error: {message}"
 msgstr ""
 
-#: packages/click/src/click/exceptions.py:81
+#: packages/click/src/click/exceptions.py:78
 #, python-brace-format
 msgid "Try '{command} {option}' for help."
 msgstr ""
 
-#: packages/click/src/click/exceptions.py:130
+#: packages/click/src/click/exceptions.py:127
 #, python-brace-format
 msgid "Invalid value: {message}"
 msgstr ""
 
-#: packages/click/src/click/exceptions.py:132
+#: packages/click/src/click/exceptions.py:129
 #, python-brace-format
 msgid "Invalid value for {param_hint}: {message}"
 msgstr ""
 
-#: packages/click/src/click/exceptions.py:190
+#: packages/click/src/click/exceptions.py:185
 msgid "Missing argument"
 msgstr ""
 
-#: packages/click/src/click/exceptions.py:192
+#: packages/click/src/click/exceptions.py:187
 msgid "Missing option"
 msgstr ""
 
-#: packages/click/src/click/exceptions.py:194
+#: packages/click/src/click/exceptions.py:189
 msgid "Missing parameter"
 msgstr ""
 
-#: packages/click/src/click/exceptions.py:196
+#: packages/click/src/click/exceptions.py:191
 #, python-brace-format
 msgid "Missing {param_type}"
 msgstr ""
 
-#: packages/click/src/click/exceptions.py:203
+#: packages/click/src/click/exceptions.py:198
 #, python-brace-format
 msgid "Missing parameter: {param_name}"
 msgstr ""
 
-#: packages/click/src/click/exceptions.py:223
+#: packages/click/src/click/exceptions.py:218
 #, python-brace-format
 msgid "No such option: {name}"
 msgstr ""
 
-#: packages/click/src/click/exceptions.py:235
+#: packages/click/src/click/exceptions.py:230
 #, python-brace-format
 msgid "Did you mean {possibility}?"
 msgid_plural "(Possible options: {possibilities})"
 msgstr[0] ""
 msgstr[1] ""
 
-#: packages/click/src/click/exceptions.py:282
+#: packages/click/src/click/exceptions.py:275
 msgid "unknown error"
 msgstr ""
 
-#: packages/click/src/click/exceptions.py:289
+#: packages/click/src/click/exceptions.py:282
 #, python-brace-format
 msgid "Could not open file {filename!r}: {message}"
 msgstr ""
@@ -200,135 +200,135 @@ msgstr ""
 msgid "Argument {name!r} takes {nargs} values."
 msgstr ""
 
-#: packages/click/src/click/parser.py:381
+#: packages/click/src/click/parser.py:376
 #, python-brace-format
 msgid "Option {name!r} does not take a value."
 msgstr ""
 
-#: packages/click/src/click/parser.py:444
+#: packages/click/src/click/parser.py:438
 #, python-brace-format
 msgid "Option {name!r} requires an argument."
 msgid_plural "Option {name!r} requires {nargs} arguments."
 msgstr[0] ""
 msgstr[1] ""
 
-#: packages/click/src/click/shell_completion.py:332
+#: packages/click/src/click/shell_completion.py:331
 msgid "Shell completion is not supported for Bash versions older than 4.4."
 msgstr ""
 
-#: packages/click/src/click/shell_completion.py:339
+#: packages/click/src/click/shell_completion.py:336
 msgid "Couldn't detect Bash version, shell completion is not supported."
 msgstr ""
 
-#: packages/click/src/click/termui.py:162
+#: packages/click/src/click/termui.py:160
 msgid "Repeat for confirmation"
 msgstr ""
 
-#: packages/click/src/click/termui.py:178
+#: packages/click/src/click/termui.py:176
 msgid "Error: The value you entered was invalid."
 msgstr ""
 
-#: packages/click/src/click/termui.py:180
+#: packages/click/src/click/termui.py:178
 #, python-brace-format
 msgid "Error: {e.message}"
 msgstr ""
 
-#: packages/click/src/click/termui.py:191
+#: packages/click/src/click/termui.py:189
 msgid "Error: The two entered values do not match."
 msgstr ""
 
-#: packages/click/src/click/termui.py:247
+#: packages/click/src/click/termui.py:245
 msgid "Error: invalid input"
 msgstr ""
 
-#: packages/click/src/click/termui.py:866
+#: packages/click/src/click/termui.py:864
 msgid "Press any key to continue..."
 msgstr ""
 
-#: packages/click/src/click/types.py:332
+#: packages/click/src/click/types.py:316
 #, python-brace-format
 msgid ""
 "Choose from:\n"
 "\t{choices}"
 msgstr ""
 
-#: packages/click/src/click/types.py:369
+#: packages/click/src/click/types.py:351
 #, python-brace-format
 msgid "{value!r} is not {choice}."
 msgid_plural "{value!r} is not one of {choices}."
 msgstr[0] ""
 msgstr[1] ""
 
-#: packages/click/src/click/types.py:460
+#: packages/click/src/click/types.py:440
 #, python-brace-format
 msgid "{value!r} does not match the format {format}."
 msgid_plural "{value!r} does not match the formats {formats}."
 msgstr[0] ""
 msgstr[1] ""
 
-#: packages/click/src/click/types.py:482
+#: packages/click/src/click/types.py:460
 #, python-brace-format
 msgid "{value!r} is not a valid {number_type}."
 msgstr ""
 
-#: packages/click/src/click/types.py:538
+#: packages/click/src/click/types.py:514
 #, python-brace-format
 msgid "{value} is not in the range {range}."
 msgstr ""
 
-#: packages/click/src/click/types.py:719
+#: packages/click/src/click/types.py:688
 #, python-brace-format
 msgid "{value!r} is not a valid boolean. Recognized values: {states}"
 msgstr ""
 
-#: packages/click/src/click/types.py:747
+#: packages/click/src/click/types.py:714
 #, python-brace-format
 msgid "{value!r} is not a valid UUID."
 msgstr ""
 
-#: packages/click/src/click/types.py:937
+#: packages/click/src/click/types.py:901
 msgid "file"
 msgstr ""
 
-#: packages/click/src/click/types.py:939
+#: packages/click/src/click/types.py:903
 msgid "directory"
 msgstr ""
 
-#: packages/click/src/click/types.py:941
+#: packages/click/src/click/types.py:905
 msgid "path"
 msgstr ""
 
-#: packages/click/src/click/types.py:988
+#: packages/click/src/click/types.py:950
 #, python-brace-format
 msgid "{name} {filename!r} does not exist."
 msgstr ""
 
-#: packages/click/src/click/types.py:997
+#: packages/click/src/click/types.py:959
 #, python-brace-format
 msgid "{name} {filename!r} is a file."
 msgstr ""
 
-#: packages/click/src/click/types.py:1005
+#: packages/click/src/click/types.py:967
 #, python-brace-format
 msgid "{name} {filename!r} is a directory."
 msgstr ""
 
-#: packages/click/src/click/types.py:1014
+#: packages/click/src/click/types.py:976
 #, python-brace-format
 msgid "{name} {filename!r} is not readable."
 msgstr ""
 
-#: packages/click/src/click/types.py:1023
+#: packages/click/src/click/types.py:985
 #, python-brace-format
 msgid "{name} {filename!r} is not writable."
 msgstr ""
 
-#: packages/click/src/click/types.py:1032
+#: packages/click/src/click/types.py:994
 #, python-brace-format
 msgid "{name} {filename!r} is not executable."
 msgstr ""
 
-#: packages/click/src/click/types.py:1099
+#: packages/click/src/click/types.py:1059
 #, python-brace-format
 msgid "{len_type} values are required, but {len_value} was given."
 msgid_plural "{len_type} values are required, but {len_value} were given."

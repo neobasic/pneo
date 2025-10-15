@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2025-10-08 17:07-0300\n"
+"POT-Creation-Date: 2025-10-15 17:45-0300\n"
 "PO-Revision-Date: 2025-10-07 12:01-0300\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: pt_BR\n"
@@ -22,7 +22,7 @@ msgstr ""
 msgid "nasa"
 msgstr ""
 
-#: packages/nasa/src/nasa/__init__.py:4
+#: packages/nasa/src/nasa/__init__.py:5
 msgid ""
 "Nasa is an implementation of the Language Server Protocol for the "
 "NeoBASIC programming language. It provides a set of core features that "
