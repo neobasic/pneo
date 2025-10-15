@@ -32,7 +32,7 @@ class ClickException(Exception):
     def __init__(self, message: str) -> None:
         super().__init__(message)
         # The context will be removed by the time we print the message, so cache
-        # the color settings here to be used later on (in `show`)
+        # the color setup here to be used later on (in `show`)
         self.show_color: bool | None = resolve_color_default()
         self.message = message
 

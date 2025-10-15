@@ -1,19 +1,20 @@
-import os
-import logging
-import logging.config
 import gettext
 import locale
+import logging
+import logging.config
+import os
 
 import nuke
+
 
 # ----------------------------------------------------------------------------
 # SETTINGS PRIVATE HELPERS
 # ----------------------------------------------------------------------------
 
-def _setup_logging(config: nuke.AppConfig):
+def _setup_logging(settings: nuke.Settings):
     from typing import Any
 
-    log_level: str = config.log_config.level
+    log_level: str = settings.log.level
     log_level = log_level.casefold() if log_level else "notset"
 
     log_config_file: str = ""
@@ -33,14 +34,14 @@ def _setup_logging(config: nuke.AppConfig):
     # load the logging configuration from inside the app packages (resource).
     loader: nuke.YamlConfigLoader = nuke.YamlConfigLoader()
     log_config_dict: dict[str, dict[str, Any]] = loader.load_config_resource(
-        config.id.app_anchor_config, log_config_file
+        settings.app.anchor_config, log_config_file
     )
 
     if log_config_file != "notset.yaml":
-        log_filename: str = str(config.id.app_log_path)  # default value
-        if config.log_config.filename and config.log_config.filename.lower() != "none":
+        log_filename: str = str(settings.app.log_path)  # default value
+        if settings.log.filename and settings.log.filename.lower() != "none":
             # just in case there is '~' in file path.
-            log_filename = os.path.expanduser(config.log_config.filename)
+            log_filename = os.path.expanduser(settings.log.filename)
 
         # Ensure log path directory exists in current OS.
         log_dir: str = os.path.dirname(log_filename)
@@ -62,13 +63,13 @@ def _setup_logging(config: nuke.AppConfig):
         console_handler.setFormatter(console_formatter)
 
 
-def _setup_internationalization(config: nuke.AppConfig):
+def _setup_internationalization(settings: nuke.Settings):
     msg_domain: str = "messages"
     valid_locales: list[str] = ["pt_BR", "en_US"]
     default_locale: str = "en_US"  # fallback language.
 
     # check the configured locale language:
-    lang: str | None = config.i18n_config.locale
+    lang: str | None = settings.i18n.locale
     if lang not in valid_locales:
         # get the default locale already configured of OS.
         try:
@@ -81,7 +82,7 @@ def _setup_internationalization(config: nuke.AppConfig):
         if lang not in valid_locales:
             lang = default_locale
 
-    # configure the choosen locale as global locale:
+    # configure the chosen locale as global locale:
     value_locale: str = lang + ".UTF-8"
     try:
         locale.setlocale(locale.LC_ALL, value_locale)
@@ -129,19 +130,19 @@ def _setup_internationalization(config: nuke.AppConfig):
 # and configuring internationalization. This should be called once at startup (import).
 
 # 1. Load configuration
-_app_config: nuke.AppConfig = nuke.AppConfig.init_instance(
+_settings: nuke.Settings = nuke.Settings.init_instance(
     name="pneo",
-    anchor_root = "pneo",
-    anchor_config = "pneo.config",
-    config_ext = "conf"
+    anchor_root="pneo",
+    anchor_config="pneo.config",
+    config_ext="conf"
 )
 
 # 2. Setup logging (do this first to log subsequent steps)
-_setup_logging(_app_config)
+_setup_logging(_settings)
 logging.debug("Logging configured.")
 
 # 3. Setup i18n
-_setup_internationalization(_app_config)
+_setup_internationalization(_settings)
 logging.debug("Internationalization configured.")
 
 # 4. Initial setup ok

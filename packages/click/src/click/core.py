@@ -1987,7 +1987,7 @@ class Parameter:
     not supported by design as some of the internals for parsing are
     intentionally not finalized.
 
-    Some settings are supported by both options and arguments.
+    Some setup are supported by both options and arguments.
 
     :param param_decls: the parameter declarations for this option or
                         argument.  This is a list of flags or argument

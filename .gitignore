@@ -153,11 +153,11 @@ ENV/
 env.bak/
 venv.bak/
 
-# Spyder project settings
+# Spyder project setup
 .spyderproject
 .spyproject
 
-# Rope project settings
+# Rope project setup
 .ropeproject
 
 # mkdocs documentation
@@ -186,7 +186,7 @@ cython_debug/
 
 # Abstra
 # Abstra is an AI-powered process automation framework.
-# Ignore directories containing user credentials, local state, and settings.
+# Ignore directories containing user credentials, local state, and setup.
 # Learn more at https://abstra.io/docs
 .abstra/
 

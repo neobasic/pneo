@@ -1,4 +1,5 @@
 import os
+import logging
 from pathlib import Path
 from importlib import resources
 from configparser import ConfigParser
@@ -6,7 +7,13 @@ from typing import Dict, List, Optional, Any, Type
 
 import yaml
 
-from nuke.formatters.print_color import p_error
+# ----------------------------------------------------------------------------
+# GLOBAL SETTINGS
+# ----------------------------------------------------------------------------
+
+# Now that the app is initialized and checked, we can get the logger and config.
+# it is a logger instance for the current module.
+logger: logging.Logger = logging.getLogger(__name__)
 
 
 # ----------------------------------------------------------------------------
@@ -24,9 +31,6 @@ class ConfigLoader:
 
         Args:
             config_parser: An initialized and already populated ConfigParser instance.
-            filepath: The path to the configuration file (used for error reporting).
-            p_error: A callable used to report errors, expected to accept a format
-                    string and arguments (similar to logging or printf-style).
 
         Returns:
             A nested dictionary mapping each section name to a dict of key/value pairs.
@@ -47,7 +51,7 @@ class ConfigLoader:
                 config_dict[section] = dict(config_parser.items(section))
             except Exception as e:  # catches almost all unexpected issues
                 # Should be rare, but catch any error from extraction.
-                p_error("Failed to parse section '%s': %r", section, e)
+                logger.error("Failed to parse section '%s': %r", section, e)
 
         return config_dict
 
@@ -68,7 +72,7 @@ class ConfigLoader:
 
         content: str = ""
 
-        # just to be sure we have vaild arguments:
+        # just to be sure we have valid arguments:
         if not anchor or not filename:
             return content
 
@@ -77,14 +81,12 @@ class ConfigLoader:
                 content = f.read()
 
         except Exception as e:  # catches almost all exceptions
-            p_error(
-                "Failed to read the content of file '%s' from package '%s': %r", filename, anchor, e
-            )
+            logger.error("Failed to read the content of file '%s' from package '%s': %r", filename, anchor, e)
 
         return content
 
     def load_content_file(self, filepath: Optional[Path]) -> str:
-        """Read the content of a file outside, from a OS path.
+        """Read the content of a file outside, from an OS path.
 
         Args:
             filepath (Path): Path to the text file.
@@ -106,7 +108,7 @@ class ConfigLoader:
                 content = file.read()
 
         except Exception as e:  # catches almost all exceptions
-            p_error("Failed to read the content of file '%s': %r", filepath, e)
+            logger.error("Failed to read the content of file '%s': %r", filepath, e)
 
         return content
 
@@ -125,7 +127,7 @@ class ConfigLoader:
 
         config_dict: Dict[str, Dict[str, Any]] = {}
 
-        # just to be sure we have vaild arguments:
+        # just to be sure we have valid arguments:
         if not config_content:
             return config_dict
 
@@ -136,7 +138,7 @@ class ConfigLoader:
             config_parser.read_string(config_content)
 
         except Exception as e:  # catches almost all exceptions
-            p_error("Failed to parse configuration from string content: %r", e)
+            logger.error("Failed to parse configuration from string content: %r", e)
 
         # extract a Dict from the sections and keys/values of config_parser.
         config_dict = self._extract_config_dict(config_parser)
@@ -159,7 +161,7 @@ class ConfigLoader:
 
         config_dict: Dict[str, Dict[str, Any]] = {}
 
-        # just to be sure we have vaild arguments:
+        # just to be sure we have valid arguments:
         if not anchor or not filename:
             return config_dict
 
@@ -175,7 +177,7 @@ class ConfigLoader:
             config_parser.read_string(content)
 
         except Exception as e:  # catches almost all exceptions
-            p_error("Failed to read config file '%s' from package '%s': %r", filename, anchor, e)
+            logger.error("Failed to read config file '%s' from package '%s': %r", filename, anchor, e)
 
         # extract a Dict from the sections and keys/values of config_parser.
         config_dict = self._extract_config_dict(config_parser)
@@ -183,7 +185,7 @@ class ConfigLoader:
 
     def load_config_file(self, filepath: Optional[Path]) -> Dict[str, Dict[str, Any]]:
         """
-        Read the content of a configuration file outside, from a OS path.
+        Read the content of a configuration file outside, from an OS path.
 
         Args:
             filepath (str): Path to the INI config file.
@@ -211,7 +213,7 @@ class ConfigLoader:
                 return config_dict
 
         except Exception as e:  # catches almost all exceptions
-            p_error("Failed to read config file '%s': %r", filepath, e)
+            logger.error("Failed to read config file '%s': %r", filepath, e)
 
         # extract a Dict from the sections and keys/values of config_parser.
         config_dict = self._extract_config_dict(config_parser)
@@ -236,7 +238,7 @@ class YamlConfigLoader(ConfigLoader):
 
         config_dict: Dict[str, Dict[str, Any]] = {}
 
-        # just to be sure we have vaild arguments:
+        # just to be sure we have valid arguments:
         if not config_content:
             return config_dict
 
@@ -245,7 +247,7 @@ class YamlConfigLoader(ConfigLoader):
             config_dict = yaml.safe_load(config_content)
 
         except Exception as e:  # catches almost all exceptions
-            p_error("Failed to parse YAML configuration from string content: %r", e)
+            logger.error("Failed to parse YAML configuration from string content: %r", e)
 
         return config_dict
 
@@ -263,7 +265,7 @@ class YamlConfigLoader(ConfigLoader):
 
         config_dict: Dict[str, Dict[str, Any]] = {}
 
-        # just to be sure we have vaild arguments:
+        # just to be sure we have valid arguments:
         if not anchor or not filename:
             return config_dict
 
@@ -279,13 +281,13 @@ class YamlConfigLoader(ConfigLoader):
             config_dict = yaml.safe_load(content)
 
         except Exception as e:  # catches almost all exceptions
-            p_error("Failed to read config file '%s' from package '%s': %r", filename, anchor, e)
+            logger.error("Failed to read config file '%s' from package '%s': %r", filename, anchor, e)
 
         return config_dict
 
     def load_config_file(self, filepath: Optional[Path]) -> Dict[str, Dict[str, Any]]:
         """
-        Read the content of a configuration file of type YAML outside, from a OS path.
+        Read the content of a configuration file of type YAML outside, from an OS path.
 
         Args:
             filepath (str): Path to the YAML config file.
@@ -313,14 +315,14 @@ class YamlConfigLoader(ConfigLoader):
                 return config_dict
 
         except Exception as e:  # catches almost all exceptions
-            p_error("Failed to read config file '%s': %r", filepath, e)
+            logger.error("Failed to read config file '%s': %r", filepath, e)
 
         # then parse it through the YAML parser, since it is a valid content.
         try:
             config_dict = yaml.safe_load(content)
 
         except Exception as e:  # catches almost all exceptions
-            p_error("Failed to read config file '%s': %r", filepath, e)
+            logger.error("Failed to read config file '%s': %r", filepath, e)
 
         return config_dict
 
