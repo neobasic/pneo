@@ -2,9 +2,7 @@ import logging
 from pathlib import Path
 
 import click
-
-from nuke import gettext as _, ngettext as _n, AppConfig, fdocstr, echo, p_trace, p_debug, p_info, p_warn, p_error, p_fatal
-
+from nuke import gettext as _, Settings, fdocstr
 
 # ----------------------------------------------------------------------------
 # GLOBAL SETTINGS
@@ -13,17 +11,14 @@ from nuke import gettext as _, ngettext as _n, AppConfig, fdocstr, echo, p_trace
 # gets a logger instance for the current module.
 logger: logging.Logger = logging.getLogger(__name__)
 
-# singleton instance with application settings.
-app_config: AppConfig = AppConfig.get_instance()
-
+# singleton instance with application setup.
+settings: Settings = Settings.get_instance()
 
 # ----------------------------------------------------------------------------
 # CLICK: COMMAND TREE
 # ----------------------------------------------------------------------------
 
-_tree_short_help: str = _(
-    "Display the dependency tree of current project, or some other project manifest file."
-)
+_tree_short_help: str = _("Display the dependency tree of current project, or some other project manifest file.")
 
 
 @click.command(options_metavar=_("<OPTIONS>"), short_help=_tree_short_help)
@@ -63,8 +58,6 @@ _tree_short_help: str = _(
 @click.pass_context
 @fdocstr(_tree_short_help)
 def tree(context: click.Context, path: Path, depth: int, outdated: bool, show_sizes: bool) -> None:
-    logger.debug(
-        "Entering: path=%s, depth=%s, outdated=%s, show_sizes=%s", path, depth, outdated, show_sizes
-    )
+    logger.debug("Entering: path=%s, depth=%s, outdated=%s, show_sizes=%s", path, depth, outdated, show_sizes)
 
     pass

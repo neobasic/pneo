@@ -6,7 +6,7 @@ from typing import Any, Optional
 
 import click
 
-from nuke import gettext as _, ngettext as _n, AppConfig, echo, p_trace, p_debug, p_info, p_warn, p_error, p_fatal
+from nuke import gettext as _, ngettext as _n, Settings, echo, p_trace, p_debug, p_info, p_warn, p_error, p_fatal
 
 
 # ----------------------------------------------------------------------------
@@ -16,8 +16,8 @@ from nuke import gettext as _, ngettext as _n, AppConfig, echo, p_trace, p_debug
 # gets a logger instance for the current module.
 logger: logging.Logger = logging.getLogger(__name__)
 
-# singleton instance with application settings.
-app_config: AppConfig = AppConfig.get_instance()
+# singleton instance with application setup.
+settings: Settings = Settings.get_instance()
 
 
 # ----------------------------------------------------------------------------
@@ -25,7 +25,7 @@ app_config: AppConfig = AppConfig.get_instance()
 # ----------------------------------------------------------------------------
 
 
-# create a new configuration file with default settings.
+# create a new configuration file with default setup.
 def create_config_file(file_path: Path, default_ok: bool = False):
     logger.debug("Entering: file_path=%s, default_ok=%s", file_path, default_ok)
 
@@ -33,18 +33,18 @@ def create_config_file(file_path: Path, default_ok: bool = False):
     os.makedirs(os.path.dirname(file_path), exist_ok=True)
 
     if default_ok:
-        # Read the settings inside the project (default configuration).
-        default_config: str = app_config.id.app_default_config
+        # Read the setup inside the project (default configuration).
+        default_config: str = settings.app.default_config
 
-        # Write the settings content in config file:
+        # Write the setup content in config file:
         with open(file_path, "w") as f:
             f.write(default_config)
     else:
-        # Use the current settings (from config file).
+        # Use the current setup (from config file).
         config_parser: ConfigParser = ConfigParser()
-        config_parser.read_dict(app_config.to_dict())
+        config_parser.read_dict(settings.to_dict())
 
-        # Write the settings content in config file:
+        # Write the setup content in config file:
         with open(file_path, "w") as f:
             logger.debug("Creating config file at '%s'.", file_path)
             config_parser.write(f)
@@ -55,24 +55,24 @@ def reset_config_file(file_path: Path, default_ok: bool = False):
     logger.debug("Entering: file_path=%s, default_ok=%s", file_path, default_ok)
 
     if default_ok:
-        # Read the settings inside the project (default configuration).
-        default_config: str = app_config.id.app_default_config
+        # Read the setup inside the project (default configuration).
+        default_config: str = settings.app.default_config
 
-        # Write the settings content in config file:
+        # Write the setup content in config file:
         with open(file_path, "w") as f:
             f.write(default_config)
     else:
-        # Use the current settings (from config file).
+        # Use the current setup (from config file).
         config_parser: ConfigParser = ConfigParser()
-        config_parser.read_dict(app_config.to_dict())
+        config_parser.read_dict(settings.to_dict())
 
-        # Write the settings content in config file:
+        # Write the setup content in config file:
         with open(file_path, "w") as f:
             logger.debug("Tracing: Resetting config file at '%s'.", file_path)
             config_parser.write(f)
 
 
-# Show the content of a config file, or the current settings.
+# Show the content of a config file, or the current setup.
 def show_config_file(file_path: Optional[Path], default_ok: bool = False):
     logger.debug("Entering: file_path=%s, default_ok=%s", file_path, default_ok)
 
@@ -81,44 +81,44 @@ def show_config_file(file_path: Optional[Path], default_ok: bool = False):
 
     if default_ok:
         title = _("\nPNEO Default Configuration:")
-        # Read the settings inside the project (default configuration).
-        default_config: str = app_config.id.app_default_config
+        # Read the setup inside the project (default configuration).
+        default_config: str = settings.app.default_config
         config_parser.read_string(default_config)
 
     elif file_path is None:
         title = _("\nPNEO Current Configuration:")
-        # Use the current settings (from config file).
-        config_parser.read_dict(app_config.to_dict())
+        # Use the current setup (from config file).
+        config_parser.read_dict(settings.to_dict())
 
     else:
         title = _("\nPNEO File Configuration:")
-        # Read the settings inside the file.
+        # Read the setup inside the file.
         config_parser.read(file_path)
 
     # Print the configuration
     logger.debug("Tracing: Showing config file at '%s'.", file_path)
-    click.echo(click.style(title, fg=app_config.theme_config.title_color, bold=True))
+    click.echo(click.style(title, fg=settings.theme.title_color, bold=True))
     for section in config_parser.sections():
         click.echo(
-            click.style(f"\n[{section}]", fg=app_config.theme_config.section_color, bold=True)
+            click.style(f"\n[{section}]", fg=settings.theme.section_color, bold=True)
         )
         for key, value in config_parser.items(section):
             click.echo(
-                f"  {click.style(key, fg=app_config.theme_config.key_color)} = {click.style(str(value), fg=app_config.theme_config.value_color)}"
+                f"  {click.style(key, fg=settings.theme.key_color)} = {click.style(str(value), fg=settings.theme.value_color)}"
             )
     click.echo()
 
 
-# Update the settings of a config file, or the current config file.
+# Update the setup of a config file, or the current config file.
 def update_config_file(file_path: Path, updates: dict[str, Any]):
     logger.debug("Entering: file_path=%s, updates=%s", file_path, updates)
 
     config_parser: ConfigParser = ConfigParser()
     if file_path is None:
-        # Use the current settings (from config file).
-        config_parser.read_dict(app_config.to_dict())
+        # Use the current setup (from config file).
+        config_parser.read_dict(settings.to_dict())
     else:
-        # Read the settings inside the file.
+        # Read the setup inside the file.
         config_parser.read(file_path)
 
     # apply the updates in config data structure.
@@ -132,7 +132,7 @@ def update_config_file(file_path: Path, updates: dict[str, Any]):
                         config_parser.set("logging", "filename", "None")
 
                     case "debug" | "info" | "warning" | "error" | "critical":
-                        config_parser.set("logging", "filename", str(app_config.id.app_log_path))
+                        config_parser.set("logging", "filename", str(settings.app.log_path))
 
             case "i18n":
                 # automatically configures all the other i18n options.
@@ -184,7 +184,7 @@ def update_config_file(file_path: Path, updates: dict[str, Any]):
                         config_parser.set("theme", "critical_color", "red")
                         config_parser.set("theme", "success_color", "bright_green")
 
-    # Write the updated settings in config file:
+    # Write the updated setup in config file:
     with open(file_path, "w") as f:
         logger.debug("Tracing: Updating config file at '%s'.", file_path)
         config_parser.write(f)

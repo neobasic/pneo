@@ -3,7 +3,7 @@ from pathlib import Path
 
 import click
 
-from nuke import gettext as _, ngettext as _n, AppConfig, fdocstr, echo, p_trace, p_debug, p_info, p_warn, p_error, p_fatal
+from nuke import gettext as _, ngettext as _n, Settings, fdocstr, echo, p_trace, p_debug, p_info, p_warn, p_error, p_fatal
 
 
 # ----------------------------------------------------------------------------
@@ -13,8 +13,8 @@ from nuke import gettext as _, ngettext as _n, AppConfig, fdocstr, echo, p_trace
 # gets a logger instance for the current module.
 logger: logging.Logger = logging.getLogger(__name__)
 
-# singleton instance with application settings.
-app_config: AppConfig = AppConfig.get_instance()
+# singleton instance with application setup.
+settings: Settings = Settings.get_instance()
 
 
 # ----------------------------------------------------------------------------
@@ -42,15 +42,6 @@ _make_short_help: str = _("Compile the target directory and generate the binary 
     default=False,
     help=_("Generate no warnings about the linking, only errors."),
 )
-@click.option(
-    "--verbose",
-    "-v",
-    required=False,
-    is_flag=True,
-    type=click.BOOL,
-    default=False,
-    help=_("Output messages about what the compiler is doing."),
-)
 @click.argument(
     "target",
     required=False,
@@ -60,7 +51,7 @@ _make_short_help: str = _("Compile the target directory and generate the binary 
 )
 @click.pass_context
 @fdocstr(_make_short_help)
-def make(context: click.Context, bin: Path, nowarn: bool, verbose: bool, target: Path) -> None:
-    logger.debug("Entering: bin=%s, nowarn=%s, verbose=%s, target=%s", bin, nowarn, verbose, target)
+def make(context: click.Context, bin: Path, nowarn: bool, target: Path) -> None:
+    logger.debug("Entering: bin=%s, nowarn=%s, target=%s", bin, nowarn, target)
 
     pass

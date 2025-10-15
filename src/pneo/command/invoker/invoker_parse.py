@@ -2,9 +2,7 @@ import logging
 from pathlib import Path
 
 import click
-
-from nuke import gettext as _, ngettext as _n, AppConfig, fdocstr, echo, p_trace, p_debug, p_info, p_warn, p_error, p_fatal
-
+from nuke import gettext as _, Settings, fdocstr
 
 # ----------------------------------------------------------------------------
 # GLOBAL SETTINGS
@@ -13,17 +11,15 @@ from nuke import gettext as _, ngettext as _n, AppConfig, fdocstr, echo, p_trace
 # gets a logger instance for the current module.
 logger: logging.Logger = logging.getLogger(__name__)
 
-# singleton instance with application settings.
-app_config: AppConfig = AppConfig.get_instance()
-
+# singleton instance with application setup.
+settings: Settings = Settings.get_instance()
 
 # ----------------------------------------------------------------------------
 # CLICK: COMMAND PARSE
 # ----------------------------------------------------------------------------
 
 _parse_short_help: str = _(
-    "Parse a single NeoBASIC program file and output the abstract syntax tree (AST) or other structured data. This can be used for debugging the parser logic."
-)
+    "Parse a single NeoBASIC program file and output the abstract syntax tree (AST) or other structured data. This can be used for debugging the parser logic.")
 
 
 @click.command(options_metavar=_("<OPTIONS>"), short_help=_parse_short_help)

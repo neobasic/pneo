@@ -1,10 +1,8 @@
 import logging
-from pathlib import Path
 
 import click
-
-from nuke import gettext as _, ngettext as _n, AppConfig, fdocstr, echo, p_trace, p_debug, p_info, p_warn, p_error, p_fatal
-
+from nuke import gettext as _, Settings, fdocstr
+from pneo.command.receiver.receiver_lock import lock_project
 
 # ----------------------------------------------------------------------------
 # GLOBAL SETTINGS
@@ -13,9 +11,8 @@ from nuke import gettext as _, ngettext as _n, AppConfig, fdocstr, echo, p_trace
 # gets a logger instance for the current module.
 logger: logging.Logger = logging.getLogger(__name__)
 
-# singleton instance with application settings.
-app_config: AppConfig = AppConfig.get_instance()
-
+# singleton instance with application setup.
+settings: Settings = Settings.get_instance()
 
 # ----------------------------------------------------------------------------
 # CLICK: COMMAND LOCK
@@ -48,4 +45,5 @@ _lock_short_help: str = _("Create or update the current project's lockfile.")
 def lock(context: click.Context, check: bool, upgrade: bool) -> None:
     logger.debug("Entering: check=%s, upgrade=%s", check, upgrade)
 
-    pass
+    # proceed with the locking.
+    lock_project(check, upgrade)

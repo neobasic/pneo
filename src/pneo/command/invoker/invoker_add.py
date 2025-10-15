@@ -1,17 +1,13 @@
 import logging
 from pathlib import Path
-from typing import Optional
 
 import click
-
-from nuke import gettext as _, ngettext as _n, AppConfig, fdocstr, echo, p_trace, p_debug, p_info, p_warn, p_error, p_fatal
-
+from nuke import gettext as _, Settings, fdocstr, p_error
 from pneo.command.receiver.receiver_add import (
     LibraryLinking,
     add_dependency_path,
     add_dependency_web,
 )
-
 
 # ----------------------------------------------------------------------------
 # GLOBAL SETTINGS
@@ -20,9 +16,8 @@ from pneo.command.receiver.receiver_add import (
 # gets a logger instance for the current module.
 logger: logging.Logger = logging.getLogger(__name__)
 
-# singleton instance with application settings.
-app_config: AppConfig = AppConfig.get_instance()
-
+# singleton instance with application setup.
+settings: Settings = Settings.get_instance()
 
 # ----------------------------------------------------------------------------
 # CLICK: COMMAND ADD
@@ -67,32 +62,27 @@ _add_short_help: str = _("Add one or more dependencies to the current project ma
 @click.pass_context
 @fdocstr(_add_short_help)
 def add(context: click.Context, path: Path, static: bool, dynamic: bool, packages: tuple) -> None:
-    logger.debug(
-        "Entering: path=%s, static=%s, dynamic=%s, packages=%s",
-        path,
-        static,
-        dynamic,
-        packages,
-    )
+    logger.debug("Entering: path=%s, static=%s, dynamic=%s, packages=%s", path, static, dynamic, packages)
 
     # dynamic is the default linking mode
     linking: LibraryLinking = LibraryLinking.DYNAMIC
 
     # can't use --static and --dynamic together.
     if static and dynamic:
-        logger.error("Used both options '--static' and '--dinamic' in command ADD.")
-        p_error(
-            _(
-                "Error: The flags <*'--static'*> and <*'--dinamic'*> are mutually exclusive; choose only one."
-            )
-        )
+        logger.error("Used both options '--static' and '--dynamic' in command ADD.")
+        p_error(_("Error: The flags <*'--static'*> and <*'--dynamic'*> are mutually exclusive; choose only one."))
         exit(1)
+
     elif static:
         linking = LibraryLinking.STATIC
 
     # check where will get the dependency from:
     if path is None:
+        # proceed with the adding of dependency.
         add_dependency_web(packages, linking)
+
     else:
         dep_path: Path = Path(path)
+
+        # proceed with the adding of dependency.
         add_dependency_path(dep_path, packages, linking)

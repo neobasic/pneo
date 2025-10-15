@@ -1,10 +1,7 @@
 import logging
-from pathlib import Path
 
 import click
-
-from nuke import gettext as _, ngettext as _n, AppConfig, fdocstr, echo, p_trace, p_debug, p_info, p_warn, p_error, p_fatal
-
+from nuke import gettext as _, Settings, fdocstr
 
 # ----------------------------------------------------------------------------
 # GLOBAL SETTINGS
@@ -13,17 +10,15 @@ from nuke import gettext as _, ngettext as _n, AppConfig, fdocstr, echo, p_trace
 # gets a logger instance for the current module.
 logger: logging.Logger = logging.getLogger(__name__)
 
-# singleton instance with application settings.
-app_config: AppConfig = AppConfig.get_instance()
-
+# singleton instance with application setup.
+settings: Settings = Settings.get_instance()
 
 # ----------------------------------------------------------------------------
 # CLICK: COMMAND VIEW
 # ----------------------------------------------------------------------------
 
 _view_short_help: str = _(
-    "Open a window (using native webview) to manage the project, and select the <COMMAND> tab; defaults to `home` if not provided."
-)
+    "Open a window (using native webview) to manage the project, and select the <COMMAND> tab; defaults to `home` if not provided.")
 
 
 @click.command(options_metavar=_("<OPTIONS>"), short_help=_view_short_help)
@@ -93,27 +88,10 @@ _view_short_help: str = _(
 @click.argument("command", required=False, type=click.STRING, metavar=_("<COMMAND>"))
 @click.pass_context
 @fdocstr(_view_short_help)
-def view(
-    context: click.Context,
-    min_size: bool,
-    resizable: bool,
-    maximized: bool,
-    fullscreen: bool,
-    on_top: bool,
-    easy_drag: bool,
-    confirm_close: bool,
-    command: str,
-) -> None:
+def view(context: click.Context, min_size: bool, resizable: bool, maximized: bool, fullscreen: bool, on_top: bool,
+         easy_drag: bool, confirm_close: bool, command: str) -> None:
     logger.debug(
         "Entering: min_size=%s, resizable=%s, maximized=%s, fullscreen=%s, on_top=%s, easy_drag=%s, confirm_close=%s, command=%s",
-        min_size,
-        resizable,
-        maximized,
-        fullscreen,
-        on_top,
-        easy_drag,
-        confirm_close,
-        command,
-    )
+        min_size, resizable, maximized, fullscreen, on_top, easy_drag, confirm_close, command)
 
     pass

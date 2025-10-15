@@ -3,7 +3,7 @@ from pathlib import Path
 
 import click
 
-from nuke import gettext as _, ngettext as _n, AppConfig, fdocstr, echo, p_trace, p_debug, p_info, p_warn, p_error, p_fatal
+from nuke import gettext as _, ngettext as _n, Settings, fdocstr, echo, p_trace, p_debug, p_info, p_warn, p_error, p_fatal
 
 
 # ----------------------------------------------------------------------------
@@ -13,8 +13,8 @@ from nuke import gettext as _, ngettext as _n, AppConfig, fdocstr, echo, p_trace
 # gets a logger instance for the current module.
 logger: logging.Logger = logging.getLogger(__name__)
 
-# singleton instance with application settings.
-app_config: AppConfig = AppConfig.get_instance()
+# singleton instance with application setup.
+settings: Settings = Settings.get_instance()
 
 
 # ----------------------------------------------------------------------------
@@ -64,17 +64,17 @@ def upgrade(context: click.Context, target_version: str) -> None:
 
 @self.command()
 @click.option(
-    "--quiet",
-    "-q",
+    "--assume-yes",
+    "-y",
     required=False,
     is_flag=True,
     type=click.BOOL,
     default=False,
-    help=_("Specifies quiet mode, not prompting for delete confirmation."),
+    help=_("Assume 'yes' for all questions, not prompting for confirmation."),
 )
 @click.pass_context
-@fdocstr(_("Uninstall pneo e remove all files and settings."))
-def uninstall(context: click.Context, quiet: bool) -> None:
-    logger.debug("Entering: quiet=%s", quiet)
+@fdocstr(_("Uninstall pneo e remove all files and setup."))
+def uninstall(context: click.Context, assume_yes: bool) -> None:
+    logger.debug("Entering: assume_yes=%s", assume_yes)
 
     pass

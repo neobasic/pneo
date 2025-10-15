@@ -4,7 +4,7 @@ from typing import Optional, Any
 
 import click
 
-from nuke import gettext as _, ngettext as _n, AppConfig, fdocstr, echo, p_trace, p_debug, p_info, p_warn, p_error, p_fatal
+from nuke import gettext as _, ngettext as _n, Settings, fdocstr, echo, p_trace, p_debug, p_info, p_warn, p_error, p_fatal
 
 from pneo.command.receiver.receiver_config import (
     create_config_file,
@@ -21,8 +21,8 @@ from pneo.command.receiver.receiver_config import (
 # gets a logger instance for the current module.
 logger: logging.Logger = logging.getLogger(__name__)
 
-# singleton instance with application settings.
-app_config: AppConfig = AppConfig.get_instance()
+# singleton instance with application setup.
+settings: Settings = Settings.get_instance()
 
 
 # ----------------------------------------------------------------------------
@@ -70,9 +70,9 @@ def config(context: click.Context) -> None:
 def create(context: click.Context, path: Path, force: bool, default_config: bool) -> None:
     logger.debug("Entering: path=%s, force=%s, default_config=%s", path, force, default_config)
 
-    target_path: Path = Path(path) if path else app_config.id.app_config_path
+    target_path: Path = Path(path) if path else settings.app.config_path
     if target_path.is_dir() or target_path.suffix != ".conf":
-        target_path = target_path / app_config.id.app_config_file
+        target_path = target_path / settings.app.config_file
 
     if target_path.exists() and not force:
         logger.warning(
@@ -107,9 +107,9 @@ def create(context: click.Context, path: Path, force: bool, default_config: bool
 def reset(context: click.Context, path: Path, default_config: bool) -> None:
     logger.debug("Entering: path=%s, default_config=%s", path, default_config)
 
-    target_path: Path = Path(path) if path else app_config.id.app_config_path
+    target_path: Path = Path(path) if path else settings.app.config_path
     if target_path.is_dir() or target_path.suffix != ".conf":
-        target_path = target_path / app_config.id.app_config_file
+        target_path = target_path / settings.app.config_file
 
     if not target_path.exists():
         logger.warning(
@@ -146,7 +146,7 @@ def show(context: click.Context, path: Path, default_config: bool) -> None:
     if path:
         target_path = Path(path)
         if target_path.is_dir() or target_path.suffix != ".conf":
-            target_path = target_path / app_config.id.app_config_file
+            target_path = target_path / settings.app.config_file
 
         if target_path and not target_path.exists():
             logger.warning(
@@ -193,9 +193,9 @@ def show(context: click.Context, path: Path, default_config: bool) -> None:
 def update(context: click.Context, path: Optional[Path], **kwargs: dict[str, Any]) -> None:
     logger.debug("Entering: path=%s, kwargs=%s", path, kwargs)
 
-    target_path: Path = Path(path) if path else app_config.id.app_config_path
+    target_path: Path = Path(path) if path else settings.app.config_path
     if target_path.is_dir() or target_path.suffix != ".conf":
-        target_path = target_path / app_config.id.app_config_file
+        target_path = target_path / settings.app.config_file
 
     if not target_path.exists():
         logger.warning(

@@ -1,10 +1,7 @@
 import logging
-from pathlib import Path
 
 import click
-
-from nuke import gettext as _, ngettext as _n, AppConfig, fdocstr, echo, p_trace, p_debug, p_info, p_warn, p_error, p_fatal
-
+from nuke import gettext as _, Settings, fdocstr
 
 # ----------------------------------------------------------------------------
 # GLOBAL SETTINGS
@@ -13,17 +10,14 @@ from nuke import gettext as _, ngettext as _n, AppConfig, fdocstr, echo, p_trace
 # gets a logger instance for the current module.
 logger: logging.Logger = logging.getLogger(__name__)
 
-# singleton instance with application settings.
-app_config: AppConfig = AppConfig.get_instance()
-
+# singleton instance with application setup.
+settings: Settings = Settings.get_instance()
 
 # ----------------------------------------------------------------------------
 # CLICK: COMMAND SERVE
 # ----------------------------------------------------------------------------
 
-_serve_short_help: str = _(
-    "Run in language server mode, ready to handle requests from a client (the editor)."
-)
+_serve_short_help: str = _("Run in language server mode, ready to handle requests from a client (the editor).")
 
 
 @click.command(options_metavar=_("<OPTIONS>"), short_help=_serve_short_help)
@@ -56,8 +50,8 @@ _serve_short_help: str = _(
     help=_("Limit completion items. [default: 10]"),
 )
 @click.option(
-    "--verbose",
-    "-v",
+    "--noisy",
+    "-n",
     required=False,
     is_flag=True,
     type=click.BOOL,
@@ -75,21 +69,8 @@ _serve_short_help: str = _(
 )
 @click.pass_context
 @fdocstr(_serve_short_help)
-def serve(
-    context: click.Context,
-    stdio: bool,
-    socket_port: int,
-    limit_results: int,
-    verbose: bool,
-    quiet: bool,
-) -> None:
-    logger.debug(
-        "Entering: stdio=%s, socket_port=%s, limit_results=%s, verbose=%s, quiet=%s",
-        stdio,
-        socket_port,
-        limit_results,
-        verbose,
-        quiet,
-    )
+def serve(context: click.Context, stdio: bool, socket_port: int, limit_results: int, noisy: bool, quiet: bool) -> None:
+    logger.debug("Entering: stdio=%s, socket_port=%s, limit_results=%s, noisy=%s, quiet=%s",
+                 stdio, socket_port, limit_results, noisy, quiet)
 
     pass

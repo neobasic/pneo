@@ -3,7 +3,7 @@ from pathlib import Path
 
 import click
 
-from nuke import gettext as _, ngettext as _n, AppConfig, fdocstr, echo, p_trace, p_debug, p_info, p_warn, p_error, p_fatal
+from nuke import gettext as _, ngettext as _n, Settings, fdocstr, echo, p_trace, p_debug, p_info, p_warn, p_error, p_fatal
 
 
 # ----------------------------------------------------------------------------
@@ -13,8 +13,8 @@ from nuke import gettext as _, ngettext as _n, AppConfig, fdocstr, echo, p_trace
 # gets a logger instance for the current module.
 logger: logging.Logger = logging.getLogger(__name__)
 
-# singleton instance with application settings.
-app_config: AppConfig = AppConfig.get_instance()
+# singleton instance with application setup.
+settings: Settings = Settings.get_instance()
 
 
 # ----------------------------------------------------------------------------
@@ -42,15 +42,6 @@ _package_short_help: str = _("Assemble the compiled binaries into a distributabl
     default=False,
     help=_("Generate no warnings about the packaging, only errors."),
 )
-@click.option(
-    "--verbose",
-    "-v",
-    required=False,
-    is_flag=True,
-    type=click.BOOL,
-    default=False,
-    help=_("Output messages about what the assembler is doing."),
-)
 @click.argument(
     "bin",
     required=False,
@@ -60,7 +51,7 @@ _package_short_help: str = _("Assemble the compiled binaries into a distributabl
 )
 @click.pass_context
 @fdocstr(_package_short_help)
-def package(context: click.Context, dist: Path, nowarn: bool, verbose: bool, bin: Path) -> None:
-    logger.debug("Entering: dist=%s, nowarn=%s, verbose=%s, bin=%s", dist, nowarn, verbose, bin)
+def package(context: click.Context, dist: Path, nowarn: bool, bin: Path) -> None:
+    logger.debug("Entering: dist=%s, nowarn=%s, bin=%s", dist, nowarn, bin)
 
     pass

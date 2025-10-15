@@ -2,9 +2,7 @@ import logging
 from pathlib import Path
 
 import click
-
-from nuke import gettext as _, ngettext as _n, AppConfig, fdocstr, echo, p_trace, p_debug, p_info, p_warn, p_error, p_fatal
-
+from nuke import gettext as _, Settings, fdocstr, p_error
 from pneo.command.receiver.receiver_backup import backup_source_file, backup_source
 
 # ----------------------------------------------------------------------------
@@ -14,9 +12,8 @@ from pneo.command.receiver.receiver_backup import backup_source_file, backup_sou
 # gets a logger instance for the current module.
 logger: logging.Logger = logging.getLogger(__name__)
 
-# singleton instance with application settings.
-app_config: AppConfig = AppConfig.get_instance()
-
+# singleton instance with application setup.
+settings: Settings = Settings.get_instance()
 
 # ----------------------------------------------------------------------------
 # CLICK: COMMAND BACKUP
@@ -68,18 +65,14 @@ def backup(context: click.Context, all: bool, force: bool, time: bool, file: Pat
     if file:
         target_file: Path = Path(file)
         if target_file.exists() and not force and not time:
-            logger.error(
-                "Backup file '%s' already exists, but option '--force' was not used.", file
-            )
-            p_error(
-                _(
-                    "Error: The backup file '%s' already exists. Use the --force option to override it."
-                ),
-                file,
-            )
+            logger.error("Backup file '%s' already exists, but option '--force' was not used.", file)
+            p_error(_("Error: The backup file '%s' already exists. Use the --force option to override it."),
+                    file)
             exit(1)
 
+        # proceed with the backup.
         backup_source_file(all, time, target_file)
 
     else:
+        # proceed with the backup.
         backup_source(all, time)
