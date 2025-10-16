@@ -2,7 +2,7 @@
 name = "pneo"
 version = "0.0.1"
 authors = [
-    {name = "Raul Bras"},
+    { name = "Raul Bras" },
 ]
 description = "Prototype implementation of a project and package manager for the NeoBASIC programming language, written in Python."
 readme = "README.md"
@@ -36,8 +36,11 @@ dependencies = [
     "watchdog>=6.0.0",
     "click",
     "nuke",
+    "nuit",
     "ngne",
+    "ntcpp",
     "nasa",
+    "tqdm>=4.67.1",
 ]
 
 [project.urls]
@@ -50,7 +53,9 @@ Changelog = "https://github.com/neobasic/pneo/blob/main/CHANGELOG.md"
 [tool.uv.sources]
 click = { workspace = true }
 nuke = { workspace = true }
+nuit = { workspace = true }
 ngne = { workspace = true }
+ntcpp = { workspace = true }
 nasa = { workspace = true }
 
 [tool.uv.workspace]
@@ -65,10 +70,7 @@ build-backend = "uv_build"
 
 [dependency-groups]
 dev = [
-    "black>=25.9.0",
     "mypy>=1.18.2",
-    "pylint>=3.3.9",
-    "pyright>=1.1.406",
 ]
 
 # Include non-Python files like .mo/.conf in the wheel

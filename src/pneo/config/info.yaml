@@ -22,99 +22,104 @@ handlers:
 
   # no need to detail debug information to avoid very large files in production.
   logfile:
-      level: INFO
-      class: logging.handlers.TimedRotatingFileHandler
-      formatter: verbose
-      encoding: utf8
-      when: 'midnight'
-      backupCount: 32
-      # filename: None
+    level: INFO
+    class: logging.handlers.TimedRotatingFileHandler
+    formatter: verbose
+    encoding: utf8
+    when: 'midnight'
+    backupCount: 32
+    # filename: None
 
 loggers:
   # only the errors from any of the libraries are of interest, 
   # and leave them in the file to debug later. 
   antlr4:
     level: ERROR
-    handlers: [logfile]
+    handlers: [ logfile ]
     propagate: no
 
   anytree:
     level: ERROR
-    handlers: [logfile]
+    handlers: [ logfile ]
     propagate: no
 
   babel:
     level: ERROR
-    handlers: [logfile]
+    handlers: [ logfile ]
     propagate: no
 
   click:
     level: ERROR
-    handlers: [logfile]
+    handlers: [ logfile ]
     propagate: no
 
   colorama:
     level: ERROR
-    handlers: [logfile]
+    handlers: [ logfile ]
     propagate: no
 
   jinja2:
     level: ERROR
-    handlers: [logfile]
+    handlers: [ logfile ]
     propagate: no
 
   platformdirs:
     level: ERROR
-    handlers: [logfile]
+    handlers: [ logfile ]
     propagate: no
 
   pygls:
     level: ERROR
-    handlers: [logfile]
+    handlers: [ logfile ]
     propagate: no
 
   rich:
     level: ERROR
-    handlers: [logfile]
+    handlers: [ logfile ]
     propagate: no
 
   tomli:
     level: ERROR
-    handlers: [logfile]
+    handlers: [ logfile ]
+    propagate: no
+
+  tqdm:
+    level: ERROR
+    handlers: [ logfile ]
     propagate: no
 
   watchdog:
     level: ERROR
-    handlers: [logfile]
+    handlers: [ logfile ]
     propagate: no
 
   webview:
     level: ERROR
-    handlers: [logfile]
+    handlers: [ logfile ]
     propagate: no
 
   yaml:
     level: ERROR
-    handlers: [logfile]
+    handlers: [ logfile ]
     propagate: no
 
   # lets root decide whether to show it in the console or just in a file.
   pneo:
     level: INFO
-    handlers: []
+    handlers: [ ]
     propagate: yes
 
   ngne:
     level: INFO
-    handlers: []
+    handlers: [ ]
     propagate: yes
 
   nasa:
     level: INFO
-    handlers: []
+    handlers: [ ]
     propagate: yes
 
 root:
   level: INFO
-  handlers: [console, logfile]
+  handlers: [ console, logfile ]
   # propagate in root is unnecessary.

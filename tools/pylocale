@@ -1,10 +1,9 @@
 #!/usr/bin/env python3
 
 import os
-import sys
 import subprocess
+import sys
 from typing import List
-
 
 # ----------------------------------------------------------------------------
 # GLOBAL SETTINGS
@@ -15,12 +14,12 @@ APP_ROOT_PACKAGE: str = APP_NAME
 LOCALE_DOMAIN: str = APP_NAME
 
 # full relative paths to the locale files.
-VALID_LOCALES: List[str] = [ 'en_US', 'pt_BR' ]
+VALID_LOCALES: List[str] = ['en_US', 'pt_BR']
 LOCALE_DIR: str = os.path.join('src', APP_ROOT_PACKAGE, 'locale')
 LOCALE_POT: str = os.path.join(LOCALE_DIR, LOCALE_DOMAIN + '.pot')
 
 # libraries to extract messages.
-PACK_LIBS: List[str] = [ 'ngne', 'nasa', 'click' ]
+PACK_LIBS: List[str] = ['click', 'nuit', 'ngne', 'ntcpp', 'nasa']
 PACK_DIR: str = 'packages'
 
 
@@ -84,7 +83,7 @@ def run_command(command_args: List[str], silent: bool = False) -> bool:
         return False
 
     finally:
-        print("\n" + "="*50 + "\n")
+        print("\n" + "=" * 50 + "\n")
 
 
 def run_pybabel_command(pybabel_args: List[str], silent: bool = False) -> bool:
@@ -127,16 +126,13 @@ if current_dir_name == "tools":
     os.chdir(parent_dir)
     print(f"✅ Detected running from **/tools. Changed directory to: {os.getcwd()}\n")
 
-
 # ----------------------------------------------------------------------
 # APP LOCALIZATION / I18N
 # ----------------------------------------------------------------------
 
-result_ok: bool = False
-
 # --- Extract English strings → messages.pot
 # Equivalent to:  pybabel extract -F babel.cfg -o src/app/locale/messages.pot .
-result_ok = run_pybabel_command(['extract', '-F', 'tools/babel.cfg', '-o', LOCALE_POT, '.'])
+result_ok: bool = run_pybabel_command(['extract', '-F', 'tools/babel.cfg', '-o', LOCALE_POT, '.'])
 if not result_ok:
     print("\n🚨 Please ensure **Babel** is installed in your environment (e.g., `pip install Babel`).", file=sys.stderr)
     sys.exit(1)
@@ -150,7 +146,6 @@ for lib in PACK_LIBS:
     result_ok = run_pybabel_command(['extract', '-F', 'tools/babel.cfg', '-o', lib_pot, lib_src])
     if not result_ok: sys.exit(1)
 
-
 # --- Update the .PO translation files.
 # Equivalent to:  pybabel update -D messages -i src/app/locale/messages.pot -d src/app/locale
 for domain in [LOCALE_DOMAIN] + PACK_LIBS:
@@ -160,21 +155,20 @@ for domain in [LOCALE_DOMAIN] + PACK_LIBS:
     result_ok = run_pybabel_command(['update', '-D', domain, '-i', domain_pot, '-d', LOCALE_DIR])
     if not result_ok: sys.exit(1)
 
-
 # --- Review, edit, and remove translations marked as fuzzy: #, fuzzy
 # Equivalent to:  grep -n -i -H -r --include="*.po" "fuzzy" src/app/locale
 run_command(['grep', '-n', '-i', '-H', '-r', '--include="*.po"', '"fuzzy"', LOCALE_DIR])
 
-
 # --- # Merge all translations into unique POT and PO files, before compilation.
 # Equivalent to:  xgettext myapp/locale/myapp.pot libA/locale/libA.pot -o merged/locale/myapp.pot
 input1: str = os.path.join(LOCALE_DIR, LOCALE_DOMAIN + '.pot')
-input2: str = os.path.join(LOCALE_DIR, 'ngne.pot')
-input3: str = os.path.join(LOCALE_DIR, 'nasa.pot')
-input4: str = os.path.join(LOCALE_DIR, 'click.pot')
+input2: str = os.path.join(LOCALE_DIR, 'nuit.pot')
+input3: str = os.path.join(LOCALE_DIR, 'ngne.pot')
+input4: str = os.path.join(LOCALE_DIR, 'ntcpp.pot')
+input5: str = os.path.join(LOCALE_DIR, 'nasa.pot')
+input6: str = os.path.join(LOCALE_DIR, 'click.pot')
 output: str = os.path.join(LOCALE_DIR, 'messages.pot')
-run_command(['xgettext', input1, input2, input3, input4, '-o', output])
-
+run_command(['xgettext', input1, input2, input3, input4, input5, input6, '-o', output])
 
 # execute the command `msgcat` for all languages, each in its locale path.
 for idiom in VALID_LOCALES:
@@ -182,12 +176,13 @@ for idiom in VALID_LOCALES:
 
     # Equivalent to:  msgcat --use-first --sort-output myapp/locale/es/LC_MESSAGES/myapp.po libA/locale/es/LC_MESSAGES/libA.po -o merged/locale/es/LC_MESSAGES/myapp.po
     input1: str = os.path.join(messages_path, LOCALE_DOMAIN + '.po')
-    input2: str = os.path.join(messages_path, 'ngne.po')
-    input3: str = os.path.join(messages_path, 'nasa.po')
-    input4: str = os.path.join(messages_path, 'click.po')
+    input2: str = os.path.join(messages_path, 'nuit.po')
+    input3: str = os.path.join(messages_path, 'ngne.po')
+    input4: str = os.path.join(messages_path, 'ntcpp.po')
+    input5: str = os.path.join(messages_path, 'nasa.po')
+    input6: str = os.path.join(messages_path, 'click.po')
     output: str = os.path.join(messages_path, 'messages.po')
-    run_command(['msgcat', '--use-first', input1, input2, input3, input4, '-o', output])
-
+    run_command(['msgcat', '--use-first', input1, input2, input3, input4, input5, input6, '-o', output])
 
 # --- Compile .po → .mo
 # The gettext runtime system uses binary .mo files, so you must compile the .po files.

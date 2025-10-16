@@ -153,7 +153,7 @@ cli.add_command(invoker_config.config)  # type: ignore
 cli.add_command(invoker_format.formatter)  # type: ignore
 cli.add_command(invoker_init.init)  # type: ignore
 cli.add_command(invoker_lint.lint)  # type: ignore
-cli.add_command(invoker_list.list)  # type: ignore
+cli.add_command(invoker_list.lister)  # type: ignore
 cli.add_command(invoker_lock.lock)  # type: ignore
 cli.add_command(invoker_make.make)  # type: ignore
 cli.add_command(invoker_package.package)  # type: ignore
