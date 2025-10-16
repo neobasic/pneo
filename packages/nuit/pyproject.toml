@@ -4,7 +4,7 @@ version = "0.0.1"
 authors = [
     { name = "Raul Bras" },
 ]
-description = "Prototype implementation of the Language Server Protocol for the NeoBASIC programming language, written in Python."
+description = "NUIT (NeoBASIC Universal Interface for Transpilers) defines a protocol for transpiling NeoBASIC code to other languages."
 readme = "README.md"
 license = "MIT"
 license-files = ["LICEN[CS]E*"]
