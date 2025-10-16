@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2025-10-15 17:45-0300\n"
+"POT-Creation-Date: 2025-10-16 13:26-0300\n"
 "PO-Revision-Date: 2025-10-06 15:55-0300\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: pt_BR\n"
@@ -100,14 +100,14 @@ msgstr "Adiciona uma ou mais dependências ao arquivo manifest do projeto corren
 #: src/pneo/command/invoker/invoker_lock.py:24
 #: src/pneo/command/invoker/invoker_make.py:27
 #: src/pneo/command/invoker/invoker_package.py:27
-#: src/pneo/command/invoker/invoker_parse.py:25
-#: src/pneo/command/invoker/invoker_remove.py:27
-#: src/pneo/command/invoker/invoker_run.py:27
-#: src/pneo/command/invoker/invoker_serve.py:23
-#: src/pneo/command/invoker/invoker_tree.py:24
-#: src/pneo/command/invoker/invoker_venv.py:25
-#: src/pneo/command/invoker/invoker_version.py:24
-#: src/pneo/command/invoker/invoker_view.py:24
+#: src/pneo/command/invoker/invoker_parse.py:28
+#: src/pneo/command/invoker/invoker_remove.py:23
+#: src/pneo/command/invoker/invoker_run.py:28
+#: src/pneo/command/invoker/invoker_serve.py:25
+#: src/pneo/command/invoker/invoker_tree.py:27
+#: src/pneo/command/invoker/invoker_venv.py:28
+#: src/pneo/command/invoker/invoker_version.py:27
+#: src/pneo/command/invoker/invoker_view.py:25
 msgid "<OPTIONS>"
 msgstr "<OPÇÕES>"
 
@@ -124,7 +124,7 @@ msgid "Library is separated from final executable and loaded at runtime."
 msgstr ""
 
 #: src/pneo/command/invoker/invoker_add.py:60
-#: src/pneo/command/invoker/invoker_remove.py:51
+#: src/pneo/command/invoker/invoker_remove.py:47
 msgid "<PACKAGES>"
 msgstr ""
 
@@ -152,7 +152,7 @@ msgstr ""
 
 #: src/pneo/command/invoker/invoker_backup.py:57
 #: src/pneo/command/invoker/invoker_lint.py:40
-#: src/pneo/command/invoker/invoker_parse.py:56
+#: src/pneo/command/invoker/invoker_parse.py:59
 msgid "<FILE>"
 msgstr ""
 
@@ -212,13 +212,13 @@ msgid "Display what would be deleted without deleting anything."
 msgstr ""
 
 #: src/pneo/command/invoker/invoker_clean.py:44
-#: src/pneo/command/invoker/invoker_self.py:73
+#: src/pneo/command/invoker/invoker_self.py:85
 msgid "Assume 'yes' for all questions, not prompting for confirmation."
 msgstr ""
 
 #: src/pneo/command/invoker/invoker_clean.py:51
 #: src/pneo/command/invoker/invoker_init.py:58
-#: src/pneo/command/invoker/invoker_venv.py:54
+#: src/pneo/command/invoker/invoker_venv.py:60
 msgid "<PATH>"
 msgstr ""
 
@@ -247,6 +247,7 @@ msgid "<FILES>"
 msgstr ""
 
 #: src/pneo/command/invoker/invoker_compile.py:60
+#: src/pneo/command/invoker/invoker_run.py:59
 #, python-format
 msgid ""
 "Error: Target directory '%s' cannot be accessed or you don't have "
@@ -255,6 +256,7 @@ msgstr ""
 
 #: src/pneo/command/invoker/invoker_compile.py:67
 #: src/pneo/command/invoker/invoker_format.py:59
+#: src/pneo/command/invoker/invoker_parse.py:68
 #, python-format
 msgid "Error: Source file '%s' does not exist."
 msgstr ""
@@ -436,6 +438,19 @@ msgstr ""
 msgid "<TARGET>"
 msgstr ""
 
+#: src/pneo/command/invoker/invoker_make.py:59
+#, python-format
+msgid ""
+"Error: Binary directory '%s' cannot be accessed or you don't have "
+"permission to write to it."
+msgstr ""
+
+#: src/pneo/command/invoker/invoker_make.py:65
+#: src/pneo/command/invoker/invoker_package.py:65
+#, python-format
+msgid "Error: Target directory '%s' does not exist or can't be read."
+msgstr ""
+
 #: src/pneo/command/invoker/invoker_package.py:24
 msgid "Assemble the compiled binaries into a distributable package."
 msgstr ""
@@ -449,97 +464,109 @@ msgid "Generate no warnings about the packaging, only errors."
 msgstr ""
 
 #: src/pneo/command/invoker/invoker_package.py:50
-msgid "<BIN>"
+msgid "<BIN-DIR>"
 msgstr ""
 
-#: src/pneo/command/invoker/invoker_parse.py:22
+#: src/pneo/command/invoker/invoker_package.py:59
+#, python-format
+msgid ""
+"Error: Distribution directory '%s' cannot be accessed or you don't have "
+"permission to write to it."
+msgstr ""
+
+#: src/pneo/command/invoker/invoker_parse.py:25
 msgid ""
 "Parse a single NeoBASIC program file and output the abstract syntax tree "
 "(AST) or other structured data. This can be used for debugging the parser"
 " logic."
 msgstr ""
 
-#: src/pneo/command/invoker/invoker_parse.py:32
+#: src/pneo/command/invoker/invoker_parse.py:35
 msgid "Maximum display depth of the abstract syntax tree (AST). [default: 100]"
 msgstr ""
 
-#: src/pneo/command/invoker/invoker_parse.py:41
+#: src/pneo/command/invoker/invoker_parse.py:44
 msgid ""
 "Show detailed information of all symbols in the abstract syntax tree "
 "(AST)."
 msgstr ""
 
-#: src/pneo/command/invoker/invoker_parse.py:50
+#: src/pneo/command/invoker/invoker_parse.py:53
 msgid "Only print main symbols in the abstract syntax tree (AST)."
 msgstr ""
 
-#: src/pneo/command/invoker/invoker_remove.py:24
+#: src/pneo/command/invoker/invoker_remove.py:20
 msgid "Remove dependencies from the current project manifest file."
 msgstr ""
 
-#: src/pneo/command/invoker/invoker_remove.py:35
+#: src/pneo/command/invoker/invoker_remove.py:31
 msgid "Remove dependencies without re-locking the project."
 msgstr ""
 
-#: src/pneo/command/invoker/invoker_remove.py:44
+#: src/pneo/command/invoker/invoker_remove.py:40
 msgid "Check whether removing the package will cause issues in the project."
 msgstr ""
 
-#: src/pneo/command/invoker/invoker_run.py:24
+#: src/pneo/command/invoker/invoker_run.py:25
 msgid "Execute the binary executable in target directory or a local program."
 msgstr ""
 
-#: src/pneo/command/invoker/invoker_run.py:33
+#: src/pneo/command/invoker/invoker_run.py:34
 msgid "Target directory containing the binary executable."
 msgstr ""
 
-#: src/pneo/command/invoker/invoker_run.py:40
+#: src/pneo/command/invoker/invoker_run.py:41
 msgid "Run the given source file as a NeoBASIC script."
 msgstr ""
 
-#: src/pneo/command/invoker/invoker_run.py:49
+#: src/pneo/command/invoker/invoker_run.py:50
 msgid "Run without accessing the network (disable network access)."
 msgstr ""
 
-#: src/pneo/command/invoker/invoker_self.py:24
+#: src/pneo/command/invoker/invoker_run.py:71
+#, python-format
+msgid "Error: Script file '%s' does not exist."
+msgstr ""
+
+#: src/pneo/command/invoker/invoker_self.py:26
 msgid "Manage the pneo executable installed."
 msgstr ""
 
-#: src/pneo/command/invoker/invoker_self.py:42
+#: src/pneo/command/invoker/invoker_self.py:44
 msgid "Only print the version."
 msgstr ""
 
-#: src/pneo/command/invoker/invoker_self.py:45
+#: src/pneo/command/invoker/invoker_self.py:47
 msgid "Show current version of installed pneo."
 msgstr ""
 
-#: src/pneo/command/invoker/invoker_self.py:56
+#: src/pneo/command/invoker/invoker_self.py:60
 msgid "<TARGET_VERSION>"
 msgstr ""
 
-#: src/pneo/command/invoker/invoker_self.py:59
+#: src/pneo/command/invoker/invoker_self.py:63
 msgid ""
 "Update pneo, installing a specified version, or upgrading to the latest "
 "version."
 msgstr ""
 
-#: src/pneo/command/invoker/invoker_self.py:76
+#: src/pneo/command/invoker/invoker_self.py:88
 msgid "Uninstall pneo e remove all files and setup."
 msgstr ""
 
-#: src/pneo/command/invoker/invoker_serve.py:20
+#: src/pneo/command/invoker/invoker_serve.py:22
 msgid ""
 "Run in language server mode, ready to handle requests from a client (the "
 "editor)."
 msgstr ""
 
-#: src/pneo/command/invoker/invoker_serve.py:32
+#: src/pneo/command/invoker/invoker_serve.py:34
 msgid ""
 "Instructs the server to communicate over its standard input (stdin) and "
 "standard output (stdout)."
 msgstr ""
 
-#: src/pneo/command/invoker/invoker_serve.py:41
+#: src/pneo/command/invoker/invoker_serve.py:43
 msgid ""
 "Instructs the server to listen on a specific TCP port for a client "
 "connection (socket). Used for remote development, servers running as "
@@ -547,114 +574,138 @@ msgid ""
 "clients to connect to a single server instance."
 msgstr ""
 
-#: src/pneo/command/invoker/invoker_serve.py:50
+#: src/pneo/command/invoker/invoker_serve.py:52
 msgid "Limit completion items. [default: 10]"
 msgstr ""
 
-#: src/pneo/command/invoker/invoker_serve.py:59
+#: src/pneo/command/invoker/invoker_serve.py:61
 msgid "Increases the server's logging and output verbosity."
 msgstr ""
 
-#: src/pneo/command/invoker/invoker_serve.py:68
+#: src/pneo/command/invoker/invoker_serve.py:70
 msgid "Decreases the server's logging and output verbosity (opposite of verbose)."
 msgstr ""
 
-#: src/pneo/command/invoker/invoker_tree.py:21
+#: src/pneo/command/invoker/invoker_serve.py:81
+msgid ""
+"Error: The flags <*'--stdio'*> and <*'--socket-port'*> are mutually "
+"exclusive; choose only one."
+msgstr ""
+
+#: src/pneo/command/invoker/invoker_tree.py:24
 msgid ""
 "Display the dependency tree of current project, or some other project "
 "manifest file."
 msgstr ""
 
-#: src/pneo/command/invoker/invoker_tree.py:30
-#: src/pneo/command/invoker/invoker_version.py:30
+#: src/pneo/command/invoker/invoker_tree.py:33
+#: src/pneo/command/invoker/invoker_version.py:33
 msgid "Path to the project manifest file."
 msgstr ""
 
-#: src/pneo/command/invoker/invoker_tree.py:38
+#: src/pneo/command/invoker/invoker_tree.py:41
 msgid "Maximum display depth of the dependency tree. [default: 255]"
 msgstr ""
 
-#: src/pneo/command/invoker/invoker_tree.py:47
+#: src/pneo/command/invoker/invoker_tree.py:50
 msgid "Show the latest available version of each package in the tree."
 msgstr ""
 
-#: src/pneo/command/invoker/invoker_tree.py:56
+#: src/pneo/command/invoker/invoker_tree.py:59
 msgid "Show sizes of all packages in the tree."
 msgstr ""
 
-#: src/pneo/command/invoker/invoker_venv.py:22
+#: src/pneo/command/invoker/invoker_tree.py:71
+#: src/pneo/command/invoker/invoker_version.py:70
+#, python-format
+msgid "Error: There is no manifest file in '%s'."
+msgstr ""
+
+#: src/pneo/command/invoker/invoker_tree.py:75
+#: src/pneo/command/invoker/invoker_version.py:74
+msgid "Error: There is no manifest file in current directory."
+msgstr ""
+
+#: src/pneo/command/invoker/invoker_venv.py:25
 msgid ""
 "Create a virtual environment named <PATH> in the working directory; "
 "defaults to `.venv` if not provided."
 msgstr ""
 
-#: src/pneo/command/invoker/invoker_venv.py:33
+#: src/pneo/command/invoker/invoker_venv.py:36
 msgid ""
 "Just check if all dependencies are installed and up-to-date, don't do "
 "anything."
 msgstr ""
 
-#: src/pneo/command/invoker/invoker_venv.py:42
+#: src/pneo/command/invoker/invoker_venv.py:45
 msgid "Ensures all dependencies are installed and up-to-date with the lockfile."
 msgstr ""
 
-#: src/pneo/command/invoker/invoker_venv.py:51
+#: src/pneo/command/invoker/invoker_venv.py:54
 msgid "Assert that the lockfile will remain unchanged."
 msgstr ""
 
-#: src/pneo/command/invoker/invoker_version.py:21
+#: src/pneo/command/invoker/invoker_venv.py:70
+#, python-format
+msgid ""
+"Error: VENV directory '%s' cannot be accessed or you don't have "
+"permission to write to it."
+msgstr ""
+
+#: src/pneo/command/invoker/invoker_version.py:24
 msgid ""
 "Read or update the current project's version, or some other project "
 "manifest file."
 msgstr ""
 
-#: src/pneo/command/invoker/invoker_version.py:39
+#: src/pneo/command/invoker/invoker_version.py:42
 msgid "Update the version without re-locking the project."
 msgstr ""
 
-#: src/pneo/command/invoker/invoker_version.py:49
+#: src/pneo/command/invoker/invoker_version.py:52
 msgid "Increment the project version using the given semantics."
 msgstr ""
 
-#: src/pneo/command/invoker/invoker_version.py:55
-msgid "<VERSION>"
+#: src/pneo/command/invoker/invoker_version.py:58
+msgid "<NEW-VERSION>"
 msgstr ""
 
-#: src/pneo/command/invoker/invoker_view.py:21
+#: src/pneo/command/invoker/invoker_view.py:22
 msgid ""
 "Open a window (using native webview) to manage the project, and select "
 "the <COMMAND> tab; defaults to `home` if not provided."
 msgstr ""
 
-#: src/pneo/command/invoker/invoker_view.py:32
+#: src/pneo/command/invoker/invoker_view.py:33
 msgid "Use minimum allowed window size."
 msgstr ""
 
-#: src/pneo/command/invoker/invoker_view.py:41
+#: src/pneo/command/invoker/invoker_view.py:42
 msgid "Whether the window can be resized by the user."
 msgstr ""
 
-#: src/pneo/command/invoker/invoker_view.py:50
+#: src/pneo/command/invoker/invoker_view.py:51
 msgid "Show window initially maximized."
 msgstr ""
 
-#: src/pneo/command/invoker/invoker_view.py:59
+#: src/pneo/command/invoker/invoker_view.py:60
 msgid "Start the window in fullscreen mode."
 msgstr ""
 
-#: src/pneo/command/invoker/invoker_view.py:68
+#: src/pneo/command/invoker/invoker_view.py:69
 msgid "Keeps window always on top."
 msgstr ""
 
-#: src/pneo/command/invoker/invoker_view.py:77
+#: src/pneo/command/invoker/invoker_view.py:78
 msgid "Whether you can drag the window by clicking anywhere."
 msgstr ""
 
-#: src/pneo/command/invoker/invoker_view.py:86
+#: src/pneo/command/invoker/invoker_view.py:87
 msgid "Whether to ask confirmation before closing."
 msgstr ""
 
-#: src/pneo/command/invoker/invoker_view.py:88
+#: src/pneo/command/invoker/invoker_view.py:93
 msgid "<COMMAND>"
 msgstr "<COMANDO>"
 
@@ -759,5 +810,11 @@ msgstr ""
 #~ msgstr ""
 
 #~ msgid "Updating config file at: %(file_path)s"
+#~ msgstr ""
+
+#~ msgid "<BIN>"
+#~ msgstr ""
+
+#~ msgid "<VERSION>"
 #~ msgstr ""
 
