@@ -1,8 +1,6 @@
 import logging
-from pathlib import Path
 
-from nuke import gettext as _, ngettext as _n, Settings, echo, p_trace, p_debug, p_info, p_warn, p_error, p_fatal
-
+from nuke import Settings
 
 # ----------------------------------------------------------------------------
 # GLOBAL SETTINGS
@@ -19,6 +17,10 @@ settings: Settings = Settings.get_instance()
 # API: COMMAND TREE
 # ----------------------------------------------------------------------------
 
+
+def display_dependency_tree(manifest_file: str, depth: int, outdated_ok: bool, show_sizes_ok: bool):
+    logger.debug("Entering: manifest_file=%s, depth=%s, outdated_ok=%s, show_sizes_ok=%s",
+                 manifest_file, depth, outdated_ok, show_sizes_ok)
 
 # ----------------------------------------------------------------------------
 # HELPERS

@@ -1,8 +1,11 @@
 import logging
+import os
 from pathlib import Path
 
 import click
 from nuke import gettext as _, Settings, fdocstr
+from nuke.formatters.print_color import p_error
+from pneo.command.receiver.receiver_parse import parse_file
 
 # ----------------------------------------------------------------------------
 # GLOBAL SETTINGS
@@ -32,7 +35,7 @@ _parse_short_help: str = _(
     help=_("Maximum display depth of the abstract syntax tree (AST). [default: 100]"),
 )
 @click.option(
-    "--all",
+    "--all-info",
     "-a",
     required=False,
     is_flag=True,
@@ -57,7 +60,12 @@ _parse_short_help: str = _(
 )
 @click.pass_context
 @fdocstr(_parse_short_help)
-def parse(context: click.Context, depth: int, all: bool, short: bool, file: Path) -> None:
-    logger.debug("Entering: depth=%s, all=%s, short=%s, file=%s", depth, all, short, file)
+def parse(context: click.Context, depth: int, all_info: bool, short: bool, file: Path) -> None:
+    logger.debug("Entering: depth=%s, all_info=%s, short=%s, file=%s", depth, all_info, short, file)
 
-    pass
+    # Check if the given file exists.
+    if not os.path.exists(file):
+        p_error(_("Error: Source file '%s' does not exist."), file)
+
+    # proceed with the parsing.
+    parse_file(file, depth, all_info, short)

@@ -2,6 +2,8 @@ import logging
 
 import click
 from nuke import gettext as _, Settings, fdocstr
+from nuke.formatters.print_color import p_error
+from pneo.command.receiver.receiver_serve import start_lsp_socket, start_lsp_stdio
 
 # ----------------------------------------------------------------------------
 # GLOBAL SETTINGS
@@ -73,4 +75,16 @@ def serve(context: click.Context, stdio: bool, socket_port: int, limit_results: 
     logger.debug("Entering: stdio=%s, socket_port=%s, limit_results=%s, noisy=%s, quiet=%s",
                  stdio, socket_port, limit_results, noisy, quiet)
 
-    pass
+    # can't use --stdio and --socket-port together.
+    if stdio and socket_port:
+        logger.error("Used both options '--stdio' and '--socket-port' in command SERVE.")
+        p_error(_("Error: The flags <*'--stdio'*> and <*'--socket-port'*> are mutually exclusive; choose only one."))
+        exit(1)
+
+    elif stdio:
+        # proceed with starting the language server in stdio mode.
+        start_lsp_stdio(limit_results, noisy, quiet)
+
+    else:
+        # proceed with starting the language server in socket mode.
+        start_lsp_socket(socket_port, limit_results, noisy, quiet)

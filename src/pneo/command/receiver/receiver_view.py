@@ -1,8 +1,6 @@
 import logging
-from pathlib import Path
 
-from nuke import gettext as _, ngettext as _n, Settings, echo, p_trace, p_debug, p_info, p_warn, p_error, p_fatal
-
+from nuke import Settings
 
 # ----------------------------------------------------------------------------
 # GLOBAL SETTINGS
@@ -19,6 +17,12 @@ settings: Settings = Settings.get_instance()
 # API: COMMAND VIEW
 # ----------------------------------------------------------------------------
 
+
+def open_view_project(command: str, min_size: bool, resizable: bool, maximized: bool, fullscreen: bool, on_top: bool,
+                      easy_drag: bool, confirm_close: bool):
+    logger.debug(
+        "Entering: command=%s, min_size=%s, resizable=%s, maximized=%s, fullscreen=%s, on_top=%s, easy_drag=%s, confirm_close=%s",
+        command, min_size, resizable, maximized, fullscreen, on_top, easy_drag, confirm_close)
 
 # ----------------------------------------------------------------------------
 # HELPERS

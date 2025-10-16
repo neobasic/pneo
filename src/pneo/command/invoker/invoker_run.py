@@ -1,10 +1,12 @@
 import logging
+import os
 from pathlib import Path
 
 import click
-
-from nuke import gettext as _, ngettext as _n, Settings, fdocstr, echo, p_trace, p_debug, p_info, p_warn, p_error, p_fatal
-
+from nuke import gettext as _, Settings, fdocstr
+from nuke.formatters.print_color import p_error
+from nuke.utils.shell import check_readable_dir
+from pneo.command.receiver.receiver_run import run_script, run_target
 
 # ----------------------------------------------------------------------------
 # GLOBAL SETTINGS
@@ -15,7 +17,6 @@ logger: logging.Logger = logging.getLogger(__name__)
 
 # singleton instance with application setup.
 settings: Settings = Settings.get_instance()
-
 
 # ----------------------------------------------------------------------------
 # CLICK: COMMAND RUN
@@ -53,4 +54,23 @@ _run_short_help: str = _("Execute the binary executable in target directory or a
 def run(context: click.Context, target: Path, script: Path, offline: bool) -> None:
     logger.debug("Entering: target=%s, script=%s, offline=%s", target, script, offline)
 
-    pass
+    # if user indicated a target dir, check if it is accessible.
+    if target and not check_readable_dir(target):
+        p_error(_("Error: Target directory '%s' cannot be accessed or you don't have permission to written to it."),
+                target)
+        exit(1)
+
+    # if user indicated a script file...
+    if script:
+        # ...check if it exists.
+        if os.path.exists(script):
+            # proceed with the execution of the script.
+            run_script(target, script, offline)
+
+        else:
+            p_error(_("Error: Script file '%s' does not exist."), script)
+            exit(1)
+
+    else:  # run binary in target
+        # proceed with the execution of binary in target.
+        run_target(target, offline)

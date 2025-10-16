@@ -3,6 +3,9 @@ from pathlib import Path
 
 import click
 from nuke import gettext as _, Settings, fdocstr
+from nuke.formatters.print_color import p_error
+from nuke.utils.shell import make_accessible_dir
+from pneo.command.receiver.receiver_venv import create_venv_path
 
 # ----------------------------------------------------------------------------
 # GLOBAL SETTINGS
@@ -51,11 +54,22 @@ _venv_short_help: str = _(
     help=_("Assert that the lockfile will remain unchanged."),
 )
 @click.argument(
-    "path", required=False, type=click.Path(exists=False, dir_okay=True), metavar=_("<PATH>")
+    "path",
+    required=False,
+    type=click.Path(exists=False, dir_okay=True),
+    metavar=_("<PATH>"),
 )
 @click.pass_context
 @fdocstr(_venv_short_help)
 def venv(context: click.Context, check: bool, sync: bool, locked: bool, path: Path) -> None:
     logger.debug("Entering: check=%s, sync=%s, locked=%s, path=%s", check, sync, locked, path)
 
-    pass
+    # if user indicated a venv dir, check if it is accessible.
+    venv_dir: str = path if path else ".venv"
+    if not make_accessible_dir(venv_dir):
+        p_error(_("Error: VENV directory '%s' cannot be accessed or you don't have permission to write to it."),
+                venv_dir)
+        exit(1)
+
+    # proceed with the environment creation.
+    create_venv_path(venv_dir, check, sync, locked)

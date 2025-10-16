@@ -1,8 +1,11 @@
 import logging
+import os
 from pathlib import Path
 
 import click
 from nuke import gettext as _, Settings, fdocstr
+from nuke.formatters.print_color import p_error
+from pneo.command.receiver.receiver_tree import display_dependency_tree
 
 # ----------------------------------------------------------------------------
 # GLOBAL SETTINGS
@@ -60,4 +63,17 @@ _tree_short_help: str = _("Display the dependency tree of current project, or so
 def tree(context: click.Context, path: Path, depth: int, outdated: bool, show_sizes: bool) -> None:
     logger.debug("Entering: path=%s, depth=%s, outdated=%s, show_sizes=%s", path, depth, outdated, show_sizes)
 
-    pass
+    # Check if the given path has a manifest file.
+    manifest_file: str = "manifest.toml"
+    if path:
+        manifest_file = os.path.join(path, "manifest.toml")
+        if not os.path.exists(manifest_file):
+            p_error(_("Error: There is no manifest file in '%s'."), path)
+            exit(1)
+
+    elif not os.path.exists(manifest_file):
+        p_error(_("Error: There is no manifest file in current directory."))
+        exit(1)
+
+    # proceed with the dependency tree displaying.
+    display_dependency_tree(manifest_file, depth, outdated, show_sizes)

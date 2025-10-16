@@ -1,8 +1,6 @@
 import logging
-from pathlib import Path
 
-from nuke import gettext as _, ngettext as _n, Settings, echo, p_trace, p_debug, p_info, p_warn, p_error, p_fatal
-
+from nuke import Settings
 
 # ----------------------------------------------------------------------------
 # GLOBAL SETTINGS
@@ -19,6 +17,21 @@ settings: Settings = Settings.get_instance()
 # API: COMMAND SELF
 # ----------------------------------------------------------------------------
 
+
+def show_pneo_version(short_ok: bool):
+    logger.debug("Entering: short_ok=%s", short_ok)
+
+
+def upgrade_pneo_version(target_version: str):
+    logger.debug("Entering: target_version=%s", target_version)
+
+
+def upgrade_pneo_latest():
+    logger.debug("Entering: ...")
+
+
+def uninstall_pneo(assume_yes: bool):
+    logger.debug("Entering: assume_yes=%s", assume_yes)
 
 # ----------------------------------------------------------------------------
 # HELPERS

@@ -1,8 +1,6 @@
 import logging
-from pathlib import Path
 
-from nuke import gettext as _, ngettext as _n, Settings, echo, p_trace, p_debug, p_info, p_warn, p_error, p_fatal
-
+from nuke import Settings
 
 # ----------------------------------------------------------------------------
 # GLOBAL SETTINGS
@@ -19,6 +17,14 @@ settings: Settings = Settings.get_instance()
 # API: COMMAND VERSION
 # ----------------------------------------------------------------------------
 
+
+def show_project_version(manifest_file: str):
+    logger.debug("Entering: manifest_file=%s", manifest_file)
+
+
+def set_project_version(manifest_file: str, new_version: str, bump: str, frozen_ok: bool):
+    logger.debug("Entering: manifest_file=%s, new_version=%s, bump=%s, frozen_ok=%s",
+                 manifest_file, new_version, bump, frozen_ok)
 
 # ----------------------------------------------------------------------------
 # HELPERS

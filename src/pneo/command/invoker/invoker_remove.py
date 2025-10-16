@@ -1,10 +1,7 @@
 import logging
-from pathlib import Path
 
 import click
-
-from nuke import gettext as _, ngettext as _n, Settings, fdocstr, echo, p_trace, p_debug, p_info, p_warn, p_error, p_fatal
-
+from nuke import gettext as _, Settings, fdocstr
 
 # ----------------------------------------------------------------------------
 # GLOBAL SETTINGS
@@ -15,7 +12,6 @@ logger: logging.Logger = logging.getLogger(__name__)
 
 # singleton instance with application setup.
 settings: Settings = Settings.get_instance()
-
 
 # ----------------------------------------------------------------------------
 # CLICK: COMMAND REMOVE
@@ -55,4 +51,4 @@ _remove_short_help: str = _("Remove dependencies from the current project manife
 def remove(context: click.Context, check: bool, locked: bool, packages: tuple) -> None:
     logger.debug("Entering: check=%s, locked=%s, packages=%s", check, locked, packages)
 
-    pass
+    # proceed with the dependency removing.

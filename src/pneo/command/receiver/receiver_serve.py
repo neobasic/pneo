@@ -1,8 +1,7 @@
 import logging
-from pathlib import Path
+from enum import StrEnum, auto
 
-from nuke import gettext as _, ngettext as _n, Settings, echo, p_trace, p_debug, p_info, p_warn, p_error, p_fatal
-
+from nuke import Settings
 
 # ----------------------------------------------------------------------------
 # GLOBAL SETTINGS
@@ -19,6 +18,19 @@ settings: Settings = Settings.get_instance()
 # API: COMMAND SERVE
 # ----------------------------------------------------------------------------
 
+class ServerMode(StrEnum):
+    STDIO = auto()
+    SOCKET = auto()
+
+
+def start_lsp_stdio(limit_results: int, noisy_ok: bool, quiet_ok: bool):
+    logger.debug("Entering: limit_results=%s, noisy_ok=%s, quiet_ok=%s",
+                 limit_results, noisy_ok, quiet_ok)
+
+
+def start_lsp_socket(socket_port: int, limit_results: int, noisy_ok: bool, quiet_ok: bool):
+    logger.debug("Entering: socket_port=%s, limit_results=%s, noisy_ok=%s, quiet_ok=%s",
+                 socket_port, limit_results, noisy_ok, quiet_ok)
 
 # ----------------------------------------------------------------------------
 # HELPERS

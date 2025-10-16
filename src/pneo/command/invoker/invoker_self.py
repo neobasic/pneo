@@ -1,10 +1,13 @@
 import logging
-from pathlib import Path
 
 import click
-
-from nuke import gettext as _, ngettext as _n, Settings, fdocstr, echo, p_trace, p_debug, p_info, p_warn, p_error, p_fatal
-
+from nuke import gettext as _, Settings, fdocstr
+from pneo.command.receiver.receiver_self import (
+    uninstall_pneo,
+    upgrade_pneo_latest,
+    upgrade_pneo_version,
+    show_pneo_version
+)
 
 # ----------------------------------------------------------------------------
 # GLOBAL SETTINGS
@@ -15,7 +18,6 @@ logger: logging.Logger = logging.getLogger(__name__)
 
 # singleton instance with application setup.
 settings: Settings = Settings.get_instance()
-
 
 # ----------------------------------------------------------------------------
 # CLICK: COMMAND SELF
@@ -45,7 +47,9 @@ def self(context: click.Context) -> None:
 @fdocstr(_("Show current version of installed pneo."))
 def version(context: click.Context, short: bool) -> None:
     logger.debug("Entering: short=%s", short)
-    pass
+
+    # proceed with the displaying of the current version.
+    show_pneo_version(short)
 
 
 @self.command()
@@ -59,7 +63,15 @@ def version(context: click.Context, short: bool) -> None:
 @fdocstr(_("Update pneo, installing a specified version, or upgrading to the latest version."))
 def upgrade(context: click.Context, target_version: str) -> None:
     logger.debug("Entering: target_version=%s", target_version)
-    pass
+
+    # check if there is a specific version:
+    if target_version:
+        # proceed with the upgrading to the specific version.
+        upgrade_pneo_version(target_version)
+
+    else:
+        # proceed with the upgrading to the latest version.
+        upgrade_pneo_latest()
 
 
 @self.command()
@@ -77,4 +89,5 @@ def upgrade(context: click.Context, target_version: str) -> None:
 def uninstall(context: click.Context, assume_yes: bool) -> None:
     logger.debug("Entering: assume_yes=%s", assume_yes)
 
-    pass
+    # proceed with the uninstalling.
+    uninstall_pneo(assume_yes)

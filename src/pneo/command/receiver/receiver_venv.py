@@ -1,8 +1,6 @@
 import logging
-from pathlib import Path
 
-from nuke import gettext as _, ngettext as _n, Settings, echo, p_trace, p_debug, p_info, p_warn, p_error, p_fatal
-
+from nuke import Settings
 
 # ----------------------------------------------------------------------------
 # GLOBAL SETTINGS
@@ -19,6 +17,8 @@ settings: Settings = Settings.get_instance()
 # API: COMMAND VENV
 # ----------------------------------------------------------------------------
 
+def create_venv_path(venv_dir: str, check_ok: bool, sync_ok: bool, locked_ok: bool):
+    logger.debug("Entering: venv_dir=%s, check_ok=%s, sync_ok=%s, locked_ok=%s", venv_dir, check_ok, sync_ok, locked_ok)
 
 # ----------------------------------------------------------------------------
 # HELPERS

@@ -2,9 +2,10 @@ import logging
 from pathlib import Path
 
 import click
-
-from nuke import gettext as _, ngettext as _n, Settings, fdocstr, echo, p_trace, p_debug, p_info, p_warn, p_error, p_fatal
-
+from nuke import gettext as _, Settings, fdocstr
+from nuke.formatters.print_color import p_error
+from nuke.utils.shell import make_accessible_dir, check_readable_dir
+from pneo.command.receiver.receiver_make import make_binary
 
 # ----------------------------------------------------------------------------
 # GLOBAL SETTINGS
@@ -16,7 +17,6 @@ logger: logging.Logger = logging.getLogger(__name__)
 # singleton instance with application setup.
 settings: Settings = Settings.get_instance()
 
-
 # ----------------------------------------------------------------------------
 # CLICK: COMMAND MAKE
 # ----------------------------------------------------------------------------
@@ -26,7 +26,7 @@ _make_short_help: str = _("Compile the target directory and generate the binary 
 
 @click.command(options_metavar=_("<OPTIONS>"), short_help=_make_short_help)
 @click.option(
-    "--bin",
+    "--bin-dir",
     "-b",
     required=False,
     type=click.Path(exists=False, dir_okay=True),
@@ -34,7 +34,7 @@ _make_short_help: str = _("Compile the target directory and generate the binary 
     help=_("Specify where to place generated binary files."),
 )
 @click.option(
-    "--nowarn",
+    "--no-warn",
     "-n",
     required=False,
     is_flag=True,
@@ -51,7 +51,19 @@ _make_short_help: str = _("Compile the target directory and generate the binary 
 )
 @click.pass_context
 @fdocstr(_make_short_help)
-def make(context: click.Context, bin: Path, nowarn: bool, target: Path) -> None:
-    logger.debug("Entering: bin=%s, nowarn=%s, target=%s", bin, nowarn, target)
+def make(context: click.Context, bin_dir: Path, no_warn: bool, target: Path) -> None:
+    logger.debug("Entering: bin_dir=%s, no_warn=%s, target=%s", bin_dir, no_warn, target)
 
-    pass
+    # if user indicated a bin dir, check if it is accessible.
+    if bin_dir and not make_accessible_dir(bin_dir):
+        p_error(_("Error: Binary directory '%s' cannot be accessed or you don't have permission to write to it."),
+                bin_dir)
+        exit(1)
+
+    # if user indicated a target dir, check if it exists and is readable.
+    if target and not check_readable_dir(target):
+        p_error(_("Error: Target directory '%s' does not exist or can't be read."), target)
+        exit(1)
+
+    # proceed with the making.
+    make_binary(target, bin_dir, no_warn)

@@ -2,6 +2,7 @@ import logging
 
 import click
 from nuke import gettext as _, Settings, fdocstr
+from pneo.command.receiver.receiver_view import open_view_project
 
 # ----------------------------------------------------------------------------
 # GLOBAL SETTINGS
@@ -85,7 +86,12 @@ _view_short_help: str = _(
     default=False,
     help=_("Whether to ask confirmation before closing."),
 )
-@click.argument("command", required=False, type=click.STRING, metavar=_("<COMMAND>"))
+@click.argument(
+    "command",
+    required=False,
+    type=click.STRING,
+    metavar=_("<COMMAND>"),
+)
 @click.pass_context
 @fdocstr(_view_short_help)
 def view(context: click.Context, min_size: bool, resizable: bool, maximized: bool, fullscreen: bool, on_top: bool,
@@ -94,4 +100,5 @@ def view(context: click.Context, min_size: bool, resizable: bool, maximized: boo
         "Entering: min_size=%s, resizable=%s, maximized=%s, fullscreen=%s, on_top=%s, easy_drag=%s, confirm_close=%s, command=%s",
         min_size, resizable, maximized, fullscreen, on_top, easy_drag, confirm_close, command)
 
-    pass
+    # proceed with the opening of window to view/maintain the project.
+    open_view_project(command, min_size, resizable, maximized, fullscreen, on_top, easy_drag, confirm_close)
