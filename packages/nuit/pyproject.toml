@@ -1,0 +1,52 @@
+[project]
+name = "nuit"
+version = "0.0.1"
+authors = [
+    { name = "Raul Bras" },
+]
+description = "Prototype implementation of the Language Server Protocol for the NeoBASIC programming language, written in Python."
+readme = "README.md"
+license = "MIT"
+license-files = ["LICEN[CS]E*"]
+keywords = ["nuit", "neobasic", "universal", "interface", "transpiler", "language", "code", "compiler"]
+classifiers = [
+    "Development Status :: 2 - Pre-Alpha",
+    "License :: OSI Approved :: MIT License",
+    "Intended Audience :: Developers",
+    "Topic :: Software Development :: Compilers",
+    "Operating System :: OS Independent",
+    "Environment :: Console",
+    "Programming Language :: Python :: 3",
+    "Typing :: Typed",
+    "Natural Language :: English",
+    "Natural Language :: Portuguese (Brazilian)",
+]
+# vide ../pyproject.toml
+# requires-python = ">=3.13"
+dependencies = []
+
+[build-system]
+requires = ["uv_build>=0.8.17,<0.9.0"]
+build-backend = "uv_build"
+
+# Include non-Python files like .mo/.conf in the wheel
+[tool.uv.build-backend]
+# Specify the root of your Python module
+module-root = "src"
+module-name = "nuit"
+# Include specific source files and configuration files
+source-include = [
+    "src/nuit/**/*.py",
+    "src/nuit/**/*.mo",
+    "src/nuit/**/*.conf",
+    "src/nuit/**/*.yaml",
+    "src/nuit/**/*.typed",
+]
+# Exclude cache directories and temporary files
+source-exclude = [
+    "src/**/__pycache__",
+    "src/**/*.pyc",
+    "src/**/*.pyo",
+    "src/**/*.pot",
+    "src/**/*.po",
+]
