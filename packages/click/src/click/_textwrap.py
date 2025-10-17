@@ -7,11 +7,11 @@ from contextlib import contextmanager
 
 class TextWrapper(textwrap.TextWrapper):
     def _handle_long_word(
-        self,
-        reversed_chunks: list[str],
-        cur_line: list[str],
-        cur_len: int,
-        width: int,
+            self,
+            reversed_chunks: list[str],
+            cur_line: list[str],
+            cur_len: int,
+            width: int,
     ) -> None:
         space_left = max(width - cur_len, 1)
 

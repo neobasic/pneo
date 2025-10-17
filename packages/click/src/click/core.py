@@ -7,14 +7,13 @@ import inspect
 import os
 import sys
 import typing as t
-from collections import abc
 from collections import Counter
+from collections import abc
 from contextlib import AbstractContextManager
-from contextlib import contextmanager
 from contextlib import ExitStack
+from contextlib import contextmanager
 from functools import update_wrapper
-from gettext import gettext as _
-from gettext import ngettext
+from gettext import gettext as _, ngettext
 from itertools import repeat
 from types import TracebackType
 
@@ -37,12 +36,12 @@ from .parser import _split_opt
 from .termui import confirm
 from .termui import prompt
 from .termui import style
+from .utils import PacifyFlushWrapper
 from .utils import _detect_program_name
 from .utils import _expand_args
 from .utils import echo
 from .utils import make_default_short_help
 from .utils import make_str
-from .utils import PacifyFlushWrapper
 
 if t.TYPE_CHECKING:
     from .shell_completion import CompletionItem
@@ -69,21 +68,21 @@ def _complete_visible_commands(ctx: Context, incomplete: str) -> cabc.Iterator[t
 
 
 def _check_nested_chain(
-    base_command: Group, cmd_name: str, cmd: Command, register: bool = False
+        base_command: Group, cmd_name: str, cmd: Command, register: bool = False
 ) -> None:
     if not base_command.chain or not isinstance(cmd, Group):
         return
 
     if register:
-        message = (
-            f"It is not possible to add the group {cmd_name!r} to another"
-            f" group {base_command.name!r} that is in chain mode."
-        )
+        message = _(
+            "It is not possible to add the group %r to another"
+            " group %r that is in chain mode."
+        ) % (cmd_name, base_command.name)
     else:
-        message = (
-            f"Found the group {cmd_name!r} as subcommand to another group "
-            f" {base_command.name!r} that is in chain mode. This is not supported."
-        )
+        message = _(
+            "Found the group %r as subcommand to another group"
+            " %r that is in chain mode. This is not supported."
+        ) % (cmd_name, base_command.name)
 
     raise RuntimeError(message)
 
@@ -110,8 +109,8 @@ def augment_usage_errors(ctx: Context, param: Parameter | None = None) -> cabc.I
 
 
 def iter_params_for_processing(
-    invocation_order: cabc.Sequence[Parameter],
-    declaration_order: cabc.Sequence[Parameter],
+        invocation_order: cabc.Sequence[Parameter],
+        declaration_order: cabc.Sequence[Parameter],
 ) -> list[Parameter]:
     """Returns all declared parameters in the order they should be processed.
 
@@ -267,23 +266,23 @@ class Context:
     formatter_class: type[HelpFormatter] = HelpFormatter
 
     def __init__(
-        self,
-        command: Command,
-        parent: Context | None = None,
-        info_name: str | None = None,
-        obj: t.Any | None = None,
-        auto_envvar_prefix: str | None = None,
-        default_map: cabc.MutableMapping[str, t.Any] | None = None,
-        terminal_width: int | None = None,
-        max_content_width: int | None = None,
-        resilient_parsing: bool = False,
-        allow_extra_args: bool | None = None,
-        allow_interspersed_args: bool | None = None,
-        ignore_unknown_options: bool | None = None,
-        help_option_names: list[str] | None = None,
-        token_normalize_func: t.Callable[[str], str] | None = None,
-        color: bool | None = None,
-        show_default: bool | None = None,
+            self,
+            command: Command,
+            parent: Context | None = None,
+            info_name: str | None = None,
+            obj: t.Any | None = None,
+            auto_envvar_prefix: str | None = None,
+            default_map: cabc.MutableMapping[str, t.Any] | None = None,
+            terminal_width: int | None = None,
+            max_content_width: int | None = None,
+            resilient_parsing: bool = False,
+            allow_extra_args: bool | None = None,
+            allow_interspersed_args: bool | None = None,
+            ignore_unknown_options: bool | None = None,
+            help_option_names: list[str] | None = None,
+            token_normalize_func: t.Callable[[str], str] | None = None,
+            color: bool | None = None,
+            show_default: bool | None = None,
     ) -> None:
         #: the parent context or `None` if none exists.
         self.parent = parent
@@ -313,10 +312,10 @@ class Context:
 
         #: A dictionary (-like object) with defaults for parameters.
         if (
-            default_map is None
-            and info_name is not None
-            and parent is not None
-            and parent.default_map is not None
+                default_map is None
+                and info_name is not None
+                and parent is not None
+                and parent.default_map is not None
         ):
             default_map = parent.default_map.get(info_name)
 
@@ -404,9 +403,9 @@ class Context:
         # prefix automatically.
         if auto_envvar_prefix is None:
             if (
-                parent is not None
-                and parent.auto_envvar_prefix is not None
-                and self.info_name is not None
+                    parent is not None
+                    and parent.auto_envvar_prefix is not None
+                    and self.info_name is not None
             ):
                 auto_envvar_prefix = f"{parent.auto_envvar_prefix}_{self.info_name.upper()}"
         else:
@@ -439,8 +438,8 @@ class Context:
         import warnings
 
         warnings.warn(
-            "'protected_args' is deprecated and will be removed in Click 9.0."
-            " 'args' will contain remaining unparsed tokens.",
+            _("'protected_args' is deprecated and will be removed in Click 9.0."
+              " 'args' will contain remaining unparsed tokens."),
             DeprecationWarning,
             stacklevel=2,
         )
@@ -473,10 +472,10 @@ class Context:
         return self
 
     def __exit__(
-        self,
-        exc_type: type[BaseException] | None,
-        exc_value: BaseException | None,
-        tb: TracebackType | None,
+            self,
+            exc_type: type[BaseException] | None,
+            exc_value: BaseException | None,
+            tb: TracebackType | None,
     ) -> bool | None:
         self._depth -= 1
         exit_result: bool | None = None
@@ -613,10 +612,10 @@ class Context:
         self._close_with_exception_info(None, None, None)
 
     def _close_with_exception_info(
-        self,
-        exc_type: type[BaseException] | None,
-        exc_value: BaseException | None,
-        tb: TracebackType | None,
+            self,
+            exc_type: type[BaseException] | None,
+            exc_value: BaseException | None,
+            tb: TracebackType | None,
     ) -> bool | None:
         """Unwind the exit stack by calling its :meth:`__exit__` providing the exception
         information to allow for exception handling by the various resources registered
@@ -678,12 +677,14 @@ class Context:
         return rv
 
     @t.overload
-    def lookup_default(self, name: str, call: t.Literal[True] = True) -> t.Any | None: ...
+    def lookup_default(self, name: str, call: t.Literal[True] = True) -> t.Any | None:
+        ...
 
     @t.overload
     def lookup_default(
-        self, name: str, call: t.Literal[False] = ...
-    ) -> t.Any | t.Callable[[], t.Any] | None: ...
+            self, name: str, call: t.Literal[False] = ...
+    ) -> t.Any | t.Callable[[], t.Any] | None:
+        ...
 
     def lookup_default(self, name: str, call: bool = True) -> t.Any | None:
         """Get the default for a parameter from :attr:`default_map`.
@@ -748,13 +749,15 @@ class Context:
         return type(self)(command, info_name=command.name, parent=self)
 
     @t.overload
-    def invoke(self, callback: t.Callable[..., V], /, *args: t.Any, **kwargs: t.Any) -> V: ...
+    def invoke(self, callback: t.Callable[..., V], /, *args: t.Any, **kwargs: t.Any) -> V:
+        ...
 
     @t.overload
-    def invoke(self, callback: Command, /, *args: t.Any, **kwargs: t.Any) -> t.Any: ...
+    def invoke(self, callback: Command, /, *args: t.Any, **kwargs: t.Any) -> t.Any:
+        ...
 
     def invoke(
-        self, callback: Command | t.Callable[..., V], /, *args: t.Any, **kwargs: t.Any
+            self, callback: Command | t.Callable[..., V], /, *args: t.Any, **kwargs: t.Any
     ) -> t.Any | V:
         """Invokes a command callback in exactly the way it expects.  There
         are two ways to invoke this method:
@@ -777,7 +780,7 @@ class Context:
             other_cmd = callback
 
             if other_cmd.callback is None:
-                raise TypeError("The given command does not have a callback that can be invoked.")
+                raise TypeError(_("The given command does not have a callback that can be invoked."))
             else:
                 callback = t.cast("t.Callable[..., V]", other_cmd.callback)
 
@@ -810,7 +813,7 @@ class Context:
         """
         # Can only forward to other commands, not direct callbacks.
         if not isinstance(cmd, Command):
-            raise TypeError("Callback is not a command.")
+            raise TypeError(_("Callback is not a command."))
 
         for param in self.params:
             if param not in kwargs:
@@ -909,19 +912,19 @@ class Command:
     ignore_unknown_options = False
 
     def __init__(
-        self,
-        name: str | None,
-        context_settings: cabc.MutableMapping[str, t.Any] | None = None,
-        callback: t.Callable[..., t.Any] | None = None,
-        params: list[Parameter] | None = None,
-        help: str | None = None,
-        epilog: str | None = None,
-        short_help: str | None = None,
-        options_metavar: str | None = _("[OPTIONS]"),
-        add_help_option: bool = True,
-        no_args_is_help: bool = False,
-        hidden: bool = False,
-        deprecated: bool | str = False,
+            self,
+            name: str | None,
+            context_settings: cabc.MutableMapping[str, t.Any] | None = None,
+            callback: t.Callable[..., t.Any] | None = None,
+            params: list[Parameter] | None = None,
+            help: str | None = None,
+            epilog: str | None = None,
+            short_help: str | None = None,
+            options_metavar: str | None = _("[OPTIONS]"),
+            add_help_option: bool = True,
+            no_args_is_help: bool = False,
+            hidden: bool = False,
+            deprecated: bool | str = False,
     ) -> None:
         #: the name the command thinks it has.  Upon registering a command
         #: on a :class:`Group` the group will default the command name
@@ -991,10 +994,10 @@ class Command:
 
             for duplicate_opt in duplicate_opts:
                 warnings.warn(
-                    (
-                        f"The parameter {duplicate_opt} is used more than once. "
+                    _(
+                        "The parameter %s is used more than once. "
                         "Remove its duplicate as parameters should be unique."
-                    ),
+                    ) % duplicate_opt,
                     stacklevel=3,
                 )
 
@@ -1083,13 +1086,11 @@ class Command:
 
         if self.deprecated:
             deprecated_message = (
-                f"(DEPRECATED: {self.deprecated})"
+                _("(DEPRECATED: %s)") % self.deprecated
                 if isinstance(self.deprecated, str)
-                else "(DEPRECATED)"
+                else _("(DEPRECATED)")
             )
-            text = _("{text} {deprecated_message}").format(
-                text=text, deprecated_message=deprecated_message
-            )
+            text = "%s %s" % (text, deprecated_message)
 
         return text.strip()
 
@@ -1120,13 +1121,11 @@ class Command:
 
         if self.deprecated:
             deprecated_message = (
-                f"(DEPRECATED: {self.deprecated})"
+                _("(DEPRECATED: %s)") % self.deprecated
                 if isinstance(self.deprecated, str)
-                else "(DEPRECATED)"
+                else _("(DEPRECATED)")
             )
-            text = _("{text} {deprecated_message}").format(
-                text=text, deprecated_message=deprecated_message
-            )
+            text = "%s %s" % (text, deprecated_message)
 
         if text:
             formatter.write_paragraph()
@@ -1156,11 +1155,11 @@ class Command:
                 formatter.write_text(epilog)
 
     def make_context(
-        self,
-        info_name: str | None,
-        args: list[str],
-        parent: Context | None = None,
-        **extra: t.Any,
+            self,
+            info_name: str | None,
+            args: list[str],
+            parent: Context | None = None,
+            **extra: t.Any,
     ) -> Context:
         """This function when given an info name and arguments will kick
         off the parsing and create a new :class:`Context`.  It does not
@@ -1205,10 +1204,10 @@ class Command:
         if args and not ctx.allow_extra_args and not ctx.resilient_parsing:
             ctx.fail(
                 ngettext(
-                    "Got unexpected extra argument ({args})",
-                    "Got unexpected extra arguments ({args})",
+                    "Got unexpected extra argument (%s)",
+                    "Got unexpected extra arguments (%s)",
                     len(args),
-                ).format(args=" ".join(map(str, args)))
+                ) % " ".join(map(str, args))
             )
 
         ctx.args = args
@@ -1222,8 +1221,8 @@ class Command:
         if self.deprecated:
             extra_message = f" {self.deprecated}" if isinstance(self.deprecated, str) else ""
             message = _(
-                "DeprecationWarning: The command {name!r} is deprecated.{extra_message}"
-            ).format(name=self.name, extra_message=extra_message)
+                "DeprecationWarning: The command %r is deprecated.%s"
+            ) % (self.name, extra_message)
             echo(style(message, fg="red"), err=True)
 
         if self.callback is not None:
@@ -1248,13 +1247,13 @@ class Command:
         if incomplete and not incomplete[0].isalnum():
             for param in self.get_params(ctx):
                 if (
-                    not isinstance(param, Option)
-                    or param.hidden
-                    or (
+                        not isinstance(param, Option)
+                        or param.hidden
+                        or (
                         not param.multiple
                         and ctx.get_parameter_source(param.name)  # type: ignore
                         is ParameterSource.COMMANDLINE
-                    )
+                )
                 ):
                     continue
 
@@ -1278,32 +1277,34 @@ class Command:
 
     @t.overload
     def main(
-        self,
-        args: cabc.Sequence[str] | None = None,
-        prog_name: str | None = None,
-        complete_var: str | None = None,
-        standalone_mode: t.Literal[True] = True,
-        **extra: t.Any,
-    ) -> t.NoReturn: ...
+            self,
+            args: cabc.Sequence[str] | None = None,
+            prog_name: str | None = None,
+            complete_var: str | None = None,
+            standalone_mode: t.Literal[True] = True,
+            **extra: t.Any,
+    ) -> t.NoReturn:
+        ...
 
     @t.overload
     def main(
-        self,
-        args: cabc.Sequence[str] | None = None,
-        prog_name: str | None = None,
-        complete_var: str | None = None,
-        standalone_mode: bool = ...,
-        **extra: t.Any,
-    ) -> t.Any: ...
+            self,
+            args: cabc.Sequence[str] | None = None,
+            prog_name: str | None = None,
+            complete_var: str | None = None,
+            standalone_mode: bool = ...,
+            **extra: t.Any,
+    ) -> t.Any:
+        ...
 
     def main(
-        self,
-        args: cabc.Sequence[str] | None = None,
-        prog_name: str | None = None,
-        complete_var: str | None = None,
-        standalone_mode: bool = True,
-        windows_expand_args: bool = True,
-        **extra: t.Any,
+            self,
+            args: cabc.Sequence[str] | None = None,
+            prog_name: str | None = None,
+            complete_var: str | None = None,
+            standalone_mode: bool = True,
+            windows_expand_args: bool = True,
+            **extra: t.Any,
     ) -> t.Any:
         """This is the way to invoke a script with all the bells and
         whistles as a command line application.  This will always terminate
@@ -1410,10 +1411,10 @@ class Command:
             sys.exit(1)
 
     def _main_shell_completion(
-        self,
-        ctx_args: cabc.MutableMapping[str, t.Any],
-        prog_name: str,
-        complete_var: str | None = None,
+            self,
+            ctx_args: cabc.MutableMapping[str, t.Any],
+            prog_name: str,
+            complete_var: str | None = None,
     ) -> None:
         """Check if the shell is asking for tab completion, process
         that, then exit early. Called from :meth:`main` before the
@@ -1512,18 +1513,19 @@ class Group(Command):
     #:
     #: .. versionadded:: 8.0
     group_class: type[Group] | type[type] | None = None
+
     # Literal[type] isn't valid, so use Type[type]
 
     def __init__(
-        self,
-        name: str | None = None,
-        commands: cabc.MutableMapping[str, Command] | cabc.Sequence[Command] | None = None,
-        invoke_without_command: bool = False,
-        no_args_is_help: bool | None = None,
-        subcommand_metavar: str | None = None,
-        chain: bool = False,
-        result_callback: t.Callable[..., t.Any] | None = None,
-        **kwargs: t.Any,
+            self,
+            name: str | None = None,
+            commands: cabc.MutableMapping[str, Command] | cabc.Sequence[Command] | None = None,
+            invoke_without_command: bool = False,
+            no_args_is_help: bool | None = None,
+            subcommand_metavar: str | None = None,
+            chain: bool = False,
+            result_callback: t.Callable[..., t.Any] | None = None,
+            **kwargs: t.Any,
     ) -> None:
         super().__init__(name, **kwargs)
 
@@ -1556,7 +1558,7 @@ class Group(Command):
         if self.chain:
             for param in self.params:
                 if isinstance(param, Argument) and not param.required:
-                    raise RuntimeError("A group in chain mode cannot have optional arguments.")
+                    raise RuntimeError(_("A group in chain mode cannot have optional arguments."))
 
     def to_info_dict(self, ctx: Context) -> dict[str, t.Any]:
         info_dict = super().to_info_dict(ctx)
@@ -1587,15 +1589,17 @@ class Group(Command):
         self.commands[name] = cmd
 
     @t.overload
-    def command(self, __func: t.Callable[..., t.Any]) -> Command: ...
+    def command(self, __func: t.Callable[..., t.Any]) -> Command:
+        ...
 
     @t.overload
     def command(
-        self, *args: t.Any, **kwargs: t.Any
-    ) -> t.Callable[[t.Callable[..., t.Any]], Command]: ...
+            self, *args: t.Any, **kwargs: t.Any
+    ) -> t.Callable[[t.Callable[..., t.Any]], Command]:
+        ...
 
     def command(
-        self, *args: t.Any, **kwargs: t.Any
+            self, *args: t.Any, **kwargs: t.Any
     ) -> t.Callable[[t.Callable[..., t.Any]], Command] | Command:
         """A shortcut decorator for declaring and attaching a command to
         the group. This takes the same arguments as :func:`command` and
@@ -1617,8 +1621,8 @@ class Group(Command):
 
         if args and callable(args[0]):
             assert (
-                len(args) == 1 and not kwargs
-            ), "Use 'command(**kwargs)(callable)' to provide arguments."
+                    len(args) == 1 and not kwargs
+            ), _("Use 'command(**kwargs)(callable)' to provide arguments.")
             (func,) = args
             args = ()
 
@@ -1636,15 +1640,17 @@ class Group(Command):
         return decorator
 
     @t.overload
-    def group(self, __func: t.Callable[..., t.Any]) -> Group: ...
+    def group(self, __func: t.Callable[..., t.Any]) -> Group:
+        ...
 
     @t.overload
     def group(
-        self, *args: t.Any, **kwargs: t.Any
-    ) -> t.Callable[[t.Callable[..., t.Any]], Group]: ...
+            self, *args: t.Any, **kwargs: t.Any
+    ) -> t.Callable[[t.Callable[..., t.Any]], Group]:
+        ...
 
     def group(
-        self, *args: t.Any, **kwargs: t.Any
+            self, *args: t.Any, **kwargs: t.Any
     ) -> t.Callable[[t.Callable[..., t.Any]], Group] | Group:
         """A shortcut decorator for declaring and attaching a group to
         the group. This takes the same arguments as :func:`group` and
@@ -1666,8 +1672,8 @@ class Group(Command):
 
         if args and callable(args[0]):
             assert (
-                len(args) == 1 and not kwargs
-            ), "Use 'group(**kwargs)(callable)' to provide arguments."
+                    len(args) == 1 and not kwargs
+            ), _("Use 'group(**kwargs)(callable)' to provide arguments.")
             (func,) = args
             args = ()
 
@@ -1862,7 +1868,7 @@ class Group(Command):
             return _process_result(rv)
 
     def resolve_command(
-        self, ctx: Context, args: list[str]
+            self, ctx: Context, args: list[str]
     ) -> tuple[str | None, Command | None, list[str]]:
         cmd_name = make_str(args[0])
         original_cmd_name = cmd_name
@@ -1885,7 +1891,7 @@ class Group(Command):
         if cmd is None and not ctx.resilient_parsing:
             if _split_opt(cmd_name)[0]:
                 self.parse_args(ctx, args)
-            ctx.fail(_("No such command {name!r}.").format(name=original_cmd_name))
+            ctx.fail(_("No such command %r.") % original_cmd_name)
         return cmd_name if cmd else None, cmd, args[1:]
 
     def shell_complete(self, ctx: Context, incomplete: str) -> list[CompletionItem]:
@@ -1932,10 +1938,10 @@ class CommandCollection(Group):
     """
 
     def __init__(
-        self,
-        name: str | None = None,
-        sources: list[Group] | None = None,
-        **kwargs: t.Any,
+            self,
+            name: str | None = None,
+            sources: list[Group] | None = None,
+            **kwargs: t.Any,
     ) -> None:
         super().__init__(name, **kwargs)
         #: The list of registered groups.
@@ -2075,32 +2081,32 @@ class Parameter:
     param_type_name = "parameter"
 
     def __init__(
-        self,
-        param_decls: cabc.Sequence[str] | None = None,
-        type: types.ParamType | t.Any | None = None,
-        required: bool = False,
-        # XXX The default historically embed two concepts:
-        # - the declaration of a Parameter object carrying the default (handy to
-        #   arbitrage the default value of coupled Parameters sharing the same
-        #   self.name, like flag options),
-        # - and the actual value of the default.
-        # It is confusing and is the source of many issues discussed in:
-        # https://github.com/pallets/click/pull/3030
-        # In the future, we might think of splitting it in two, not unlike
-        # Option.is_flag and Option.flag_value: we could have something like
-        # Parameter.is_default and Parameter.default_value.
-        default: t.Any | t.Callable[[], t.Any] | None = UNSET,
-        callback: t.Callable[[Context, Parameter, t.Any], t.Any] | None = None,
-        nargs: int | None = None,
-        multiple: bool = False,
-        metavar: str | None = None,
-        expose_value: bool = True,
-        is_eager: bool = False,
-        envvar: str | cabc.Sequence[str] | None = None,
-        shell_complete: (
-            t.Callable[[Context, Parameter, str], list[CompletionItem] | list[str]] | None
-        ) = None,
-        deprecated: bool | str = False,
+            self,
+            param_decls: cabc.Sequence[str] | None = None,
+            type: types.ParamType | t.Any | None = None,
+            required: bool = False,
+            # XXX The default historically embed two concepts:
+            # - the declaration of a Parameter object carrying the default (handy to
+            #   arbitrage the default value of coupled Parameters sharing the same
+            #   self.name, like flag options),
+            # - and the actual value of the default.
+            # It is confusing and is the source of many issues discussed in:
+            # https://github.com/pallets/click/pull/3030
+            # In the future, we might think of splitting it in two, not unlike
+            # Option.is_flag and Option.flag_value: we could have something like
+            # Parameter.is_default and Parameter.default_value.
+            default: t.Any | t.Callable[[], t.Any] | None = UNSET,
+            callback: t.Callable[[Context, Parameter, t.Any], t.Any] | None = None,
+            nargs: int | None = None,
+            multiple: bool = False,
+            metavar: str | None = None,
+            expose_value: bool = True,
+            is_eager: bool = False,
+            envvar: str | cabc.Sequence[str] | None = None,
+            shell_complete: (
+                    t.Callable[[Context, Parameter, str], list[CompletionItem] | list[str]] | None
+            ) = None,
+            deprecated: bool | str = False,
     ) -> None:
         self.name: str | None
         self.opts: list[str]
@@ -2133,15 +2139,16 @@ class Parameter:
         if __debug__:
             if self.type.is_composite and nargs != self.type.arity:
                 raise ValueError(
-                    f"'nargs' must be {self.type.arity} (or None) for"
-                    f" type {self.type!r}, but it was {nargs}."
+                    _("'nargs' must be %s (or None) for"
+                      " type %r, but it was %s.") % (self.type.arity, self.type, nargs)
                 )
 
             if required and deprecated:
                 raise ValueError(
-                    f"The {self.param_type_name} '{self.human_readable_name}' "
-                    "is deprecated and still required. A deprecated "
-                    f"{self.param_type_name} cannot be required."
+                    _("The %s '%s' "
+                      "is deprecated and still required. A deprecated "
+                      "%s cannot be required.")
+                    % (self.param_type_name, self.human_readable_name, self.param_type_name)
                 )
 
     def to_info_dict(self) -> dict[str, t.Any]:
@@ -2176,7 +2183,7 @@ class Parameter:
         return f"<{self.__class__.__name__} {self.name}>"
 
     def _parse_decls(
-        self, decls: cabc.Sequence[str], expose_value: bool
+            self, decls: cabc.Sequence[str], expose_value: bool
     ) -> tuple[str | None, list[str], list[str]]:
         raise NotImplementedError()
 
@@ -2202,12 +2209,14 @@ class Parameter:
         return metavar
 
     @t.overload
-    def get_default(self, ctx: Context, call: t.Literal[True] = True) -> t.Any | None: ...
+    def get_default(self, ctx: Context, call: t.Literal[True] = True) -> t.Any | None:
+        ...
 
     @t.overload
     def get_default(
-        self, ctx: Context, call: bool = ...
-    ) -> t.Any | t.Callable[[], t.Any] | None: ...
+            self, ctx: Context, call: bool = ...
+    ) -> t.Any | t.Callable[[], t.Any] | None:
+        ...
 
     def get_default(self, ctx: Context, call: bool = True) -> t.Any | t.Callable[[], t.Any] | None:
         """Get the default for the parameter. Tries
@@ -2244,7 +2253,7 @@ class Parameter:
         raise NotImplementedError()
 
     def consume_value(
-        self, ctx: Context, opts: cabc.Mapping[str, t.Any]
+            self, ctx: Context, opts: cabc.Mapping[str, t.Any]
     ) -> tuple[t.Any, ParameterSource]:
         """Returns the parameter value produced by the parser.
 
@@ -2321,10 +2330,10 @@ class Parameter:
                 if len(value) != self.nargs:
                     raise BadParameter(
                         ngettext(
-                            "Takes {nargs} values but 1 was given.",
-                            "Takes {nargs} values but {len} were given.",
+                            "Takes %s values but 1 was given.",
+                            "Takes %s values but %d were given.",
                             len(value),
-                        ).format(nargs=self.nargs, len=len(value)),
+                        ) % (self.nargs, len(value)),
                         ctx=ctx,
                         param=self,
                     )
@@ -2443,7 +2452,7 @@ class Parameter:
         return rv
 
     def handle_parse_result(
-        self, ctx: Context, opts: cabc.Mapping[str, t.Any], args: list[str]
+            self, ctx: Context, opts: cabc.Mapping[str, t.Any], args: list[str]
     ) -> tuple[t.Any, list[str]]:
         """Process the value produced by the parser from user input.
 
@@ -2463,18 +2472,14 @@ class Parameter:
 
             # Display a deprecation warning if necessary.
             if (
-                self.deprecated
-                and value is not UNSET
-                and source not in (ParameterSource.DEFAULT, ParameterSource.DEFAULT_MAP)
+                    self.deprecated
+                    and value is not UNSET
+                    and source not in (ParameterSource.DEFAULT, ParameterSource.DEFAULT_MAP)
             ):
                 extra_message = f" {self.deprecated}" if isinstance(self.deprecated, str) else ""
                 message = _(
-                    "DeprecationWarning: The {param_type} {name!r} is deprecated." "{extra_message}"
-                ).format(
-                    param_type=self.param_type_name,
-                    name=self.human_readable_name,
-                    extra_message=extra_message,
-                )
+                    "DeprecationWarning: The %s %r is deprecated." "%s"
+                ) % (self.param_type_name, self.human_readable_name, extra_message)
                 echo(style(message, fg="red"), err=True)
 
             # Process the value through the parameter's type.
@@ -2490,17 +2495,17 @@ class Parameter:
 
         # Add parameter's value to the context.
         if (
-            self.expose_value
-            # We skip adding the value if it was previously set by another parameter
-            # targeting the same variable name. This prevents parameters competing for
-            # the same name to override each other.
-            and self.name not in ctx.params
+                self.expose_value
+                # We skip adding the value if it was previously set by another parameter
+                # targeting the same variable name. This prevents parameters competing for
+                # the same name to override each other.
+                and self.name not in ctx.params
         ):
             # Click is logically enforcing that the name is None if the parameter is
             # not to be exposed. We still assert it here to please the type checker.
             assert (
-                self.name is not None
-            ), f"{self!r} parameter's name should not be None when exposing value."
+                    self.name is not None
+            ), _("%r parameter's name should not be None when exposing value.") % self
             # Normalize UNSET values to None, as we're about to pass them to the
             # command function and move them to the pure-Python realm of user-written
             # code.
@@ -2614,25 +2619,25 @@ class Option(Parameter):
     param_type_name = "option"
 
     def __init__(
-        self,
-        param_decls: cabc.Sequence[str] | None = None,
-        show_default: bool | str | None = None,
-        prompt: bool | str = False,
-        confirmation_prompt: bool | str = False,
-        prompt_required: bool = True,
-        hide_input: bool = False,
-        is_flag: bool | None = None,
-        flag_value: t.Any = UNSET,
-        multiple: bool = False,
-        count: bool = False,
-        allow_from_autoenv: bool = True,
-        type: types.ParamType | t.Any | None = None,
-        help: str | None = None,
-        hidden: bool = False,
-        show_choices: bool = True,
-        show_envvar: bool = False,
-        deprecated: bool | str = False,
-        **attrs: t.Any,
+            self,
+            param_decls: cabc.Sequence[str] | None = None,
+            show_default: bool | str | None = None,
+            prompt: bool | str = False,
+            confirmation_prompt: bool | str = False,
+            prompt_required: bool = True,
+            hide_input: bool = False,
+            is_flag: bool | None = None,
+            flag_value: t.Any = UNSET,
+            multiple: bool = False,
+            count: bool = False,
+            allow_from_autoenv: bool = True,
+            type: types.ParamType | t.Any | None = None,
+            help: str | None = None,
+            hidden: bool = False,
+            show_choices: bool = True,
+            show_envvar: bool = False,
+            deprecated: bool | str = False,
+            **attrs: t.Any,
     ) -> None:
         if help:
             help = inspect.cleandoc(help)
@@ -2641,7 +2646,7 @@ class Option(Parameter):
 
         if prompt is True:
             if self.name is None:
-                raise TypeError("'name' is required with 'prompt=True'.")
+                raise TypeError(_("'name' is required with 'prompt=True'."))
 
             prompt_text: str | None = self.name.replace("_", " ").capitalize()
         elif prompt is False:
@@ -2651,7 +2656,9 @@ class Option(Parameter):
 
         if deprecated:
             deprecated_message = (
-                f"(DEPRECATED: {deprecated})" if isinstance(deprecated, str) else "(DEPRECATED)"
+                _("(DEPRECATED: %s)") % deprecated
+                if isinstance(deprecated, str)
+                else _("(DEPRECATED)")
             )
             help = help + deprecated_message if help is not None else deprecated_message
 
@@ -2744,23 +2751,23 @@ class Option(Parameter):
 
         if __debug__:
             if deprecated and prompt:
-                raise ValueError("`deprecated` options cannot use `prompt`.")
+                raise ValueError(_("`deprecated` options cannot use `prompt`."))
 
             if self.nargs == -1:
-                raise TypeError("nargs=-1 is not supported for options.")
+                raise TypeError(_("nargs=-1 is not supported for options."))
 
             if not self.is_bool_flag and self.secondary_opts:
-                raise TypeError("Secondary flag is not valid for non-boolean flag.")
+                raise TypeError(_("Secondary flag is not valid for non-boolean flag."))
 
             if self.is_bool_flag and self.hide_input and self.prompt is not None:
-                raise TypeError("'prompt' with 'hide_input' is not valid for boolean flag.")
+                raise TypeError(_("'prompt' with 'hide_input' is not valid for boolean flag."))
 
             if self.count:
                 if self.multiple:
-                    raise TypeError("'count' is not valid with 'multiple'.")
+                    raise TypeError(_("'count' is not valid with 'multiple'."))
 
                 if self.is_flag:
-                    raise TypeError("'count' is not valid with 'is_flag'.")
+                    raise TypeError(_("'count' is not valid with 'is_flag'."))
 
     def to_info_dict(self) -> dict[str, t.Any]:
         """
@@ -2784,11 +2791,11 @@ class Option(Parameter):
     def get_error_hint(self, ctx: Context) -> str:
         result = super().get_error_hint(ctx)
         if self.show_envvar and self.envvar is not None:
-            result += f" (env var: '{self.envvar}')"
+            result += _(" (env var: '%s')") % self.envvar
         return result
 
     def _parse_decls(
-        self, decls: cabc.Sequence[str], expose_value: bool
+            self, decls: cabc.Sequence[str], expose_value: bool
     ) -> tuple[str | None, list[str], list[str]]:
         opts = []
         secondary_opts = []
@@ -2798,7 +2805,7 @@ class Option(Parameter):
         for decl in decls:
             if decl.isidentifier():
                 if name is not None:
-                    raise TypeError(f"Name '{name}' defined twice")
+                    raise TypeError(_("Name '%s' defined twice") % name)
                 name = decl
             else:
                 split_char = ";" if decl[:1] == "/" else "/"
@@ -2813,7 +2820,8 @@ class Option(Parameter):
                         secondary_opts.append(second.lstrip())
                     if first == second:
                         raise ValueError(
-                            f"Boolean option {decl!r} cannot use the" " same flag for true/false."
+                            _("Boolean option %r cannot use the"
+                              " same flag for true/false.") % decl
                         )
                 else:
                     possible_names.append(_split_opt(decl))
@@ -2828,13 +2836,13 @@ class Option(Parameter):
         if name is None:
             if not expose_value:
                 return None, opts, secondary_opts
-            raise TypeError(f"Could not determine name for option with declarations {decls!r}")
+            raise TypeError(_("Could not determine name for option with declarations %r") % decls)
 
         if not opts and not secondary_opts:
             raise TypeError(
-                f"No options defined but a name was passed ({name})."
-                " Did you mean to declare an argument instead? Did"
-                f" you mean to pass '--{name}'?"
+                _("No options defined but a name was passed (%s)."
+                  " Did you mean to declare an argument instead? Did"
+                  " you mean to pass '--%s'?") % (name, name)
             )
 
         return name, opts, secondary_opts
@@ -2907,13 +2915,13 @@ class Option(Parameter):
         extra = self.get_help_extra(ctx)
         extra_items = []
         if "envvars" in extra:
-            extra_items.append(_("env var: {var}").format(var=", ".join(extra["envvars"])))
+            extra_items.append(_("env var: %s") % ", ".join(extra["envvars"]))
         if "default" in extra:
-            extra_items.append(_("default: {default}").format(default=extra["default"]))
+            extra_items.append(_("default: %s") % extra["default"])
         if "range" in extra:
             extra_items.append(extra["range"])
         if "required" in extra:
-            extra_items.append(_(extra["required"]))
+            extra_items.append(extra["required"])
 
         if extra_items:
             extra_str = "; ".join(extra_items)
@@ -2929,9 +2937,9 @@ class Option(Parameter):
 
             if envvar is None:
                 if (
-                    self.allow_from_autoenv
-                    and ctx.auto_envvar_prefix is not None
-                    and self.name is not None
+                        self.allow_from_autoenv
+                        and ctx.auto_envvar_prefix is not None
+                        and self.name is not None
                 ):
                     envvar = f"{ctx.auto_envvar_prefix}_{self.name.upper()}"
 
@@ -2989,9 +2997,9 @@ class Option(Parameter):
                 extra["default"] = default_string
 
         if (
-            isinstance(self.type, types._NumberRangeBase)
-            # skip count with default range type
-            and not (self.count and self.type.min == 0 and self.type.max is None)
+                isinstance(self.type, types._NumberRangeBase)
+                # skip count with default range type
+                and not (self.count and self.type.min == 0 and self.type.max is None)
         ):
             range_str = self.type._describe_range()
 
@@ -3120,7 +3128,7 @@ class Option(Parameter):
         return rv
 
     def consume_value(
-        self, ctx: Context, opts: cabc.Mapping[str, Parameter]
+            self, ctx: Context, opts: cabc.Mapping[str, Parameter]
     ) -> tuple[t.Any, ParameterSource]:
         """For :class:`Option`, the value can be collected from an interactive prompt
         if the option is a flag that needs a value (and the :attr:`prompt` property is
@@ -3148,10 +3156,10 @@ class Option(Parameter):
         # A flag which is activated always returns the flag value, unless the value
         # comes from the explicitly sets default.
         elif (
-            self.is_flag
-            and value is True
-            and not self.is_bool_flag
-            and source not in (ParameterSource.DEFAULT, ParameterSource.DEFAULT_MAP)
+                self.is_flag
+                and value is True
+                and not self.is_bool_flag
+                and source not in (ParameterSource.DEFAULT, ParameterSource.DEFAULT_MAP)
         ):
             value = self.flag_value
 
@@ -3159,10 +3167,10 @@ class Option(Parameter):
         # Here we replace each occurrence of value-less flags (marked by the
         # FLAG_NEEDS_VALUE sentinel) with the flag_value.
         elif (
-            self.multiple
-            and value is not UNSET
-            and source not in (ParameterSource.DEFAULT, ParameterSource.DEFAULT_MAP)
-            and any(v is FLAG_NEEDS_VALUE for v in value)
+                self.multiple
+                and value is not UNSET
+                and source not in (ParameterSource.DEFAULT, ParameterSource.DEFAULT_MAP)
+                and any(v is FLAG_NEEDS_VALUE for v in value)
         ):
             value = [self.flag_value if v is FLAG_NEEDS_VALUE else v for v in value]
             source = ParameterSource.COMMANDLINE
@@ -3170,10 +3178,10 @@ class Option(Parameter):
         # The value wasn't set, or used the param's default, prompt for one to the user
         # if prompting is enabled.
         elif (
-            (value is UNSET or source in (ParameterSource.DEFAULT, ParameterSource.DEFAULT_MAP))
-            and self.prompt is not None
-            and (self.required or self.prompt_required)
-            and not ctx.resilient_parsing
+                (value is UNSET or source in (ParameterSource.DEFAULT, ParameterSource.DEFAULT_MAP))
+                and self.prompt is not None
+                and (self.required or self.prompt_required)
+                and not ctx.resilient_parsing
         ):
             value = self.prompt_for_value(ctx)
             source = ParameterSource.PROMPT
@@ -3200,10 +3208,10 @@ class Argument(Parameter):
     param_type_name = "argument"
 
     def __init__(
-        self,
-        param_decls: cabc.Sequence[str],
-        required: bool | None = None,
-        **attrs: t.Any,
+            self,
+            param_decls: cabc.Sequence[str],
+            required: bool | None = None,
+            **attrs: t.Any,
     ) -> None:
         # Auto-detect the requirement status of the argument if not explicitly set.
         if required is None:
@@ -3216,7 +3224,7 @@ class Argument(Parameter):
                 required = False
 
         if "multiple" in attrs:
-            raise TypeError("__init__() got an unexpected keyword argument 'multiple'.")
+            raise TypeError(_("__init__() got an unexpected keyword argument 'multiple'."))
 
         super().__init__(param_decls, required=required, **attrs)
 
@@ -3241,18 +3249,19 @@ class Argument(Parameter):
         return var
 
     def _parse_decls(
-        self, decls: cabc.Sequence[str], expose_value: bool
+            self, decls: cabc.Sequence[str], expose_value: bool
     ) -> tuple[str | None, list[str], list[str]]:
         if not decls:
             if not expose_value:
                 return None, [], []
-            raise TypeError("Argument is marked as exposed, but does not have a name.")
+            raise TypeError(_("Argument is marked as exposed, but does not have a name."))
         if len(decls) == 1:
             name = arg = decls[0]
             name = name.replace("-", "_").lower()
         else:
             raise TypeError(
-                "Arguments take exactly one parameter declaration, got" f" {len(decls)}: {decls}."
+                _("Arguments take exactly one parameter declaration, got"
+                  " %d: %s.") % (len(decls), decls)
             )
         return name, [arg], []
 
@@ -3271,8 +3280,8 @@ def __getattr__(name: str) -> object:
 
     if name == "BaseCommand":
         warnings.warn(
-            "'BaseCommand' is deprecated and will be removed in Click 9.0. Use"
-            " 'Command' instead.",
+            _("'BaseCommand' is deprecated and will be removed in Click 9.0. Use"
+              " 'Command' instead."),
             DeprecationWarning,
             stacklevel=2,
         )
@@ -3280,8 +3289,8 @@ def __getattr__(name: str) -> object:
 
     if name == "MultiCommand":
         warnings.warn(
-            "'MultiCommand' is deprecated and will be removed in Click 9.0. Use"
-            " 'Group' instead.",
+            _("'MultiCommand' is deprecated and will be removed in Click 9.0. Use"
+              " 'Group' instead."),
             DeprecationWarning,
             stacklevel=2,
         )

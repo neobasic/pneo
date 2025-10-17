@@ -9,6 +9,7 @@ from functools import update_wrapper
 from types import ModuleType
 from types import TracebackType
 
+from ._compat import WIN
 from ._compat import _default_text_stderr
 from ._compat import _default_text_stdout
 from ._compat import _find_binary_writer
@@ -18,7 +19,6 @@ from ._compat import open_stream
 from ._compat import should_strip_ansi
 from ._compat import strip_ansi
 from ._compat import text_streams
-from ._compat import WIN
 from .globals import resolve_color_default
 
 if t.TYPE_CHECKING:
@@ -114,12 +114,12 @@ class LazyFile:
     """
 
     def __init__(
-        self,
-        filename: str | os.PathLike[str],
-        mode: str = "r",
-        encoding: str | None = None,
-        errors: str | None = "strict",
-        atomic: bool = False,
+            self,
+            filename: str | os.PathLike[str],
+            mode: str = "r",
+            encoding: str | None = None,
+            errors: str | None = "strict",
+            atomic: bool = False,
     ):
         self.name: str = os.fspath(filename)
         self.mode = mode
@@ -146,7 +146,7 @@ class LazyFile:
     def __repr__(self) -> str:
         if self._f is not None:
             return repr(self._f)
-        return f"<unopened file '{format_filename(self.name)}' {self.mode}>"
+        return "<unopened file '%s' %s>" % (format_filename(self.name), self.mode)
 
     def open(self) -> t.IO[t.Any]:
         """Opens the file if it's not yet open.  This call might fail with
@@ -182,10 +182,10 @@ class LazyFile:
         return self
 
     def __exit__(
-        self,
-        exc_type: type[BaseException] | None,
-        exc_value: BaseException | None,
-        tb: TracebackType | None,
+            self,
+            exc_type: type[BaseException] | None,
+            exc_value: BaseException | None,
+            tb: TracebackType | None,
     ) -> None:
         self.close_intelligently()
 
@@ -205,10 +205,10 @@ class KeepOpenFile:
         return self
 
     def __exit__(
-        self,
-        exc_type: type[BaseException] | None,
-        exc_value: BaseException | None,
-        tb: TracebackType | None,
+            self,
+            exc_type: type[BaseException] | None,
+            exc_value: BaseException | None,
+            tb: TracebackType | None,
     ) -> None:
         pass
 
@@ -220,11 +220,11 @@ class KeepOpenFile:
 
 
 def echo(
-    message: t.Any | None = None,
-    file: t.IO[t.Any] | None = None,
-    nl: bool = True,
-    err: bool = False,
-    color: bool | None = None,
+        message: t.Any | None = None,
+        file: t.IO[t.Any] | None = None,
+        nl: bool = True,
+        err: bool = False,
+        color: bool | None = None,
 ) -> None:
     """Print a message and newline to stdout or a file. This should be
     used instead of :func:`print` because it provides better support
@@ -330,14 +330,15 @@ def get_binary_stream(name: t.Literal["stdin", "stdout", "stderr"]) -> t.BinaryI
     """
     opener = binary_streams.get(name)
     if opener is None:
-        raise TypeError(f"Unknown standard stream '{name}'")
+        raise TypeError("Unknown standard stream '%s'" % name)
+
     return opener()
 
 
 def get_text_stream(
-    name: t.Literal["stdin", "stdout", "stderr"],
-    encoding: str | None = None,
-    errors: str | None = "strict",
+        name: t.Literal["stdin", "stdout", "stderr"],
+        encoding: str | None = None,
+        errors: str | None = "strict",
 ) -> t.TextIO:
     """Returns a system stream for text processing.  This usually returns
     a wrapped stream around a binary stream returned from
@@ -351,17 +352,17 @@ def get_text_stream(
     """
     opener = text_streams.get(name)
     if opener is None:
-        raise TypeError(f"Unknown standard stream '{name}'")
+        raise TypeError("Unknown standard stream '%s'" % name)
     return opener(encoding, errors)
 
 
 def open_file(
-    filename: str | os.PathLike[str],
-    mode: str = "r",
-    encoding: str | None = None,
-    errors: str | None = "strict",
-    lazy: bool = False,
-    atomic: bool = False,
+        filename: str | os.PathLike[str],
+        mode: str = "r",
+        encoding: str | None = None,
+        errors: str | None = "strict",
+        lazy: bool = False,
+        atomic: bool = False,
 ) -> t.IO[t.Any]:
     """Open a file, with extra behavior to handle ``'-'`` to indicate
     a standard stream, lazy open on write, and atomic write. Similar to
@@ -403,8 +404,8 @@ def open_file(
 
 
 def format_filename(
-    filename: str | bytes | os.PathLike[str] | os.PathLike[bytes],
-    shorten: bool = False,
+        filename: str | bytes | os.PathLike[str] | os.PathLike[bytes],
+        shorten: bool = False,
 ) -> str:
     """Format a filename as a string for display. Ensures the filename can be
     displayed by replacing any invalid bytes or surrogate escapes in the name
@@ -546,10 +547,10 @@ def _detect_program_name(path: str | None = None, _main: ModuleType | None = Non
     # set incorrectly for entry points created with pip on Windows.
     # It is set to "" inside a Shiv or PEX zipapp.
     if getattr(_main, "__package__", None) in {None, ""} or (
-        os.name == "nt"
-        and _main.__package__ == ""
-        and not os.path.exists(path)
-        and os.path.exists(f"{path}.exe")
+            os.name == "nt"
+            and _main.__package__ == ""
+            and not os.path.exists(path)
+            and os.path.exists(f"{path}.exe")
     ):
         # Executed a file, like "python app.py".
         return os.path.basename(path)
@@ -568,11 +569,11 @@ def _detect_program_name(path: str | None = None, _main: ModuleType | None = Non
 
 
 def _expand_args(
-    args: cabc.Iterable[str],
-    *,
-    user: bool = True,
-    env: bool = True,
-    glob_recursive: bool = True,
+        args: cabc.Iterable[str],
+        *,
+        user: bool = True,
+        env: bool = True,
+        glob_recursive: bool = True,
 ) -> list[str]:
     """Simulate Unix shell expansion with Python functions.
 

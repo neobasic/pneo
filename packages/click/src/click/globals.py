@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import typing as t
+from gettext import gettext as _
 from threading import local
 
 if t.TYPE_CHECKING:
@@ -36,7 +37,7 @@ def get_current_context(silent: bool = False) -> Context | None:
         return t.cast("Context", _local.stack[-1])
     except (AttributeError, IndexError) as e:
         if not silent:
-            raise RuntimeError("There is no active click context.") from e
+            raise RuntimeError(_("There is no active click context.")) from e
 
     return None
 

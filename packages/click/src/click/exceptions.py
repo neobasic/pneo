@@ -2,8 +2,7 @@ from __future__ import annotations
 
 import collections.abc as cabc
 import typing as t
-from gettext import gettext as _
-from gettext import ngettext
+from gettext import gettext as _, ngettext
 
 from ._compat import get_text_stderr
 from .globals import resolve_color_default
@@ -75,15 +74,13 @@ class UsageError(ClickException):
         color = None
         hint = ""
         if self.ctx is not None and self.ctx.command.get_help_option(self.ctx) is not None:
-            hint = _("Try '{command} {option}' for help.").format(
-                command=self.ctx.command_path, option=self.ctx.help_option_names[0]
-            )
+            hint = _("Try '%s %s' for help.") % (self.ctx.command_path, self.ctx.help_option_names[0])
             hint = f"{hint}\n"
         if self.ctx is not None:
             color = self.ctx.color
             echo(f"{self.ctx.get_usage()}\n{hint}", file=file, color=color)
         echo(
-            _("Error: {message}").format(message=self.format_message()),
+            _("Error: %s") % self.format_message(),
             file=file,
             color=color,
         )
@@ -108,11 +105,11 @@ class BadParameter(UsageError):
     """
 
     def __init__(
-        self,
-        message: str,
-        ctx: Context | None = None,
-        param: Parameter | None = None,
-        param_hint: cabc.Sequence[str] | str | None = None,
+            self,
+            message: str,
+            ctx: Context | None = None,
+            param: Parameter | None = None,
+            param_hint: cabc.Sequence[str] | str | None = None,
     ) -> None:
         super().__init__(message, ctx)
         self.param = param
@@ -124,11 +121,9 @@ class BadParameter(UsageError):
         elif self.param is not None:
             param_hint = self.param.get_error_hint(self.ctx)  # type: ignore
         else:
-            return _("Invalid value: {message}").format(message=self.message)
+            return _("Invalid value: %s") % self.message
 
-        return _("Invalid value for {param_hint}: {message}").format(
-            param_hint=_join_param_hints(param_hint), message=self.message
-        )
+        return _("Invalid value for %s: %s") % (_join_param_hints(param_hint), self.message)
 
 
 class MissingParameter(BadParameter):
@@ -144,12 +139,12 @@ class MissingParameter(BadParameter):
     """
 
     def __init__(
-        self,
-        message: str | None = None,
-        ctx: Context | None = None,
-        param: Parameter | None = None,
-        param_hint: cabc.Sequence[str] | str | None = None,
-        param_type: str | None = None,
+            self,
+            message: str | None = None,
+            ctx: Context | None = None,
+            param: Parameter | None = None,
+            param_hint: cabc.Sequence[str] | str | None = None,
+            param_type: str | None = None,
     ) -> None:
         super().__init__(message or "", ctx, param, param_hint)
         self.param_type = param_type
@@ -188,14 +183,14 @@ class MissingParameter(BadParameter):
         elif param_type == "parameter":
             missing = _("Missing parameter")
         else:
-            missing = _("Missing {param_type}").format(param_type=param_type)
+            missing = _("Missing %s") % param_type
 
         return f"{missing}{param_hint}.{msg}"
 
     def __str__(self) -> str:
         if not self.message:
             param_name = self.param.name if self.param else None
-            return _("Missing parameter: {param_name}").format(param_name=param_name)
+            return _("Missing parameter: %s") % param_name
         else:
             return self.message
 
@@ -208,14 +203,14 @@ class NoSuchOption(UsageError):
     """
 
     def __init__(
-        self,
-        option_name: str,
-        message: str | None = None,
-        possibilities: cabc.Sequence[str] | None = None,
-        ctx: Context | None = None,
+            self,
+            option_name: str,
+            message: str | None = None,
+            possibilities: cabc.Sequence[str] | None = None,
+            ctx: Context | None = None,
     ) -> None:
         if message is None:
-            message = _("No such option: {name}").format(name=option_name)
+            message = _("No such option: %s") % option_name
 
         super().__init__(message, ctx)
         self.option_name = option_name
@@ -279,9 +274,7 @@ class FileError(ClickException):
         self.filename = filename
 
     def format_message(self) -> str:
-        return _("Could not open file {filename!r}: {message}").format(
-            filename=self.ui_filename, message=self.message
-        )
+        return _("Could not open file %r: %s") % (self.ui_filename, self.message)
 
 
 class Abort(RuntimeError):

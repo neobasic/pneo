@@ -7,6 +7,8 @@ composable.
 
 from __future__ import annotations
 
+from gettext import gettext as _
+
 from .core import Argument as Argument
 from .core import Command as Command
 from .core import CommandCollection as CommandCollection
@@ -52,8 +54,8 @@ from .termui import unstyle as unstyle
 from .types import BOOL as BOOL
 from .types import Choice as Choice
 from .types import DateTime as DateTime
-from .types import File as File
 from .types import FLOAT as FLOAT
+from .types import File as File
 from .types import FloatRange as FloatRange
 from .types import INT as INT
 from .types import IntRange as IntRange
@@ -78,8 +80,8 @@ def __getattr__(name: str) -> object:
         from .core import _BaseCommand
 
         warnings.warn(
-            "'BaseCommand' is deprecated and will be removed in Click 9.0. Use"
-            " 'Command' instead.",
+            _("'BaseCommand' is deprecated and will be removed in Click 9.0. Use"
+              " 'Command' instead."),
             DeprecationWarning,
             stacklevel=2,
         )
@@ -89,8 +91,8 @@ def __getattr__(name: str) -> object:
         from .core import _MultiCommand
 
         warnings.warn(
-            "'MultiCommand' is deprecated and will be removed in Click 9.0. Use"
-            " 'Group' instead.",
+            _("'MultiCommand' is deprecated and will be removed in Click 9.0. Use"
+              " 'Group' instead."),
             DeprecationWarning,
             stacklevel=2,
         )
@@ -100,8 +102,8 @@ def __getattr__(name: str) -> object:
         from .parser import _OptionParser
 
         warnings.warn(
-            "'OptionParser' is deprecated and will be removed in Click 9.0. The"
-            " old parser is available in 'optparse'.",
+            _("'OptionParser' is deprecated and will be removed in Click 9.0. The"
+              " old parser is available in 'optparse'."),
             DeprecationWarning,
             stacklevel=2,
         )
@@ -112,9 +114,9 @@ def __getattr__(name: str) -> object:
         import warnings
 
         warnings.warn(
-            "The '__version__' attribute is deprecated and will be removed in"
-            " Click 9.1. Use feature detection or"
-            " 'importlib.metadata.version(\"click\")' instead.",
+            _("The '__version__' attribute is deprecated and will be removed in"
+              " Click 9.1. Use feature detection or"
+              " 'importlib.metadata.version(\"click\")' instead."),
             DeprecationWarning,
             stacklevel=2,
         )

@@ -8,13 +8,12 @@ import sys
 import typing as t
 from datetime import datetime
 from gettext import gettext as _
-from gettext import ngettext
 
 from ._compat import _get_argv_encoding
 from ._compat import open_stream
 from .exceptions import BadParameter
-from .utils import format_filename
 from .utils import LazyFile
+from .utils import format_filename
 from .utils import safecall
 
 if t.TYPE_CHECKING:
@@ -81,10 +80,10 @@ class ParamType:
         return {"param_type": param_type, "name": name}
 
     def __call__(
-        self,
-        value: t.Any,
-        param: Parameter | None = None,
-        ctx: Context | None = None,
+            self,
+            value: t.Any,
+            param: Parameter | None = None,
+            ctx: Context | None = None,
     ) -> t.Any:
         if value is not None:
             return self.convert(value, param, ctx)
@@ -132,16 +131,16 @@ class ParamType:
         return (rv or "").split(self.envvar_list_splitter)
 
     def fail(
-        self,
-        message: str,
-        param: Parameter | None = None,
-        ctx: Context | None = None,
+            self,
+            message: str,
+            param: Parameter | None = None,
+            ctx: Context | None = None,
     ) -> t.NoReturn:
         """Helper method to fail with an invalid value message."""
         raise BadParameter(message, ctx=ctx, param=param)
 
     def shell_complete(
-        self, ctx: Context, param: Parameter, incomplete: str
+            self, ctx: Context, param: Parameter, incomplete: str
     ) -> list[CompletionItem]:
         """Return a list of
         :class:`~click.shell_completion.CompletionItem` objects for the
@@ -313,9 +312,7 @@ class Choice(ParamType, t.Generic[ParamTypeValue]):
 
         .. versionchanged:: 8.2.0 Added ``ctx`` argument.
         """
-        return _("Choose from:\n\t{choices}").format(
-            choices=",\n\t".join(self._normalized_mapping(ctx=ctx).values())
-        )
+        return _("Choose from:\n\t%s") % (",\n\t".join(self._normalized_mapping(ctx=ctx).values()))
 
     def convert(self, value: t.Any, param: Parameter | None, ctx: Context | None) -> ParamTypeValue:
         """
@@ -357,7 +354,7 @@ class Choice(ParamType, t.Generic[ParamTypeValue]):
         return f"Choice({list(self.choices)})"
 
     def shell_complete(
-        self, ctx: Context, param: Parameter, incomplete: str
+            self, ctx: Context, param: Parameter, incomplete: str
     ) -> list[CompletionItem]:
         """Complete choices that start with the incomplete value.
 
@@ -457,9 +454,7 @@ class _NumberParamTypeBase(ParamType):
             return self._number_class(value)
         except ValueError:
             self.fail(
-                _("{value!r} is not a valid {number_type}.").format(
-                    value=value, number_type=self.name
-                ),
+                _("%r is not a valid %s.") % (value, self.name),
                 param,
                 ctx,
             )
@@ -467,12 +462,12 @@ class _NumberParamTypeBase(ParamType):
 
 class _NumberRangeBase(_NumberParamTypeBase):
     def __init__(
-        self,
-        min: float | None = None,
-        max: float | None = None,
-        min_open: bool = False,
-        max_open: bool = False,
-        clamp: bool = False,
+            self,
+            min: float | None = None,
+            max: float | None = None,
+            min_open: bool = False,
+            max_open: bool = False,
+            clamp: bool = False,
     ) -> None:
         self.min = min
         self.max = max
@@ -511,9 +506,7 @@ class _NumberRangeBase(_NumberParamTypeBase):
 
         if lt_min or gt_max:
             self.fail(
-                _("{value} is not in the range {range}.").format(
-                    value=rv, range=self._describe_range()
-                ),
+                _("%s is not in the range %s.") % (rv, self._describe_range()),
                 param,
                 ctx,
             )
@@ -608,17 +601,17 @@ class FloatRange(_NumberRangeBase, FloatParamType):
     name = "float range"
 
     def __init__(
-        self,
-        min: float | None = None,
-        max: float | None = None,
-        min_open: bool = False,
-        max_open: bool = False,
-        clamp: bool = False,
+            self,
+            min: float | None = None,
+            max: float | None = None,
+            min_open: bool = False,
+            max_open: bool = False,
+            clamp: bool = False,
     ) -> None:
         super().__init__(min=min, max=max, min_open=min_open, max_open=max_open, clamp=clamp)
 
         if (min_open or max_open) and clamp:
-            raise TypeError("Clamping is not supported for open bounds.")
+            raise TypeError(_("Clamping is not supported for open bounds."))
 
     def _clamp(self, bound: float, dir: t.Literal[1, -1], open: bool) -> float:
         if not open:
@@ -627,7 +620,7 @@ class FloatRange(_NumberRangeBase, FloatParamType):
         # Could use math.nextafter here, but clamping an
         # open float range doesn't seem to be particularly useful. It's
         # left up to the user to write a callback to do it if needed.
-        raise RuntimeError("Clamping is not supported for open bounds.")
+        raise RuntimeError(_("Clamping is not supported for open bounds."))
 
 
 class BoolParamType(ParamType):
@@ -685,9 +678,7 @@ class BoolParamType(ParamType):
         normalized = self.str_to_bool(value)
         if normalized is None:
             self.fail(
-                _("{value!r} is not a valid boolean. Recognized values: {states}").format(
-                    value=value, states=", ".join(sorted(self.bool_states))
-                ),
+                _("%r is not a valid boolean. Recognized values: %s") % (value, ", ".join(sorted(self.bool_states))),
                 param,
                 ctx,
             )
@@ -711,7 +702,7 @@ class UUIDParameterType(ParamType):
         try:
             return uuid.UUID(value)
         except ValueError:
-            self.fail(_("{value!r} is not a valid UUID.").format(value=value), param, ctx)
+            self.fail(_("%r is not a valid UUID.") % value, param, ctx)
 
     def __repr__(self) -> str:
         return "UUID"
@@ -751,12 +742,12 @@ class File(ParamType):
     envvar_list_splitter: t.ClassVar[str] = os.path.pathsep
 
     def __init__(
-        self,
-        mode: str = "r",
-        encoding: str | None = None,
-        errors: str | None = "strict",
-        lazy: bool | None = None,
-        atomic: bool = False,
+            self,
+            mode: str = "r",
+            encoding: str | None = None,
+            errors: str | None = "strict",
+            lazy: bool | None = None,
+            atomic: bool = False,
     ) -> None:
         self.mode = mode
         self.encoding = encoding
@@ -779,10 +770,10 @@ class File(ParamType):
         return False
 
     def convert(
-        self,
-        value: str | os.PathLike[str] | t.IO[t.Any],
-        param: Parameter | None,
-        ctx: Context | None,
+            self,
+            value: str | os.PathLike[str] | t.IO[t.Any],
+            param: Parameter | None,
+            ctx: Context | None,
     ) -> t.IO[t.Any]:
         if _is_file_like(value):
             return value
@@ -820,7 +811,7 @@ class File(ParamType):
             self.fail(f"'{format_filename(value)}': {e.strerror}", param, ctx)
 
     def shell_complete(
-        self, ctx: Context, param: Parameter, incomplete: str
+            self, ctx: Context, param: Parameter, incomplete: str
     ) -> list[CompletionItem]:
         """Return a special completion marker that tells the completion
         system to use the shell to provide file path completions.
@@ -876,16 +867,16 @@ class Path(ParamType):
     envvar_list_splitter: t.ClassVar[str] = os.path.pathsep
 
     def __init__(
-        self,
-        exists: bool = False,
-        file_okay: bool = True,
-        dir_okay: bool = True,
-        writable: bool = False,
-        readable: bool = True,
-        resolve_path: bool = False,
-        allow_dash: bool = False,
-        path_type: type[t.Any] | None = None,
-        executable: bool = False,
+            self,
+            exists: bool = False,
+            file_okay: bool = True,
+            dir_okay: bool = True,
+            writable: bool = False,
+            readable: bool = True,
+            resolve_path: bool = False,
+            allow_dash: bool = False,
+            path_type: type[t.Any] | None = None,
+            executable: bool = False,
     ):
         self.exists = exists
         self.file_okay = file_okay
@@ -928,10 +919,10 @@ class Path(ParamType):
         return value
 
     def convert(
-        self,
-        value: str | os.PathLike[str],
-        param: Parameter | None,
-        ctx: Context | None,
+            self,
+            value: str | os.PathLike[str],
+            param: Parameter | None,
+            ctx: Context | None,
     ) -> str | bytes | os.PathLike[str]:
         rv = value
 
@@ -947,53 +938,41 @@ class Path(ParamType):
                 if not self.exists:
                     return self.coerce_path_result(rv)
                 self.fail(
-                    _("{name} {filename!r} does not exist.").format(
-                        name=self.name.title(), filename=format_filename(value)
-                    ),
+                    _("%s %r does not exist.") % (self.name.title(), format_filename(value)),
                     param,
                     ctx,
                 )
 
             if not self.file_okay and stat.S_ISREG(st.st_mode):
                 self.fail(
-                    _("{name} {filename!r} is a file.").format(
-                        name=self.name.title(), filename=format_filename(value)
-                    ),
+                    _("%s %r is a file.") % (self.name.title(), format_filename(value)),
                     param,
                     ctx,
                 )
             if not self.dir_okay and stat.S_ISDIR(st.st_mode):
                 self.fail(
-                    _("{name} {filename!r} is a directory.").format(
-                        name=self.name.title(), filename=format_filename(value)
-                    ),
+                    _("%s %r is a directory.") % (self.name.title(), format_filename(value)),
                     param,
                     ctx,
                 )
 
             if self.readable and not os.access(rv, os.R_OK):
                 self.fail(
-                    _("{name} {filename!r} is not readable.").format(
-                        name=self.name.title(), filename=format_filename(value)
-                    ),
+                    _("%s %r is not readable.") % (self.name.title(), format_filename(value)),
                     param,
                     ctx,
                 )
 
             if self.writable and not os.access(rv, os.W_OK):
                 self.fail(
-                    _("{name} {filename!r} is not writable.").format(
-                        name=self.name.title(), filename=format_filename(value)
-                    ),
+                    _("%s %r is not writable.") % (self.name.title(), format_filename(value)),
                     param,
                     ctx,
                 )
 
             if self.executable and not os.access(value, os.X_OK):
                 self.fail(
-                    _("{name} {filename!r} is not executable.").format(
-                        name=self.name.title(), filename=format_filename(value)
-                    ),
+                    _("%s %r is not executable.") % (self.name.title(), format_filename(value)),
                     param,
                     ctx,
                 )
@@ -1001,7 +980,7 @@ class Path(ParamType):
         return self.coerce_path_result(rv)
 
     def shell_complete(
-        self, ctx: Context, param: Parameter, incomplete: str
+            self, ctx: Context, param: Parameter, incomplete: str
     ) -> list[CompletionItem]:
         """Return a special completion marker that tells the completion
         system to use the shell to provide path completions for only
@@ -1056,10 +1035,10 @@ class Tuple(CompositeParamType):
         if len_value != len_type:
             self.fail(
                 ngettext(
-                    "{len_type} values are required, but {len_value} was given.",
-                    "{len_type} values are required, but {len_value} were given.",
+                    "%s values are required, but %s was given.",
+                    "%s values are required, but %s were given.",
                     len_value,
-                ).format(len_type=len_type, len_value=len_value),
+                ) % (len_type, len_value),
                 param=param,
                 ctx=ctx,
             )
@@ -1117,7 +1096,7 @@ def convert_type(ty: t.Any | None, default: t.Any | None = None) -> ParamType:
     if __debug__:
         try:
             if issubclass(ty, ParamType):
-                raise AssertionError(f"Attempted to use an uninstantiated parameter type ({ty}).")
+                raise AssertionError(_("Attempted to use an uninstantiated parameter type (%s).") % ty)
         except TypeError:
             # ty is an instance (correct), so issubclass fails.
             pass

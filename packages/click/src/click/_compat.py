@@ -7,6 +7,7 @@ import os
 import re
 import sys
 import typing as t
+from gettext import gettext as _
 from types import TracebackType
 from weakref import WeakKeyDictionary
 
@@ -17,11 +18,11 @@ _ansi_re = re.compile(r"\033\[[;?0-9]*[a-zA-Z]")
 
 
 def _make_text_stream(
-    stream: t.BinaryIO,
-    encoding: str | None,
-    errors: str | None,
-    force_readable: bool = False,
-    force_writable: bool = False,
+        stream: t.BinaryIO,
+        encoding: str | None,
+        errors: str | None,
+        force_readable: bool = False,
+        force_writable: bool = False,
 ) -> t.TextIO:
     if encoding is None:
         encoding = get_best_encoding(stream)
@@ -55,13 +56,13 @@ def get_best_encoding(stream: t.IO[t.Any]) -> str:
 
 class _NonClosingTextIOWrapper(io.TextIOWrapper):
     def __init__(
-        self,
-        stream: t.BinaryIO,
-        encoding: str | None,
-        errors: str | None,
-        force_readable: bool = False,
-        force_writable: bool = False,
-        **extra: t.Any,
+            self,
+            stream: t.BinaryIO,
+            encoding: str | None,
+            errors: str | None,
+            force_readable: bool = False,
+            force_writable: bool = False,
+            **extra: t.Any,
     ) -> None:
         self._stream = stream = t.cast(
             t.BinaryIO, _FixupStream(stream, force_readable, force_writable)
@@ -90,10 +91,10 @@ class _FixupStream:
     """
 
     def __init__(
-        self,
-        stream: t.BinaryIO,
-        force_readable: bool = False,
-        force_writable: bool = False,
+            self,
+            stream: t.BinaryIO,
+            force_readable: bool = False,
+            force_writable: bool = False,
     ):
         self._stream = stream
         self._force_readable = force_readable
@@ -234,13 +235,13 @@ def _is_compatible_text_stream(stream: t.TextIO, encoding: str | None, errors: s
 
 
 def _force_correct_text_stream(
-    text_stream: t.IO[t.Any],
-    encoding: str | None,
-    errors: str | None,
-    is_binary: t.Callable[[t.IO[t.Any], bool], bool],
-    find_binary: t.Callable[[t.IO[t.Any]], t.BinaryIO | None],
-    force_readable: bool = False,
-    force_writable: bool = False,
+        text_stream: t.IO[t.Any],
+        encoding: str | None,
+        errors: str | None,
+        is_binary: t.Callable[[t.IO[t.Any], bool], bool],
+        find_binary: t.Callable[[t.IO[t.Any]], t.BinaryIO | None],
+        force_readable: bool = False,
+        force_writable: bool = False,
 ) -> t.TextIO:
     if is_binary(text_stream, False):
         binary_reader = t.cast(t.BinaryIO, text_stream)
@@ -249,7 +250,7 @@ def _force_correct_text_stream(
         # If the stream looks compatible, and won't default to a
         # misconfigured ascii encoding, return it as-is.
         if _is_compatible_text_stream(text_stream, encoding, errors) and not (
-            encoding is None and _stream_is_misconfigured(text_stream)
+                encoding is None and _stream_is_misconfigured(text_stream)
         ):
             return text_stream
 
@@ -280,10 +281,10 @@ def _force_correct_text_stream(
 
 
 def _force_correct_text_reader(
-    text_reader: t.IO[t.Any],
-    encoding: str | None,
-    errors: str | None,
-    force_readable: bool = False,
+        text_reader: t.IO[t.Any],
+        encoding: str | None,
+        errors: str | None,
+        force_readable: bool = False,
 ) -> t.TextIO:
     return _force_correct_text_stream(
         text_reader,
@@ -296,10 +297,10 @@ def _force_correct_text_reader(
 
 
 def _force_correct_text_writer(
-    text_writer: t.IO[t.Any],
-    encoding: str | None,
-    errors: str | None,
-    force_writable: bool = False,
+        text_writer: t.IO[t.Any],
+        encoding: str | None,
+        errors: str | None,
+        force_writable: bool = False,
 ) -> t.TextIO:
     return _force_correct_text_stream(
         text_writer,
@@ -314,21 +315,21 @@ def _force_correct_text_writer(
 def get_binary_stdin() -> t.BinaryIO:
     reader = _find_binary_reader(sys.stdin)
     if reader is None:
-        raise RuntimeError("Was not able to determine binary stream for sys.stdin.")
+        raise RuntimeError(_("Was not able to determine binary stream for sys.stdin."))
     return reader
 
 
 def get_binary_stdout() -> t.BinaryIO:
     writer = _find_binary_writer(sys.stdout)
     if writer is None:
-        raise RuntimeError("Was not able to determine binary stream for sys.stdout.")
+        raise RuntimeError(_("Was not able to determine binary stream for sys.stdout."))
     return writer
 
 
 def get_binary_stderr() -> t.BinaryIO:
     writer = _find_binary_writer(sys.stderr)
     if writer is None:
-        raise RuntimeError("Was not able to determine binary stream for sys.stderr.")
+        raise RuntimeError(_("Was not able to determine binary stream for sys.stderr."))
     return writer
 
 
@@ -354,10 +355,10 @@ def get_text_stderr(encoding: str | None = None, errors: str | None = None) -> t
 
 
 def _wrap_io_open(
-    file: str | os.PathLike[str] | int,
-    mode: str,
-    encoding: str | None,
-    errors: str | None,
+        file: str | os.PathLike[str] | int,
+        mode: str,
+        encoding: str | None,
+        errors: str | None,
 ) -> t.IO[t.Any]:
     """Handles not passing ``encoding`` and ``errors`` in binary mode."""
     if "b" in mode:
@@ -367,11 +368,11 @@ def _wrap_io_open(
 
 
 def open_stream(
-    filename: str | os.PathLike[str],
-    mode: str = "r",
-    encoding: str | None = None,
-    errors: str | None = "strict",
-    atomic: bool = False,
+        filename: str | os.PathLike[str],
+        mode: str = "r",
+        encoding: str | None = None,
+        errors: str | None = "strict",
+        atomic: bool = False,
 ) -> tuple[t.IO[t.Any], bool]:
     binary = "b" in mode
     filename = os.fspath(filename)
@@ -394,15 +395,15 @@ def open_stream(
     # Some usability stuff for atomic writes
     if "a" in mode:
         raise ValueError(
-            "Appending to an existing file is not supported, because that"
-            " would involve an expensive `copy`-operation to a temporary"
-            " file. Open the file in normal `w`-mode and copy explicitly"
-            " if that's what you're after."
+            _("Appending to an existing file is not supported, because that"
+              " would involve an expensive `copy`-operation to a temporary"
+              " file. Open the file in normal `w`-mode and copy explicitly"
+              " if that's what you're after.")
         )
     if "x" in mode:
-        raise ValueError("Use the `overwrite`-parameter instead.")
+        raise ValueError(_("Use the `overwrite`-parameter instead."))
     if "w" not in mode:
-        raise ValueError("Atomic writes only make sense with `w`-mode.")
+        raise ValueError(_("Atomic writes only make sense with `w`-mode."))
 
     # Atomic writes are more complicated.  They work by opening a file
     # as a proxy in the same folder and then using the fdopen
@@ -431,10 +432,10 @@ def open_stream(
             break
         except OSError as e:
             if e.errno == errno.EEXIST or (
-                os.name == "nt"
-                and e.errno == errno.EACCES
-                and os.path.isdir(e.filename)
-                and os.access(e.filename, os.W_OK)
+                    os.name == "nt"
+                    and e.errno == errno.EACCES
+                    and os.path.isdir(e.filename)
+                    and os.access(e.filename, os.W_OK)
             ):
                 continue
             raise
@@ -472,10 +473,10 @@ class _AtomicFile:
         return self
 
     def __exit__(
-        self,
-        exc_type: type[BaseException] | None,
-        exc_value: BaseException | None,
-        tb: TracebackType | None,
+            self,
+            exc_type: type[BaseException] | None,
+            exc_value: BaseException | None,
+            tb: TracebackType | None,
     ) -> None:
         self.close(delete=exc_type is not None)
 
@@ -508,12 +509,15 @@ def should_strip_ansi(stream: t.IO[t.Any] | None = None, color: bool | None = No
 if sys.platform.startswith("win") and WIN:
     from ._winconsole import _get_windows_console_stream
 
+
     def _get_argv_encoding() -> str:
         import locale
 
         return locale.getpreferredencoding()
 
+
     _ansi_stream_wrappers: cabc.MutableMapping[t.TextIO, t.TextIO] = WeakKeyDictionary()
+
 
     def auto_wrap_for_ansi(stream: t.TextIO, color: bool | None = None) -> t.TextIO:
         """Support ANSI color and style codes on Windows by wrapping a
@@ -555,8 +559,9 @@ else:
     def _get_argv_encoding() -> str:
         return getattr(sys.stdin, "encoding", None) or sys.getfilesystemencoding()
 
+
     def _get_windows_console_stream(
-        f: t.TextIO, encoding: str | None, errors: str | None
+            f: t.TextIO, encoding: str | None, errors: str | None
     ) -> t.TextIO | None:
         return None
 
@@ -573,8 +578,8 @@ def isatty(stream: t.IO[t.Any]) -> bool:
 
 
 def _make_cached_stream_func(
-    src_func: t.Callable[[], t.TextIO | None],
-    wrapper_func: t.Callable[[], t.TextIO],
+        src_func: t.Callable[[], t.TextIO | None],
+        wrapper_func: t.Callable[[], t.TextIO],
 ) -> t.Callable[[], t.TextIO | None]:
     cache: cabc.MutableMapping[t.TextIO, t.TextIO] = WeakKeyDictionary()
 
@@ -603,7 +608,6 @@ def _make_cached_stream_func(
 _default_text_stdin = _make_cached_stream_func(lambda: sys.stdin, get_text_stdin)
 _default_text_stdout = _make_cached_stream_func(lambda: sys.stdout, get_text_stdout)
 _default_text_stderr = _make_cached_stream_func(lambda: sys.stderr, get_text_stderr)
-
 
 binary_streams: cabc.Mapping[str, t.Callable[[], t.BinaryIO]] = {
     "stdin": get_binary_stdin,

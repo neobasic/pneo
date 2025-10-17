@@ -19,14 +19,14 @@ from io import StringIO
 from pathlib import Path
 from types import TracebackType
 
-from ._compat import _default_text_stdout
 from ._compat import CYGWIN
+from ._compat import WIN
+from ._compat import _default_text_stdout
 from ._compat import get_best_encoding
 from ._compat import isatty
 from ._compat import open_stream
 from ._compat import strip_ansi
 from ._compat import term_len
-from ._compat import WIN
 from .exceptions import ClickException
 from .utils import echo
 
@@ -42,23 +42,23 @@ else:
 
 class ProgressBar(t.Generic[V]):
     def __init__(
-        self,
-        iterable: cabc.Iterable[V] | None,
-        length: int | None = None,
-        fill_char: str = "#",
-        empty_char: str = " ",
-        bar_template: str = "%(bar)s",
-        info_sep: str = "  ",
-        hidden: bool = False,
-        show_eta: bool = True,
-        show_percent: bool | None = None,
-        show_pos: bool = False,
-        item_show_func: t.Callable[[V | None], str | None] | None = None,
-        label: str | None = None,
-        file: t.TextIO | None = None,
-        color: bool | None = None,
-        update_min_steps: int = 1,
-        width: int = 30,
+            self,
+            iterable: cabc.Iterable[V] | None,
+            length: int | None = None,
+            fill_char: str = "#",
+            empty_char: str = " ",
+            bar_template: str = "%(bar)s",
+            info_sep: str = "  ",
+            hidden: bool = False,
+            show_eta: bool = True,
+            show_percent: bool | None = None,
+            show_pos: bool = False,
+            item_show_func: t.Callable[[V | None], str | None] | None = None,
+            label: str | None = None,
+            file: t.TextIO | None = None,
+            color: bool | None = None,
+            update_min_steps: int = 1,
+            width: int = 30,
     ) -> None:
         self.fill_char = fill_char
         self.empty_char = empty_char
@@ -95,7 +95,7 @@ class ProgressBar(t.Generic[V]):
                 length = None
         if iterable is None:
             if length is None:
-                raise TypeError("iterable or length is required")
+                raise TypeError(_("Iterable or length is required."))
             iterable = t.cast("cabc.Iterable[V]", range(length))
         self.iter: cabc.Iterable[V] = iter(iterable)
         self.length = length
@@ -118,16 +118,16 @@ class ProgressBar(t.Generic[V]):
         return self
 
     def __exit__(
-        self,
-        exc_type: type[BaseException] | None,
-        exc_value: BaseException | None,
-        tb: TracebackType | None,
+            self,
+            exc_type: type[BaseException] | None,
+            exc_value: BaseException | None,
+            tb: TracebackType | None,
     ) -> None:
         self.render_finish()
 
     def __iter__(self) -> cabc.Iterator[V]:
         if not self.entered:
-            raise RuntimeError("You need to use progress bars in a with block.")
+            raise RuntimeError(_("You need to use progress bars in a with block."))
         self.render_progress()
         return self.generator()
 
@@ -222,12 +222,12 @@ class ProgressBar(t.Generic[V]):
                 info_bits.append(item_info)
 
         return (
-            self.bar_template
-            % {
-                "label": self.label,
-                "bar": self.format_bar(),
-                "info": self.info_sep.join(info_bits),
-            }
+                self.bar_template
+                % {
+                    "label": self.label,
+                    "bar": self.format_bar(),
+                    "info": self.info_sep.join(info_bits),
+                }
         ).rstrip()
 
     def render_progress(self) -> None:
@@ -342,7 +342,7 @@ class ProgressBar(t.Generic[V]):
         # `self.generator()` repeatedly, and this must remain safe in
         # order for that interface to work.
         if not self.entered:
-            raise RuntimeError("You need to use progress bars in a with block.")
+            raise RuntimeError(_("You need to use progress bars in a with block."))
 
         if not self._is_atty:
             yield from self.iter
@@ -547,11 +547,11 @@ def _nullpager(stream: t.TextIO, generator: cabc.Iterable[str], color: bool | No
 
 class Editor:
     def __init__(
-        self,
-        editor: str | None = None,
-        env: cabc.Mapping[str, str] | None = None,
-        require_save: bool = True,
-        extension: str = ".txt",
+            self,
+            editor: str | None = None,
+            env: cabc.Mapping[str, str] | None = None,
+            require_save: bool = True,
+            extension: str = ".txt",
     ) -> None:
         self.editor = editor
         self.env = env
@@ -591,19 +591,21 @@ class Editor:
             c = subprocess.Popen(args=f"{editor} {exc_filename}", env=environ, shell=True)
             exit_code = c.wait()
             if exit_code != 0:
-                raise ClickException(_("{editor}: Editing failed").format(editor=editor))
+                raise ClickException(_("%s: Editing failed") % editor)
         except OSError as e:
             raise ClickException(
-                _("{editor}: Editing failed: {e}").format(editor=editor, e=e)
+                _("%s: Editing failed: %s") % (editor, e)
             ) from e
 
     @t.overload
-    def edit(self, text: bytes | bytearray) -> bytes | None: ...
+    def edit(self, text: bytes | bytearray) -> bytes | None:
+        ...
 
     # We cannot know whether or not the type expected is str or bytes when None
     # is passed, so str is returned as that was what was done before.
     @t.overload
-    def edit(self, text: str | None) -> str | None: ...
+    def edit(self, text: str | None) -> str | None:
+        ...
 
     def edit(self, text: str | bytes | bytearray | None) -> str | bytes | None:
         import tempfile
@@ -740,9 +742,11 @@ def _translate_ch_to_exc(ch: str) -> None:
 if sys.platform == "win32":
     import msvcrt
 
+
     @contextlib.contextmanager
     def raw_terminal() -> cabc.Iterator[int]:
         yield -1
+
 
     def getchar(echo: bool) -> str:
         # The function `getch` will return a bytes object corresponding to
@@ -794,6 +798,7 @@ else:
     import termios
     import tty
 
+
     @contextlib.contextmanager
     def raw_terminal() -> cabc.Iterator[int]:
         f: t.TextIO | None
@@ -820,6 +825,7 @@ else:
                     f.close()
         except termios.error:
             pass
+
 
     def getchar(echo: bool) -> str:
         with raw_terminal() as fd:

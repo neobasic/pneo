@@ -15,10 +15,10 @@ from .exceptions import Abort
 from .exceptions import UsageError
 from .globals import resolve_color_default
 from .types import Choice
-from .types import convert_type
 from .types import ParamType
-from .utils import echo
+from .types import convert_type
 from .utils import LazyFile
+from .utils import echo
 
 if t.TYPE_CHECKING:
     from ._termui_impl import ProgressBar
@@ -58,12 +58,12 @@ def hidden_prompt_func(prompt: str) -> str:
 
 
 def _build_prompt(
-    text: str,
-    suffix: str,
-    show_default: bool = False,
-    default: t.Any | None = None,
-    show_choices: bool = True,
-    type: ParamType | None = None,
+        text: str,
+        suffix: str,
+        show_default: bool = False,
+        default: t.Any | None = None,
+        show_choices: bool = True,
+        type: ParamType | None = None,
 ) -> str:
     prompt = text
     if type is not None and show_choices and isinstance(type, Choice):
@@ -81,16 +81,16 @@ def _format_default(default: t.Any) -> t.Any:
 
 
 def prompt(
-    text: str,
-    default: t.Any | None = None,
-    hide_input: bool = False,
-    confirmation_prompt: bool | str = False,
-    type: ParamType | t.Any | None = None,
-    value_proc: t.Callable[[str], t.Any] | None = None,
-    prompt_suffix: str = ": ",
-    show_default: bool = True,
-    err: bool = False,
-    show_choices: bool = True,
+        text: str,
+        default: t.Any | None = None,
+        hide_input: bool = False,
+        confirmation_prompt: bool | str = False,
+        type: ParamType | t.Any | None = None,
+        value_proc: t.Callable[[str], t.Any] | None = None,
+        prompt_suffix: str = ": ",
+        show_default: bool = True,
+        err: bool = False,
+        show_choices: bool = True,
 ) -> t.Any:
     """Prompts a user for input.  This is a convenience function that can
     be used to prompt a user for input later.
@@ -175,7 +175,7 @@ def prompt(
             if hide_input:
                 echo(_("Error: The value you entered was invalid."), err=err)
             else:
-                echo(_("Error: {e.message}").format(e=e), err=err)
+                echo(_("Error: %s") % e.message, err=err)
             continue
         if not confirmation_prompt:
             return result
@@ -190,12 +190,12 @@ def prompt(
 
 
 def confirm(
-    text: str,
-    default: bool | None = False,
-    abort: bool = False,
-    prompt_suffix: str = ": ",
-    show_default: bool = True,
-    err: bool = False,
+        text: str,
+        default: bool | None = False,
+        abort: bool = False,
+        prompt_suffix: str = ": ",
+        show_default: bool = True,
+        err: bool = False,
 ) -> bool:
     """Prompts for confirmation (yes/no question).
 
@@ -251,8 +251,8 @@ def confirm(
 
 
 def echo_via_pager(
-    text_or_generator: cabc.Iterable[str] | t.Callable[[], cabc.Iterable[str]] | str,
-    color: bool | None = None,
+        text_or_generator: cabc.Iterable[str] | t.Callable[[], cabc.Iterable[str]] | str,
+        color: bool | None = None,
 ) -> None:
     """This function takes a text and shows it via an environment specific
     pager on stdout.
@@ -284,62 +284,62 @@ def echo_via_pager(
 
 @t.overload
 def progressbar(
-    *,
-    length: int,
-    label: str | None = None,
-    hidden: bool = False,
-    show_eta: bool = True,
-    show_percent: bool | None = None,
-    show_pos: bool = False,
-    fill_char: str = "#",
-    empty_char: str = "-",
-    bar_template: str = "%(label)s  [%(bar)s]  %(info)s",
-    info_sep: str = "  ",
-    width: int = 36,
-    file: t.TextIO | None = None,
-    color: bool | None = None,
-    update_min_steps: int = 1,
+        *,
+        length: int,
+        label: str | None = None,
+        hidden: bool = False,
+        show_eta: bool = True,
+        show_percent: bool | None = None,
+        show_pos: bool = False,
+        fill_char: str = "#",
+        empty_char: str = "-",
+        bar_template: str = "%(label)s  [%(bar)s]  %(info)s",
+        info_sep: str = "  ",
+        width: int = 36,
+        file: t.TextIO | None = None,
+        color: bool | None = None,
+        update_min_steps: int = 1,
 ) -> ProgressBar[int]: ...
 
 
 @t.overload
 def progressbar(
-    iterable: cabc.Iterable[V] | None = None,
-    length: int | None = None,
-    label: str | None = None,
-    hidden: bool = False,
-    show_eta: bool = True,
-    show_percent: bool | None = None,
-    show_pos: bool = False,
-    item_show_func: t.Callable[[V | None], str | None] | None = None,
-    fill_char: str = "#",
-    empty_char: str = "-",
-    bar_template: str = "%(label)s  [%(bar)s]  %(info)s",
-    info_sep: str = "  ",
-    width: int = 36,
-    file: t.TextIO | None = None,
-    color: bool | None = None,
-    update_min_steps: int = 1,
+        iterable: cabc.Iterable[V] | None = None,
+        length: int | None = None,
+        label: str | None = None,
+        hidden: bool = False,
+        show_eta: bool = True,
+        show_percent: bool | None = None,
+        show_pos: bool = False,
+        item_show_func: t.Callable[[V | None], str | None] | None = None,
+        fill_char: str = "#",
+        empty_char: str = "-",
+        bar_template: str = "%(label)s  [%(bar)s]  %(info)s",
+        info_sep: str = "  ",
+        width: int = 36,
+        file: t.TextIO | None = None,
+        color: bool | None = None,
+        update_min_steps: int = 1,
 ) -> ProgressBar[V]: ...
 
 
 def progressbar(
-    iterable: cabc.Iterable[V] | None = None,
-    length: int | None = None,
-    label: str | None = None,
-    hidden: bool = False,
-    show_eta: bool = True,
-    show_percent: bool | None = None,
-    show_pos: bool = False,
-    item_show_func: t.Callable[[V | None], str | None] | None = None,
-    fill_char: str = "#",
-    empty_char: str = "-",
-    bar_template: str = "%(label)s  [%(bar)s]  %(info)s",
-    info_sep: str = "  ",
-    width: int = 36,
-    file: t.TextIO | None = None,
-    color: bool | None = None,
-    update_min_steps: int = 1,
+        iterable: cabc.Iterable[V] | None = None,
+        length: int | None = None,
+        label: str | None = None,
+        hidden: bool = False,
+        show_eta: bool = True,
+        show_percent: bool | None = None,
+        show_pos: bool = False,
+        item_show_func: t.Callable[[V | None], str | None] | None = None,
+        fill_char: str = "#",
+        empty_char: str = "-",
+        bar_template: str = "%(label)s  [%(bar)s]  %(info)s",
+        info_sep: str = "  ",
+        width: int = 36,
+        file: t.TextIO | None = None,
+        color: bool | None = None,
+        update_min_steps: int = 1,
 ) -> ProgressBar[V]:
     """This function creates an iterable context manager that can be used
     to iterate over something while showing a progress bar.  It will
@@ -508,18 +508,18 @@ def _interpret_color(color: int | tuple[int, int, int] | str, offset: int = 0) -
 
 
 def style(
-    text: t.Any,
-    fg: int | tuple[int, int, int] | str | None = None,
-    bg: int | tuple[int, int, int] | str | None = None,
-    bold: bool | None = None,
-    dim: bool | None = None,
-    underline: bool | None = None,
-    overline: bool | None = None,
-    italic: bool | None = None,
-    blink: bool | None = None,
-    reverse: bool | None = None,
-    strikethrough: bool | None = None,
-    reset: bool = True,
+        text: t.Any,
+        fg: int | tuple[int, int, int] | str | None = None,
+        bg: int | tuple[int, int, int] | str | None = None,
+        bold: bool | None = None,
+        dim: bool | None = None,
+        underline: bool | None = None,
+        overline: bool | None = None,
+        italic: bool | None = None,
+        blink: bool | None = None,
+        reverse: bool | None = None,
+        strikethrough: bool | None = None,
+        reset: bool = True,
 ) -> str:
     """Styles a text with ANSI styles and returns the new string.  By
     default the styling is self contained which means that at the end
@@ -606,13 +606,13 @@ def style(
         try:
             bits.append(f"\033[{_interpret_color(fg)}m")
         except KeyError:
-            raise TypeError(f"Unknown color {fg!r}") from None
+            raise TypeError(_("Unknown color %r") % fg) from None
 
     if bg:
         try:
             bits.append(f"\033[{_interpret_color(bg, 10)}m")
         except KeyError:
-            raise TypeError(f"Unknown color {bg!r}") from None
+            raise TypeError(_("Unknown color %r") % bg) from None
 
     if bold is not None:
         bits.append(f"\033[{1 if bold else 22}m")
@@ -649,12 +649,12 @@ def unstyle(text: str) -> str:
 
 
 def secho(
-    message: t.Any | None = None,
-    file: t.IO[t.AnyStr] | None = None,
-    nl: bool = True,
-    err: bool = False,
-    color: bool | None = None,
-    **styles: t.Any,
+        message: t.Any | None = None,
+        file: t.IO[t.AnyStr] | None = None,
+        nl: bool = True,
+        err: bool = False,
+        color: bool | None = None,
+        **styles: t.Any,
 ) -> None:
     """This function combines :func:`echo` and :func:`style` into one
     call.  As such the following two calls are the same::
@@ -684,42 +684,42 @@ def secho(
 
 @t.overload
 def edit(
-    text: bytes | bytearray,
-    editor: str | None = None,
-    env: cabc.Mapping[str, str] | None = None,
-    require_save: bool = False,
-    extension: str = ".txt",
+        text: bytes | bytearray,
+        editor: str | None = None,
+        env: cabc.Mapping[str, str] | None = None,
+        require_save: bool = False,
+        extension: str = ".txt",
 ) -> bytes | None: ...
 
 
 @t.overload
 def edit(
-    text: str,
-    editor: str | None = None,
-    env: cabc.Mapping[str, str] | None = None,
-    require_save: bool = True,
-    extension: str = ".txt",
+        text: str,
+        editor: str | None = None,
+        env: cabc.Mapping[str, str] | None = None,
+        require_save: bool = True,
+        extension: str = ".txt",
 ) -> str | None: ...
 
 
 @t.overload
 def edit(
-    text: None = None,
-    editor: str | None = None,
-    env: cabc.Mapping[str, str] | None = None,
-    require_save: bool = True,
-    extension: str = ".txt",
-    filename: str | cabc.Iterable[str] | None = None,
+        text: None = None,
+        editor: str | None = None,
+        env: cabc.Mapping[str, str] | None = None,
+        require_save: bool = True,
+        extension: str = ".txt",
+        filename: str | cabc.Iterable[str] | None = None,
 ) -> None: ...
 
 
 def edit(
-    text: str | bytes | bytearray | None = None,
-    editor: str | None = None,
-    env: cabc.Mapping[str, str] | None = None,
-    require_save: bool = True,
-    extension: str = ".txt",
-    filename: str | cabc.Iterable[str] | None = None,
+        text: str | bytes | bytearray | None = None,
+        editor: str | None = None,
+        env: cabc.Mapping[str, str] | None = None,
+        require_save: bool = True,
+        extension: str = ".txt",
+        filename: str | cabc.Iterable[str] | None = None,
 ) -> str | bytes | bytearray | None:
     r"""Edits the given text in the defined editor.  If an editor is given
     (should be the full path to the executable but the regular operating

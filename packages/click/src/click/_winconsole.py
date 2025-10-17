@@ -14,6 +14,8 @@ import sys
 import time
 import typing as t
 from ctypes import Array
+from ctypes import POINTER
+from ctypes import Structure
 from ctypes import byref
 from ctypes import c_char
 from ctypes import c_char_p
@@ -21,13 +23,12 @@ from ctypes import c_int
 from ctypes import c_ssize_t
 from ctypes import c_ulong
 from ctypes import c_void_p
-from ctypes import POINTER
 from ctypes import py_object
-from ctypes import Structure
 from ctypes.wintypes import DWORD
 from ctypes.wintypes import HANDLE
 from ctypes.wintypes import LPCWSTR
 from ctypes.wintypes import LPWSTR
+from gettext import gettext as _
 
 from ._compat import _NonClosingTextIOWrapper
 
@@ -99,8 +100,10 @@ else:
             ("internal", c_void_p),
         ]
 
+
     PyObject_GetBuffer = pythonapi.PyObject_GetBuffer
     PyBuffer_Release = pythonapi.PyBuffer_Release
+
 
     def get_buffer(obj: Buffer, writable: bool = False) -> Array[c_char]:
         buf = Py_buffer()
@@ -133,7 +136,7 @@ class _WindowsConsoleReader(_WindowsConsoleRawIOBase):
         if not bytes_to_be_read:
             return 0
         elif bytes_to_be_read % 2:
-            raise ValueError("cannot read odd number of bytes from UTF-16-LE encoded console")
+            raise ValueError(_("Cannot read odd number of bytes from UTF-16-LE encoded console."))
 
         buffer = get_buffer(b, writable=True)
         code_units_to_be_read = bytes_to_be_read // 2
@@ -150,7 +153,7 @@ class _WindowsConsoleReader(_WindowsConsoleRawIOBase):
             # wait for KeyboardInterrupt
             time.sleep(0.1)
         if not rv:
-            raise OSError(f"Windows error: {GetLastError()}")
+            raise OSError(_("Windows error: %s") % GetLastError())
 
         if buffer[0] == EOF:
             return 0
@@ -167,7 +170,7 @@ class _WindowsConsoleWriter(_WindowsConsoleRawIOBase):
             return "ERROR_SUCCESS"
         elif errno == ERROR_NOT_ENOUGH_MEMORY:
             return "ERROR_NOT_ENOUGH_MEMORY"
-        return f"Windows error {errno}"
+        return _("Windows error %s") % errno
 
     def write(self, b: Buffer) -> int:
         bytes_to_be_written = len(b)
@@ -272,13 +275,13 @@ def _is_console(f: t.TextIO) -> bool:
 
 
 def _get_windows_console_stream(
-    f: t.TextIO, encoding: str | None, errors: str | None
+        f: t.TextIO, encoding: str | None, errors: str | None
 ) -> t.TextIO | None:
     if (
-        get_buffer is None
-        or encoding not in {"utf-16-le", None}
-        or errors not in {"strict", None}
-        or not _is_console(f)
+            get_buffer is None
+            or encoding not in {"utf-16-le", None}
+            or errors not in {"strict", None}
+            or not _is_console(f)
     ):
         return None
 

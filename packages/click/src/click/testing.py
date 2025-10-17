@@ -8,6 +8,7 @@ import shlex
 import sys
 import tempfile
 import typing as t
+from gettext import gettext as _
 from types import TracebackType
 
 from . import _compat
@@ -134,7 +135,7 @@ def make_input_stream(input: str | bytes | t.IO[t.Any] | None, charset: str) -> 
         if rv is not None:
             return rv
 
-        raise TypeError("Could not find binary reader for input stream.")
+        raise TypeError(_("Could not find binary reader for input stream."))
 
     if input is None:
         input = b""
@@ -167,15 +168,15 @@ class Result:
     """
 
     def __init__(
-        self,
-        runner: CliRunner,
-        stdout_bytes: bytes,
-        stderr_bytes: bytes,
-        output_bytes: bytes,
-        return_value: t.Any,
-        exit_code: int,
-        exception: BaseException | None,
-        exc_info: tuple[type[BaseException], BaseException, TracebackType] | None = None,
+            self,
+            runner: CliRunner,
+            stdout_bytes: bytes,
+            stderr_bytes: bytes,
+            output_bytes: bytes,
+            return_value: t.Any,
+            exit_code: int,
+            exception: BaseException | None,
+            exc_info: tuple[type[BaseException], BaseException, TracebackType] | None = None,
     ):
         self.runner = runner
         self.stdout_bytes = stdout_bytes
@@ -238,11 +239,11 @@ class CliRunner:
     """
 
     def __init__(
-        self,
-        charset: str = "utf-8",
-        env: cabc.Mapping[str, str | None] | None = None,
-        echo_stdin: bool = False,
-        catch_exceptions: bool = True,
+            self,
+            charset: str = "utf-8",
+            env: cabc.Mapping[str, str | None] | None = None,
+            echo_stdin: bool = False,
+            catch_exceptions: bool = True,
     ) -> None:
         self.charset = charset
         self.env: cabc.Mapping[str, str | None] = env or {}
@@ -257,7 +258,7 @@ class CliRunner:
         return cli.name or "root"
 
     def make_env(
-        self, overrides: cabc.Mapping[str, str | None] | None = None
+            self, overrides: cabc.Mapping[str, str | None] | None = None
     ) -> cabc.Mapping[str, str | None]:
         """Returns the environment overrides for invoking a script."""
         rv = dict(self.env)
@@ -267,10 +268,10 @@ class CliRunner:
 
     @contextlib.contextmanager
     def isolation(
-        self,
-        input: str | bytes | t.IO[t.Any] | None = None,
-        env: cabc.Mapping[str, str | None] | None = None,
-        color: bool = False,
+            self,
+            input: str | bytes | t.IO[t.Any] | None = None,
+            env: cabc.Mapping[str, str | None] | None = None,
+            color: bool = False,
     ) -> cabc.Iterator[tuple[io.BytesIO, io.BytesIO, io.BytesIO]]:
         """A context manager that sets up the isolation for invoking of a
         command line tool.  This sets up `<stdin>` with the given input data
@@ -418,14 +419,14 @@ class CliRunner:
             formatting.FORCED_WIDTH = old_forced_width
 
     def invoke(
-        self,
-        cli: Command,
-        args: str | cabc.Sequence[str] | None = None,
-        input: str | bytes | t.IO[t.Any] | None = None,
-        env: cabc.Mapping[str, str | None] | None = None,
-        catch_exceptions: bool | None = None,
-        color: bool = False,
-        **extra: t.Any,
+            self,
+            cli: Command,
+            args: str | cabc.Sequence[str] | None = None,
+            input: str | bytes | t.IO[t.Any] | None = None,
+            env: cabc.Mapping[str, str | None] | None = None,
+            catch_exceptions: bool | None = None,
+            color: bool = False,
+            **extra: t.Any,
     ) -> Result:
         """Invokes a command in an isolated environment.  The arguments are
         forwarded directly to the command line script, the `extra` keyword
@@ -532,7 +533,7 @@ class CliRunner:
 
     @contextlib.contextmanager
     def isolated_filesystem(
-        self, temp_dir: str | os.PathLike[str] | None = None
+            self, temp_dir: str | os.PathLike[str] | None = None
     ) -> cabc.Iterator[str]:
         """A context manager that creates a temporary directory and
         changes the current working directory to it. This isolates tests

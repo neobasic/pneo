@@ -22,18 +22,18 @@ def measure_table(rows: cabc.Iterable[tuple[str, str]]) -> tuple[int, ...]:
 
 
 def iter_rows(
-    rows: cabc.Iterable[tuple[str, str]], col_count: int
+        rows: cabc.Iterable[tuple[str, str]], col_count: int
 ) -> cabc.Iterator[tuple[str, ...]]:
     for row in rows:
         yield row + ("",) * (col_count - len(row))
 
 
 def wrap_text(
-    text: str,
-    width: int = 78,
-    initial_indent: str = "",
-    subsequent_indent: str = "",
-    preserve_paragraphs: bool = False,
+        text: str,
+        width: int = 78,
+        initial_indent: str = "",
+        subsequent_indent: str = "",
+        preserve_paragraphs: bool = False,
 ) -> str:
     """A helper function that intelligently wraps text.  By default, it
     assumes that it operates on a single paragraph of text but if the
@@ -114,10 +114,10 @@ class HelpFormatter:
     """
 
     def __init__(
-        self,
-        indent_increment: int = 2,
-        width: int | None = None,
-        max_width: int | None = None,
+            self,
+            indent_increment: int = 2,
+            width: int | None = None,
+            max_width: int | None = None,
     ) -> None:
         self.indent_increment = indent_increment
         if max_width is None:
@@ -204,10 +204,10 @@ class HelpFormatter:
         self.write("\n")
 
     def write_dl(
-        self,
-        rows: cabc.Sequence[tuple[str, str]],
-        col_max: int = 30,
-        col_spacing: int = 2,
+            self,
+            rows: cabc.Sequence[tuple[str, str]],
+            col_max: int = 30,
+            col_spacing: int = 2,
     ) -> None:
         """Writes a definition list into the buffer.  This is how options
         and commands are usually formatted.
@@ -220,7 +220,7 @@ class HelpFormatter:
         rows = list(rows)
         widths = measure_table(rows)
         if len(widths) != 2:
-            raise TypeError("Expected two columns for definition list")
+            raise TypeError(_("Expected two columns for definition list"))
 
         first_col = min(widths[0], col_max) + col_spacing
 

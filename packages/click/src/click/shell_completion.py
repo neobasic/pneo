@@ -17,11 +17,11 @@ from .utils import echo
 
 
 def shell_complete(
-    cli: Command,
-    ctx_args: cabc.MutableMapping[str, t.Any],
-    prog_name: str,
-    complete_var: str,
-    instruction: str,
+        cli: Command,
+        ctx_args: cabc.MutableMapping[str, t.Any],
+        prog_name: str,
+        complete_var: str,
+        instruction: str,
 ) -> int:
     """Perform shell completion for the given CLI program.
 
@@ -76,11 +76,11 @@ class CompletionItem:
     __slots__ = ("value", "type", "help", "_info")
 
     def __init__(
-        self,
-        value: t.Any,
-        type: str = "plain",
-        help: str | None = None,
-        **kwargs: t.Any,
+            self,
+            value: t.Any,
+            type: str = "plain",
+            help: str | None = None,
+            **kwargs: t.Any,
     ) -> None:
         self.value: t.Any = value
         self.type: str = type
@@ -222,11 +222,11 @@ class ShellComplete:
     """
 
     def __init__(
-        self,
-        cli: Command,
-        ctx_args: cabc.MutableMapping[str, t.Any],
-        prog_name: str,
-        complete_var: str,
+            self,
+            cli: Command,
+            ctx_args: cabc.MutableMapping[str, t.Any],
+            prog_name: str,
+            complete_var: str,
     ) -> None:
         self.cli = cli
         self.ctx_args = ctx_args
@@ -422,7 +422,6 @@ class FishComplete(ShellComplete):
 
 ShellCompleteType = t.TypeVar("ShellCompleteType", bound="type[ShellComplete]")
 
-
 _available_shells: dict[str, type[ShellComplete]] = {
     "bash": BashComplete,
     "fish": FishComplete,
@@ -510,9 +509,9 @@ def _is_incomplete_argument(ctx: Context, param: Parameter) -> bool:
     # Will be None if expose_value is False.
     value = ctx.params.get(param.name)
     return (
-        param.nargs == -1
-        or ctx.get_parameter_source(param.name) is not ParameterSource.COMMANDLINE
-        or (param.nargs > 1 and isinstance(value, (tuple, list)) and len(value) < param.nargs)
+            param.nargs == -1
+            or ctx.get_parameter_source(param.name) is not ParameterSource.COMMANDLINE
+            or (param.nargs > 1 and isinstance(value, (tuple, list)) and len(value) < param.nargs)
     )
 
 
@@ -551,10 +550,10 @@ def _is_incomplete_option(ctx: Context, args: list[str], param: Parameter) -> bo
 
 
 def _resolve_context(
-    cli: Command,
-    ctx_args: cabc.MutableMapping[str, t.Any],
-    prog_name: str,
-    args: list[str],
+        cli: Command,
+        ctx_args: cabc.MutableMapping[str, t.Any],
+        prog_name: str,
+        args: list[str],
 ) -> Context:
     """Produce the context hierarchy starting with the command and
     traversing the complete arguments. This only follows the commands,
@@ -579,7 +578,7 @@ def _resolve_context(
                         return ctx
 
                     with cmd.make_context(
-                        name, args, parent=ctx, resilient_parsing=True
+                            name, args, parent=ctx, resilient_parsing=True
                     ) as sub_ctx:
                         ctx = sub_ctx
                         args = ctx._protected_args + ctx.args
@@ -593,12 +592,12 @@ def _resolve_context(
                             return ctx
 
                         with cmd.make_context(
-                            name,
-                            args,
-                            parent=ctx,
-                            allow_extra_args=True,
-                            allow_interspersed_args=False,
-                            resilient_parsing=True,
+                                name,
+                                args,
+                                parent=ctx,
+                                allow_extra_args=True,
+                                allow_interspersed_args=False,
+                                resilient_parsing=True,
                         ) as sub_sub_ctx:
                             sub_ctx = sub_sub_ctx
                             args = sub_ctx.args
@@ -612,7 +611,7 @@ def _resolve_context(
 
 
 def _resolve_incomplete(
-    ctx: Context, args: list[str], incomplete: str
+        ctx: Context, args: list[str], incomplete: str
 ) -> tuple[Command | Parameter, str]:
     """Find the Click object that will handle the completion of the
     incomplete value. Return the object and the incomplete value.

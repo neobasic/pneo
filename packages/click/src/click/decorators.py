@@ -49,7 +49,7 @@ def pass_obj(f: t.Callable[te.Concatenate[T, P], R]) -> t.Callable[P, R]:
 
 
 def make_pass_decorator(
-    object_type: type[T], ensure: bool = False
+        object_type: type[T], ensure: bool = False
 ) -> t.Callable[[t.Callable[te.Concatenate[T, P], R]], t.Callable[P, R]]:
     """Given an object type this creates a decorator that will work
     similar to :func:`pass_obj` but instead of passing the object of the
@@ -85,9 +85,9 @@ def make_pass_decorator(
 
             if obj is None:
                 raise RuntimeError(
-                    "Managed to invoke callback without a context"
-                    f" object of type {object_type.__name__!r}"
-                    " existing."
+                    _("Managed to invoke callback without a context"
+                      " object of type %r"
+                      " existing.") % object_type.__name__
                 )
 
             return ctx.invoke(f, obj, *args, **kwargs)
@@ -98,7 +98,7 @@ def make_pass_decorator(
 
 
 def pass_meta_key(
-    key: str, *, doc_description: str | None = None
+        key: str, *, doc_description: str | None = None
 ) -> t.Callable[[t.Callable[te.Concatenate[T, P], R]], t.Callable[P, R]]:
     """Create a decorator that passes a key from
     :attr:`click.Context.meta` as the first argument to the decorated
@@ -121,12 +121,12 @@ def pass_meta_key(
         return update_wrapper(new_func, f)
 
     if doc_description is None:
-        doc_description = f"the {key!r} key from :attr:`click.Context.meta`"
+        doc_description = _("the %r key from :attr:`click.Context.meta`") % key
 
-    decorator.__doc__ = (
-        f"Decorator that passes {doc_description} as the first argument"
+    decorator.__doc__ = _(
+        "Decorator that passes %s as the first argument"
         " to the decorated function."
-    )
+    ) % doc_description
     return decorator
 
 
@@ -142,33 +142,33 @@ def command(name: _AnyCallable) -> Command: ...
 # @command(namearg, CommandCls, ...) or @command(namearg, cls=CommandCls, ...)
 @t.overload
 def command(
-    name: str | None,
-    cls: type[CmdType],
-    **attrs: t.Any,
+        name: str | None,
+        cls: type[CmdType],
+        **attrs: t.Any,
 ) -> t.Callable[[_AnyCallable], CmdType]: ...
 
 
 # variant: name omitted, cls _must_ be a keyword argument, @command(cls=CommandCls, ...)
 @t.overload
 def command(
-    name: None = None,
-    *,
-    cls: type[CmdType],
-    **attrs: t.Any,
+        name: None = None,
+        *,
+        cls: type[CmdType],
+        **attrs: t.Any,
 ) -> t.Callable[[_AnyCallable], CmdType]: ...
 
 
 # variant: with optional string name, no cls argument provided.
 @t.overload
 def command(
-    name: str | None = ..., cls: None = None, **attrs: t.Any
+        name: str | None = ..., cls: None = None, **attrs: t.Any
 ) -> t.Callable[[_AnyCallable], Command]: ...
 
 
 def command(
-    name: str | _AnyCallable | None = None,
-    cls: type[CmdType] | None = None,
-    **attrs: t.Any,
+        name: str | _AnyCallable | None = None,
+        cls: type[CmdType] | None = None,
+        **attrs: t.Any,
 ) -> Command | t.Callable[[_AnyCallable], Command | CmdType]:
     r"""Creates a new :class:`Command` and uses the decorated function as
     callback.  This will also automatically attach all decorated
@@ -208,15 +208,15 @@ def command(
     if callable(name):
         func = name
         name = None
-        assert cls is None, "Use 'command(cls=cls)(callable)' to specify a class."
-        assert not attrs, "Use 'command(**kwargs)(callable)' to provide arguments."
+        assert cls is None, _("Use 'command(cls=cls)(callable)' to specify a class.")
+        assert not attrs, _("Use 'command(**kwargs)(callable)' to provide arguments.")
 
     if cls is None:
         cls = t.cast("type[CmdType]", Command)
 
     def decorator(f: _AnyCallable) -> CmdType:
         if isinstance(f, Command):
-            raise TypeError("Attempted to convert a callback into a command twice.")
+            raise TypeError(_("Attempted to convert a callback into a command twice."))
 
         attr_params = attrs.pop("params", None)
         params = attr_params if attr_params is not None else []
@@ -267,33 +267,33 @@ def group(name: _AnyCallable) -> Group: ...
 # @group(namearg, GroupCls, ...) or @group(namearg, cls=GroupCls, ...)
 @t.overload
 def group(
-    name: str | None,
-    cls: type[GrpType],
-    **attrs: t.Any,
+        name: str | None,
+        cls: type[GrpType],
+        **attrs: t.Any,
 ) -> t.Callable[[_AnyCallable], GrpType]: ...
 
 
 # variant: name omitted, cls _must_ be a keyword argument, @group(cmd=GroupCls, ...)
 @t.overload
 def group(
-    name: None = None,
-    *,
-    cls: type[GrpType],
-    **attrs: t.Any,
+        name: None = None,
+        *,
+        cls: type[GrpType],
+        **attrs: t.Any,
 ) -> t.Callable[[_AnyCallable], GrpType]: ...
 
 
 # variant: with optional string name, no cls argument provided.
 @t.overload
 def group(
-    name: str | None = ..., cls: None = None, **attrs: t.Any
+        name: str | None = ..., cls: None = None, **attrs: t.Any
 ) -> t.Callable[[_AnyCallable], Group]: ...
 
 
 def group(
-    name: str | _AnyCallable | None = None,
-    cls: type[GrpType] | None = None,
-    **attrs: t.Any,
+        name: str | _AnyCallable | None = None,
+        cls: type[GrpType] | None = None,
+        **attrs: t.Any,
 ) -> Group | t.Callable[[_AnyCallable], Group | GrpType]:
     """Creates a new :class:`Group` with a function as callback.  This
     works otherwise the same as :func:`command` just that the `cls`
@@ -322,7 +322,7 @@ def _param_memo(f: t.Callable[..., t.Any], param: Parameter) -> None:
 
 
 def argument(
-    *param_decls: str, cls: type[Argument] | None = None, **attrs: t.Any
+        *param_decls: str, cls: type[Argument] | None = None, **attrs: t.Any
 ) -> t.Callable[[FC], FC]:
     """Attaches an argument to the command.  All positional arguments are
     passed as parameter declarations to :class:`Argument`; all keyword
@@ -350,7 +350,7 @@ def argument(
 
 
 def option(
-    *param_decls: str, cls: type[Option] | None = None, **attrs: t.Any
+        *param_decls: str, cls: type[Option] | None = None, **attrs: t.Any
 ) -> t.Callable[[FC], FC]:
     """Attaches an option to the command.  All positional arguments are
     passed as parameter declarations to :class:`Option`; all keyword
@@ -396,8 +396,8 @@ def confirmation_option(*param_decls: str, **kwargs: t.Any) -> t.Callable[[FC], 
     kwargs.setdefault("is_flag", True)
     kwargs.setdefault("callback", callback)
     kwargs.setdefault("expose_value", False)
-    kwargs.setdefault("prompt", "Do you want to continue?")
-    kwargs.setdefault("help", "Confirm the action without prompting.")
+    kwargs.setdefault("prompt", _("Do you want to continue?"))
+    kwargs.setdefault("help", _("Confirm the action without prompting."))
     return option(*param_decls, **kwargs)
 
 
@@ -419,12 +419,12 @@ def password_option(*param_decls: str, **kwargs: t.Any) -> t.Callable[[FC], FC]:
 
 
 def version_option(
-    version: str | None = None,
-    *param_decls: str,
-    package_name: str | None = None,
-    prog_name: str | None = None,
-    message: str | None = None,
-    **kwargs: t.Any,
+        version: str | None = None,
+        *param_decls: str,
+        package_name: str | None = None,
+        prog_name: str | None = None,
+        message: str | None = None,
+        **kwargs: t.Any,
 ) -> t.Callable[[FC], FC]:
     """Add a ``--version`` option which immediately prints the version
     number and exits the program.
@@ -498,12 +498,12 @@ def version_option(
                 version = importlib.metadata.version(package_name)
             except importlib.metadata.PackageNotFoundError:
                 raise RuntimeError(
-                    f"{package_name!r} is not installed. Try passing" " 'package_name' instead."
+                    _("%r is not installed. Try passing 'package_name' instead.") % package_name
                 ) from None
 
         if version is None:
             raise RuntimeError(
-                f"Could not determine the version for {package_name!r} automatically."
+                _("Could not determine the version for %r automatically.") % package_name
             )
 
         echo(
