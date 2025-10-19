@@ -2,8 +2,8 @@ from typing import Final, Any, Dict
 
 from colorama import Fore, Style
 
-from nuke.setup.settings import Settings
 from nuke.setup.logging_levels import LogLevel
+from nuke.setup.settings import Settings
 
 # ----------------------------------------------------------------------------
 # ANSI COLORED PRINTS, FOR EACH LOGGING LEVEL.
@@ -63,8 +63,31 @@ def _level_icon(level: LogLevel) -> str:
 
 
 def _level_color(level: LogLevel) -> str:
-    ansi_color: str = COLOR_MAP.get(level, Style.NORMAL)
-    return ansi_color
+    # check if option -c or --color was used in command line.
+    color: str = Settings.get_instance().ctx.obj.get("color", "auto")
+    match color:
+        case "auto":
+            return COLOR_MAP.get(level, Style.NORMAL)
+        case "black":
+            return Fore.BLACK
+        case "blue":
+            return Fore.BLUE
+        case "cyan":
+            return Fore.CYAN
+        case "green":
+            return Fore.GREEN
+        case "magenta":
+            return Fore.MAGENTA
+        case "red":
+            return Fore.RED
+        case "white":
+            return Fore.WHITE
+        case "yellow":
+            return Fore.YELLOW
+
+        # default color for output, if none is specified.
+        case _:  # choice 'never'
+            return Style.NORMAL
 
 
 def _print(level: LogLevel, message: str, *args: Any):
