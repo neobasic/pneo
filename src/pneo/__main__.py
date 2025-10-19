@@ -1,6 +1,7 @@
 import logging
 import sys
 from importlib.metadata import version
+from pathlib import Path
 
 import colorama
 
@@ -115,14 +116,87 @@ CONTEXT_SETTINGS: dict = dict(help_option_names=["-h", "--help"])
     default=False,
     help=_("Use verbose output on console, about what pneo is doing."),
 )
+@click.option(
+    "-cc", "--color",
+    required=False,
+    type=click.Choice(
+        ["auto", "never", "black", "blue", "cyan",
+         "green", "magenta", "red", "white", "yellow"],
+        case_sensitive=False
+    ),
+    default="auto",
+    help=_("Control the use of color in output."),
+)
+@click.option(
+    "-np", "--no-progress",
+    required=False,
+    is_flag=True,
+    type=click.BOOL,
+    default=False,
+    help=_("Hide all progress outputs. For example, spinners or progress bars."),
+)
+@click.option(
+    "-off", "--offline",
+    required=False,
+    is_flag=True,
+    type=click.BOOL,
+    default=False,
+    help=_("Disable network access. "
+           "When disabled, pneo will only use locally cached data and locally available files."),
+)
+@click.option(
+    "-qq", "--quiet",
+    required=False,
+    is_flag=True,
+    type=click.BOOL,
+    default=False,
+    help=_("Use quiet output. "
+           "Enable a silent mode in which pneo will write no output to stdout."),
+)
+@click.option(
+    "-cf", "--config-file",
+    required=False,
+    type=click.Path(exists=True, file_okay=True, dir_okay=True),
+    help=_("The path to a 'pneo.conf' file to use for configuration."),
+)
+@click.option(
+    "-cs", "--config-setting",
+    required=False,
+    type=click.STRING,
+    help=_("Setting to use, overriding the current configuration, specified as KEY=VALUE pair. "
+           "For two or more settings, use '' as delimiter and `;` as a separator without spaces."),
+)
+@click.option(
+    "-dd", "--directory",
+    required=False,
+    type=click.Path(exists=True, file_okay=True, dir_okay=True),
+    help=_("Change to the given directory prior to running the command. "
+           "Relative paths are resolved with the given directory as the base."),
+)
+@click.option(
+    "-pp", "--project",
+    required=False,
+    type=click.STRING,
+    help=_("Run the command within the given project directory."),
+)
 @click.pass_context
 @fdocstr(APP_ABOUT)
-def cli(context: click.Context, notice: bool, verbose: bool):
+def cli(context: click.Context, notice: bool, verbose: bool, color: str, no_progress: bool, offline: bool, quiet: bool,
+        config_setting: str, config_file: Path, directory: Path, project: str):
     logger.debug("Entering: notice=%s, verbose=%s", notice, verbose)
 
     # save all global options, to be used in commands processing.
     context.ensure_object(dict)
     context.obj["verbose"] = verbose
+    context.obj["color"] = color
+    context.obj["no_progress"] = no_progress
+    context.obj["offline"] = offline
+    context.obj["quiet"] = quiet
+
+    if config_setting: context.obj["config_setting"] = config_setting
+    if config_file: context.obj["config_file"] = config_file
+    if directory: context.obj["directory"] = directory
+    if project: context.obj["project"] = project
 
     # now there is a valid context to be stored in global setup:
     settings.ctx = context
