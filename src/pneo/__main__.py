@@ -17,6 +17,7 @@ from pneo.command.invoker import (
     invoker_config,
     invoker_format,
     invoker_init,
+    invoker_hotspot,
     invoker_lint,
     invoker_list,
     invoker_lock,
@@ -226,6 +227,7 @@ cli.add_command(invoker_compile.compiler)  # type: ignore
 cli.add_command(invoker_config.config)  # type: ignore
 cli.add_command(invoker_format.formatter)  # type: ignore
 cli.add_command(invoker_init.init)  # type: ignore
+cli.add_command(invoker_hotspot.hotspot)  # type: ignore
 cli.add_command(invoker_lint.lint)  # type: ignore
 cli.add_command(invoker_list.lister)  # type: ignore
 cli.add_command(invoker_lock.lock)  # type: ignore
