@@ -1,0 +1,14 @@
+#!/bin/sh
+
+# remove the files from the last generation:
+cd /home/dever/workspace/neobasic/pneo/packages/ngne/src/ngne/parser
+rm -f *.interp *.tokens *.py
+
+# position where the .g4 grammars are located:
+cd /home/dever/workspace/neobasic/pneo/packages/ngne/antlr4
+
+# generate Python sources for the NeoBASIC grammar:
+java -Xmx500M -cp "/usr/local/lib/antlr-4.13.2-complete.jar:$CLASSPATH" org.antlr.v4.Tool -listener -visitor -encoding UTF-8 -Dlanguage=Python3 -package parser *.g4
+
+# move the generated sources to the parser package:
+mv -f *.interp *.tokens *.py ../src/ngne/parser
