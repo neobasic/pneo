@@ -221,3 +221,6 @@ __marimo__/
 
 # macOS related 
 .DS_Store
+
+# antlr4 generated files
+.antlr/
