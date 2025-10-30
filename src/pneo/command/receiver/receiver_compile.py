@@ -18,8 +18,8 @@ settings: Settings = Settings.get_instance()
 # API: COMMAND COMPILE
 # ----------------------------------------------------------------------------
 
-def compile_files(target: Path, files: tuple[str, ...], no_warn_ok: bool):
-    logger.debug("Entering: target=%s, files=%s, no_warn_ok=%s", target, files, no_warn_ok)
+def compile_files(target: Path, files: tuple[str, ...], ast_dump: bool, no_warn_ok: bool):
+    logger.debug("Entering: target=%s, files=%s, ast_dump=%s, no_warn_ok=%s", target, files, ast_dump, no_warn_ok)
 
     pass
 

@@ -35,6 +35,15 @@ _compile_short_help: str = _("Parse and transpile one or more NeoBASIC program f
     help=_("Specify where to place generated transpiled files. [Default: .]"),
 )
 @click.option(
+    "--ast-dump",
+    "-A",
+    required=False,
+    is_flag=True,
+    type=click.BOOL,
+    default=False,
+    help=_("Print the full AST (Abstract Syntax Tree) representing the parsed NeoBASIC source code."),
+)
+@click.option(
     "--no-warn",
     "-n",
     required=False,
@@ -52,8 +61,8 @@ _compile_short_help: str = _("Parse and transpile one or more NeoBASIC program f
 )
 @click.pass_context
 @fdocstr(_compile_short_help)
-def compiler(context: click.Context, target: Path, no_warn: bool, files: tuple) -> None:
-    logger.debug("Entering: target=%s, no_warn=%s, files=%s", target, no_warn, files)
+def compiler(context: click.Context, target: Path, ast_dump: bool, no_warn: bool, files: tuple) -> None:
+    logger.debug("Entering: target=%s, ast_dump=%s, no_warn=%s, files=%s", target, ast_dump, no_warn, files)
 
     # if user indicated a target dir, check if it is accessible.
     if target and not make_accessible_dir(target):
@@ -67,4 +76,4 @@ def compiler(context: click.Context, target: Path, no_warn: bool, files: tuple) 
             p_error(_("Error: Source file '%s' does not exist."), file_name)
 
     # proceed with the compiling.
-    compile_files(target, files, no_warn)
+    compile_files(target, files, ast_dump, no_warn)
