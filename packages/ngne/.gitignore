@@ -1,3 +1,4 @@
 # antlr4 generated files
 antlr/.antlr/
-antlr/i18n/.antlr/
+/src/ngne/frontend/PythonLexerBase.py
+/src/ngne/parser/*
