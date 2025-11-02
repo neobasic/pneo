@@ -139,11 +139,11 @@ _settings: nuke.Settings = nuke.Settings.init_instance(
 
 # 2. Setup logging (do this first to log subsequent steps)
 _setup_logging(_settings)
-logging.debug("Logging configured.")
+# logging.debug("Logging configured.")
 
 # 3. Setup i18n
 _setup_internationalization(_settings)
-logging.debug("Internationalization configured.")
+# logging.debug("Internationalization configured.")
 
 # 4. Initial setup ok
-logging.debug("Application initialized successfully.")
+# logging.debug("Application initialized successfully.")
