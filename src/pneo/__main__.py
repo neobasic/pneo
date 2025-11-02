@@ -57,6 +57,18 @@ settings: Settings = Settings.get_instance()
 colorama.init(autoreset=True)
 
 # ----------------------------------------------------------------------------
+from ngne.frontend import analysis
+
+# analysis.parse_source_file("demo.neo")
+tree = analysis.parse_one_liner("""\
+define flag, dd
+""")
+
+if tree or not tree: sys.exit(0)
+# ----------------------------------------------------------------------------
+
+
+# ----------------------------------------------------------------------------
 # MAIN ENTRY-POINT
 # ----------------------------------------------------------------------------
 
@@ -116,6 +128,14 @@ CONTEXT_SETTINGS: dict = dict(help_option_names=["-h", "--help"])
     type=click.BOOL,
     default=False,
     help=_("Use verbose output on console, about what pneo is doing."),
+)
+@click.option(
+    "-W", "--warn-error",
+    required=False,
+    is_flag=True,
+    type=click.BOOL,
+    default=False,
+    help=_("Treat any warnings as errors."),
 )
 @click.option(
     "-cc", "--color",
@@ -182,13 +202,18 @@ CONTEXT_SETTINGS: dict = dict(help_option_names=["-h", "--help"])
 )
 @click.pass_context
 @fdocstr(APP_ABOUT)
-def cli(context: click.Context, notice: bool, verbose: bool, color: str, no_progress: bool, offline: bool, quiet: bool,
+def cli(context: click.Context, notice: bool, verbose: bool, warn_error: bool, color: str, no_progress: bool,
+        offline: bool, quiet: bool,
         config_setting: str, config_file: Path, directory: Path, project: str):
-    logger.debug("Entering: notice=%s, verbose=%s", notice, verbose)
+    logger.debug(
+        "Entering: notice=%s, verbose=%s, warn_error=%s, color=%s, no_progress=%s, offline=%s, quiet=%s, config_setting=%s, config_file=%s, directory=%s, project=%s",
+        notice, verbose, warn_error, color, no_progress, offline, quiet, config_setting, config_file, directory,
+        project)
 
     # save all global options, to be used in commands processing.
     context.ensure_object(dict)
     context.obj["verbose"] = verbose
+    context.obj["warn_error"] = warn_error
     context.obj["color"] = color
     context.obj["no_progress"] = no_progress
     context.obj["offline"] = offline
