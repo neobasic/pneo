@@ -41,3 +41,8 @@ class AstTreeListener(NeoBasicParserListener):
 
         from pprint import pprint
         pprint(children)
+
+    # Exit a parse tree produced by NeoBasicParser#typeSentence.
+    def exitTypeSentence(self, ctx: NeoBasicParser.TypeSentenceContext):
+        print("\n exitTypeSentence:")
+        print("\t ctx.children:", ctx.children)

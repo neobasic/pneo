@@ -61,7 +61,7 @@ from ngne.frontend import analysis
 
 # analysis.parse_source_file("demo.neo")
 tree = analysis.parse_one_liner("""\
-define flag, dd
+var d = d;"%s<>33.3"
 """)
 
 if tree or not tree: sys.exit(0)
