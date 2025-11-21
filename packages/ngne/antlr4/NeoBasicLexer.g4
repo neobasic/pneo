@@ -48,23 +48,33 @@ AS : 'as';
 OF : 'of';
 INCLUDE : 'include';
 INTERFACE : 'interface';
-EXTERN : 'extern';
-RPROC : 'rproc';
-FOREIGN : 'foreign';
+
+// ACCESS SPECIFIERS
+
+PUBLIC : 'public';
+PROTECTED : 'protected';
+PRIVATE : 'private';
 
 // TOP LEVEL SENTENCES
 
-CONST : 'const';
-IVAL : 'ival';
-VAR : 'var';
 TYPE : 'type';
+CONST : 'const';
+LET : 'let';
+VAR : 'var';
+CAST : 'cast';
 FACT : 'fact';
-ENUM : 'enum';
 FUNC : 'func';
 FEED : 'feed';
 SUB : 'sub';
+OUT : 'out';
+RAISES : 'raises';
+NOPANIC : 'nopanic';
+DELETE : 'delete';
+MACRO : 'macro';
+VAL : 'val';
 OPERATOR : 'operator';
 EVENT : 'event';
+ENUM : 'enum';
 STRUCT : 'struct';
 PROTO : 'proto';
 TRAIT : 'trait';
@@ -78,48 +88,6 @@ DESTRUCT : 'destruct';
 PROPERTY : 'property';
 GETTER : 'get';
 SETTER : 'set';
-RAISES : 'raises';
-NOPANIC : 'nopanic';
-
-// ACCESS SPECIFIERS
-
-PUBLIC : 'public';
-PROTECTED : 'protected';
-PRIVATE : 'private';
-
-// DECLARATION SPECIFIERS
-
-COMPTIME : 'comptime';
-INLINE : 'inline';
-CURRY : 'curry';
-STATIC : 'static';
-LINEAR : 'linear';
-SHARED : 'shared';
-VOLATILE : 'volatile';
-LOCAL : 'local';
-ATOMIC : 'atomic';
-MUTABLE : 'mutable';
-TRANSIENT : 'transient';
-SYNCHRO : 'synchro';
-DIM : 'dim';
-METHOD : 'method';
-OVERRIDE : 'override';
-FINAL : 'final';
-OFF : 'off';
-ASYNC : 'async';
-UNIQUE : 'unique';
-ABSTRACT : 'abstract';
-SEALED : 'sealed';
-SINGLETON : 'singleton';
-RECORD : 'record';
-DYNAMIC : 'dynamic';
-CALLBACK : 'callback';
-MONAD : 'monad';
-PREFIX : 'prefix';
-INFIX : 'infix';
-POSTFIX : 'postfix';
-EXPLICIT : 'explicit';
-DELETE : 'delete';
 
 // STATEMENTS AND BLOCKS
 
@@ -146,7 +114,6 @@ WHILE : 'while';
 UNTIL : 'until';
 UPTO : 'upto';
 NEXT : 'next';
-REDO : 'redo';
 CONTINUE : 'continue';
 BREAK : 'break';
 RETURN : 'return';
@@ -161,7 +128,6 @@ AWAIT : 'await';
 SWITCH : 'switch';
 WHEN : 'when';
 DEFAULT : 'default';
-RESUME : 'resume';
 BEGIN : 'begin';
 END : 'end';
 
@@ -173,9 +139,6 @@ ECHO  : 'echo';
 ALERT : 'alert';
 ENTRY : 'entry';
 PLAY  : 'play';
-SINCE : 'since';
-TIMELY : 'timely';
-CANCEL : 'cancel';
 
 // PREDECLARED VALUES AND VARIABLES
 
@@ -198,7 +161,6 @@ TWO : 'two';
 
 // EXPRESSIONS
 
-LET : 'let';
 LAMBDA : 'lambda';
 
 // META OPERATORS'
@@ -217,13 +179,15 @@ LIKE : 'like';
 
 // LOGICAL OPERATORS
 
-AND : 'and';
-ANDN : 'andn';
-NAND : 'nand';
-OR : 'or';
-NOR : 'nor';
+AND : 'and';        // Short-circuit: stops evaluating as soon as the result is known
+NSC_AND : 'AND';    // Non-short-circuit: always evaluates both expressions
+AND_NOT : 'andn';   // X AND NOT Y
+NOT_AND : 'nand';   // NOT (X AND Y)
+OR : 'or';          // Short-circuit: stops evaluating as soon as the result is known
+NSC_OR : 'OR';      // Non-short-circuit: always evaluates both expressions
+NOT_OR : 'nor';     // NOT (X OR Y)
 XOR : 'xor';
-NXOR : 'nxor';
+NOT_XOR : 'nxor';   // NOT (X XOR Y)
 NOT : 'not';
 
 // COMPOUND OPERATORS
@@ -234,10 +198,6 @@ NAB : 'nab';
 // ARRAY OPERATORS
 
 DEL   : 'del';
-UNION : 'union';
-UNITE : 'unite';
-INTER : 'inter';
-MINUS : 'minus';
 
 // META DATA TYPES
 
@@ -264,8 +224,8 @@ NAT16 : 'nat16';
 NAT32 : 'nat32';
 NAT64 : 'nat64';
 NAT128 : 'nat128';
-NAT : 'nat';
-BIGNAT : 'bignat';
+NATURAL : 'natural';
+BIGNATURAL : 'bignatural';
 
 // NUMERIC INTEGERS
 
@@ -289,11 +249,11 @@ BIGREAL : 'bigreal';
 
 // NUMERIC DECIMALS
 
-DECIMAL8 : 'decimal8';
-DECIMAL16 : 'decimal16';
-DECIMAL32 : 'decimal32';
-DECIMAL64 : 'decimal64';
-DECIMAL128 : 'decimal128';
+DEC8 : 'dec8';
+DEC16 : 'dec16';
+DEC32 : 'dec32';
+DEC64 : 'dec64';
+DEC128 : 'dec128';
 DECIMAL : 'decimal';
 MONEY : 'money';
 
@@ -328,21 +288,20 @@ ELAPSE : 'elapse';
 // CHARACTER DATA TYPES
 
 ASCII : 'ascii';
+WCHAR : 'wchar';
 CHAR8 : 'char8';
 CHAR16 : 'char16';
 CHAR32 : 'char32';
 CHAR : 'char';
-WCHAR : 'wchar';
 
 // SEQUENCE DATA TYPES
 
 ANSI : 'ansi';
-STR8 : 'str8';
-STR16 : 'str16';
-STR32 : 'str32';
-STR : 'str';
-CSTR : 'cstr';
 WSTR : 'wstr';
+STRING8 : 'string8';
+STRING16 : 'string16';
+STRING32 : 'string32';
+STRING : 'string';
 REGEX : 'regex';
 BINARY : 'binary';
 
@@ -496,7 +455,10 @@ HYPHEN        : '-';    //
 
 ELLIPSIS      : '...';   // 
 
+LIFETIME      : '::';   // 
+
 NAMED_ARGUMENTS : '**';  //
+NAMED_OPTIONS   : '~~';  //
 
 
 // --- BINARY OPERATORS ---------------------------------------------
@@ -533,8 +495,8 @@ THREE_WAY_TEST        : '<=>';
 
 STRICT_EQUALITY   : '==';
 STRICT_INEQUALITY : '!=';
-LOOSE_EQUALITY    : '~==';
-LOOSE_INEQUALITY  : '~!=';
+LOOSE_EQUALITY    : '~==';  // ???
+LOOSE_INEQUALITY  : '~!=';  // ???
 LEFT_ANGLE        : '<';    // Less Than
 LESS_OR_EQUALS    : '<=';
 RIGHT_ANGLE       : '>';    // Greater Than
@@ -587,32 +549,32 @@ PIPELINE : '|>';
 
 // Flow of Execution Operators
 
-EXECUTE_BACKGROUND : '||';
-
 EXECUTE_SEQUENCE : '&&';
 
 EXECUTE_SEQUENCE_OKAY : '?&';
 EXECUTE_SEQUENCE_FAIL : '!&';
 
+EXECUTE_BACKGROUND : '||';
+
 // Input/Output Redirection Operators
 
-OUTPUT_REDIRECTION : '&>';
 APPEND_OUTPUT_REDIRECTION : '&>>';
+OUTPUT_REDIRECTION : '&>';
 
-STDOUT_REDIRECTION : '&1>';
 APPEND_STDOUT_REDIRECTION : '&1>>';
+STDOUT_REDIRECTION : '&1>';
 
-STDERR_REDIRECTION : '&2>';
 APPEND_STDERR_REDIRECTION : '&2>>';
+STDERR_REDIRECTION : '&2>';
 
 // Single Assignment Operators
 
 EQUAL               : '=';    // Assignment, Equality
 DERIVED_ASSIGNMENT  : ':=';
+LAZY_ASSIGNMENT     : '~=';
 POP_ONE_ASSIGNMENT  : '<-';
 PULL_ALL_ASSIGNMENT : '<<-'; 
 PIPE_ASSIGNMENT     : '<|'; 
-SPECIAL_ASSIGNMENT  : '~=';
 
 // Compound Assignment Operators
 
@@ -630,6 +592,8 @@ PERCENTAGE_DECREASE_ASSIGNMENT  : '%-=';
 PERCENTAGE_VARIATION_ASSIGNMENT : '%^=';
 ADDITION_ASSIGNMENT             : '+=';
 SUBTRACTION_ASSIGNMENT          : '-=';
+SET_UNION_ASSIGNMENT            : '|=';
+SET_INTER_ASSIGNMENT            : '&=';
 LEFT_SHIFT_ASSIGNMENT           : '<<=';
 SIGNED_RIGHT_SHIFT_ASSIGNMENT   : '>>=';
 UNSIGNED_RIGHT_SHIFT_ASSIGNMENT : '>>>=';
@@ -1065,8 +1029,10 @@ DOUBLE_RIGHT_BRACKET : ']]';   //
 DOUBLE_LEFT_CURLY    : '{{';   // 
 DOUBLE_RIGHT_CURLY   : '}}';   // 
 
-DOUBLE_COLON         : '::';   // 
+DOUBLE_COMMA         : ',,';   //
 DOUBLE_SEMICOLON     : ';;';   // 
+DOUBLE_CARET         : '^^';   //
+
 
 // XML tags
 

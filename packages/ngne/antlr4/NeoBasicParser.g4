@@ -164,7 +164,7 @@ defineDeclare : defineDeclareSingle
               | defineDeclareMultiple
               ;
 
-defineDeclareSingle : defIdentifier literal?;
+defineDeclareSingle : defAtom literal?;
 
 defineDeclareMultiple: defineDeclareSingle (COMMA defineDeclareSingle)+;
 
@@ -175,13 +175,13 @@ undefSuite : EOS INDENT undefDeclareBlock DEDENT;
 
 undefDeclareBlock : undefDeclare (EOS undefDeclare)*;
 
-undefDeclare : defIdentifiers;
+undefDeclare : defAtoms;
 
-defIdentifier : IDENTIFIER
-              | ATOM_IDENTIFIER
-              ;
+defAtom : IDENTIFIER
+        | ATOM_IDENTIFIER
+        ;
 
-defIdentifiers : defIdentifier (COMMA defIdentifier)*;
+defAtoms : defAtom (COMMA defAtom)*;
 
 // Use declaration
 
@@ -270,7 +270,7 @@ visibilityLabelSuite : visibilityModifier EOS INDENT declarationSentence (EOS de
 
 // Especial clauses used repeatedly
 
-extendsClause : EXTENDS types;
+extendsClause : EXTENDS visibilityModifier? type ( COMMA visibilityModifier? type )*;
 
 implementsClause : IMPLEMENTS types;
 
@@ -292,17 +292,23 @@ parenthesizedParameters : LEFT_PARENTHESIS procParameters? RIGHT_PARENTHESIS;
 
 procParameters : procParameter ( COMMA procParameter )*;
 
-procParameter : metadataDecorators? prefixParameterName? IDENTIFIER ( prefixParameterType? type )? ( EQUAL expression )?;
+procParameter : modeParameterSpecifier? metadataDecorators? prefixParameterName? IDENTIFIER ( prefixParameterType? type )? ( EQUAL expression )?;
 
-prefixParameterName : AMPERSAND             // reference variable (mutable)
-                    | ASTERISK              // call-by-name (zero-argument function: recomputed every time it is accessed)
-                    | TILDE                 // lazy (evaluated only when used)
+modeParameterSpecifier : VAR
+                       | VAL
+                       | IN
+                       | IN OUT
+                       | OUT
+                       ;
+
+prefixParameterName : NAMED_ARGUMENTS       // **  dict: named-parameter arguments
+                    | NAMED_OPTIONS         // ~~  dict: named macro-options
+                    | TILDE                 // ~   lazy call-by-name (evaluated only when used as a zero-argument function: recomputed every time it is accessed)()
                     ;
 
-prefixParameterType : NAMED_ARGUMENTS       // dict: named-parameter arguments
-                    | ELLIPSIS              // tuple: variadic
-                    | INTERVAL_INCLUSIVE    // range: values, slice limits
-                    | COLON                 // pair: key, value
+prefixParameterType : ELLIPSIS              // ... tuple: variadic
+                    | INTERVAL_INCLUSIVE    // ..  range: values, slice limits
+                    | COLON                 // :   pair: key, value
                     ;
 
 procResultType : type
@@ -322,7 +328,6 @@ procSemex : COLON procSpecifier;
 
 procSpecifier : DEFAULT
               | DELETE
-              | ABSTRACT
               ;
 
 procImplicitReturn : IMPLICIT_RETURN expression;
@@ -337,9 +342,11 @@ guardElseClause : EOS PIPE ( ELSE IMPLICIT_RETURN )? expression;
 
 outerDeclareSentence : typeSentence
                      | constSentence
-                     | ivalSentence
+                     | letSentence
                      | varSentence
+                     | castSentence
                      | factSentence
+                     | macroSentence
                      | funcSentence
                      | feedSentence
                      | subSentence
@@ -350,6 +357,7 @@ outerDeclareSentence : typeSentence
                      | protoSentence
                      | traitSentence
                      | classSentence
+                     | objectSentence
                      ;
 
 // Type declaration
@@ -393,24 +401,24 @@ constDeclareParallel : LEFT_PARENTHESIS inferredDecoratedIdentifiers RIGHT_PAREN
 
 // Immutable Value declaration
 
-ivalSentence : ivalClause;
+letSentence : letClause;
 
-ivalClause : IVAL ( ivalSuite | ivalDeclare );
+letClause : LET ( letSuite | letDeclare );
 
-ivalSuite : EOS INDENT ivalDeclareBlock DEDENT;
+letSuite : EOS INDENT letDeclareBlock DEDENT;
 
-ivalDeclareBlock : ivalDeclare (EOS ivalDeclare)*;
+letDeclareBlock : letDeclare (EOS letDeclare)*;
 
-ivalDeclare : ivalDeclareSingle
-            | ivalDeclareMultiple
-            | ivalDeclareParallel
-            ;
+letDeclare : letDeclareSingle
+           | letDeclareMultiple
+           | letDeclareParallel
+           ;
 
-ivalDeclareSingle : inferredDecoratedIdentifier (singleAssignmentOperator expression)?;
+letDeclareSingle : inferredDecoratedIdentifier (singleAssignmentOperator expression)?;
 
-ivalDeclareMultiple : ivalDeclareSingle (COMMA ivalDeclareSingle)+;
+letDeclareMultiple : letDeclareSingle (COMMA letDeclareSingle)+;
 
-ivalDeclareParallel : LEFT_PARENTHESIS inferredDecoratedIdentifiers RIGHT_PARENTHESIS unpackingAssignmentOperator expressions;
+letDeclareParallel : LEFT_PARENTHESIS inferredDecoratedIdentifiers RIGHT_PARENTHESIS unpackingAssignmentOperator expressions;
 
 // Variable declaration
 
@@ -433,11 +441,23 @@ varDeclareMultiple : varDeclareSingle (COMMA varDeclareSingle)+;
 
 varDeclareParallel : LEFT_PARENTHESIS inferredDecoratedIdentifiers RIGHT_PARENTHESIS unpackingAssignmentOperator expressions;
 
+// Cast declaration
+
+castSentence : castClause;
+
+castClause : CAST declarationIdentifier parenthesizedParameters procResultType raisesClause? procBody?;
+
 // Fact declaration
 
 factSentence : factClause;
 
-factClause : FACT declarationIdentifier procParameter raisesClause? procBody;
+factClause : FACT declarationIdentifier parenthesizedParameters raisesClause? procBody;
+
+// Macro declaration
+
+macroSentence : macroClause;
+
+macroClause : MACRO declarationIdentifier parenthesizedParameters mixesClause? raisesClause? procBody;
 
 // Func declaration
 
@@ -569,6 +589,14 @@ classFieldSimple : inferredDecoratedIdentifier attributeTag? ( EQUAL expression 
 
 classSuite : logicalInstructionSuite;
 
+// Object declaration
+
+objectSentence : objectClause;
+
+objectClause : OBJECT declarationIdentifier extendsClause? implementsClause? mixesClause? objectBody;
+
+objectBody : logicalInstructionSuite;
+
 
 // Inner declarations
 
@@ -679,31 +707,27 @@ consoleStatement : atClause consoleStatement
 
 atClause : AT expressions;
 
-echoCommand : ECHO expression? COMMA?;
+echoCommand : ECHO expressions? COMMA?;
 
-scanCommand : SCAN expression? COMMA?;
+scanCommand : SCAN expressions? COMMA?;
 
-alertCommand : ALERT expression?;
+alertCommand : ALERT expressions?;
 
-entryCommand : ENTRY expression?;
+entryCommand : ENTRY expressions?;
 
 playCommand : PLAY expressions;
 
 // Deterministic statements
 
-deterministicStatement : redoSentence
-                       | continueSentence
+deterministicStatement : continueSentence
                        | breakSentence
                        | fallthroughSentence
                        | deferSentence
-                       | resumeSentence
                        | returnSentence
                        | yieldSentence
                        | raiseSentence
                        | panicSentence
                        ;
-
-redoSentence : REDO ( labelIdentifier | INTEGER_LIT )?;
 
 continueSentence : CONTINUE ( labelIdentifier | INTEGER_LIT )?;
 
@@ -712,8 +736,6 @@ breakSentence : BREAK ( labelIdentifier | INTEGER_LIT )?;
 fallthroughSentence : FALLTHROUGH ( labelIdentifier | INTEGER_LIT )?;
 
 deferSentence : DEFER statementSentence;
-
-resumeSentence : RESUME labelIdentifier?;
 
 returnSentence : RETURN expressions?;
 
@@ -1010,24 +1032,24 @@ bitShiftOperator : DOUBLE_LEFT_ANGLE
 // Logical Operators (Non-Strict Evaluation = Short-circuit Evaluation) (Infix Notation)
 
 binaryConjunctionOperator : AND
-                          | ANDN
-                          | NAND
+                          | NSC_AND
+                          | NOT_AND
+                          | AND_NOT
                           ;
 
 binaryExclusiveDisjunctionOperator : XOR
-                                   | NXOR
+                                   | NOT_XOR
                                    ;
 
 binaryDisjunctionOperator : OR
-                          | NOR
+                          | NSC_OR
+                          | NOT_OR
                           ;
 
 //  Collection Operators
 
-binaryArrayOperator : UNION
-                    | UNITE
-                    | INTER
-                    | MINUS
+binaryArrayOperator : AMPERSAND
+                    | PIPE
                     ;
 
 // Comparison Operators
@@ -1131,6 +1153,7 @@ assignmentOperator : singleAssignmentOperator
 
 singleAssignmentOperator : EQUAL
                          | DERIVED_ASSIGNMENT
+                         | LAZY_ASSIGNMENT
                          | POP_ONE_ASSIGNMENT
                          | PULL_ALL_ASSIGNMENT
                          | PIPE_ASSIGNMENT
@@ -1153,6 +1176,8 @@ compoundAssignmentOperator : NTH_POWER_ASSIGNMENT
                            | PERCENTAGE_VARIATION_ASSIGNMENT
                            | ADDITION_ASSIGNMENT
                            | SUBTRACTION_ASSIGNMENT
+                           | SET_UNION_ASSIGNMENT
+                           | SET_INTER_ASSIGNMENT
                            | LEFT_SHIFT_ASSIGNMENT
                            | SIGNED_RIGHT_SHIFT_ASSIGNMENT
                            | UNSIGNED_RIGHT_SHIFT_ASSIGNMENT
@@ -1204,7 +1229,7 @@ genericTypeParameters : LEFT_ANGLE typeParameters RIGHT_ANGLE;
 
 typeParameters : typeParameter ( COMMA typeParameter )*;
 
-typeParameter : type ( ( IS | ANCESTOROF | EXTENDS | IMPLEMENTS | MIXES ) type )?;
+typeParameter : type ( ( IS | ANCESTOROF | EXTENDS | IMPLEMENTS | MIXES | LIFETIME ) type )?;
 
 types : type ( COMMA type )*;
 
@@ -1214,8 +1239,8 @@ type : prefixTypeModifier type
      | type AND type
      | type OR type
      | type XOR type
+     | type LIFETIME type
      | nativeType
-     | procType
      | qualifiedIdentifier
      ;
 
@@ -1235,17 +1260,8 @@ nativeType : escalarType
            | compoundType
            | optionType
            | metaType
+           | procType
            ;
-
-procType : funcType
-         | feedType
-         | subType
-         | factType
-         | eventType
-         | operatorType
-         | getterType
-         | setterType
-         ;
 
 // Escalar data types
 
@@ -1278,8 +1294,8 @@ numericNatural : BYTE
                | NAT32
                | NAT64
                | NAT128
-               | NAT
-               | BIGNAT
+               | NATURAL
+               | BIGNATURAL
                ;
 
 numericInteger : INT8
@@ -1291,11 +1307,11 @@ numericInteger : INT8
                | BIGINT
                ;
 
-numericDecimal : DECIMAL8
-               | DECIMAL16
-               | DECIMAL32
-               | DECIMAL64
-               | DECIMAL128
+numericDecimal : DEC8
+               | DEC16
+               | DEC32
+               | DEC64
+               | DEC128
                | DECIMAL
                | MONEY
                ;
@@ -1334,11 +1350,11 @@ temporalType : ELAPSE
              ;
 
 characterType : ASCII
+              | WCHAR
               | CHAR8
               | CHAR16
               | CHAR32
               | CHAR
-              | WCHAR
               ;
 
 // Compound data types
@@ -1349,12 +1365,11 @@ compoundType : sequenceType
              ;
 
 sequenceType : ANSI
-             | STR8
-             | STR16
-             | STR32
-             | STR
-             | CSTR
              | WSTR
+             | STRING8
+             | STRING16
+             | STRING32
+             | STRING
              | REGEX
              | BINARY
              ;
@@ -1396,17 +1411,42 @@ metaType : ATOM
          | SPAN
          | VIEW
          | VOID
+         | APPLET
+         | MODULE
+         | NOTABENE
+         | INTERFACE
+         | TYPE
+         | ENUM
+         | STRUCT
+         | PROTO
+         | TRAIT
+         | CLASS
+         | OBJECT
+         | PROPERTY
          ;
 
-// Procedure data types
+// Procedural data types
+
+procType : castType
+         | factType
+         | funcType
+         | feedType
+         | subType
+         | operatorType
+         | eventType
+         | getterType
+         | setterType
+         ;
+
+castType : CAST parenthesizedParameterTypes procResultType;
+
+factType : FACT procParameterType;
 
 funcType : FUNC parenthesizedParameterTypes procResultType;
 
 feedType : FEED parenthesizedParameterTypes procResultType;
 
 subType : SUB parenthesizedParameterTypes;
-
-factType : FACT procParameterType;
 
 operatorType : OPERATOR parenthesizedParameterTypes procResultType;
 
@@ -1694,7 +1734,6 @@ memberName : inferredDecoratedIdentifier;
 
 memberValue : expression;
 
-
 // lambda function literals
 
 lambdaLiteral : lambdaClause
@@ -1702,7 +1741,7 @@ lambdaLiteral : lambdaClause
               | arithmeticComprehension
               ;
 
-lambdaClause : LAMBDA procParameters? COLON expressions;
+lambdaClause : LAMBDA procParameters? IMPLICIT_RETURN expressions;
 
 lambdaStatement : LAMBDA_PARENTHESIS statementBlock RIGHT_PARENTHESIS;
 
@@ -1805,7 +1844,8 @@ primaryExpression : primaryOperand
                   | parenthesizedExpression
                   | primaryExpression LEFT_BRACKET arrayIndexing RIGHT_BRACKET              // indexing
                   | primaryExpression DOT primaryExpression                                 // selector
-                  | primaryExpression parenthesizedArguments                                // procedure call
+                  | primaryExpression genericTypeParameters? parenthesizedArguments         // procedure call                        // procedure call
+                  | primaryExpression expressions macroOption*                              // macro call
                   | prefixUnaryOperator primaryExpression                                   // ++i, new x
                   | primaryExpression SEMICOLON formatType                                  // casting
                   | primaryFunctor primaryExpression                                        // fact test
@@ -1849,6 +1889,8 @@ formatType : type
            | stringLiteral
            ;
 
+macroOption : TILDE IDENTIFIER ( EQUAL expression );
+
 juxtapositionExpression : sequenceLiteral+;
 
 expressions : expression (COMMA expression)*;
@@ -1870,12 +1912,11 @@ expression : primaryExpression
            | expression coalescingOperator expression?
            | expression IF expression ELSE expression
            | guardsExpression
-           | macroExpression
            | shellProcess
            | assignmentExpression
-           | primaryExpression ( FUNCTOR primaryFunctor )+ expression?                             // fmap -> fmap ...
-           | primaryFunctor ( FUNCTOR primaryFunctor )* expressions                                // all -> fact ...
-           | primaryExpression parenthesizedArguments lambdaLiteral  // trailing lambda syntax (Kotlin)
+           | primaryExpression ( FUNCTOR primaryFunctor )+ expression?         // fmap -> fmap ...
+           | primaryFunctor ( FUNCTOR primaryFunctor )* expressions            // all -> fact ...
+           | primaryExpression parenthesizedArguments lambdaLiteral            // trailing lambda syntax (Kotlin)
            ;
 
 guardsExpression : guardClause+ guardDefault?;
@@ -1883,10 +1924,6 @@ guardsExpression : guardClause+ guardDefault?;
 guardClause : PIPE expression IMPLICIT_RETURN expression;
 
 guardDefault : PIPE expression;
-
-macroExpression : macroCall+;
-
-macroCall : qualifiedIdentifier expression*;
 
 shellProcess : shellPathLiteral LEFT_CURLY statementBlock RIGHT_CURLY;
 
