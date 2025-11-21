@@ -440,21 +440,21 @@ class NeoBasicParserListener(ParseTreeListener):
         pass
 
 
-    # Enter a parse tree produced by NeoBasicParser#defIdentifier.
-    def enterDefIdentifier(self, ctx:NeoBasicParser.DefIdentifierContext):
+    # Enter a parse tree produced by NeoBasicParser#defAtom.
+    def enterDefAtom(self, ctx:NeoBasicParser.DefAtomContext):
         pass
 
-    # Exit a parse tree produced by NeoBasicParser#defIdentifier.
-    def exitDefIdentifier(self, ctx:NeoBasicParser.DefIdentifierContext):
+    # Exit a parse tree produced by NeoBasicParser#defAtom.
+    def exitDefAtom(self, ctx:NeoBasicParser.DefAtomContext):
         pass
 
 
-    # Enter a parse tree produced by NeoBasicParser#defIdentifiers.
-    def enterDefIdentifiers(self, ctx:NeoBasicParser.DefIdentifiersContext):
+    # Enter a parse tree produced by NeoBasicParser#defAtoms.
+    def enterDefAtoms(self, ctx:NeoBasicParser.DefAtomsContext):
         pass
 
-    # Exit a parse tree produced by NeoBasicParser#defIdentifiers.
-    def exitDefIdentifiers(self, ctx:NeoBasicParser.DefIdentifiersContext):
+    # Exit a parse tree produced by NeoBasicParser#defAtoms.
+    def exitDefAtoms(self, ctx:NeoBasicParser.DefAtomsContext):
         pass
 
 
@@ -782,6 +782,15 @@ class NeoBasicParserListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by NeoBasicParser#modeParameterSpecifier.
+    def enterModeParameterSpecifier(self, ctx:NeoBasicParser.ModeParameterSpecifierContext):
+        pass
+
+    # Exit a parse tree produced by NeoBasicParser#modeParameterSpecifier.
+    def exitModeParameterSpecifier(self, ctx:NeoBasicParser.ModeParameterSpecifierContext):
+        pass
+
+
     # Enter a parse tree produced by NeoBasicParser#prefixParameterName.
     def enterPrefixParameterName(self, ctx:NeoBasicParser.PrefixParameterNameContext):
         pass
@@ -1025,75 +1034,75 @@ class NeoBasicParserListener(ParseTreeListener):
         pass
 
 
-    # Enter a parse tree produced by NeoBasicParser#ivalSentence.
-    def enterIvalSentence(self, ctx:NeoBasicParser.IvalSentenceContext):
+    # Enter a parse tree produced by NeoBasicParser#letSentence.
+    def enterLetSentence(self, ctx:NeoBasicParser.LetSentenceContext):
         pass
 
-    # Exit a parse tree produced by NeoBasicParser#ivalSentence.
-    def exitIvalSentence(self, ctx:NeoBasicParser.IvalSentenceContext):
-        pass
-
-
-    # Enter a parse tree produced by NeoBasicParser#ivalClause.
-    def enterIvalClause(self, ctx:NeoBasicParser.IvalClauseContext):
-        pass
-
-    # Exit a parse tree produced by NeoBasicParser#ivalClause.
-    def exitIvalClause(self, ctx:NeoBasicParser.IvalClauseContext):
+    # Exit a parse tree produced by NeoBasicParser#letSentence.
+    def exitLetSentence(self, ctx:NeoBasicParser.LetSentenceContext):
         pass
 
 
-    # Enter a parse tree produced by NeoBasicParser#ivalSuite.
-    def enterIvalSuite(self, ctx:NeoBasicParser.IvalSuiteContext):
+    # Enter a parse tree produced by NeoBasicParser#letClause.
+    def enterLetClause(self, ctx:NeoBasicParser.LetClauseContext):
         pass
 
-    # Exit a parse tree produced by NeoBasicParser#ivalSuite.
-    def exitIvalSuite(self, ctx:NeoBasicParser.IvalSuiteContext):
-        pass
-
-
-    # Enter a parse tree produced by NeoBasicParser#ivalDeclareBlock.
-    def enterIvalDeclareBlock(self, ctx:NeoBasicParser.IvalDeclareBlockContext):
-        pass
-
-    # Exit a parse tree produced by NeoBasicParser#ivalDeclareBlock.
-    def exitIvalDeclareBlock(self, ctx:NeoBasicParser.IvalDeclareBlockContext):
+    # Exit a parse tree produced by NeoBasicParser#letClause.
+    def exitLetClause(self, ctx:NeoBasicParser.LetClauseContext):
         pass
 
 
-    # Enter a parse tree produced by NeoBasicParser#ivalDeclare.
-    def enterIvalDeclare(self, ctx:NeoBasicParser.IvalDeclareContext):
+    # Enter a parse tree produced by NeoBasicParser#letSuite.
+    def enterLetSuite(self, ctx:NeoBasicParser.LetSuiteContext):
         pass
 
-    # Exit a parse tree produced by NeoBasicParser#ivalDeclare.
-    def exitIvalDeclare(self, ctx:NeoBasicParser.IvalDeclareContext):
-        pass
-
-
-    # Enter a parse tree produced by NeoBasicParser#ivalDeclareSingle.
-    def enterIvalDeclareSingle(self, ctx:NeoBasicParser.IvalDeclareSingleContext):
-        pass
-
-    # Exit a parse tree produced by NeoBasicParser#ivalDeclareSingle.
-    def exitIvalDeclareSingle(self, ctx:NeoBasicParser.IvalDeclareSingleContext):
+    # Exit a parse tree produced by NeoBasicParser#letSuite.
+    def exitLetSuite(self, ctx:NeoBasicParser.LetSuiteContext):
         pass
 
 
-    # Enter a parse tree produced by NeoBasicParser#ivalDeclareMultiple.
-    def enterIvalDeclareMultiple(self, ctx:NeoBasicParser.IvalDeclareMultipleContext):
+    # Enter a parse tree produced by NeoBasicParser#letDeclareBlock.
+    def enterLetDeclareBlock(self, ctx:NeoBasicParser.LetDeclareBlockContext):
         pass
 
-    # Exit a parse tree produced by NeoBasicParser#ivalDeclareMultiple.
-    def exitIvalDeclareMultiple(self, ctx:NeoBasicParser.IvalDeclareMultipleContext):
+    # Exit a parse tree produced by NeoBasicParser#letDeclareBlock.
+    def exitLetDeclareBlock(self, ctx:NeoBasicParser.LetDeclareBlockContext):
         pass
 
 
-    # Enter a parse tree produced by NeoBasicParser#ivalDeclareParallel.
-    def enterIvalDeclareParallel(self, ctx:NeoBasicParser.IvalDeclareParallelContext):
+    # Enter a parse tree produced by NeoBasicParser#letDeclare.
+    def enterLetDeclare(self, ctx:NeoBasicParser.LetDeclareContext):
         pass
 
-    # Exit a parse tree produced by NeoBasicParser#ivalDeclareParallel.
-    def exitIvalDeclareParallel(self, ctx:NeoBasicParser.IvalDeclareParallelContext):
+    # Exit a parse tree produced by NeoBasicParser#letDeclare.
+    def exitLetDeclare(self, ctx:NeoBasicParser.LetDeclareContext):
+        pass
+
+
+    # Enter a parse tree produced by NeoBasicParser#letDeclareSingle.
+    def enterLetDeclareSingle(self, ctx:NeoBasicParser.LetDeclareSingleContext):
+        pass
+
+    # Exit a parse tree produced by NeoBasicParser#letDeclareSingle.
+    def exitLetDeclareSingle(self, ctx:NeoBasicParser.LetDeclareSingleContext):
+        pass
+
+
+    # Enter a parse tree produced by NeoBasicParser#letDeclareMultiple.
+    def enterLetDeclareMultiple(self, ctx:NeoBasicParser.LetDeclareMultipleContext):
+        pass
+
+    # Exit a parse tree produced by NeoBasicParser#letDeclareMultiple.
+    def exitLetDeclareMultiple(self, ctx:NeoBasicParser.LetDeclareMultipleContext):
+        pass
+
+
+    # Enter a parse tree produced by NeoBasicParser#letDeclareParallel.
+    def enterLetDeclareParallel(self, ctx:NeoBasicParser.LetDeclareParallelContext):
+        pass
+
+    # Exit a parse tree produced by NeoBasicParser#letDeclareParallel.
+    def exitLetDeclareParallel(self, ctx:NeoBasicParser.LetDeclareParallelContext):
         pass
 
 
@@ -1169,6 +1178,24 @@ class NeoBasicParserListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by NeoBasicParser#castSentence.
+    def enterCastSentence(self, ctx:NeoBasicParser.CastSentenceContext):
+        pass
+
+    # Exit a parse tree produced by NeoBasicParser#castSentence.
+    def exitCastSentence(self, ctx:NeoBasicParser.CastSentenceContext):
+        pass
+
+
+    # Enter a parse tree produced by NeoBasicParser#castClause.
+    def enterCastClause(self, ctx:NeoBasicParser.CastClauseContext):
+        pass
+
+    # Exit a parse tree produced by NeoBasicParser#castClause.
+    def exitCastClause(self, ctx:NeoBasicParser.CastClauseContext):
+        pass
+
+
     # Enter a parse tree produced by NeoBasicParser#factSentence.
     def enterFactSentence(self, ctx:NeoBasicParser.FactSentenceContext):
         pass
@@ -1184,6 +1211,24 @@ class NeoBasicParserListener(ParseTreeListener):
 
     # Exit a parse tree produced by NeoBasicParser#factClause.
     def exitFactClause(self, ctx:NeoBasicParser.FactClauseContext):
+        pass
+
+
+    # Enter a parse tree produced by NeoBasicParser#macroSentence.
+    def enterMacroSentence(self, ctx:NeoBasicParser.MacroSentenceContext):
+        pass
+
+    # Exit a parse tree produced by NeoBasicParser#macroSentence.
+    def exitMacroSentence(self, ctx:NeoBasicParser.MacroSentenceContext):
+        pass
+
+
+    # Enter a parse tree produced by NeoBasicParser#macroClause.
+    def enterMacroClause(self, ctx:NeoBasicParser.MacroClauseContext):
+        pass
+
+    # Exit a parse tree produced by NeoBasicParser#macroClause.
+    def exitMacroClause(self, ctx:NeoBasicParser.MacroClauseContext):
         pass
 
 
@@ -1610,6 +1655,33 @@ class NeoBasicParserListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by NeoBasicParser#objectSentence.
+    def enterObjectSentence(self, ctx:NeoBasicParser.ObjectSentenceContext):
+        pass
+
+    # Exit a parse tree produced by NeoBasicParser#objectSentence.
+    def exitObjectSentence(self, ctx:NeoBasicParser.ObjectSentenceContext):
+        pass
+
+
+    # Enter a parse tree produced by NeoBasicParser#objectClause.
+    def enterObjectClause(self, ctx:NeoBasicParser.ObjectClauseContext):
+        pass
+
+    # Exit a parse tree produced by NeoBasicParser#objectClause.
+    def exitObjectClause(self, ctx:NeoBasicParser.ObjectClauseContext):
+        pass
+
+
+    # Enter a parse tree produced by NeoBasicParser#objectBody.
+    def enterObjectBody(self, ctx:NeoBasicParser.ObjectBodyContext):
+        pass
+
+    # Exit a parse tree produced by NeoBasicParser#objectBody.
+    def exitObjectBody(self, ctx:NeoBasicParser.ObjectBodyContext):
+        pass
+
+
     # Enter a parse tree produced by NeoBasicParser#innerDeclareSentence.
     def enterInnerDeclareSentence(self, ctx:NeoBasicParser.InnerDeclareSentenceContext):
         pass
@@ -1907,15 +1979,6 @@ class NeoBasicParserListener(ParseTreeListener):
         pass
 
 
-    # Enter a parse tree produced by NeoBasicParser#redoSentence.
-    def enterRedoSentence(self, ctx:NeoBasicParser.RedoSentenceContext):
-        pass
-
-    # Exit a parse tree produced by NeoBasicParser#redoSentence.
-    def exitRedoSentence(self, ctx:NeoBasicParser.RedoSentenceContext):
-        pass
-
-
     # Enter a parse tree produced by NeoBasicParser#continueSentence.
     def enterContinueSentence(self, ctx:NeoBasicParser.ContinueSentenceContext):
         pass
@@ -1949,15 +2012,6 @@ class NeoBasicParserListener(ParseTreeListener):
 
     # Exit a parse tree produced by NeoBasicParser#deferSentence.
     def exitDeferSentence(self, ctx:NeoBasicParser.DeferSentenceContext):
-        pass
-
-
-    # Enter a parse tree produced by NeoBasicParser#resumeSentence.
-    def enterResumeSentence(self, ctx:NeoBasicParser.ResumeSentenceContext):
-        pass
-
-    # Exit a parse tree produced by NeoBasicParser#resumeSentence.
-    def exitResumeSentence(self, ctx:NeoBasicParser.ResumeSentenceContext):
         pass
 
 
@@ -2996,15 +3050,6 @@ class NeoBasicParserListener(ParseTreeListener):
         pass
 
 
-    # Enter a parse tree produced by NeoBasicParser#procType.
-    def enterProcType(self, ctx:NeoBasicParser.ProcTypeContext):
-        pass
-
-    # Exit a parse tree produced by NeoBasicParser#procType.
-    def exitProcType(self, ctx:NeoBasicParser.ProcTypeContext):
-        pass
-
-
     # Enter a parse tree produced by NeoBasicParser#escalarType.
     def enterEscalarType(self, ctx:NeoBasicParser.EscalarTypeContext):
         pass
@@ -3167,6 +3212,33 @@ class NeoBasicParserListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by NeoBasicParser#procType.
+    def enterProcType(self, ctx:NeoBasicParser.ProcTypeContext):
+        pass
+
+    # Exit a parse tree produced by NeoBasicParser#procType.
+    def exitProcType(self, ctx:NeoBasicParser.ProcTypeContext):
+        pass
+
+
+    # Enter a parse tree produced by NeoBasicParser#castType.
+    def enterCastType(self, ctx:NeoBasicParser.CastTypeContext):
+        pass
+
+    # Exit a parse tree produced by NeoBasicParser#castType.
+    def exitCastType(self, ctx:NeoBasicParser.CastTypeContext):
+        pass
+
+
+    # Enter a parse tree produced by NeoBasicParser#factType.
+    def enterFactType(self, ctx:NeoBasicParser.FactTypeContext):
+        pass
+
+    # Exit a parse tree produced by NeoBasicParser#factType.
+    def exitFactType(self, ctx:NeoBasicParser.FactTypeContext):
+        pass
+
+
     # Enter a parse tree produced by NeoBasicParser#funcType.
     def enterFuncType(self, ctx:NeoBasicParser.FuncTypeContext):
         pass
@@ -3191,15 +3263,6 @@ class NeoBasicParserListener(ParseTreeListener):
 
     # Exit a parse tree produced by NeoBasicParser#subType.
     def exitSubType(self, ctx:NeoBasicParser.SubTypeContext):
-        pass
-
-
-    # Enter a parse tree produced by NeoBasicParser#factType.
-    def enterFactType(self, ctx:NeoBasicParser.FactTypeContext):
-        pass
-
-    # Exit a parse tree produced by NeoBasicParser#factType.
-    def exitFactType(self, ctx:NeoBasicParser.FactTypeContext):
         pass
 
 
@@ -3932,6 +3995,15 @@ class NeoBasicParserListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by NeoBasicParser#macroOption.
+    def enterMacroOption(self, ctx:NeoBasicParser.MacroOptionContext):
+        pass
+
+    # Exit a parse tree produced by NeoBasicParser#macroOption.
+    def exitMacroOption(self, ctx:NeoBasicParser.MacroOptionContext):
+        pass
+
+
     # Enter a parse tree produced by NeoBasicParser#juxtapositionExpression.
     def enterJuxtapositionExpression(self, ctx:NeoBasicParser.JuxtapositionExpressionContext):
         pass
@@ -3983,24 +4055,6 @@ class NeoBasicParserListener(ParseTreeListener):
 
     # Exit a parse tree produced by NeoBasicParser#guardDefault.
     def exitGuardDefault(self, ctx:NeoBasicParser.GuardDefaultContext):
-        pass
-
-
-    # Enter a parse tree produced by NeoBasicParser#macroExpression.
-    def enterMacroExpression(self, ctx:NeoBasicParser.MacroExpressionContext):
-        pass
-
-    # Exit a parse tree produced by NeoBasicParser#macroExpression.
-    def exitMacroExpression(self, ctx:NeoBasicParser.MacroExpressionContext):
-        pass
-
-
-    # Enter a parse tree produced by NeoBasicParser#macroCall.
-    def enterMacroCall(self, ctx:NeoBasicParser.MacroCallContext):
-        pass
-
-    # Exit a parse tree produced by NeoBasicParser#macroCall.
-    def exitMacroCall(self, ctx:NeoBasicParser.MacroCallContext):
         pass
 
 

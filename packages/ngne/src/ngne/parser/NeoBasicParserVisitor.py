@@ -249,13 +249,13 @@ class NeoBasicParserVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by NeoBasicParser#defIdentifier.
-    def visitDefIdentifier(self, ctx:NeoBasicParser.DefIdentifierContext):
+    # Visit a parse tree produced by NeoBasicParser#defAtom.
+    def visitDefAtom(self, ctx:NeoBasicParser.DefAtomContext):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by NeoBasicParser#defIdentifiers.
-    def visitDefIdentifiers(self, ctx:NeoBasicParser.DefIdentifiersContext):
+    # Visit a parse tree produced by NeoBasicParser#defAtoms.
+    def visitDefAtoms(self, ctx:NeoBasicParser.DefAtomsContext):
         return self.visitChildren(ctx)
 
 
@@ -439,6 +439,11 @@ class NeoBasicParserVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
+    # Visit a parse tree produced by NeoBasicParser#modeParameterSpecifier.
+    def visitModeParameterSpecifier(self, ctx:NeoBasicParser.ModeParameterSpecifierContext):
+        return self.visitChildren(ctx)
+
+
     # Visit a parse tree produced by NeoBasicParser#prefixParameterName.
     def visitPrefixParameterName(self, ctx:NeoBasicParser.PrefixParameterNameContext):
         return self.visitChildren(ctx)
@@ -574,43 +579,43 @@ class NeoBasicParserVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by NeoBasicParser#ivalSentence.
-    def visitIvalSentence(self, ctx:NeoBasicParser.IvalSentenceContext):
+    # Visit a parse tree produced by NeoBasicParser#letSentence.
+    def visitLetSentence(self, ctx:NeoBasicParser.LetSentenceContext):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by NeoBasicParser#ivalClause.
-    def visitIvalClause(self, ctx:NeoBasicParser.IvalClauseContext):
+    # Visit a parse tree produced by NeoBasicParser#letClause.
+    def visitLetClause(self, ctx:NeoBasicParser.LetClauseContext):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by NeoBasicParser#ivalSuite.
-    def visitIvalSuite(self, ctx:NeoBasicParser.IvalSuiteContext):
+    # Visit a parse tree produced by NeoBasicParser#letSuite.
+    def visitLetSuite(self, ctx:NeoBasicParser.LetSuiteContext):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by NeoBasicParser#ivalDeclareBlock.
-    def visitIvalDeclareBlock(self, ctx:NeoBasicParser.IvalDeclareBlockContext):
+    # Visit a parse tree produced by NeoBasicParser#letDeclareBlock.
+    def visitLetDeclareBlock(self, ctx:NeoBasicParser.LetDeclareBlockContext):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by NeoBasicParser#ivalDeclare.
-    def visitIvalDeclare(self, ctx:NeoBasicParser.IvalDeclareContext):
+    # Visit a parse tree produced by NeoBasicParser#letDeclare.
+    def visitLetDeclare(self, ctx:NeoBasicParser.LetDeclareContext):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by NeoBasicParser#ivalDeclareSingle.
-    def visitIvalDeclareSingle(self, ctx:NeoBasicParser.IvalDeclareSingleContext):
+    # Visit a parse tree produced by NeoBasicParser#letDeclareSingle.
+    def visitLetDeclareSingle(self, ctx:NeoBasicParser.LetDeclareSingleContext):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by NeoBasicParser#ivalDeclareMultiple.
-    def visitIvalDeclareMultiple(self, ctx:NeoBasicParser.IvalDeclareMultipleContext):
+    # Visit a parse tree produced by NeoBasicParser#letDeclareMultiple.
+    def visitLetDeclareMultiple(self, ctx:NeoBasicParser.LetDeclareMultipleContext):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by NeoBasicParser#ivalDeclareParallel.
-    def visitIvalDeclareParallel(self, ctx:NeoBasicParser.IvalDeclareParallelContext):
+    # Visit a parse tree produced by NeoBasicParser#letDeclareParallel.
+    def visitLetDeclareParallel(self, ctx:NeoBasicParser.LetDeclareParallelContext):
         return self.visitChildren(ctx)
 
 
@@ -654,6 +659,16 @@ class NeoBasicParserVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
+    # Visit a parse tree produced by NeoBasicParser#castSentence.
+    def visitCastSentence(self, ctx:NeoBasicParser.CastSentenceContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by NeoBasicParser#castClause.
+    def visitCastClause(self, ctx:NeoBasicParser.CastClauseContext):
+        return self.visitChildren(ctx)
+
+
     # Visit a parse tree produced by NeoBasicParser#factSentence.
     def visitFactSentence(self, ctx:NeoBasicParser.FactSentenceContext):
         return self.visitChildren(ctx)
@@ -661,6 +676,16 @@ class NeoBasicParserVisitor(ParseTreeVisitor):
 
     # Visit a parse tree produced by NeoBasicParser#factClause.
     def visitFactClause(self, ctx:NeoBasicParser.FactClauseContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by NeoBasicParser#macroSentence.
+    def visitMacroSentence(self, ctx:NeoBasicParser.MacroSentenceContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by NeoBasicParser#macroClause.
+    def visitMacroClause(self, ctx:NeoBasicParser.MacroClauseContext):
         return self.visitChildren(ctx)
 
 
@@ -899,6 +924,21 @@ class NeoBasicParserVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
+    # Visit a parse tree produced by NeoBasicParser#objectSentence.
+    def visitObjectSentence(self, ctx:NeoBasicParser.ObjectSentenceContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by NeoBasicParser#objectClause.
+    def visitObjectClause(self, ctx:NeoBasicParser.ObjectClauseContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by NeoBasicParser#objectBody.
+    def visitObjectBody(self, ctx:NeoBasicParser.ObjectBodyContext):
+        return self.visitChildren(ctx)
+
+
     # Visit a parse tree produced by NeoBasicParser#innerDeclareSentence.
     def visitInnerDeclareSentence(self, ctx:NeoBasicParser.InnerDeclareSentenceContext):
         return self.visitChildren(ctx)
@@ -1064,11 +1104,6 @@ class NeoBasicParserVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by NeoBasicParser#redoSentence.
-    def visitRedoSentence(self, ctx:NeoBasicParser.RedoSentenceContext):
-        return self.visitChildren(ctx)
-
-
     # Visit a parse tree produced by NeoBasicParser#continueSentence.
     def visitContinueSentence(self, ctx:NeoBasicParser.ContinueSentenceContext):
         return self.visitChildren(ctx)
@@ -1086,11 +1121,6 @@ class NeoBasicParserVisitor(ParseTreeVisitor):
 
     # Visit a parse tree produced by NeoBasicParser#deferSentence.
     def visitDeferSentence(self, ctx:NeoBasicParser.DeferSentenceContext):
-        return self.visitChildren(ctx)
-
-
-    # Visit a parse tree produced by NeoBasicParser#resumeSentence.
-    def visitResumeSentence(self, ctx:NeoBasicParser.ResumeSentenceContext):
         return self.visitChildren(ctx)
 
 
@@ -1669,11 +1699,6 @@ class NeoBasicParserVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by NeoBasicParser#procType.
-    def visitProcType(self, ctx:NeoBasicParser.ProcTypeContext):
-        return self.visitChildren(ctx)
-
-
     # Visit a parse tree produced by NeoBasicParser#escalarType.
     def visitEscalarType(self, ctx:NeoBasicParser.EscalarTypeContext):
         return self.visitChildren(ctx)
@@ -1764,6 +1789,21 @@ class NeoBasicParserVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
+    # Visit a parse tree produced by NeoBasicParser#procType.
+    def visitProcType(self, ctx:NeoBasicParser.ProcTypeContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by NeoBasicParser#castType.
+    def visitCastType(self, ctx:NeoBasicParser.CastTypeContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by NeoBasicParser#factType.
+    def visitFactType(self, ctx:NeoBasicParser.FactTypeContext):
+        return self.visitChildren(ctx)
+
+
     # Visit a parse tree produced by NeoBasicParser#funcType.
     def visitFuncType(self, ctx:NeoBasicParser.FuncTypeContext):
         return self.visitChildren(ctx)
@@ -1776,11 +1816,6 @@ class NeoBasicParserVisitor(ParseTreeVisitor):
 
     # Visit a parse tree produced by NeoBasicParser#subType.
     def visitSubType(self, ctx:NeoBasicParser.SubTypeContext):
-        return self.visitChildren(ctx)
-
-
-    # Visit a parse tree produced by NeoBasicParser#factType.
-    def visitFactType(self, ctx:NeoBasicParser.FactTypeContext):
         return self.visitChildren(ctx)
 
 
@@ -2189,6 +2224,11 @@ class NeoBasicParserVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
+    # Visit a parse tree produced by NeoBasicParser#macroOption.
+    def visitMacroOption(self, ctx:NeoBasicParser.MacroOptionContext):
+        return self.visitChildren(ctx)
+
+
     # Visit a parse tree produced by NeoBasicParser#juxtapositionExpression.
     def visitJuxtapositionExpression(self, ctx:NeoBasicParser.JuxtapositionExpressionContext):
         return self.visitChildren(ctx)
@@ -2216,16 +2256,6 @@ class NeoBasicParserVisitor(ParseTreeVisitor):
 
     # Visit a parse tree produced by NeoBasicParser#guardDefault.
     def visitGuardDefault(self, ctx:NeoBasicParser.GuardDefaultContext):
-        return self.visitChildren(ctx)
-
-
-    # Visit a parse tree produced by NeoBasicParser#macroExpression.
-    def visitMacroExpression(self, ctx:NeoBasicParser.MacroExpressionContext):
-        return self.visitChildren(ctx)
-
-
-    # Visit a parse tree produced by NeoBasicParser#macroCall.
-    def visitMacroCall(self, ctx:NeoBasicParser.MacroCallContext):
         return self.visitChildren(ctx)
 
 
