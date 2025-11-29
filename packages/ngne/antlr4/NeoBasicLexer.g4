@@ -67,6 +67,7 @@ FUNC : 'func';
 FEED : 'feed';
 SUB : 'sub';
 OUT : 'out';
+REF : 'ref';
 RAISES : 'raises';
 NOPANIC : 'nopanic';
 DELETE : 'delete';
@@ -289,6 +290,7 @@ ELAPSE : 'elapse';
 
 ASCII : 'ascii';
 WCHAR : 'wchar';
+UNICODE : 'unicode';
 CHAR8 : 'char8';
 CHAR16 : 'char16';
 CHAR32 : 'char32';
@@ -722,6 +724,8 @@ BINARY_LIT
 
 ASCII_LIT : 'a'? ASCII_CHAR;
 
+UNICODE_LIT : ( 'u' | 'u32' )? UNICODE_CHAR;
+
 CHAR_LIT : CHARS_PREFIX? UNICODE_CHAR;
 
 fragment CHARS_PREFIX : 'a' | 'u' | 'u8' | 'u16' | 'u32' | 'L';
@@ -894,6 +898,8 @@ RUBBERDUCK : '@' IDENTIFIER? '=';
 // Song Bird Tracing
 
 SONGBIRD : '@' IDENTIFIER? '>';
+
+SONGBIRD_LOG : '@<' .*? '>';
 
 
 // --- MAGIC COMMENTS -----------------------------------------------

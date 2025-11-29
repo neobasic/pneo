@@ -51,7 +51,8 @@ directiveInstructionLiner : directiveSentence EOS logicalInstruction;
 
 directiveInstructionSuite : directiveSentence logicalInstructionSuite;
 
-instructionSentence : SONGBIRD instructionSentence
+instructionSentence : SONGBIRD_LOG instructionSentence
+                    | SONGBIRD instructionSentence
                     | RUBBERDUCK instructionSentence
                     | topLevelSentence
                     | declarationSentence
@@ -294,11 +295,11 @@ procParameters : procParameter ( COMMA procParameter )*;
 
 procParameter : modeParameterSpecifier? metadataDecorators? prefixParameterName? IDENTIFIER ( prefixParameterType? type )? ( EQUAL expression )?;
 
-modeParameterSpecifier : VAR
-                       | VAL
-                       | IN
-                       | IN OUT
-                       | OUT
+modeParameterSpecifier : VAR                // reference variable parameter
+                       | VAL                // default parameter for macros
+                       | IN                 // in parâmeter
+                       | OUT                // out parâmeter
+                       | REF                // in and out parâmeter, can be pointer
                        ;
 
 prefixParameterName : NAMED_ARGUMENTS       // **  dict: named-parameter arguments
@@ -334,9 +335,9 @@ procImplicitReturn : IMPLICIT_RETURN expression;
 
 procPatternGuards : guardBranchClause+ guardElseClause?;
 
-guardBranchClause : EOS PIPE expressions IMPLICIT_RETURN expression;
+guardBranchClause : EOS PIPE expressions COLON expression;
 
-guardElseClause : EOS PIPE ( ELSE IMPLICIT_RETURN )? expression;
+guardElseClause : EOS PIPE ( ELSE COLON )? expression;
 
 // Outer declarations
 
@@ -445,7 +446,13 @@ varDeclareParallel : LEFT_PARENTHESIS inferredDecoratedIdentifiers RIGHT_PARENTH
 
 castSentence : castClause;
 
-castClause : CAST declarationIdentifier parenthesizedParameters procResultType raisesClause? procBody?;
+castClause : CAST declarationIdentifier parenthesizedParameters? procResultType raisesClause? castBody;
+
+castBody : COLON stringLiteral
+         | procImplicitReturn
+         | procPatternGuards
+         | procSuite
+         ;
 
 // Fact declaration
 
@@ -1351,6 +1358,7 @@ temporalType : ELAPSE
 
 characterType : ASCII
               | WCHAR
+              | UNICODE
               | CHAR8
               | CHAR16
               | CHAR32
@@ -1442,6 +1450,8 @@ castType : CAST parenthesizedParameterTypes procResultType;
 
 factType : FACT procParameterType;
 
+macroType : MACRO parenthesizedParameterTypes procResultType;
+
 funcType : FUNC parenthesizedParameterTypes procResultType;
 
 feedType : FEED parenthesizedParameterTypes procResultType;
@@ -1528,6 +1538,7 @@ dateLiteral : ATOM_DOT_LIT
 // Character literal
 
 characterLiteral : ASCII_LIT
+                 | UNICODE_LIT
                  | CHAR_LIT
                  | LETTER parenthesizedExpression
                  | DIGIT parenthesizedExpression
@@ -1728,7 +1739,9 @@ objectLiteralValue : LEFT_CURLY RIGHT_CURLY
 
 objectMembers : objectMember ( COMMA objectMember )*;
 
-objectMember : ( memberName COLON )? memberValue;
+objectMember : ( memberName COLON )? memberValue
+             | ELLIPSIS qualifiedIdentifier
+             ;
 
 memberName : inferredDecoratedIdentifier;
 
