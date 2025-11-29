@@ -1196,6 +1196,15 @@ class NeoBasicParserListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by NeoBasicParser#castBody.
+    def enterCastBody(self, ctx:NeoBasicParser.CastBodyContext):
+        pass
+
+    # Exit a parse tree produced by NeoBasicParser#castBody.
+    def exitCastBody(self, ctx:NeoBasicParser.CastBodyContext):
+        pass
+
+
     # Enter a parse tree produced by NeoBasicParser#factSentence.
     def enterFactSentence(self, ctx:NeoBasicParser.FactSentenceContext):
         pass
@@ -3236,6 +3245,15 @@ class NeoBasicParserListener(ParseTreeListener):
 
     # Exit a parse tree produced by NeoBasicParser#factType.
     def exitFactType(self, ctx:NeoBasicParser.FactTypeContext):
+        pass
+
+
+    # Enter a parse tree produced by NeoBasicParser#macroType.
+    def enterMacroType(self, ctx:NeoBasicParser.MacroTypeContext):
+        pass
+
+    # Exit a parse tree produced by NeoBasicParser#macroType.
+    def exitMacroType(self, ctx:NeoBasicParser.MacroTypeContext):
         pass
 
 

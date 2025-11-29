@@ -669,6 +669,11 @@ class NeoBasicParserVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
+    # Visit a parse tree produced by NeoBasicParser#castBody.
+    def visitCastBody(self, ctx:NeoBasicParser.CastBodyContext):
+        return self.visitChildren(ctx)
+
+
     # Visit a parse tree produced by NeoBasicParser#factSentence.
     def visitFactSentence(self, ctx:NeoBasicParser.FactSentenceContext):
         return self.visitChildren(ctx)
@@ -1801,6 +1806,11 @@ class NeoBasicParserVisitor(ParseTreeVisitor):
 
     # Visit a parse tree produced by NeoBasicParser#factType.
     def visitFactType(self, ctx:NeoBasicParser.FactTypeContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by NeoBasicParser#macroType.
+    def visitMacroType(self, ctx:NeoBasicParser.MacroTypeContext):
         return self.visitChildren(ctx)
 
 
