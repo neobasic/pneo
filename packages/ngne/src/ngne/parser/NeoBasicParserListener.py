@@ -1988,6 +1988,42 @@ class NeoBasicParserListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by NeoBasicParser#deferSentence.
+    def enterDeferSentence(self, ctx:NeoBasicParser.DeferSentenceContext):
+        pass
+
+    # Exit a parse tree produced by NeoBasicParser#deferSentence.
+    def exitDeferSentence(self, ctx:NeoBasicParser.DeferSentenceContext):
+        pass
+
+
+    # Enter a parse tree produced by NeoBasicParser#raiseSentence.
+    def enterRaiseSentence(self, ctx:NeoBasicParser.RaiseSentenceContext):
+        pass
+
+    # Exit a parse tree produced by NeoBasicParser#raiseSentence.
+    def exitRaiseSentence(self, ctx:NeoBasicParser.RaiseSentenceContext):
+        pass
+
+
+    # Enter a parse tree produced by NeoBasicParser#panicSentence.
+    def enterPanicSentence(self, ctx:NeoBasicParser.PanicSentenceContext):
+        pass
+
+    # Exit a parse tree produced by NeoBasicParser#panicSentence.
+    def exitPanicSentence(self, ctx:NeoBasicParser.PanicSentenceContext):
+        pass
+
+
+    # Enter a parse tree produced by NeoBasicParser#exitSentence.
+    def enterExitSentence(self, ctx:NeoBasicParser.ExitSentenceContext):
+        pass
+
+    # Exit a parse tree produced by NeoBasicParser#exitSentence.
+    def exitExitSentence(self, ctx:NeoBasicParser.ExitSentenceContext):
+        pass
+
+
     # Enter a parse tree produced by NeoBasicParser#continueSentence.
     def enterContinueSentence(self, ctx:NeoBasicParser.ContinueSentenceContext):
         pass
@@ -2015,15 +2051,6 @@ class NeoBasicParserListener(ParseTreeListener):
         pass
 
 
-    # Enter a parse tree produced by NeoBasicParser#deferSentence.
-    def enterDeferSentence(self, ctx:NeoBasicParser.DeferSentenceContext):
-        pass
-
-    # Exit a parse tree produced by NeoBasicParser#deferSentence.
-    def exitDeferSentence(self, ctx:NeoBasicParser.DeferSentenceContext):
-        pass
-
-
     # Enter a parse tree produced by NeoBasicParser#returnSentence.
     def enterReturnSentence(self, ctx:NeoBasicParser.ReturnSentenceContext):
         pass
@@ -2039,24 +2066,6 @@ class NeoBasicParserListener(ParseTreeListener):
 
     # Exit a parse tree produced by NeoBasicParser#yieldSentence.
     def exitYieldSentence(self, ctx:NeoBasicParser.YieldSentenceContext):
-        pass
-
-
-    # Enter a parse tree produced by NeoBasicParser#raiseSentence.
-    def enterRaiseSentence(self, ctx:NeoBasicParser.RaiseSentenceContext):
-        pass
-
-    # Exit a parse tree produced by NeoBasicParser#raiseSentence.
-    def exitRaiseSentence(self, ctx:NeoBasicParser.RaiseSentenceContext):
-        pass
-
-
-    # Enter a parse tree produced by NeoBasicParser#panicSentence.
-    def enterPanicSentence(self, ctx:NeoBasicParser.PanicSentenceContext):
-        pass
-
-    # Exit a parse tree produced by NeoBasicParser#panicSentence.
-    def exitPanicSentence(self, ctx:NeoBasicParser.PanicSentenceContext):
         pass
 
 

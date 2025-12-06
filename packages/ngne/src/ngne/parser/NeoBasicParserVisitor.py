@@ -1109,6 +1109,26 @@ class NeoBasicParserVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
+    # Visit a parse tree produced by NeoBasicParser#deferSentence.
+    def visitDeferSentence(self, ctx:NeoBasicParser.DeferSentenceContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by NeoBasicParser#raiseSentence.
+    def visitRaiseSentence(self, ctx:NeoBasicParser.RaiseSentenceContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by NeoBasicParser#panicSentence.
+    def visitPanicSentence(self, ctx:NeoBasicParser.PanicSentenceContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by NeoBasicParser#exitSentence.
+    def visitExitSentence(self, ctx:NeoBasicParser.ExitSentenceContext):
+        return self.visitChildren(ctx)
+
+
     # Visit a parse tree produced by NeoBasicParser#continueSentence.
     def visitContinueSentence(self, ctx:NeoBasicParser.ContinueSentenceContext):
         return self.visitChildren(ctx)
@@ -1124,11 +1144,6 @@ class NeoBasicParserVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by NeoBasicParser#deferSentence.
-    def visitDeferSentence(self, ctx:NeoBasicParser.DeferSentenceContext):
-        return self.visitChildren(ctx)
-
-
     # Visit a parse tree produced by NeoBasicParser#returnSentence.
     def visitReturnSentence(self, ctx:NeoBasicParser.ReturnSentenceContext):
         return self.visitChildren(ctx)
@@ -1136,16 +1151,6 @@ class NeoBasicParserVisitor(ParseTreeVisitor):
 
     # Visit a parse tree produced by NeoBasicParser#yieldSentence.
     def visitYieldSentence(self, ctx:NeoBasicParser.YieldSentenceContext):
-        return self.visitChildren(ctx)
-
-
-    # Visit a parse tree produced by NeoBasicParser#raiseSentence.
-    def visitRaiseSentence(self, ctx:NeoBasicParser.RaiseSentenceContext):
-        return self.visitChildren(ctx)
-
-
-    # Visit a parse tree produced by NeoBasicParser#panicSentence.
-    def visitPanicSentence(self, ctx:NeoBasicParser.PanicSentenceContext):
         return self.visitChildren(ctx)
 
 
